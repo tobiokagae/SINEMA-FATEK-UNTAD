@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINEMA Chatbot - Universitas Tadulako</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🎓</span>
+                    <div class="logo-text">
+                        <h1>SINEMA Chatbot</h1>
+                        <p>Universitas Tadulako</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="newChatBtn" class="btn btn-secondary" title="Chat Baru">
+                        ➕ Chat Baru
+                    </button>
+                    <button id="uploadBtn" class="btn btn-secondary" title="Upload Dokumen">
+                        📄 Upload
+                    </button>
+                    <button id="refreshBtn" class="btn btn-secondary" title="Refresh Index">
+                        🔄 Refresh
+                    </button>
+                    <a href="/admin" class="btn btn-secondary" title="Admin">
+                        ⚙️ Admin
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Upload Modal -->
+        <div id="uploadModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📄 Upload Dokumen</h3>
+                    <button id="closeUploadModal" class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="upload-zone" id="uploadZone">
+                        <p>📁 Drag & drop file di sini</p>
+                        <p>atau</p>
+                        <input type="file" id="fileInput" accept=".pdf,.txt,.md" hidden>
+                        <button id="selectFileBtn" class="btn btn-primary">Pilih File</button>
+                        <p class="upload-hint">Format: PDF, TXT, MD</p>
+                    </div>
+                    <div id="uploadStatus" class="upload-status hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <main class="chat-container">
+            <div id="chatMessages" class="chat-messages">
+                <!-- Welcome Message -->
+                <div class="message bot-message">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <p>Halo! Saya adalah asisten virtual <strong>SINEMA</strong> Universitas Tadulako. 👋</p>
+                        <p>Saya dapat membantu menjawab pertanyaan seputar:</p>
+                        <ul>
+                            <li>📝 Pengisian KRS</li>
+                            <li>💰 Pembayaran UKT</li>
+                            <li>📚 Prosedur Skripsi</li>
+                            <li>🎓 Beasiswa</li>
+                            <li>📋 Layanan Akademik</li>
+                        </ul>
+                        <p>Silakan bertanya!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div id="typingIndicator" class="typing-indicator hidden">
+                <div class="message-avatar">🤖</div>
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="input-area">
+            <div class="input-container">
+                <input type="text" id="messageInput" placeholder="Ketik pertanyaan Anda..." autocomplete="off">
+                <button id="sendBtn" class="btn btn-primary">
+                    <span>Kirim</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" />
+                    </svg>
+                </button>
+            </div>
+            <p class="input-hint">Tekan Enter untuk mengirim • <span id="sessionInfo">Session: -</span></p>
+        </footer>
+    </div>
+
+    <script src="/static/js/chat.js"></script>
+</body>
+
+</html>

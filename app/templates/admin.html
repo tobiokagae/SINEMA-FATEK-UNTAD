@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SINEMA Chatbot</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⚙️</span>
+                    <div class="logo-text">
+                        <h1>Admin Dashboard</h1>
+                        <p>SINEMA Chatbot</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <a href="/" class="btn btn-primary">← Kembali ke Chat</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="admin-main">
+            <!-- Stats Cards -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💬</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalMessages">-</span>
+                        <span class="stat-label">Total Pesan</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalSessions">-</span>
+                        <span class="stat-label">Total Sesi</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📄</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="docCount">-</span>
+                        <span class="stat-label">Dokumen</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="chunkCount">-</span>
+                        <span class="stat-label">Chunks Index</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="cacheHits">-</span>
+                        <span class="stat-label">Cache Hits</span>
+                    </div>
+                </div>
+                <div class="stat-card satisfaction">
+                    <div class="stat-icon">😊</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="satisfaction">-</span>
+                        <span class="stat-label">Kepuasan</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback Section -->
+            <section class="admin-section">
+                <h2>📊 Feedback Terbaru</h2>
+                <div class="feedback-stats">
+                    <span class="feedback-positive">👍 <span id="positiveCount">0</span></span>
+                    <span class="feedback-negative">👎 <span id="negativeCount">0</span></span>
+                </div>
+                <div id="feedbackList" class="feedback-list">
+                    <p class="loading">Loading...</p>
+                </div>
+            </section>
+
+            <!-- Documents Section -->
+            <section class="admin-section">
+                <h2>📄 Dokumen</h2>
+                <div id="documentList" class="document-list">
+                    <p class="loading">Loading...</p>
+                </div>
+            </section>
+
+            <!-- Top Queries -->
+            <section class="admin-section">
+                <h2>🔥 Pertanyaan Populer</h2>
+                <div id="topQueries" class="top-queries">
+                    <p class="loading">Loading...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Load admin data
+        async function loadAdminData() {
+            try {
+                // Stats
+                const statsRes = await fetch('/api/admin/stats');
+                const stats = await statsRes.json();
+
+                document.getElementById('totalMessages').textContent = stats.total_messages || 0;
+                document.getElementById('totalSessions').textContent = stats.total_sessions || 0;
+                document.getElementById('docCount').textContent = stats.document_count || 0;
+                document.getElementById('chunkCount').textContent = stats.indexed_chunks || 0;
+                document.getElementById('cacheHits').textContent = stats.cache?.total_hits || 0;
+                document.getElementById('satisfaction').textContent = (stats.feedback?.satisfaction_rate || 0) + '%';
+                document.getElementById('positiveCount').textContent = stats.feedback?.positive || 0;
+                document.getElementById('negativeCount').textContent = stats.feedback?.negative || 0;
+
+                // Top queries
+                const topQueriesEl = document.getElementById('topQueries');
+                if (stats.top_queries && stats.top_queries.length > 0) {
+                    topQueriesEl.innerHTML = stats.top_queries.map((q, i) =>
+                        `<div class="query-item">${i + 1}. ${q}</div>`
+                    ).join('');
+                } else {
+                    topQueriesEl.innerHTML = '<p class="empty">Belum ada data</p>';
+                }
+
+                // Feedback
+                const feedbackRes = await fetch('/api/admin/feedback');
+                const feedbackData = await feedbackRes.json();
+                const feedbackList = document.getElementById('feedbackList');
+
+                if (feedbackData.feedback && feedbackData.feedback.length > 0) {
+                    feedbackList.innerHTML = feedbackData.feedback.slice(-10).reverse().map(f => `
+                        <div class="feedback-item ${f.feedback}">
+                            <span class="feedback-icon">${f.feedback === 'positive' ? '👍' : '👎'}</span>
+                            <div class="feedback-content">
+                                <p class="feedback-query">${f.query || 'N/A'}</p>
+                                <p class="feedback-time">${new Date(f.timestamp).toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    feedbackList.innerHTML = '<p class="empty">Belum ada feedback</p>';
+                }
+
+                // Documents
+                const docsRes = await fetch('/api/documents');
+                const docsData = await docsRes.json();
+                const docList = document.getElementById('documentList');
+
+                if (docsData.documents && docsData.documents.length > 0) {
+                    docList.innerHTML = docsData.documents.map(d => `
+                        <div class="document-item">
+                            <span class="doc-icon">📄</span>
+                            <span class="doc-name">${d.name}</span>
+                            <span class="doc-size">${(d.size / 1024).toFixed(1)} KB</span>
+                            <button class="btn-delete" onclick="deleteDoc('${d.name}')">🗑️</button>
+                        </div>
+                    `).join('');
+                } else {
+                    docList.innerHTML = '<p class="empty">Tidak ada dokumen</p>';
+                }
+
+            } catch (error) {
+                console.error('Error loading admin data:', error);
+            }
+        }
+
+        async function deleteDoc(filename) {
+            if (!confirm(`Hapus ${filename}?`)) return;
+
+            await fetch(`/api/documents/${filename}`, { method: 'DELETE' });
+            loadAdminData();
+        }
+
+        // Load on page load
+        loadAdminData();
+
+        // Auto refresh every 30s
+        setInterval(loadAdminData, 30000);
+    </script>
+</body>
+
+</html>
