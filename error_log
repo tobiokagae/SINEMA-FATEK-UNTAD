@@ -1,0 +1,6 @@
+[08-Sep-2025 18:26:59 Asia/Jakarta] PHP Warning:  require(/home/siny1585/sinema/vendor/autoload.php): Failed to open stream: No such file or directory in /home/siny1585/sinema/artisan on line 9
+[08-Sep-2025 18:26:59 Asia/Jakarta] PHP Warning:  require(/home/siny1585/sinema/vendor/autoload.php): Failed to open stream: No such file or directory in /home/siny1585/sinema/artisan on line 9
+[08-Sep-2025 18:26:59 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/siny1585/sinema/vendor/autoload.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/siny1585/sinema/artisan:9
+Stack trace:
+#0 {main}
+  thrown in /home/siny1585/sinema/artisan on line 9
