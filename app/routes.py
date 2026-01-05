@@ -280,11 +280,36 @@ def upload_document():
         logger.error(f"Upload error: {str(e)}", exc_info=True)
         return jsonify({'error': str(e)}), 500
 
-@main.route('/api/categories', methods=['GET'])
-def list_categories():
-    """List all document categories"""
-    categories = DatabaseService.get_all_categories()
-    return jsonify({'categories': categories})
+@main.route('/api/categories', methods=['GET', 'POST'])
+def categories():
+    """List all or create new document categories"""
+    if request.method == 'GET':
+        categories = DatabaseService.get_all_categories()
+        return jsonify({'categories': categories})
+    
+    # POST - Create new category
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    name = data.get('name', '').strip().lower().replace(' ', '_')
+    display_name = data.get('display_name', '').strip()
+    icon = data.get('icon', '📁')
+    
+    if not name or not display_name:
+        return jsonify({'error': 'Name and display_name are required'}), 400
+    
+    # Check if exists
+    existing = DatabaseService.get_category_by_name(name)
+    if existing:
+        return jsonify({'error': f'Category "{name}" already exists'}), 400
+    
+    # Create category
+    category = DatabaseService.create_category(name, display_name, icon)
+    if category:
+        return jsonify({'success': True, 'category': category.to_dict()})
+    else:
+        return jsonify({'error': 'Failed to create category'}), 500
 
 @main.route('/api/documents', methods=['GET'])
 def list_documents():
@@ -297,17 +322,100 @@ def list_documents():
 
 @main.route('/api/documents/<filename>', methods=['DELETE'])
 def delete_document(filename):
-    """Delete a document and remove from index"""
+    """Delete a document, its original file, and refresh index to remove chunks"""
+    from flask import current_app
+    logger = current_app.logger
+    
     try:
-        # Delete from filesystem
-        filepath = DOCUMENTS_DIR / secure_filename(filename)
-        if filepath.exists():
-            filepath.unlink()
+        safe_name = secure_filename(filename)
+        base_name = Path(safe_name).stem
+        deleted_files = []
+        
+        # Delete MD file
+        md_path = DOCUMENTS_DIR / safe_name
+        if md_path.exists():
+            md_path.unlink()
+            deleted_files.append(safe_name)
+            logger.info(f"Deleted MD: {safe_name}")
+        
+        # Delete original files (PDF, DOC, DOCX)
+        for ext in ['.pdf', '.doc', '.docx', '.txt']:
+            orig_path = DOCUMENTS_DIR / f"{base_name}{ext}"
+            if orig_path.exists():
+                orig_path.unlink()
+                deleted_files.append(f"{base_name}{ext}")
+                logger.info(f"Deleted original: {base_name}{ext}")
         
         # Delete from database
-        DatabaseService.delete_document(filename)
+        deleted = DatabaseService.delete_document_by_filename(filename)
+        logger.info(f"Deleted from database: {filename} (success: {deleted})")
         
-        return jsonify({'message': f'{filename} deleted', 'note': 'Run refresh to update index'})
+        # Schedule background reindex (debounced - waits 5s after last delete)
+        try:
+            from .background_reindex import get_background_reindex_service
+            bg_service = get_background_reindex_service()
+            bg_service.schedule_reindex()
+            logger.info("Background reindex scheduled (5s debounce)")
+        except Exception as e:
+            logger.warning(f"Failed to schedule background reindex: {e}")
+        
+        return jsonify({
+            'message': 'Document deleted successfully',
+            'deleted_files': deleted_files,
+            'reindex_scheduled': True,
+            'note': 'Index will refresh automatically in 5 seconds'
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@main.route('/api/documents/<filename>/download', methods=['GET'])
+def download_document(filename):
+    """Download a document"""
+    from flask import send_from_directory
+    try:
+        safe_filename = secure_filename(filename)
+        filepath = DOCUMENTS_DIR / safe_filename
+        
+        if not filepath.exists():
+            return jsonify({'error': 'File not found'}), 404
+        
+        return send_from_directory(
+            DOCUMENTS_DIR,
+            safe_filename,
+            as_attachment=True,
+            download_name=filename
+        )
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@main.route('/api/documents/<filename>/preview', methods=['GET'])
+def preview_document(filename):
+    """Preview a document (inline display)"""
+    from flask import send_from_directory
+    try:
+        safe_filename = secure_filename(filename)
+        filepath = DOCUMENTS_DIR / safe_filename
+        
+        if not filepath.exists():
+            return jsonify({'error': 'Resource not found'}), 404
+        
+        # Get mimetype
+        ext = filepath.suffix.lower()
+        mimetypes = {
+            '.pdf': 'application/pdf',
+            '.md': 'text/markdown',
+            '.txt': 'text/plain',
+            '.doc': 'application/msword',
+            '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        }
+        mimetype = mimetypes.get(ext, 'application/octet-stream')
+        
+        return send_from_directory(
+            DOCUMENTS_DIR,
+            safe_filename,
+            as_attachment=False,
+            mimetype=mimetype
+        )
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

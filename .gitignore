@@ -24,44 +24,47 @@ wheels/
 venv/
 ENV/
 env/
-.venv/
 
 # Environment Variables
 .env
+.env.local
+.env.*.local
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+*~
 
 # Logs
 *.log
 logs/
 
-# Database
+# Vector Database (large files)
+vector_db/
+
+# SQLite Database
 *.db
 *.sqlite3
 
-# Vector Store / Models (large files)
-vector_db/
-models/
-*.faiss
-*.pkl
+# Debug/Test files
+debug_*.py
+test_*.py
+*_output.txt
+check_*.py
+fix_*.py
+delete_*.py
+verify_*.py
 
-# Documents (user uploaded)
-documents/
-
-# Streamlit
-.streamlit/
+# OS files
+.DS_Store
+Thumbs.db
 
 # Jupyter
 .ipynb_checkpoints/
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Cache
-.cache/
-*.pyc
+# Misc
+*.bak
+*.tmp
+*.temp

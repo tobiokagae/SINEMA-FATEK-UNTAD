@@ -65,8 +65,20 @@ def create_app():
         DatabaseService.seed_default_categories()
     
     # Register blueprints
-    from .routes import main
+    from .routes import main, get_retriever
     app.register_blueprint(main)
+    
+    # Initialize background reindex service
+    from .background_reindex import get_background_reindex_service
+    
+    def reindex_callback():
+        """Callback function for background reindexing"""
+        retriever = get_retriever()
+        retriever.refresh_index()
+    
+    bg_service = get_background_reindex_service()
+    bg_service.init_app(app, reindex_callback)
+    app.bg_reindex_service = bg_service
     
     # Global error handlers
     @app.errorhandler(404)

@@ -232,6 +232,18 @@ class DatabaseService:
         return db.session.get(Category, category_id)
     
     @staticmethod
+    def create_category(name: str, display_name: str, icon: str = '📁') -> Optional[Category]:
+        """Create a new category"""
+        try:
+            category = Category(name=name, display_name=display_name, icon=icon)
+            db.session.add(category)
+            db.session.commit()
+            return category
+        except Exception as e:
+            db.session.rollback()
+            return None
+    
+    @staticmethod
     def seed_default_categories():
         """Seed default document categories"""
         default_categories = [
@@ -306,3 +318,23 @@ class DatabaseService:
     def get_document_by_filename(filename: str) -> Optional[Document]:
         """Get document by filename"""
         return db.session.query(Document).filter_by(filename=filename).first()
+    
+    @staticmethod
+    def delete_document_by_filename(filename: str) -> bool:
+        """Delete a document by filename"""
+        from flask import current_app
+        try:
+            doc = db.session.query(Document).filter_by(filename=filename).first()
+            if doc:
+                current_app.logger.info(f"Found document to delete: id={doc.id}, filename={doc.filename}")
+                db.session.delete(doc)
+                db.session.commit()
+                current_app.logger.info(f"Successfully deleted document: {filename}")
+                return True
+            else:
+                current_app.logger.warning(f"Document not found for deletion: {filename}")
+                return False
+        except Exception as e:
+            current_app.logger.error(f"Error deleting document {filename}: {e}")
+            db.session.rollback()
+            return False
