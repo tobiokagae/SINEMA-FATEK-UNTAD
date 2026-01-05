@@ -4,8 +4,11 @@ namespace App\Filament\Pages;
 
 use App\Services\ChatbotService;
 use Filament\Actions\Action;
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
@@ -13,9 +16,10 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Log;
 
-class ChatbotDocuments extends Page implements HasForms
+class ChatbotDocuments extends Page implements HasForms, HasActions
 {
     use InteractsWithForms;
+    use InteractsWithActions;
     
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationLabel = 'Dokumen Chatbot';
@@ -23,7 +27,7 @@ class ChatbotDocuments extends Page implements HasForms
     protected static ?int $navigationSort = -5;
     protected static string $view = 'filament.pages.chatbot-documents';
     
-    public ?array $uploadData = [];
+    public ?array $data = [];
     public array $documents = [];
     public array $categories = [];
     public array $stats = [];
@@ -38,6 +42,7 @@ class ChatbotDocuments extends Page implements HasForms
     public function mount(): void
     {
         $this->loadData();
+        $this->form->fill();
     }
     
     protected function loadData(): void
@@ -46,41 +51,74 @@ class ChatbotDocuments extends Page implements HasForms
         $this->documents = $this->chatbotService->getDocuments();
         $this->categories = $this->chatbotService->getCategories();
         $this->stats = $this->chatbotService->getStats();
+        
+        \Log::info('ChatbotDocuments loadData: ' . count($this->documents) . ' documents loaded');
     }
     
     public function form(Form $form): Form
     {
+        if (empty($this->categories)) {
+            $this->categories = app(ChatbotService::class)->getCategories();
+        }
+        
         $categoryOptions = collect($this->categories)->pluck('display_name', 'name')->toArray();
         
         return $form
             ->schema([
                 FileUpload::make('file')
                     ->label('Pilih Dokumen')
+                    ->disk('local')
+                    ->directory('chatbot-uploads')
+                    ->visibility('private')
+                    ->preserveFilenames()
                     ->acceptedFileTypes([
+                        '.pdf', '.doc', '.docx', '.txt', '.md',
                         'application/pdf',
-                        'text/plain',
-                        'text/markdown',
-                        '.md',
                         'application/msword',
-                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                        'text/plain', 'text/markdown', 'text/x-markdown',
                     ])
                     ->maxSize(10240)
-                    ->required(),
+                    ->required()
+                    ->live()
+                    ->validationMessages([
+                        'required' => 'File dokumen harus diupload',
+                    ]),
                     
                 Select::make('category')
                     ->label('Kategori')
+                    ->placeholder('-- Pilih Kategori --')
                     ->options($categoryOptions ?: ['general' => 'Umum'])
-                    ->default('general')
-                    ->required(),
+                    ->required()
+                    ->live()
+                    ->validationMessages([
+                        'required' => 'Kategori harus dipilih',
+                    ]),
             ])
-            ->statePath('uploadData');
+            ->statePath('data');
     }
     
-    public function upload(): void
+    public function uploadAction(): Action
     {
+        return Action::make('upload')
+            ->label('Upload & Proses')
+            ->icon('heroicon-o-cloud-arrow-up')
+            ->color('warning')
+            ->size('lg')
+            ->extraAttributes(['class' => 'w-full justify-center'])
+            ->disabled(fn () => empty($this->data['file']) || empty($this->data['category']))
+            ->action(function () {
+                $this->processUpload();
+            });
+    }
+    
+    public function processUpload(): void
+    {
+        Log::info('=== processUpload called ===');
+        
         $data = $this->form->getState();
         
-        Log::info('Upload data: ' . json_encode($data));
+        Log::info('Form data: ' . json_encode($data));
         
         if (empty($data['file'])) {
             Notification::make()
@@ -90,111 +128,30 @@ class ChatbotDocuments extends Page implements HasForms
             return;
         }
         
-        // The file value from Filament FileUpload
-        $fileValue = $data['file'];
-        Log::info('File value type: ' . gettype($fileValue));
-        Log::info('File value: ' . (is_string($fileValue) ? $fileValue : json_encode($fileValue)));
+        // FileUpload with disk('local') stores in private/ folder
+        $filePath = storage_path('app/private/' . $data['file']);
         
-        // Find the actual file path
-        $tempPath = null;
-        $originalName = null;
+        Log::info('File path: ' . $filePath);
         
-        // Check all possible locations
-        $searchPaths = [
-            storage_path('app/private/livewire-tmp'),
-            storage_path('app/livewire-tmp'),
-            storage_path('app/public'),
-        ];
-        
-        foreach ($searchPaths as $searchDir) {
-            if (!is_dir($searchDir)) continue;
-            
-            $files = glob($searchDir . '/*');
-            foreach ($files as $file) {
-                $basename = basename($file);
-                // Match if fileValue is contained in basename or vice versa
-                if (strpos($basename, $fileValue) !== false || strpos($fileValue, $basename) !== false || $basename === $fileValue) {
-                    $tempPath = $file;
-                    break 2;
-                }
-            }
-        }
-        
-        // If still not found, try direct path
-        if (!$tempPath) {
-            $directPaths = [
-                storage_path('app/private/livewire-tmp/' . $fileValue),
-                storage_path('app/livewire-tmp/' . $fileValue),
-                storage_path('app/' . $fileValue),
-            ];
-            
-            foreach ($directPaths as $path) {
-                if (file_exists($path)) {
-                    $tempPath = $path;
-                    break;
-                }
-            }
-        }
-        
-        Log::info('Temp path found: ' . ($tempPath ?? 'NOT FOUND'));
-        
-        if (!$tempPath || !file_exists($tempPath)) {
+        if (!file_exists($filePath)) {
             Notification::make()
                 ->title('File tidak ditemukan')
-                ->body('File: ' . $fileValue)
+                ->body($filePath)
                 ->danger()
                 ->send();
             return;
         }
         
-        // Extract original name from Livewire metadata in filename
-        $basename = basename($tempPath);
-        if (preg_match('/-meta(.+)-\./', $basename, $matches)) {
-            $decoded = base64_decode($matches[1]);
-            if ($decoded) {
-                $originalName = $decoded;
-            }
-        }
-        
-        if (!$originalName) {
-            $originalName = $basename;
-        }
-        
-        Log::info('Original name: ' . $originalName);
-        
-        // Create safe filename
-        $extension = pathinfo($originalName, PATHINFO_EXTENSION);
-        $safeName = preg_replace('/[^a-zA-Z0-9_.-]/', '_', pathinfo($originalName, PATHINFO_FILENAME));
-        $finalName = $safeName . '.' . $extension;
-        
-        // Ensure storage directory exists
-        $storageDir = storage_path('app/chatbot-documents');
-        if (!is_dir($storageDir)) {
-            mkdir($storageDir, 0755, true);
-        }
-        
-        $storagePath = $storageDir . '/' . $finalName;
-        
-        // Copy file
-        if (!copy($tempPath, $storagePath)) {
-            Notification::make()
-                ->title('Gagal menyimpan file')
-                ->danger()
-                ->send();
-            return;
-        }
-        
-        Log::info('File saved to: ' . $storagePath);
+        $filename = basename($filePath);
         
         Notification::make()
-            ->title('File tersimpan, mengirim ke chatbot API...')
+            ->title('Memproses dokumen...')
             ->info()
             ->send();
         
-        // Send to chatbot API
         $file = new \Illuminate\Http\UploadedFile(
-            $storagePath,
-            $finalName,
+            $filePath,
+            $filename,
             null,
             null,
             true
@@ -207,18 +164,18 @@ class ChatbotDocuments extends Page implements HasForms
         
         if (isset($result['error'])) {
             Notification::make()
-                ->title('Gagal mengupload ke chatbot API')
+                ->title('Gagal upload ke chatbot')
                 ->body($result['error'])
                 ->danger()
                 ->send();
         } else {
             Notification::make()
                 ->title('Dokumen berhasil diproses!')
-                ->body("File: {$finalName} | Chunks: " . ($result['chunks'] ?? 0))
+                ->body("File: {$filename} | Chunks: " . ($result['chunks'] ?? 0))
                 ->success()
                 ->send();
             
-            $this->reset('uploadData');
+            $this->form->fill();
             $this->loadData();
         }
     }
@@ -226,11 +183,6 @@ class ChatbotDocuments extends Page implements HasForms
     public function deleteDocument(string $filename): void
     {
         $result = $this->chatbotService->deleteDocument($filename);
-        
-        $localPath = storage_path('app/chatbot-documents/' . $filename);
-        if (file_exists($localPath)) {
-            unlink($localPath);
-        }
         
         if (isset($result['error'])) {
             Notification::make()
@@ -241,11 +193,47 @@ class ChatbotDocuments extends Page implements HasForms
         } else {
             Notification::make()
                 ->title('Dokumen dihapus')
+                ->body('Semua file dan data terkait telah dihapus.')
                 ->success()
                 ->send();
-            
-            $this->loadData();
         }
+        
+        // Reload data to refresh the list immediately
+        $this->documents = [];
+        $this->stats = [];
+        $this->loadData();
+    }
+    
+    public function getDocumentUrl(string $filename): string
+    {
+        // Try PDF first, then DOCX, then DOC (replace .md extension)
+        $baseName = preg_replace('/\\.md$/', '', $filename);
+        $chatbotUrl = config('services.chatbot.url', 'http://127.0.0.1:5000');
+        // Default to PDF - Flask will handle if file doesn't exist
+        return $chatbotUrl . '/api/documents/' . urlencode($baseName . '.pdf') . '/download';
+    }
+    
+    public function getPreviewUrl(string $filename): string
+    {
+        // Preview MD file (readable text)
+        $chatbotUrl = config('services.chatbot.url', 'http://127.0.0.1:5000');
+        return $chatbotUrl . '/api/documents/' . urlencode($filename) . '/preview';
+    }
+    
+    public function getOriginalUrl(string $filename): string
+    {
+        // Get original file URL (check for PDF, DOCX, DOC, TXT)
+        $baseName = preg_replace('/\\.md$/', '', $filename);
+        $chatbotUrl = config('services.chatbot.url', 'http://127.0.0.1:5000');
+        return $chatbotUrl . '/api/documents/' . urlencode($baseName) . '/original';
+    }
+    
+    public function getPdfPreviewUrl(string $filename): string
+    {
+        // Preview original file (PDF or DOCX)
+        $baseName = preg_replace('/\\.md$/', '', $filename);
+        $chatbotUrl = config('services.chatbot.url', 'http://127.0.0.1:5000');
+        return $chatbotUrl . '/api/documents/' . urlencode($baseName . '.pdf') . '/preview';
     }
     
     public function refreshIndex(): void
@@ -276,6 +264,43 @@ class ChatbotDocuments extends Page implements HasForms
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('addCategory')
+                ->label('Tambah Kategori')
+                ->icon('heroicon-o-folder-plus')
+                ->color('success')
+                ->form([
+                    TextInput::make('display_name')
+                        ->label('Nama Kategori')
+                        ->placeholder('Contoh: Panduan Akademik')
+                        ->required()
+                        ->maxLength(100),
+                    TextInput::make('icon')
+                        ->label('Ikon (Emoji)')
+                        ->placeholder('📁')
+                        ->default('📁')
+                        ->maxLength(10),
+                ])
+                ->action(function (array $data) {
+                    $displayName = $data['display_name'];
+                    $icon = $data['icon'] ?? '📁';
+                    
+                    $result = $this->chatbotService->createCategory($displayName, $displayName, $icon);
+                    
+                    if (isset($result['error'])) {
+                        Notification::make()
+                            ->title('Gagal menambah kategori')
+                            ->body($result['error'])
+                            ->danger()
+                            ->send();
+                    } else {
+                        Notification::make()
+                            ->title('Kategori berhasil ditambahkan!')
+                            ->success()
+                            ->send();
+                        
+                        $this->loadData();
+                    }
+                }),
             Action::make('refresh')
                 ->label('Refresh Index')
                 ->icon('heroicon-o-arrow-path')

@@ -72,13 +72,13 @@
                     </div>
                 </x-slot>
                 
-                <form wire:submit.prevent="upload" class="space-y-4">
+                <div class="space-y-4">
                     {{ $this->form }}
                     
-                    <x-filament::button type="submit" class="w-full" icon="heroicon-o-cloud-arrow-up">
-                        Upload & Proses
-                    </x-filament::button>
-                </form>
+                    <div class="pt-2">
+                        {{ $this->uploadAction }}
+                    </div>
+                </div>
                 
                 <div class="mt-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-800">
                     <p class="text-xs text-gray-600 dark:text-gray-400">
@@ -106,24 +106,32 @@
                 @if(count($documents) > 0)
                     <div class="divide-y divide-gray-200 dark:divide-gray-700">
                         @foreach($documents as $doc)
-                            <div class="flex items-center justify-between py-4 first:pt-0 last:pb-0">
+                            @php
+                                $filename = $doc['filename'] ?? '';
+                                $originalName = $doc['original_name'] ?? '';
+                                $displayName = pathinfo($filename, PATHINFO_FILENAME);
+                                
+                                // Check if original file is different and is a binary format
+                                $hasBinaryOriginal = false;
+                                $originalExt = '';
+                                
+                                if (!empty($originalName) && $originalName !== $filename) {
+                                    $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+                                    if (in_array($ext, ['pdf', 'doc', 'docx'])) {
+                                        $hasBinaryOriginal = true;
+                                        $originalExt = strtoupper($ext);
+                                    }
+                                }
+                            @endphp
+                            <div wire:key="doc-{{ $loop->index }}" class="flex items-center justify-between py-4 first:pt-0 last:pb-0">
                                 <div class="flex items-center gap-4">
                                     <div class="flex-shrink-0 rounded-lg bg-primary-50 p-2.5 dark:bg-primary-400/10">
-                                        @php
-                                            $ext = pathinfo($doc['filename'] ?? '', PATHINFO_EXTENSION);
-                                        @endphp
-                                        @if($ext === 'pdf')
-                                            <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/>
-                                            </svg>
-                                        @else
-                                            <svg class="h-5 w-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
-                                            </svg>
-                                        @endif
+                                        <svg class="h-5 w-5 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
+                                        </svg>
                                     </div>
                                     <div>
-                                        <p class="font-medium text-gray-950 dark:text-white">{{ $doc['filename'] ?? 'Unknown' }}</p>
+                                        <p class="font-medium text-gray-950 dark:text-white">{{ $displayName }}</p>
                                         <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
                                             <span class="inline-flex items-center rounded-full bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-700 dark:bg-primary-400/10 dark:text-primary-400">
                                                 {{ $doc['category_name'] ?? 'Umum' }}
@@ -133,15 +141,150 @@
                                         </div>
                                     </div>
                                 </div>
-                                <x-filament::button
-                                    color="danger"
-                                    size="sm"
-                                    icon="heroicon-o-trash"
-                                    wire:click="deleteDocument('{{ $doc['filename'] ?? '' }}')"
-                                    wire:confirm="Yakin ingin menghapus dokumen ini?"
-                                >
-                                    Hapus
-                                </x-filament::button>
+                                <div class="flex items-center gap-2">
+                                    {{-- View Dropdown --}}
+                                    <x-filament::dropdown>
+                                        <x-slot name="trigger">
+                                            <x-filament::button color="gray" size="sm" icon="heroicon-o-eye">
+                                                Lihat
+                                            </x-filament::button>
+                                        </x-slot>
+                                        <x-filament::dropdown.list>
+                                            <x-filament::dropdown.list.item 
+                                                tag="a" 
+                                                href="{{ $this->getPreviewUrl($filename) }}" 
+                                                target="_blank"
+                                                icon="heroicon-o-document-text"
+                                            >
+                                                File Markdown
+                                            </x-filament::dropdown.list.item>
+                                            @if($hasBinaryOriginal)
+                                            <x-filament::dropdown.list.item 
+                                                tag="a" 
+                                                href="{{ $this->getPdfPreviewUrl($filename) }}" 
+                                                target="_blank"
+                                                icon="heroicon-o-document"
+                                            >
+                                                File Original ({{ $originalExt }})
+                                            </x-filament::dropdown.list.item>
+                                            @endif
+                                        </x-filament::dropdown.list>
+                                    </x-filament::dropdown>
+                                    
+                                    {{-- Download Dropdown --}}
+                                    <x-filament::dropdown>
+                                        <x-slot name="trigger">
+                                            <x-filament::button color="success" size="sm" icon="heroicon-o-arrow-down-tray">
+                                                Download
+                                            </x-filament::button>
+                                        </x-slot>
+                                        <x-filament::dropdown.list>
+                                            <x-filament::dropdown.list.item 
+                                                tag="a" 
+                                                href="{{ $this->getPreviewUrl($filename) }}" 
+                                                download="{{ $filename }}"
+                                                icon="heroicon-o-document-text"
+                                            >
+                                                File Markdown
+                                            </x-filament::dropdown.list.item>
+                                            @if($hasBinaryOriginal)
+                                            <x-filament::dropdown.list.item 
+                                                tag="a" 
+                                                href="{{ $this->getDocumentUrl($filename) }}" 
+                                                download
+                                                icon="heroicon-o-document"
+                                            >
+                                                File Original ({{ $originalExt }})
+                                            </x-filament::dropdown.list.item>
+                                            @endif
+                                        </x-filament::dropdown.list>
+                                    </x-filament::dropdown>
+                                    
+                                    {{-- Delete Button with Modal --}}
+                                    <div x-data="{ open: false }">
+                                        <x-filament::button
+                                            color="danger"
+                                            size="sm"
+                                            icon="heroicon-o-trash"
+                                            x-on:click="open = true"
+                                        >
+                                            Hapus
+                                        </x-filament::button>
+                                        
+                                        {{-- Modal Backdrop --}}
+                                        <div 
+                                            x-show="open" 
+                                            x-cloak
+                                            class="fixed inset-0 z-40 bg-black/50"
+                                            x-on:click="open = false"
+                                            x-transition:enter="ease-out duration-300"
+                                            x-transition:enter-start="opacity-0"
+                                            x-transition:enter-end="opacity-100"
+                                            x-transition:leave="ease-in duration-200"
+                                            x-transition:leave-start="opacity-100"
+                                            x-transition:leave-end="opacity-0"
+                                        ></div>
+                                        
+                                        {{-- Modal Content --}}
+                                        <div 
+                                            x-show="open" 
+                                            x-cloak
+                                            class="fixed inset-0 z-50 flex items-center justify-center p-4"
+                                            x-transition:enter="ease-out duration-300"
+                                            x-transition:enter-start="opacity-0 scale-95"
+                                            x-transition:enter-end="opacity-100 scale-100"
+                                            x-transition:leave="ease-in duration-200"
+                                            x-transition:leave-start="opacity-100 scale-100"
+                                            x-transition:leave-end="opacity-0 scale-95"
+                                        >
+                                            <div class="w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-xl" x-on:click.stop>
+                                                {{-- Header --}}
+                                                <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                                                    <div class="flex items-center gap-2 text-danger-600 dark:text-danger-400">
+                                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                                        </svg>
+                                                        <span class="text-lg font-semibold">Hapus Dokumen</span>
+                                                    </div>
+                                                </div>
+                                                
+                                                {{-- Body --}}
+                                                <div class="p-4 space-y-3">
+                                                    <p class="font-medium text-gray-900 dark:text-gray-100">{{ $displayName }}</p>
+                                                    <div class="rounded-lg bg-danger-50 dark:bg-danger-900/20 p-3 text-sm text-danger-700 dark:text-danger-300">
+                                                        <p class="font-medium mb-1">⚠️ Peringatan:</p>
+                                                        <ul class="list-disc list-inside space-y-1">
+                                                            <li>File markdown (.md) akan dihapus</li>
+                                                            @if($hasBinaryOriginal)
+                                                            <li>File original ({{ $originalExt }}) akan dihapus</li>
+                                                            @endif
+                                                            <li>Semua chunk di vector store akan dihapus</li>
+                                                            <li>Data di database akan dihapus</li>
+                                                        </ul>
+                                                    </div>
+                                                    <p class="text-sm text-gray-500 dark:text-gray-400">Tindakan ini tidak dapat dibatalkan.</p>
+                                                </div>
+                                                
+                                                {{-- Footer --}}
+                                                <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-2">
+                                                    <x-filament::button color="gray" x-on:click="open = false">
+                                                        Batal
+                                                    </x-filament::button>
+                                                    <x-filament::button 
+                                                        color="danger" 
+                                                        icon="heroicon-o-trash"
+                                                        wire:click="deleteDocument('{{ $filename }}')"
+                                                        x-on:click="open = false"
+                                                        wire:loading.attr="disabled"
+                                                    >
+                                                        <span wire:loading.remove wire:target="deleteDocument('{{ $filename }}')">Ya, Hapus</span>
+                                                        <span wire:loading wire:target="deleteDocument('{{ $filename }}')">Menghapus...</span>
+                                                    </x-filament::button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
