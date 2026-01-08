@@ -79,6 +79,7 @@ DB_PASSWORD=
 
 # Settings
 USE_API=true
+DEVICE=cuda
 ```
 
 ## ▶️ Menjalankan
@@ -86,6 +87,8 @@ USE_API=true
 ### Flask API (Untuk integrasi SINEMA)
 ```bash
 flask run
+# atau
+python run.py
 ```
 API tersedia di: `http://127.0.0.1:5000`
 
@@ -95,42 +98,66 @@ streamlit run streamlit_app.py
 ```
 UI tersedia di: `http://localhost:8501`
 
-## � API Endpoints
+## 📡 API Endpoints
 
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
 | `POST` | `/api/chat` | Kirim pesan chat |
+| `POST` | `/api/session/new` | Buat session baru |
+| `GET` | `/api/session/<id>/history` | Riwayat chat session |
+| `POST` | `/api/feedback` | Kirim feedback |
 | `GET` | `/api/documents` | Daftar dokumen |
-| `POST` | `/api/documents` | Upload dokumen baru |
+| `POST` | `/api/upload` | Upload dokumen baru |
 | `DELETE` | `/api/documents/<filename>` | Hapus dokumen |
-| `POST` | `/api/refresh` | Refresh index manual |
-| `GET` | `/api/stats` | Statistik sistem |
+| `GET` | `/api/documents/<filename>/download` | Download dokumen |
+| `GET` | `/api/documents/<filename>/preview` | Preview dokumen |
 | `GET` | `/api/categories` | Daftar kategori |
+| `POST` | `/api/categories` | Buat kategori baru |
+| `POST` | `/api/refresh` | Refresh index manual |
+| `POST` | `/api/cache/clear` | Hapus semua cache |
+| `POST` | `/api/sync` | Sync dokumen filesystem ke database |
+| `GET` | `/api/admin/stats` | Statistik sistem |
+| `GET` | `/api/admin/feedback` | Daftar feedback |
+| `GET` | `/api/admin/sessions` | Daftar sessions |
+| `GET` | `/api/health` | Health check |
 
 ## 📁 Struktur Project
 
 ```
 sinema-chatbot/
 ├── app/
-│   ├── __init__.py          # Flask app factory
+│   ├── __init__.py           # Flask app factory
 │   ├── routes.py             # API endpoints
-│   ├── database.py           # Database service
+│   ├── database.py           # Database service (MySQL)
 │   ├── models.py             # SQLAlchemy models
 │   ├── config.py             # Konfigurasi
 │   ├── background_reindex.py # Background reindex service
-│   └── rag/
-│       ├── retriever.py      # RAG retriever
-│       ├── vector_store.py   # FAISS vector store
-│       ├── chunking.py       # Document chunking
-│       └── llm.py            # LLM integration
+│   ├── logging_config.py     # Logging configuration
+│   ├── llm/                  # LLM integration
+│   │   └── api_generator.py  # OpenRouter API generator
+│   ├── rag/                  # RAG components
+│   │   ├── __init__.py       # Module exports
+│   │   ├── retriever.py      # RAG retriever
+│   │   ├── vector_store.py   # FAISS vector store
+│   │   ├── document_loader.py # Document loading & chunking
+│   │   └── ...
+│   └── templates/            # HTML templates
 ├── documents/                # Folder dokumen (MD + original)
 ├── vector_db/                # FAISS index storage
+├── logs/                     # Log files
+├── evaluation/               # Evaluasi RAG
+├── static/                   # Static assets
 ├── .env                      # Environment config
+├── .env.example              # Environment template
 ├── requirements.txt          # Python dependencies
-└── run.py                    # Alternative entry point
+├── run.py                    # Flask entry point
+├── streamlit_app.py          # Streamlit UI
+├── rebuild_index.py          # Manual index rebuild
+├── evaluate_rag.py           # RAG evaluation script
+└── verify_rag_system.py      # RAG verification
 ```
 
-## � Menambah Dokumen
+## 📝 Menambah Dokumen
 
 ### Via Laravel Admin (Recommended)
 1. Login ke SINEMA sebagai admin
@@ -141,7 +168,7 @@ sinema-chatbot/
 
 ### Via API
 ```bash
-curl -X POST http://127.0.0.1:5000/api/documents \
+curl -X POST http://127.0.0.1:5000/api/upload \
   -F "file=@dokumen.pdf" \
   -F "category=akademik"
 ```
@@ -157,7 +184,12 @@ Saat dokumen dihapus/ditambah, sistem secara otomatis:
 
 Cek status sistem:
 ```bash
-curl http://127.0.0.1:5000/api/stats
+curl http://127.0.0.1:5000/api/admin/stats
+```
+
+Cek health:
+```bash
+curl http://127.0.0.1:5000/api/health
 ```
 
 ## 🛠️ Development
@@ -170,6 +202,16 @@ python rebuild_index.py
 ### Evaluate RAG Performance
 ```bash
 python evaluate_rag.py
+```
+
+### Verify RAG System
+```bash
+python verify_rag_system.py
+```
+
+### Clear Cache
+```bash
+python clear_tem_cache.py
 ```
 
 ## 📝 License
