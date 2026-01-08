@@ -39,11 +39,14 @@ Sistem chatbot berbasis RAG (Retrieval-Augmented Generation) yang terintegrasi d
 
 | Parameter | Nilai | Deskripsi |
 |-----------|-------|-----------|
-| Chunk Size | 400 chars | Ukuran potongan dokumen |
-| Chunk Overlap | 100 chars | Overlap antar chunk |
-| Top-K | 25 | Jumlah chunk diambil per query |
+| Chunk Size | 500 chars | Ukuran potongan dokumen |
+| Chunk Overlap | 50 chars | Overlap antar chunk |
+| Top-K | 8 | Jumlah chunk diambil per query |
+| Relevance Threshold | 0.2 | Batas minimum relevansi |
 | Embedding Model | `paraphrase-multilingual-MiniLM-L12-v2` | Model multilingual |
-| LLM | GPT-4o-mini via OpenRouter | Model untuk generate jawaban |
+| LLM | `openai/gpt-oss-20b:free` via OpenRouter | Model untuk generate jawaban |
+| Temperature | 0.7 | Kreativitas jawaban |
+| Max Tokens | 2048 | Panjang maksimal respons |
 
 ## ⚙️ Instalasi
 
@@ -67,8 +70,30 @@ pip install -r requirements.txt
 ### 3. Konfigurasi Environment
 Salin `.env.example` ke `.env` dan isi:
 ```env
-# API Keys
+# Flask
+SECRET_KEY=your-secret-key
+DEBUG=true
+FLASK_ENV=development
+
+# OpenRouter API
+USE_API=true
 OPENROUTER_API_KEY=your-openrouter-api-key
+OPENROUTER_MODEL=openai/gpt-oss-20b:free
+DEVICE=cuda
+
+# LLM Generation
+MAX_NEW_TOKENS=2048
+TEMPERATURE=0.7
+TOP_P=0.9
+
+# RAG Configuration
+TOP_K=8
+CHUNK_SIZE=500
+CHUNK_OVERLAP=50
+RELEVANCE_THRESHOLD=0.2
+
+# Rate Limiting
+RATE_LIMIT=20 per minute
 
 # Database (MySQL)
 DB_HOST=127.0.0.1
@@ -76,10 +101,6 @@ DB_PORT=3306
 DB_DATABASE=siny1585_sinemadb
 DB_USERNAME=root
 DB_PASSWORD=
-
-# Settings
-USE_API=true
-DEVICE=cuda
 ```
 
 ## ▶️ Menjalankan
