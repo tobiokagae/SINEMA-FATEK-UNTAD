@@ -133,4 +133,18 @@ class ChatbotService
             return ['error' => $e->getMessage()];
         }
     }
+    
+    public function clearCache(): array
+    {
+        try {
+            $response = Http::post("{$this->baseUrl}/api/cache/clear");
+            if ($response->successful()) {
+                return $response->json() ?? ['deleted_count' => 0];
+            }
+            return ['error' => 'Failed to clear cache'];
+        } catch (\Exception $e) {
+            \Log::error('ChatbotService::clearCache error: ' . $e->getMessage());
+            throw $e;
+        }
+    }
 }

@@ -39,7 +39,7 @@
                 </div>
                 <div>
                     <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Cache Hits</p>
-                    <p class="text-2xl font-semibold text-gray-950 dark:text-white">{{ $stats['cache']['cache_hits'] ?? 0 }}</p>
+                    <p class="text-2xl font-semibold text-gray-950 dark:text-white">{{ $stats['cache']['total_hits'] ?? 0 }}</p>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                 </div>
                 <div>
                     <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Sesi</p>
-                    <p class="text-2xl font-semibold text-gray-950 dark:text-white">{{ $stats['sessions']['total'] ?? 0 }}</p>
+                    <p class="text-2xl font-semibold text-gray-950 dark:text-white">{{ $stats['total_sessions'] ?? 0 }}</p>
                 </div>
             </div>
         </div>
@@ -102,6 +102,10 @@
                         <span>Daftar Dokumen ({{ count($documents) }})</span>
                     </div>
                 </x-slot>
+                
+                <x-slot name="headerEnd">
+                    {{ $this->clearCacheAction }}
+                </x-slot>
 
                 @if(count($documents) > 0)
                     <div class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -145,7 +149,7 @@
                                     {{-- View Dropdown --}}
                                     <x-filament::dropdown>
                                         <x-slot name="trigger">
-                                            <x-filament::button color="gray" size="sm" icon="heroicon-o-eye">
+                                            <x-filament::button color="gray" size="sm" icon="heroicon-o-eye" outlined>
                                                 Lihat
                                             </x-filament::button>
                                         </x-slot>
@@ -174,7 +178,7 @@
                                     {{-- Download Dropdown --}}
                                     <x-filament::dropdown>
                                         <x-slot name="trigger">
-                                            <x-filament::button color="success" size="sm" icon="heroicon-o-arrow-down-tray">
+                                            <x-filament::button color="warning" size="sm" icon="heroicon-o-arrow-down-tray" outlined>
                                                 Download
                                             </x-filament::button>
                                         </x-slot>
@@ -207,6 +211,7 @@
                                             size="sm"
                                             icon="heroicon-o-trash"
                                             x-on:click="open = true"
+                                            outlined
                                         >
                                             Hapus
                                         </x-filament::button>

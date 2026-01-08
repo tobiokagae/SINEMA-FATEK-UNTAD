@@ -74,7 +74,7 @@
                 <div class="flex flex-col max-w-[85%]">
                     <div class="bg-white rounded-2xl rounded-tl-md p-4 shadow-sm border border-gray-100">
                         <p class="text-sm text-gray-800 leading-relaxed">
-                            Halo! 👋 Saya <span class="font-semibold text-amber-600">SINEMA Assistant</span>, asisten virtual untuk Sistem Informasi Ekstrakurikuler Mahasiswa.
+                            Halo! 👋 Saya <span class="font-semibold text-amber-600">SINEMA Assistant</span>, asisten virtual yang siap membantu Anda seputar kegiatan ekstrakurikuler, panduan akademik, dan tugas akhir di Fakultas Teknik UNTAD.
                         </p>
                         <p class="text-sm text-gray-600 mt-2">Ada yang bisa saya bantu?</p>
                         
@@ -82,17 +82,17 @@
                         <div class="mt-4 pt-3 border-t border-gray-100">
                             <p class="text-xs text-gray-500 font-medium mb-2">💡 Pertanyaan populer:</p>
                             <div class="flex flex-wrap gap-2">
-                                <button @click="sendQuickMessage('Cara daftar SINEMA')"
+                                <button @click="sendQuickMessage('Bagaimana cara mengajukan kegiatan ekstrakurikuler?')"
                                         class="text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full hover:bg-amber-100 transition-all duration-200 border border-amber-200/50 hover:shadow-sm">
-                                    📝 Cara daftar
+                                    📝 Pengajuan kegiatan
                                 </button>
-                                <button @click="sendQuickMessage('Info poin SINEMA')"
+                                <button @click="sendQuickMessage('Bagaimana cara menghitung nilai mutu ekstrakurikuler?')"
                                         class="text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full hover:bg-amber-100 transition-all duration-200 border border-amber-200/50 hover:shadow-sm">
-                                    ⭐ Info poin
+                                    ⭐ Nilai mutu
                                 </button>
-                                <button @click="sendQuickMessage('Cek status pengajuan')"
+                                <button @click="sendQuickMessage('Apa syarat untuk mendapatkan transkrip TEM?')"
                                         class="text-xs bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full hover:bg-amber-100 transition-all duration-200 border border-amber-200/50 hover:shadow-sm">
-                                    📊 Cek status
+                                    📄 Transkrip TEM
                                 </button>
                             </div>
                         </div>
@@ -361,9 +361,9 @@ function chatbot() {
                             <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
                         </svg>
                     </div>
-                    <div class="flex flex-col max-w-[85%]">
-                        <div class="bg-white rounded-2xl rounded-tl-md p-3 shadow-sm border border-gray-100">
-                            <p class="text-sm text-gray-800 leading-relaxed">${this.formatMessage(message.text)}</p>
+                    <div class="flex flex-col max-w-[85%] overflow-hidden">
+                        <div class="bg-white rounded-2xl rounded-tl-md p-3 shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="text-sm text-gray-800 leading-relaxed break-words">${this.formatMessage(message.text)}</div>
                         </div>
                         <span class="text-[10px] text-gray-400 mt-1">${this.formatTime(message.timestamp)}</span>
                     </div>
@@ -374,11 +374,15 @@ function chatbot() {
         },
 
         formatMessage(text) {
+            // Simple formatting - no complex table parsing
+            // LLM is instructed to use lists instead of tables
             return text
+                .replace(/\|/g, '') // Remove any remaining pipe characters
+                .replace(/---+/g, '') // Remove horizontal lines
+                .replace(/\n\n+/g, '<br><br>')
                 .replace(/\n/g, '<br>')
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/(\d+️⃣)/g, '<span class="text-amber-600">$1</span>');
+                .replace(/\*(.*?)\*/g, '<em>$1</em>');
         },
 
         formatTime(timestamp) {

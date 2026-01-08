@@ -91,6 +91,38 @@ class ChatbotDocuments extends Page implements HasForms, HasActions
                     ->options($categoryOptions ?: ['general' => 'Umum'])
                     ->required()
                     ->live()
+                    ->searchable()
+                    ->createOptionForm([
+                        TextInput::make('display_name')
+                            ->label('Nama Kategori Baru')
+                            ->placeholder('Contoh: Panduan Akademik')
+                            ->required()
+                            ->maxLength(100),
+                    ])
+                    ->createOptionUsing(function (array $data) {
+                        $displayName = $data['display_name'];
+                        $name = \Str::slug($displayName, '_');
+                        
+                        $result = app(ChatbotService::class)->createCategory($name, $displayName, '📁');
+                        
+                        if (isset($result['error'])) {
+                            Notification::make()
+                                ->title('Gagal menambah kategori')
+                                ->body($result['error'])
+                                ->danger()
+                                ->send();
+                            return null;
+                        }
+                        
+                        $this->categories = app(ChatbotService::class)->getCategories();
+                        
+                        Notification::make()
+                            ->title('Kategori berhasil ditambahkan!')
+                            ->success()
+                            ->send();
+                            
+                        return $name;
+                    })
                     ->validationMessages([
                         'required' => 'Kategori harus dipilih',
                     ]),
@@ -110,6 +142,41 @@ class ChatbotDocuments extends Page implements HasForms, HasActions
             ->action(function () {
                 $this->processUpload();
             });
+    }
+    
+    public function clearCacheAction(): Action
+    {
+        return Action::make('clearCache')
+            ->label('Clear Cache')
+            ->icon('heroicon-o-trash')
+            ->color('gray')
+            ->requiresConfirmation()
+            ->modalHeading('Hapus Semua Cache?')
+            ->modalDescription('Ini akan menghapus semua cache respons chatbot. Pertanyaan berikutnya akan diproses ulang dari awal.')
+            ->modalSubmitActionLabel('Ya, Hapus Cache')
+            ->action(function () {
+                $this->clearCache();
+            });
+    }
+    
+    public function clearCache(): void
+    {
+        try {
+            $response = $this->chatbotService->clearCache();
+            
+            Notification::make()
+                ->title('Cache berhasil dihapus')
+                ->body("Deleted: {$response['deleted_count']} entries")
+                ->success()
+                ->send();
+                
+        } catch (\Exception $e) {
+            Notification::make()
+                ->title('Gagal menghapus cache')
+                ->body($e->getMessage())
+                ->danger()
+                ->send();
+        }
     }
     
     public function processUpload(): void
@@ -264,41 +331,26 @@ class ChatbotDocuments extends Page implements HasForms, HasActions
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('addCategory')
-                ->label('Tambah Kategori')
-                ->icon('heroicon-o-folder-plus')
-                ->color('success')
-                ->form([
-                    TextInput::make('display_name')
-                        ->label('Nama Kategori')
-                        ->placeholder('Contoh: Panduan Akademik')
-                        ->required()
-                        ->maxLength(100),
-                    TextInput::make('icon')
-                        ->label('Ikon (Emoji)')
-                        ->placeholder('📁')
-                        ->default('📁')
-                        ->maxLength(10),
-                ])
-                ->action(function (array $data) {
-                    $displayName = $data['display_name'];
-                    $icon = $data['icon'] ?? '📁';
-                    
-                    $result = $this->chatbotService->createCategory($displayName, $displayName, $icon);
-                    
-                    if (isset($result['error'])) {
+            Action::make('clearCache')
+                ->label('Clear Cache')
+                ->icon('heroicon-o-trash')
+                ->color('gray')
+                ->requiresConfirmation()
+                ->modalHeading('Hapus Semua Cache?')
+                ->modalDescription('Ini akan menghapus semua cache respons chatbot.')
+                ->action(function () {
+                    try {
+                        $result = $this->chatbotService->clearCache();
                         Notification::make()
-                            ->title('Gagal menambah kategori')
-                            ->body($result['error'])
-                            ->danger()
-                            ->send();
-                    } else {
-                        Notification::make()
-                            ->title('Kategori berhasil ditambahkan!')
+                            ->title('Cache berhasil dihapus')
                             ->success()
                             ->send();
-                        
-                        $this->loadData();
+                    } catch (\Exception $e) {
+                        Notification::make()
+                            ->title('Gagal menghapus cache')
+                            ->body($e->getMessage())
+                            ->danger()
+                            ->send();
                     }
                 }),
             Action::make('refresh')
