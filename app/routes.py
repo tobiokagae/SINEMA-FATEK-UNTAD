@@ -97,13 +97,51 @@ def chat():
         # Check cache first
         cached = DatabaseService.get_cached_response(query)
         if cached:
-            response, sources, latency = cached
-            DatabaseService.add_message(session_id, "assistant", response, sources, latency, cached=True)
+            cached_response, sources, original_latency = cached
             logger.info(f"Cache hit for query: {query[:50]}...")
+            
+            # Check if cached response is an error - don't rephrase errors
+            error_indicators = ['maaf,', 'error:', 'rate limit', 'batas penggunaan', 'server sedang tidak tersedia']
+            is_error_response = any(indicator in cached_response.lower() for indicator in error_indicators)
+            
+            if is_error_response:
+                # Return error response as-is, no rephrase
+                DatabaseService.add_message(session_id, "assistant", cached_response, sources, original_latency, cached=True)
+                return jsonify({
+                    'response': cached_response,
+                    'sources': sources,
+                    'latency': round(original_latency, 2),
+                    'cached': True,
+                    'session_id': session_id
+                })
+            
+            # Rephrase valid cached response slightly using LLM
+            import time
+            start_time = time.time()
+            generator = get_generator()
+            
+            rephrase_prompt = f"""Berikut adalah jawaban yang sudah ada untuk pertanyaan serupa. 
+Tolong sampaikan informasi yang sama dengan cara yang sedikit berbeda (variasi kata, struktur kalimat), 
+tapi JANGAN mengubah fakta atau menambah informasi baru.
+
+Jawaban asli:
+{cached_response}
+
+Sampaikan ulang dengan gaya yang sedikit berbeda:"""
+            
+            rephrased, _ = generator.generate(
+                query=rephrase_prompt,
+                context="",
+                system_prompt="Kamu adalah asisten yang bertugas menyampaikan ulang informasi dengan gaya berbeda tanpa mengubah fakta."
+            )
+            
+            rephrase_latency = time.time() - start_time
+            
+            DatabaseService.add_message(session_id, "assistant", rephrased, sources, rephrase_latency, cached=True)
             return jsonify({
-                'response': response,
+                'response': rephrased,
                 'sources': sources,
-                'latency': round(latency, 2),
+                'latency': round(rephrase_latency, 2),
                 'cached': True,
                 'session_id': session_id
             })
@@ -135,8 +173,31 @@ def chat():
             system_prompt=SYSTEM_PROMPT
         )
         
-        # Cache the response
-        DatabaseService.cache_response(query, response, sources, latency)
+        # Cache the response ONLY if it's a valid successful response
+        # Skip caching error responses
+        error_indicators = [
+            'maaf,',
+            'error:',
+            'rate limit',
+            'batas penggunaan',
+            'server sedang tidak tersedia'
+        ]
+        is_error_response = any(indicator in response.lower() for indicator in error_indicators)
+        
+        # Skip caching short/generic queries (not real questions)
+        skip_query_patterns = [
+            'ok', 'oke', 'baik', 'baiklah', 'hmm', 'oh', 'ya', 'yaa', 
+            'terima kasih', 'thanks', 'makasih', 'siap', 'mantap', 'lanjut',
+            'halo', 'hai', 'hi', 'hello', 'hey'
+        ]
+        query_lower = query.lower().strip()
+        is_short_query = len(query_lower) < 10  # Less than 10 chars
+        is_generic_query = any(pattern in query_lower for pattern in skip_query_patterns)
+        
+        should_cache = not is_error_response and not is_short_query and not is_generic_query
+        
+        if should_cache:
+            DatabaseService.cache_response(query, response, sources, latency)
         
         # Save assistant message
         DatabaseService.add_message(session_id, "assistant", response, sources, latency)
@@ -350,6 +411,10 @@ def delete_document(filename):
         deleted = DatabaseService.delete_document_by_filename(filename)
         logger.info(f"Deleted from database: {filename} (success: {deleted})")
         
+        # Clear all cache since document content changed
+        cache_cleared = DatabaseService.clear_all_cache()
+        logger.info(f"Cleared {cache_cleared} cache entries due to document deletion")
+        
         # Schedule background reindex (debounced - waits 5s after last delete)
         try:
             from .background_reindex import get_background_reindex_service
@@ -458,6 +523,20 @@ def refresh_index():
         retriever = get_retriever()
         retriever.refresh_index()
         return jsonify({'message': 'Index refreshed successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@main.route('/api/cache/clear', methods=['POST'])
+def clear_cache():
+    """Clear all cache entries"""
+    from flask import current_app
+    try:
+        deleted = DatabaseService.clear_all_cache()
+        current_app.logger.info(f"Manually cleared {deleted} cache entries")
+        return jsonify({
+            'message': 'Cache cleared successfully',
+            'deleted_count': deleted
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

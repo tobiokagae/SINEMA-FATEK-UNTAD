@@ -123,14 +123,34 @@ class DatabaseService:
     
     @staticmethod
     def cache_response(query: str, response: str, sources: List, latency: float):
-        """Cache a response"""
+        """Cache a response if no similar query exists"""
         query_hash = DatabaseService.get_cache_hash(query)
         
-        # Check if exists
+        # Check if exact hash exists
         existing = db.session.query(CacheEntry).filter_by(query_hash=query_hash).first()
         if existing:
             return
         
+        # Check for semantically similar queries using word overlap
+        query_words = set(query.lower().strip().split())
+        
+        # Get recent cache entries to compare
+        recent_entries = db.session.query(CacheEntry).order_by(CacheEntry.created_at.desc()).limit(100).all()
+        
+        for entry in recent_entries:
+            cached_words = set(entry.query.lower().strip().split())
+            
+            # Calculate Jaccard similarity
+            if query_words and cached_words:
+                intersection = len(query_words & cached_words)
+                union = len(query_words | cached_words)
+                similarity = intersection / union if union > 0 else 0
+                
+                # Skip if too similar (>70% overlap)
+                if similarity > 0.7:
+                    return
+        
+        # Save new cache entry
         entry = CacheEntry(
             query_hash=query_hash,
             query=query,
@@ -150,6 +170,14 @@ class DatabaseService:
             'entries': total_entries,
             'total_hits': int(total_hits)
         }
+    
+    @staticmethod
+    def clear_all_cache() -> int:
+        """Clear all cache entries and reset ID - called when documents change"""
+        # Use TRUNCATE to reset AUTO_INCREMENT to 1
+        db.session.execute(db.text('TRUNCATE TABLE cache_chatbot'))
+        db.session.commit()
+        return 0  # TRUNCATE doesn't return row count
     
     @staticmethod
     def get_top_queries(limit: int = 10) -> List[str]:
