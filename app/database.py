@@ -83,7 +83,7 @@ class DatabaseService:
     
     @staticmethod
     def get_recent_context(session_id: str, n_turns: int = 3) -> str:
-        """Get recent conversation context for multi-turn"""
+        """Get recent conversation context for multi-turn (legacy method)"""
         messages = db.session.query(Message).filter_by(session_id=session_id)\
             .order_by(Message.created_at.desc())\
             .limit(n_turns * 2).all()
@@ -98,6 +98,58 @@ class DatabaseService:
         
         return "\n".join(context_parts)
     
+    @staticmethod
+    def get_context_sliding_window(session_id: str, recent_turns: int = 2) -> Tuple[List[Dict], List[Dict]]:
+        """
+        Get conversation context using sliding window approach.
+        
+        Returns:
+            Tuple of (older_messages, recent_messages)
+            - older_messages: Messages to be summarized (older than recent_turns)
+            - recent_messages: Most recent messages to keep in full
+        """
+        # Get ALL messages from this session
+        all_messages = db.session.query(Message).filter_by(session_id=session_id)\
+            .order_by(Message.created_at.asc()).all()
+        
+        if not all_messages:
+            return [], []
+        
+        # Convert to dict format
+        messages_list = []
+        for msg in all_messages:
+            messages_list.append({
+                "role": msg.role,
+                "content": msg.content,
+                "timestamp": msg.created_at.isoformat() if msg.created_at else None
+            })
+        
+        # Split into older and recent
+        # recent_turns * 2 because each turn = 1 user + 1 assistant message
+        recent_count = recent_turns * 2
+        
+        if len(messages_list) <= recent_count:
+            # All messages are "recent", nothing to summarize
+            return [], messages_list
+        
+        older_messages = messages_list[:-recent_count]
+        recent_messages = messages_list[-recent_count:]
+        
+        return older_messages, recent_messages
+    
+    @staticmethod
+    def format_messages_for_context(messages: List[Dict], max_chars: int = 300) -> str:
+        """Format messages list into context string"""
+        context_parts = []
+        for msg in messages:
+            role = "User" if msg["role"] == "user" else "Bot"
+            content = msg["content"]
+            if len(content) > max_chars:
+                content = content[:max_chars] + "..."
+            context_parts.append(f"{role}: {content}")
+        return "\n".join(context_parts)
+    
+
     # =========================
     # Cache Operations
     # =========================

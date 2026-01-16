@@ -94,69 +94,106 @@ def chat():
         # Save user message
         DatabaseService.add_message(session_id, "user", query)
         
-        # Check cache first
-        cached = DatabaseService.get_cached_response(query)
-        if cached:
-            cached_response, sources, original_latency = cached
-            logger.info(f"Cache hit for query: {query[:50]}...")
-            
-            # Check if cached response is an error - don't rephrase errors
-            error_indicators = ['maaf,', 'error:', 'rate limit', 'batas penggunaan', 'server sedang tidak tersedia']
-            is_error_response = any(indicator in cached_response.lower() for indicator in error_indicators)
-            
-            if is_error_response:
-                # Return error response as-is, no rephrase
-                DatabaseService.add_message(session_id, "assistant", cached_response, sources, original_latency, cached=True)
-                return jsonify({
-                    'response': cached_response,
-                    'sources': sources,
-                    'latency': round(original_latency, 2),
-                    'cached': True,
-                    'session_id': session_id
-                })
-            
-            # Rephrase valid cached response slightly using LLM
-            import time
-            start_time = time.time()
-            generator = get_generator()
-            
-            rephrase_prompt = f"""Berikut adalah jawaban yang sudah ada untuk pertanyaan serupa. 
-Tolong sampaikan informasi yang sama dengan cara yang sedikit berbeda (variasi kata, struktur kalimat), 
-tapi JANGAN mengubah fakta atau menambah informasi baru.
-
-Jawaban asli:
-{cached_response}
-
-Sampaikan ulang dengan gaya yang sedikit berbeda:"""
-            
-            rephrased, _ = generator.generate(
-                query=rephrase_prompt,
-                context="",
-                system_prompt="Kamu adalah asisten yang bertugas menyampaikan ulang informasi dengan gaya berbeda tanpa mengubah fakta."
-            )
-            
-            rephrase_latency = time.time() - start_time
-            
-            DatabaseService.add_message(session_id, "assistant", rephrased, sources, rephrase_latency, cached=True)
-            return jsonify({
-                'response': rephrased,
-                'sources': sources,
-                'latency': round(rephrase_latency, 2),
-                'cached': True,
-                'session_id': session_id
-            })
+        # =====================================
+        # CACHE DISABLED FOR TESTING CONSISTENCY
+        # =====================================
+        # # Check cache first
+        # cached = DatabaseService.get_cached_response(query)
+        # if cached:
+        #     cached_response, sources, original_latency = cached
+        #     logger.info(f"Cache hit for query: {query[:50]}...")
+        #     
+        #     # Check if cached response is an error - don't rephrase errors
+        #     error_indicators = ['maaf,', 'error:', 'rate limit', 'batas penggunaan', 'server sedang tidak tersedia']
+        #     is_error_response = any(indicator in cached_response.lower() for indicator in error_indicators)
+        #     
+        #     if is_error_response:
+        #         # Return error response as-is, no rephrase
+        #         DatabaseService.add_message(session_id, "assistant", cached_response, sources, original_latency, cached=True)
+        #         return jsonify({
+        #             'response': cached_response,
+        #             'sources': sources,
+        #             'latency': round(original_latency, 2),
+        #             'cached': True,
+        #             'session_id': session_id
+        #         })
+        #     
+        #     # Rephrase valid cached response slightly using LLM
+        #     import time
+        #     start_time = time.time()
+        #     generator = get_generator()
+        #     
+        #     rephrase_prompt = f"""Berikut adalah jawaban yang sudah ada untuk pertanyaan serupa. 
+        # Tolong sampaikan informasi yang sama dengan cara yang sedikit berbeda (variasi kata, struktur kalimat), 
+        # tapi JANGAN mengubah fakta atau menambah informasi baru.
+        # 
+        # Jawaban asli:
+        # {cached_response}
+        # 
+        # Sampaikan ulang dengan gaya yang sedikit berbeda:"""
+        #     
+        #     rephrased, _ = generator.generate(
+        #         query=rephrase_prompt,
+        #         context="",
+        #         system_prompt="Kamu adalah asisten yang bertugas menyampaikan ulang informasi dengan gaya berbeda tanpa mengubah fakta."
+        #     )
+        #     
+        #     rephrase_latency = time.time() - start_time
+        #     
+        #     DatabaseService.add_message(session_id, "assistant", rephrased, sources, rephrase_latency, cached=True)
+        #     return jsonify({
+        #         'response': rephrased,
+        #         'sources': sources,
+        #         'latency': round(rephrase_latency, 2),
+        #         'cached': True,
+        #         'session_id': session_id
+        #     })
         
         # Get RAG context
         retriever = get_retriever()
         context = retriever.get_context(query)
         
-        # Get conversation context for multi-turn
-        conv_context = DatabaseService.get_recent_context(session_id, n_turns=2)
+        # Get conversation context using sliding window + summary
+        older_msgs, recent_msgs = DatabaseService.get_context_sliding_window(session_id, recent_turns=2)
         
-        # Enhance context with conversation history
+        # Build conversation context
+        conv_context_parts = []
+        
+        # Summarize older messages if any exist
+        if older_msgs and len(older_msgs) >= 2:
+            generator = get_generator()
+            older_text = DatabaseService.format_messages_for_context(older_msgs, max_chars=200)
+            
+            # Generate summary of older conversation
+            summary_prompt = f"""Ringkas percakapan berikut dalam 1-2 kalimat singkat. 
+Fokus pada topik dan informasi penting yang dibahas. Gunakan bahasa Indonesia.
+
+Percakapan:
+{older_text}
+
+Ringkasan singkat:"""
+            
+            summary, _ = generator.generate(
+                query=summary_prompt,
+                context="",
+                system_prompt="Kamu adalah asisten yang bertugas meringkas percakapan secara singkat."
+            )
+            
+            # Only add summary if it's not an error
+            if summary and not any(err in summary.lower() for err in ['maaf,', 'error:', 'rate limit']):
+                conv_context_parts.append(f"📝 Ringkasan percakapan sebelumnya:\n{summary.strip()}")
+                logger.info(f"Generated conversation summary: {summary[:100]}...")
+        
+        # Add recent messages in full
+        if recent_msgs:
+            recent_text = DatabaseService.format_messages_for_context(recent_msgs, max_chars=500)
+            conv_context_parts.append(f"💬 Percakapan terbaru:\n{recent_text}")
+        
+        # Combine everything
         full_context = context
-        if conv_context:
-            full_context = f"Percakapan sebelumnya:\n{conv_context}\n\n---\n\n{context}"
+        if conv_context_parts:
+            conv_context = "\n\n---\n\n".join(conv_context_parts)
+            full_context = f"{conv_context}\n\n---\n\n📚 Konteks dokumen:\n{context}"
         
         # Get sources
         results = retriever.retrieve(query)
@@ -194,10 +231,11 @@ Sampaikan ulang dengan gaya yang sedikit berbeda:"""
         is_short_query = len(query_lower) < 10  # Less than 10 chars
         is_generic_query = any(pattern in query_lower for pattern in skip_query_patterns)
         
-        should_cache = not is_error_response and not is_short_query and not is_generic_query
-        
-        if should_cache:
-            DatabaseService.cache_response(query, response, sources, latency)
+        # CACHE SAVE DISABLED FOR TESTING
+        # should_cache = not is_error_response and not is_short_query and not is_generic_query
+        # 
+        # if should_cache:
+        #     DatabaseService.cache_response(query, response, sources, latency)
         
         # Save assistant message
         DatabaseService.add_message(session_id, "assistant", response, sources, latency)

@@ -525,44 +525,49 @@ class DocumentLoader:
         return ""
     
     def _split_text(self, text: str) -> List[str]:
-        """Split text into overlapping chunks"""
-        chunks = []
+        """Split text into overlapping chunks using semantic chunking.
+        
+        Uses LangChain's RecursiveCharacterTextSplitter which:
+        1. Splits by sentence/paragraph boundaries first
+        2. Falls back to smaller separators if needed
+        3. Properly implements overlap between chunks
+        """
+        try:
+            from langchain_text_splitters import RecursiveCharacterTextSplitter
+        except ImportError:
+            # Fallback for older langchain versions
+            from langchain.text_splitter import RecursiveCharacterTextSplitter
         
         # Clean text
         text = text.strip()
         if not text:
-            return chunks
+            return []
         
-        # Split by paragraphs first
-        paragraphs = text.split('\n\n')
-        current_chunk = ""
+        # Create semantic text splitter
+        # Separators are tried in order - prefers paragraph > sentence > word boundaries
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=self.chunk_size,
+            chunk_overlap=self.chunk_overlap,
+            length_function=len,
+            is_separator_regex=False,
+            separators=[
+                "\n\n",      # Paragraphs (highest priority)
+                "\n",        # Lines
+                ". ",        # Sentences
+                "? ",        # Questions
+                "! ",        # Exclamations
+                "; ",        # Semicolons
+                ", ",        # Commas
+                " ",         # Words
+                ""           # Characters (last resort)
+            ]
+        )
         
-        for para in paragraphs:
-            para = para.strip()
-            if not para:
-                continue
-            
-            if len(current_chunk) + len(para) <= self.chunk_size:
-                current_chunk += para + "\n\n"
-            else:
-                if current_chunk:
-                    chunks.append(current_chunk.strip())
-                
-                # Handle long paragraphs
-                if len(para) > self.chunk_size:
-                    words = para.split()
-                    current_chunk = ""
-                    for word in words:
-                        if len(current_chunk) + len(word) + 1 <= self.chunk_size:
-                            current_chunk += word + " "
-                        else:
-                            if current_chunk:
-                                chunks.append(current_chunk.strip())
-                            current_chunk = word + " "
-                else:
-                    current_chunk = para + "\n\n"
+        # Split the text
+        chunks = text_splitter.split_text(text)
         
-        if current_chunk.strip():
-            chunks.append(current_chunk.strip())
+        print(f"   Semantic chunking: {len(text)} chars → {len(chunks)} chunks "
+              f"(size={self.chunk_size}, overlap={self.chunk_overlap})")
         
         return chunks
+

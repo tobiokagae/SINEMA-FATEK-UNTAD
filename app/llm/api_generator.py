@@ -138,7 +138,7 @@ Jawab berdasarkan konteks di atas."""
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
-                max_tokens=1024,
+                max_tokens=2048,
                 temperature=0.7,
             )
             
