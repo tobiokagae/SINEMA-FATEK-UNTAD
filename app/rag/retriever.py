@@ -58,27 +58,68 @@ class RAGRetriever:
         
         self._initialized = True
     
-    def retrieve(self, query: str, top_k: int = None) -> List[Tuple[Document, float]]:
-        """Retrieve relevant documents for a query"""
+    def retrieve(self, query: str, top_k: int = None, use_mmr: bool = True) -> List[Tuple[Document, float]]:
+        """
+        Retrieve relevant documents for a query.
+        
+        Args:
+            query: Search query
+            top_k: Number of results to return
+            use_mmr: If True, use MMR for diverse results across documents
+        
+        Returns:
+            List of (Document, score) tuples
+        """
         if not self._initialized:
             self.initialize()
         
         k = top_k or self.top_k
-        results = self.vector_store.search(query, top_k=k)
+        
+        if use_mmr:
+            # Use MMR for diverse results (fetch more candidates, return top_k)
+            results = self.vector_store.search_mmr(
+                query, 
+                top_k=k, 
+                fetch_k=k * 3,  # Fetch 3x candidates for better diversity
+                lambda_mult=0.7,  # 70% relevance, 30% diversity
+                diversity_boost=0.3  # Extra boost for new source documents
+            )
+        else:
+            # Standard similarity search
+            results = self.vector_store.search(query, top_k=k)
         
         return results
     
     def get_context(self, query: str, top_k: int = None) -> str:
-        """Get formatted context string from retrieved documents"""
+        """Get formatted context string from retrieved documents with clear source labels"""
         results = self.retrieve(query, top_k)
         
         if not results:
             return ""
         
+        # Map source filenames to readable names
+        source_labels = {
+            'PANDUAN_AKADEMIK_FATEK': '📘 Panduan Akademik FATEK (Jalur Skripsi)',
+            'Buku_Panduan_TA_Non_Skripsi': '📗 Panduan TA Non-Skripsi',
+            'PANDUAN_SATUAN_POIN_EKSTRAKURIKULER': '📙 Panduan Poin Ekstrakurikuler',
+        }
+        
         context_parts = []
         for i, (doc, score) in enumerate(results, 1):
-            source = doc.metadata.get('source', 'unknown')
-            context_parts.append(f"[Sumber {i}: {source}]\n{doc.content}")
+            source_file = doc.metadata.get('source', 'unknown')
+            
+            # Get readable label or create one from filename
+            readable_label = None
+            for key, label in source_labels.items():
+                if key in source_file:
+                    readable_label = label
+                    break
+            
+            if not readable_label:
+                # Clean up filename for display
+                readable_label = f"📄 {source_file.replace('_', ' ').replace('.md', '')}"
+            
+            context_parts.append(f"[SUMBER: {readable_label}]\n{doc.content}")
         
         return "\n\n---\n\n".join(context_parts)
     

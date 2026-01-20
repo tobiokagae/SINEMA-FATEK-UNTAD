@@ -1,0 +1,94 @@
+﻿Config: CHUNK_SIZE=600, CHUNK_OVERLAP=120, TOP_K=18
+--------------------------------------------------
+FAISS Vector Store: CPU mode (faiss-gpu not installed)
+Loaded 4043 documents from C:\Users\USER\Documents\kuliah\Skripsi Aclisung\PROJECT\sinema-chatbot\vector_db on CPU
+Query: syarat seminar proposal
+==================================================
+Loading embedding model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+Using device: cpu
+Embedding model loaded successfully on CPU
+
+--- CHUNK 1 (score: 0.752) ---
+Source: PANDUAN_AKADEMIK_FATEK_2025-2026.pdf
+Content preview:
+v. Seminar proposal dilaksanakan oleh jurusan sesuai dengan jadwal yang
+ditetapkan.
+vi. Seminar dapat dilaksanakan jika dihadiri oleh Pembimbing Utama dan/atau
+Pembimbing Pendamping, dan minimal 1 orang dosen penguji.
+vii. Pelaksanaan seminar proposal penelitian maksimal 90 menit.
+viii. Penilaian seminar proposal memenuhi pembobotan nilai angka (NA) skala 0-
+100, selanjutnya dapat dikonversi seperti Tabel 7.1.
+ix. Dosen pembimbing dan dosen penguji wajib memberikan penilaian.
+x. Setelah dinyatakan lulus seminar proposal, mahasiswa dapat mengajukan...
+
+--- CHUNK 2 (score: 0.717) ---
+Source: PANDUAN_AKADEMIK_FATEK_2025-2026.md
+Content preview:
+memahami kesulitan yang dihadapi dan menemukan solusinya.
+5.5. Seminar
+Kegiatan seminar merupakan kegiatan untuk melatih kemampuan mahasiswa dalam
+mempublikasikan dan mempresentasikan hasil karya.
+40...
+
+--- CHUNK 3 (score: 0.732) ---
+Source: Buku_Panduan_TA_Non_Skripsi_Finish.pdf
+Content preview:
+b. Saran
+Peneliti memberikan rekomendasi untuk pelaksanaan kegiatan serupa di masa
+mendatang agar hasil yang dicapai dapat lebih optimal.
+Lampiran
+Lampiran pada saat seminar proposal :
+1. Rancangan artikel ilmiah yang akan disusun.
+2. Rencana kerja penelitian (timeline).
+3. Instrumen penelitian (kuesioner, pedoman wawancara, formulir observasi, dll.).
+Lampiran pada saat ujian akhir:
+1. Naskah publikasi original yang telah Publish
+2. Bukti accepted (LoA)
+3. Lembar hasil review dari reviewer
+4. Sertifikat sebagai presenter
+5. Lampiran Sertifikat atau Bukti Peringkat Prosiding...
+
+--- CHUNK 4 (score: 0.595) ---
+Source: Buku_Panduan_TA_Non_Skripsi_Finish.md
+Content preview:
+| 1. Undang-Undang No. 12 Tahun 2012 tentang Pendidikan Tinggi. 2. Peraturan Menteri Pendidikan dan Kebudayaan No. 3 Tahun 2020 tentang Standar Nasional Pendidikan Tinggi. 3. Panduan Penyelenggaraan SPMI (Sistem Penjaminan Mutu Internal) Perguruan Tinggi. 4. Peraturan Rektor/Keputusan Fakultas terkait pedoman akademik dan penyelesaian studi. | | 1. Memberikan panduan pelaksanaan Tugas Akhir Non-Skripsi (Jurnal, Prototype, Proyek, atau TTG) secara terstruktur, transparan, dan akuntabel. 2...
+
+--- CHUNK 5 (score: 0.671) ---
+Source: PANDUAN_AKADEMIK_FATEK_2025-2026.pdf
+Content preview:
+7.3. Seminar Proposal ........................................................................................................ 57
+7.4. Syarat-Syarat Seminar Hasil ......................................................................................... 59
+7.5. Penyelenggaraan Seminar Hasil .. ................................................................................ 59
+7.6. Kliring ........................................................................................................................... 60...
+
+--- CHUNK 6 (score: 0.692) ---
+Source: PANDUAN_AKADEMIK_FATEK_2025-2026.md
+Content preview:
+bersangkutan akan dipanggil oleh pihak KDK jika usulan tersebut belum disetujui.
+(5) Tahapan dan susunan kepanitian penyelesaian studi program sarjana/diploma
+meliputi:
+a. Seminar Proposal, susunan kepanitian minimal 3 (tiga) orang terdiri dari:
+pembimbing utama sebagai ketua merangkap pembahas; pembimbing
+pendamping sebagai sekretaris merangkap pembahas; dan minimal 1 (satu) orang
+pembahas sebagai anggota.
+b. Seminar Hasil, susunan kepanitian minimal 3 (tiga) orang terdiri dari:
+pembimbing utama sebagai ketua merangkap pembahas;...
+
+--- CHUNK 7 (score: 0.724) ---
+Source: PANDUAN_AKADEMIK_FATEK_2025-2026.md
+Content preview:
+x. Setelah dinyatakan lulus seminar proposal, mahasiswa dapat mengajukan
+permohonan data penelitian (Lampiran 6) untuk mendukung tugas akhir.
+xi. Pelaksanaan seminar proposal pada Program Studi S2 Teknik Sipil dan S2
+Arsitektur mengikuti aturan pada yang ditetapkan pada pascasarjana
+(https://sipil.pasca.untad.ac.id/pedoman-akademik/)
+Tabel 7.1. Penilaian Seminar Proposal
+Nilai Akhir Nilai Mutu Angka Mutu
+Kriteria...
+
+--- CHUNK 8 (score: 0.673) ---
+Source: PANDUAN_AKADEMIK_FATEK_2025-2026.md
+Content preview:
+| 5. | | | F10243050 | | | Seminar Proposal / Seminar Proposal | | | 3 | | | SEMESTER II | | |
+| 6. | | | F10243051 | | | Seminar Hasil / Results Seminar | | | 4 | | | SEMESTER III | | |
+| 7. | | | F10243052 | | | Tesis / Thesis | | | 8 | | | SEMESTER IV | | |...

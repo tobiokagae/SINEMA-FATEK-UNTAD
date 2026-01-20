@@ -107,6 +107,101 @@ class VectorStore:
         
         return results
     
+    def search_mmr(self, query: str, top_k: int = 5, fetch_k: int = 20, 
+                   lambda_mult: float = 0.7, diversity_boost: float = 0.3) -> List[Tuple[Document, float]]:
+        """
+        Search using Maximal Marginal Relevance for diverse results.
+        
+        MMR balances relevance and diversity to ensure results from different 
+        source documents are included.
+        
+        Args:
+            query: Search query
+            top_k: Number of results to return
+            fetch_k: Number of candidates to fetch initially (should be > top_k)
+            lambda_mult: Balance between relevance (1) and diversity (0). Default 0.7
+            diversity_boost: Extra score boost for chunks from new source documents
+        
+        Returns:
+            List of (Document, score) tuples with diverse results
+        """
+        if self.index is None or len(self.documents) == 0:
+            return []
+        
+        # Generate query embedding
+        query_embedding = self.embedding_model.embed_text(query)
+        query_embedding = query_embedding.reshape(1, -1)
+        faiss.normalize_L2(query_embedding)
+        
+        # Fetch more candidates than needed
+        active_index = self.gpu_index if self.use_gpu and self.gpu_index is not None else self.index
+        k = min(fetch_k, len(self.documents))
+        scores, indices = active_index.search(query_embedding, k)
+        
+        # Filter valid results
+        candidates = []
+        candidate_embeddings = []
+        for score, idx in zip(scores[0], indices[0]):
+            if idx >= 0 and idx < len(self.documents):
+                candidates.append((self.documents[idx], float(score), idx))
+        
+        if not candidates:
+            return []
+        
+        # Get embeddings for candidates (reconstruct from index)
+        for _, _, idx in candidates:
+            # Reconstruct embedding from FAISS index
+            embedding = np.zeros((1, self.index.d), dtype=np.float32)
+            self.index.reconstruct(int(idx), embedding[0])  # Convert to Python int
+            candidate_embeddings.append(embedding[0])
+        
+        candidate_embeddings = np.array(candidate_embeddings)
+        
+        # MMR Selection
+        selected = []
+        selected_indices = set()
+        selected_sources = set()  # Track unique source documents
+        
+        while len(selected) < min(top_k, len(candidates)):
+            best_score = -float('inf')
+            best_idx = -1
+            
+            for i, (doc, relevance_score, orig_idx) in enumerate(candidates):
+                if i in selected_indices:
+                    continue
+                
+                # Calculate MMR score
+                if not selected:
+                    # First selection: pure relevance
+                    mmr_score = relevance_score
+                else:
+                    # Calculate max similarity to already selected
+                    selected_embeddings = candidate_embeddings[list(selected_indices)]
+                    similarities = np.dot(selected_embeddings, candidate_embeddings[i])
+                    max_sim = np.max(similarities)
+                    
+                    # MMR: balance relevance and diversity
+                    mmr_score = lambda_mult * relevance_score - (1 - lambda_mult) * max_sim
+                
+                # Boost score for new source documents (diversity across files)
+                source = doc.metadata.get('source', 'unknown')
+                if source not in selected_sources:
+                    mmr_score += diversity_boost
+                
+                if mmr_score > best_score:
+                    best_score = mmr_score
+                    best_idx = i
+            
+            if best_idx == -1:
+                break
+            
+            doc, relevance_score, orig_idx = candidates[best_idx]
+            selected.append((doc, relevance_score))
+            selected_indices.add(best_idx)
+            selected_sources.add(doc.metadata.get('source', 'unknown'))
+        
+        return selected
+    
     def save(self):
         """Save index and documents to disk"""
         if self.persist_dir is None:
