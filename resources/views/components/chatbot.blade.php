@@ -129,6 +129,9 @@
     </div>
 </div>
 
+<!-- Marked.js for Markdown parsing -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <style>
     @keyframes fade-in {
         from { opacity: 0; transform: translateY(10px); }
@@ -151,6 +154,76 @@
     }
     #chatMessages::-webkit-scrollbar-thumb:hover {
         background: #a3a3a3;
+    }
+    
+    /* Message formatting styles - Markdown Support */
+    .chat-message {
+        text-align: left;
+        line-height: 1.7;
+        font-size: 13px;
+        color: #374151;
+    }
+    
+    /* Headers */
+    .chat-message h1, .chat-message h2, .chat-message h3 {
+        font-weight: 600;
+        color: #d97706;
+        margin: 14px 0 8px 0;
+    }
+    .chat-message h1:first-child, .chat-message h2:first-child, .chat-message h3:first-child {
+        margin-top: 0;
+    }
+    .chat-message h1 { font-size: 16px; }
+    .chat-message h2 { font-size: 15px; }
+    .chat-message h3 { font-size: 14px; }
+    
+    /* Bold & Italic */
+    .chat-message strong { font-weight: 600; color: #111827; }
+    .chat-message em { font-style: italic; }
+    
+    /* Paragraphs */
+    .chat-message p {
+        margin-bottom: 10px;
+    }
+    .chat-message p:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* Ordered & Unordered Lists */
+    .chat-message ol, .chat-message ul {
+        margin: 8px 0 12px 0;
+        padding-left: 20px;
+    }
+    .chat-message ol { list-style-type: decimal; }
+    .chat-message ul { list-style-type: disc; }
+    .chat-message li {
+        margin-bottom: 6px;
+        line-height: 1.6;
+    }
+    .chat-message li:last-child { margin-bottom: 0; }
+    
+    /* Nested Lists */
+    .chat-message ol ol, .chat-message ul ul, .chat-message ol ul, .chat-message ul ol {
+        margin: 4px 0;
+        padding-left: 16px;
+    }
+    
+    /* Code */
+    .chat-message code {
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-family: monospace;
+    }
+    
+    /* Blockquote */
+    .chat-message blockquote {
+        border-left: 3px solid #d97706;
+        padding-left: 12px;
+        margin: 8px 0;
+        color: #6b7280;
+        font-style: italic;
     }
 </style>
 
@@ -374,15 +447,18 @@ function chatbot() {
         },
 
         formatMessage(text) {
-            // Simple formatting - no complex table parsing
-            // LLM is instructed to use lists instead of tables
-            return text
-                .replace(/\|/g, '') // Remove any remaining pipe characters
-                .replace(/---+/g, '') // Remove horizontal lines
-                .replace(/\n\n+/g, '<br><br>')
-                .replace(/\n/g, '<br>')
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>');
+            // Use marked.js to parse markdown
+            if (typeof marked !== 'undefined') {
+                // Configure marked for safe rendering
+                marked.setOptions({
+                    breaks: true,  // Convert \n to <br>
+                    gfm: true,     // GitHub Flavored Markdown
+                    sanitize: false
+                });
+                return '<div class="chat-message">' + marked.parse(text) + '</div>';
+            }
+            // Fallback if marked not loaded
+            return '<div class="chat-message"><p>' + text.replace(/\n/g, '<br>') + '</p></div>';
         },
 
         formatTime(timestamp) {

@@ -102,10 +102,6 @@
                         <span>Daftar Dokumen ({{ count($documents) }})</span>
                     </div>
                 </x-slot>
-                
-                <x-slot name="headerEnd">
-                    {{ $this->clearCacheAction }}
-                </x-slot>
 
                 @if(count($documents) > 0)
                     <div class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -185,8 +181,7 @@
                                         <x-filament::dropdown.list>
                                             <x-filament::dropdown.list.item 
                                                 tag="a" 
-                                                href="{{ $this->getPreviewUrl($filename) }}" 
-                                                download="{{ $filename }}"
+                                                href="{{ $this->getMdDownloadUrl($filename) }}" 
                                                 icon="heroicon-o-document-text"
                                             >
                                                 File Markdown

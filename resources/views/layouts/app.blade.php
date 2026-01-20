@@ -29,14 +29,14 @@
                         <a href="#faq" class="text-gray-600 hover:text-amber-500 transition-colors">FAQ</a>
                     </nav>
                     @guest
-                        <a href="/admin/login"
+                        <a href="/dashboard/login"
                             class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-all shadow-md">
                             Masuk
                         </a>
                     @else
                         <div class="flex items-center space-x-3">
                             <span class="text-gray-600">{{ Auth::user()->name }}</span>
-                            <a href="/admin"
+                            <a href="/dashboard"
                                 class="bg-amber-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-amber-600 transition-all shadow-md">
                                 Dashboard
                             </a>
@@ -57,7 +57,7 @@
                 <div class="container mx-auto px-6 text-center">
                     <h3 class="text-3xl font-bold">Mulai Kumpulkan Poin Ekstrakurikuler Anda Hari Ini!</h3>
                     @guest
-                        <a href="/admin/register"
+                        <a href="/dashboard/register"
                             class="mt-8 inline-block bg-amber-500 text-white font-bold px-8 py-4 rounded-lg hover:bg-amber-600 transition-all shadow-lg text-lg">
                             Daftar Sekarang
                         </a>
@@ -74,12 +74,10 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     @stack('scripts')
 
-    <!-- Chatbot Component - Only show on non-admin pages for guest users -->
-    @guest
-        @unless(request()->is('admin/*'))
-            <x-chatbot />
-        @endunless
-    @endguest
+    <!-- Chatbot Component - Show on non-admin pages for all users -->
+    @unless(request()->is('dashboard/*'))
+        <x-chatbot />
+    @endunless
 </body>
 
 </html>

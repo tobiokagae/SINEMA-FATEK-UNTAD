@@ -9,12 +9,12 @@ Route::middleware('auth')->group(function () {
     // Link verifikasi dari email
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-        return redirect('/admin');
+        return redirect('/dashboard');
     })->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
 
     // Halaman notice
     Route::get('/email/verify', function () {
-        return redirect('/admin/login');
+        return redirect('/dashboard/login');
     })->name('verification.notice');
 
     // Logout

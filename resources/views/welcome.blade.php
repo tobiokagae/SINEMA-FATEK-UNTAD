@@ -62,7 +62,7 @@
                     semua kegiatan ekstrakurikuler Anda menjadi transkrip nilai yang berharga.
                 </p>
                 <div class="flex justify-center gap-4">
-                    <a href="/admin/register"
+                    <a href="/dashboard/register"
                         class="bg-amber-500 text-white font-bold px-8 py-4 rounded-lg hover:bg-amber-600 transition-all shadow-lg text-lg">
                         Daftar Sekarang
                     </a>

@@ -287,6 +287,13 @@ class ChatbotDocuments extends Page implements HasForms, HasActions
         return $chatbotUrl . '/api/documents/' . urlencode($filename) . '/preview';
     }
     
+    public function getMdDownloadUrl(string $filename): string
+    {
+        // Download MD file with proper headers
+        $chatbotUrl = config('services.chatbot.url', 'http://127.0.0.1:5000');
+        return $chatbotUrl . '/api/documents/' . urlencode($filename) . '/download';
+    }
+    
     public function getOriginalUrl(string $filename): string
     {
         // Get original file URL (check for PDF, DOCX, DOC, TXT)
@@ -305,11 +312,6 @@ class ChatbotDocuments extends Page implements HasForms, HasActions
     
     public function refreshIndex(): void
     {
-        Notification::make()
-            ->title('Memperbarui index...')
-            ->info()
-            ->send();
-        
         $result = $this->chatbotService->refreshIndex();
         
         if (isset($result['error'])) {
@@ -338,9 +340,12 @@ class ChatbotDocuments extends Page implements HasForms, HasActions
                 ->requiresConfirmation()
                 ->modalHeading('Hapus Semua Cache?')
                 ->modalDescription('Ini akan menghapus semua cache respons chatbot.')
+                ->modalSubmitActionLabel('Ya, Hapus Cache')
+                ->closeModalByClickingAway(false)
                 ->action(function () {
                     try {
                         $result = $this->chatbotService->clearCache();
+                        $this->loadData(); // Refresh stats immediately
                         Notification::make()
                             ->title('Cache berhasil dihapus')
                             ->success()
@@ -356,8 +361,15 @@ class ChatbotDocuments extends Page implements HasForms, HasActions
             Action::make('refresh')
                 ->label('Refresh Index')
                 ->icon('heroicon-o-arrow-path')
-                ->action('refreshIndex')
-                ->color('warning'),
+                ->color('warning')
+                ->requiresConfirmation()
+                ->modalHeading('Refresh Index Dokumen?')
+                ->modalDescription('Ini akan memproses ulang semua dokumen dan membangun kembali vector store. Proses ini bisa memakan waktu beberapa menit.')
+                ->modalSubmitActionLabel('Ya, Refresh Index')
+                ->closeModalByClickingAway(false)
+                ->action(function () {
+                    $this->refreshIndex();
+                }),
         ];
     }
 }
