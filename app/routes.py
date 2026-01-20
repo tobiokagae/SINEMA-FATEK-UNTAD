@@ -94,60 +94,22 @@ def chat():
         # Save user message
         DatabaseService.add_message(session_id, "user", query)
         
-        # =====================================
-        # CACHE DISABLED FOR TESTING CONSISTENCY
-        # =====================================
-        # # Check cache first
-        # cached = DatabaseService.get_cached_response(query)
-        # if cached:
-        #     cached_response, sources, original_latency = cached
-        #     logger.info(f"Cache hit for query: {query[:50]}...")
-        #     
-        #     # Check if cached response is an error - don't rephrase errors
-        #     error_indicators = ['maaf,', 'error:', 'rate limit', 'batas penggunaan', 'server sedang tidak tersedia']
-        #     is_error_response = any(indicator in cached_response.lower() for indicator in error_indicators)
-        #     
-        #     if is_error_response:
-        #         # Return error response as-is, no rephrase
-        #         DatabaseService.add_message(session_id, "assistant", cached_response, sources, original_latency, cached=True)
-        #         return jsonify({
-        #             'response': cached_response,
-        #             'sources': sources,
-        #             'latency': round(original_latency, 2),
-        #             'cached': True,
-        #             'session_id': session_id
-        #         })
-        #     
-        #     # Rephrase valid cached response slightly using LLM
-        #     import time
-        #     start_time = time.time()
-        #     generator = get_generator()
-        #     
-        #     rephrase_prompt = f"""Berikut adalah jawaban yang sudah ada untuk pertanyaan serupa. 
-        # Tolong sampaikan informasi yang sama dengan cara yang sedikit berbeda (variasi kata, struktur kalimat), 
-        # tapi JANGAN mengubah fakta atau menambah informasi baru.
-        # 
-        # Jawaban asli:
-        # {cached_response}
-        # 
-        # Sampaikan ulang dengan gaya yang sedikit berbeda:"""
-        #     
-        #     rephrased, _ = generator.generate(
-        #         query=rephrase_prompt,
-        #         context="",
-        #         system_prompt="Kamu adalah asisten yang bertugas menyampaikan ulang informasi dengan gaya berbeda tanpa mengubah fakta."
-        #     )
-        #     
-        #     rephrase_latency = time.time() - start_time
-        #     
-        #     DatabaseService.add_message(session_id, "assistant", rephrased, sources, rephrase_latency, cached=True)
-        #     return jsonify({
-        #         'response': rephrased,
-        #         'sources': sources,
-        #         'latency': round(rephrase_latency, 2),
-        #         'cached': True,
-        #         'session_id': session_id
-        #     })
+        # Check cache first
+        cached = DatabaseService.get_cached_response(query)
+        if cached:
+            cached_response, sources, original_latency = cached
+            logger.info(f"Cache hit for query: {query[:50]}...")
+            
+            # Save to message log as cached
+            DatabaseService.add_message(session_id, "assistant", cached_response, sources, original_latency, cached=True)
+            
+            return jsonify({
+                'response': cached_response,
+                'sources': sources,
+                'latency': round(original_latency, 2),
+                'cached': True,
+                'session_id': session_id
+            })
         
         # Get RAG context
         retriever = get_retriever()
@@ -228,14 +190,20 @@ Ringkasan singkat:"""
             'halo', 'hai', 'hi', 'hello', 'hey'
         ]
         query_lower = query.lower().strip()
+        query_words = set(query_lower.split())  # Split into words
         is_short_query = len(query_lower) < 10  # Less than 10 chars
-        is_generic_query = any(pattern in query_lower for pattern in skip_query_patterns)
+        # Only match if pattern is an EXACT WORD in query (not substring)
+        is_generic_query = any(pattern in query_words or query_lower == pattern for pattern in skip_query_patterns)
         
-        # CACHE SAVE DISABLED FOR TESTING
-        # should_cache = not is_error_response and not is_short_query and not is_generic_query
-        # 
-        # if should_cache:
-        #     DatabaseService.cache_response(query, response, sources, latency)
+        # Cache the response if it's valid
+        should_cache = not is_error_response and not is_short_query and not is_generic_query
+        
+        logger.info(f"[CACHE DEBUG] query='{query[:30]}...', is_error={is_error_response}, is_short={is_short_query}, is_generic={is_generic_query}, should_cache={should_cache}")
+        
+        if should_cache:
+            DatabaseService.cache_response(query, response, sources, latency)
+        else:
+            logger.info(f"[CACHE DEBUG] Skipped caching due to filters")
         
         # Save assistant message
         DatabaseService.add_message(session_id, "assistant", response, sources, latency)

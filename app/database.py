@@ -156,8 +156,13 @@ class DatabaseService:
     
     @staticmethod
     def get_cache_hash(query: str) -> str:
-        """Generate hash for query"""
-        return hashlib.md5(query.lower().strip().encode()).hexdigest()
+        """Generate hash for query - normalized (lowercase, no punctuation)"""
+        import re
+        # Remove punctuation, lowercase, strip whitespace
+        normalized = re.sub(r'[^\w\s]', '', query.lower().strip())
+        # Collapse multiple spaces into one
+        normalized = re.sub(r'\s+', ' ', normalized)
+        return hashlib.md5(normalized.encode()).hexdigest()
     
     @staticmethod
     def get_cached_response(query: str) -> Optional[Tuple[str, List, float]]:
@@ -176,11 +181,16 @@ class DatabaseService:
     @staticmethod
     def cache_response(query: str, response: str, sources: List, latency: float):
         """Cache a response if no similar query exists"""
+        from flask import current_app
+        logger = current_app.logger
+        
         query_hash = DatabaseService.get_cache_hash(query)
+        logger.info(f"[CACHE] Attempting to cache query: '{query[:50]}...' hash={query_hash[:16]}...")
         
         # Check if exact hash exists
         existing = db.session.query(CacheEntry).filter_by(query_hash=query_hash).first()
         if existing:
+            logger.info(f"[CACHE] SKIP - Exact hash already exists")
             return
         
         # Check for semantically similar queries using word overlap
@@ -200,18 +210,24 @@ class DatabaseService:
                 
                 # Skip if too similar (>70% overlap)
                 if similarity > 0.7:
+                    logger.info(f"[CACHE] SKIP - Similar query exists (sim={similarity:.2f})")
                     return
         
         # Save new cache entry
-        entry = CacheEntry(
-            query_hash=query_hash,
-            query=query,
-            response=response,
-            sources=sources,
-            latency=latency
-        )
-        db.session.add(entry)
-        db.session.commit()
+        try:
+            entry = CacheEntry(
+                query_hash=query_hash,
+                query=query,
+                response=response,
+                sources=sources,
+                latency=latency
+            )
+            db.session.add(entry)
+            db.session.commit()
+            logger.info(f"[CACHE] SUCCESS - Saved new cache entry, id={entry.id}")
+        except Exception as e:
+            logger.error(f"[CACHE] ERROR - Failed to save: {e}")
+            db.session.rollback()
     
     @staticmethod
     def get_cache_stats() -> Dict:
