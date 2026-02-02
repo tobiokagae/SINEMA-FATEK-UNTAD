@@ -52,14 +52,18 @@ class DocumentLoader:
     
     def load_document(self, file_path: Path, category: str = None) -> List[Document]:
         """Load a single document and split into chunks
-        
+
         Args:
             file_path: Path to the document file
             category: Optional category for the document (e.g., 'beasiswa', 'panduan_krs')
         """
         file_path = Path(file_path)
         ext = file_path.suffix.lower()
-        
+
+        # Auto-detect category from filename if not provided
+        if category is None or category == 'uncategorized':
+            category = self._detect_category_from_filename(file_path.name)
+
         # Route to appropriate loader
         if ext == '.pdf':
             content = self._load_pdf(file_path)
@@ -78,15 +82,15 @@ class DocumentLoader:
         else:
             # Default: treat as text
             content = self._load_text(file_path)
-        
+
         chunks = self._split_text(content)
-        
+
         documents = []
         for i, chunk in enumerate(chunks):
             # Extract heading and snippet for source citation
             heading = self._extract_heading(chunk, content)
             snippet = self._extract_snippet(chunk)
-            
+
             documents.append(Document(
                 content=chunk,
                 metadata={
@@ -94,13 +98,41 @@ class DocumentLoader:
                     'chunk_index': i,
                     'total_chunks': len(chunks),
                     'original_type': ext,
-                    'category': category or 'uncategorized',
+                    'category': category,
                     'heading': heading,
                     'snippet': snippet
                 }
             ))
-        
+
         return documents
+
+    def _detect_category_from_filename(self, filename: str) -> str:
+        """Auto-detect document category from filename for better retrieval
+
+        Args:
+            filename: Name of the document file
+
+        Returns:
+            Detected category string
+        """
+        filename_lower = filename.lower()
+
+        # Keyword-based category detection
+        categories = {
+            'poin_ekstrakurikuler': ['poin', 'ekstrakurikuler', 'spe'],
+            'panduan_akademik': ['panduan', 'akademik', 'buku_panduan'],
+            'ta_skripsi': ['skripsi', 'ta_skripsi'],
+            'ta_non_skripsi': ['ta_non_skripsi', 'non_skripsi'],
+            'website_sinema': ['sinema', 'website'],
+            'integritas': ['integritas', 'plagiarisme'],
+            'transkrip_tem': ['transkrip', 'tem'],
+        }
+
+        for category, keywords in categories.items():
+            if any(keyword in filename_lower for keyword in keywords):
+                return category
+
+        return 'general'
     
     def _extract_heading(self, chunk: str, full_content: str) -> str:
         """Extract the nearest heading/section for a chunk.
@@ -201,7 +233,7 @@ class DocumentLoader:
         with open(md_path, 'w', encoding='utf-8') as f:
             f.write(md_content)
         
-        print(f"✅ Converted {file_path.name} → {md_filename} ({len(md_content)} chars)")
+        print(f"[OK] Converted {file_path.name} -> {md_filename} ({len(md_content)} chars)")
         return md_path
     
     def convert_pdf_to_markdown(self, pdf_path: Path, output_dir: Path = None) -> Path:
@@ -860,7 +892,7 @@ class DocumentLoader:
         # Split the text
         chunks = text_splitter.split_text(text)
         
-        print(f"   Semantic chunking: {len(text)} chars → {len(chunks)} chunks "
+        print(f"   Semantic chunking: {len(text)} chars -> {len(chunks)} chunks "
               f"(size={self.chunk_size}, overlap={self.chunk_overlap})")
         
         return chunks

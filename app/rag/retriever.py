@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """RAG Retriever combining all components"""
-import os
 from pathlib import Path
 from typing import List, Tuple
 
@@ -84,13 +83,16 @@ class RAGRetriever:
 
         k = top_k or self.top_k
 
+        # Apply query expansion for better matching
+        expanded_query = self._expand_query(query)
+
         # For reranking, fetch more candidates initially (increased for better coverage)
         fetch_k = k * 3 if self.use_reranker else k
 
         if use_mmr:
             # Use MMR for diverse results (fetch more candidates, return top_k)
             results = self.vector_store.search_mmr(
-                query,
+                expanded_query,  # Use expanded query
                 top_k=fetch_k,
                 fetch_k=fetch_k * 3,  # Fetch 3x candidates for better diversity
                 lambda_mult=0.7,  # 70% relevance, 30% diversity
@@ -98,15 +100,107 @@ class RAGRetriever:
             )
         else:
             # Standard similarity search
-            results = self.vector_store.search(query, top_k=fetch_k)
-        
-        # Apply reranking if enabled
+            results = self.vector_store.search(expanded_query, top_k=fetch_k)
+
+        # Apply category-based filtering before reranking
+        if results:
+            results = self._filter_by_category(query, results)
+            print(f"[CATEGORY FILTER] After filtering: {len(results)} results")
+
+        # Apply reranking if enabled - use ORIGINAL query for reranking
         if self.use_reranker and self.reranker and results:
             print(f"[RERANKER] Reranking {len(results)} results...")
-            results = self.reranker.rerank(query, results, top_k=k)
+            results = self.reranker.rerank(query, results, top_k=k)  # Use original query for reranking
             print(f"[RERANKER] Top result score: {results[0][1]:.4f}" if results else "")
-        
+
         return results
+
+    def _expand_query(self, query: str) -> str:
+        """Expand query with synonyms and related terms for better retrieval
+
+        Args:
+            query: Original query
+
+        Returns:
+            Expanded query with synonyms
+        """
+        query_lower = query.lower()
+
+        # Define expansion rules
+        expansions = {
+            # "mengumpulkan poin" → add "klaim", "pengajuan", "ekstrakurikuler"
+            'mengumpulkan poin': ['mengumpulkan poin klaim ekstrakurikuler pengajuan'],
+            'poin': ['poin ekstrakurikuler kegiatan spe'],
+            # Add more expansions as needed
+            'ekstrakurikuler': ['kegiatan kemahasiswaan organisasi lomba'],
+            'klaim': ['pengajuan bukti sertifikat'],
+        }
+
+        # Check if query matches any expansion pattern
+        for pattern, synonyms in expansions.items():
+            if pattern in query_lower:
+                # Add synonyms to query
+                # Use both original and expanded for retrieval
+                expanded = query + ' ' + ' '.join(synonyms)
+                print(f"[QUERY EXPANSION] '{query}' -> '{expanded[:100]}...'")
+                return expanded
+
+        return query
+
+    def _detect_query_category(self, query: str) -> str:
+        """Detect the likely category of a query for better filtering
+
+        Args:
+            query: The search query
+
+        Returns:
+            Detected category
+        """
+        query_lower = query.lower()
+
+        # Keyword-based category detection
+        if any(word in query_lower for word in ['poin', 'ekstrakurikuler', 'spe', 'kegiatan', 'lomba', 'organisasi', 'ukm']):
+            return 'poin_ekstrakurikuler'
+        elif any(word in query_lower for word in ['skripsi', 'seminar proposal', 'seminar hasil', 'sidang skripsi']):
+            return 'ta_skripsi'
+        elif any(word in query_lower for word in ['non-skripsi', 'ta non', 'prototipe', 'karya']):
+            return 'ta_non_skripsi'
+        elif any(word in query_lower for word in ['sinema', 'dashboard', 'login', 'pengajuan']):
+            return 'website_sinema'
+        elif any(word in query_lower for word in ['plagiarisme', 'integritas', 'etalase']):
+            return 'integritas'
+        elif any(word in query_lower for word in ['transkrip', 'tem']):
+            return 'transkrip_tem'
+        elif any(word in query_lower for word in ['ipk', 'sks', 'nilai', 'krs', 'semester']):
+            return 'panduan_akademik'
+
+        return 'general'
+
+    def _filter_by_category(self, query: str, results: List[Tuple[Document, float]]) -> List[Tuple[Document, float]]:
+        """Filter results by category to improve relevance
+
+        Args:
+            query: The search query
+            results: Retrieved documents with scores
+
+        Returns:
+            Filtered results
+        """
+        query_category = self._detect_query_category(query)
+
+        # If query is general, don't filter
+        if query_category == 'general':
+            return results
+
+        # Filter documents by matching category
+        filtered = []
+        for doc, score in results:
+            doc_category = doc.metadata.get('category', 'general')
+            # Keep if category matches OR if document is general (could be relevant)
+            if doc_category == query_category or doc_category == 'general' or doc_category == 'panduan_akademik':
+                filtered.append((doc, score))
+
+        return filtered if filtered else results  # Return filtered if non-empty, else original
     
     def _generate_source_label(self, source_file: str) -> str:
         """Generate readable label from filename dynamically (no hardcoding)"""

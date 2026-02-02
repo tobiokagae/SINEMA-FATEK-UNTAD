@@ -34,7 +34,7 @@ def get_retriever() -> RAGRetriever:
             chunk_size=CHUNK_SIZE,
             chunk_overlap=CHUNK_OVERLAP,
             top_k=TOP_K,
-            use_reranker=False,  # Reranking dinonaktifkan
+            use_reranker=False,  # Reranker dinonaktifkan
             relevance_threshold=RELEVANCE_THRESHOLD
         )
         _retriever.initialize()
@@ -238,25 +238,27 @@ Ringkasan singkat:"""
             system_prompt=SYSTEM_PROMPT
         )
 
-        # Add disclaimer for RAG responses (not for simple queries)
-        disclaimer = "\n\n⚠️ Informasi di atas berdasarkan dokumen yang tersedia. Silakan cek dokumen resmi atau hubungi admin FATEK untuk kepastian terbaru."
-        response = response + disclaimer
-
-
-        # Cache the response ONLY if it's a valid successful response
-        # Skip caching error responses
+        # Check if response is an error
         error_indicators = [
             'maaf,',
             'error:',
             'rate limit',
             'batas penggunaan',
-            'server sedang tidak tersedia'
+            'server sedang tidak tersedia',
+            'masalah autentikasi',
+            'terjadi kesalahan'
         ]
         is_error_response = any(indicator in response.lower() for indicator in error_indicators)
-        
-        # Skip caching short/generic queries (not real questions)
+
+        # For error responses, don't show sources
+        if is_error_response:
+            sources = []
+
+
+        # Cache the response ONLY if it's a valid successful response
+        # Skip caching error responses
         skip_query_patterns = [
-            'ok', 'oke', 'baik', 'baiklah', 'hmm', 'oh', 'ya', 'yaa', 
+            'ok', 'oke', 'baik', 'baiklah', 'hmm', 'oh', 'ya', 'yaa',
             'terima kasih', 'thanks', 'makasih', 'siap', 'mantap', 'lanjut',
             'halo', 'hai', 'hi', 'hello', 'hey'
         ]
@@ -265,12 +267,12 @@ Ringkasan singkat:"""
         is_short_query = len(query_lower) < 10  # Less than 10 chars
         # Only match if pattern is an EXACT WORD in query (not substring)
         is_generic_query = any(pattern in query_words or query_lower == pattern for pattern in skip_query_patterns)
-        
+
         # # Cache the response if it's valid (TEMPORARILY DISABLED)
         # should_cache = not is_error_response and not is_short_query and not is_generic_query
-        # 
+        #
         # logger.info(f"[CACHE DEBUG] query='{query[:30]}...', is_error={is_error_response}, is_short={is_short_query}, is_generic={is_generic_query}, should_cache={should_cache}")
-        # 
+        #
         # if should_cache:
         #     DatabaseService.cache_response(query, response, sources, latency)
         # else:

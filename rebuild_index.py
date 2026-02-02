@@ -1,79 +1,83 @@
-"""Script to rebuild the vector index"""
-import os
+# -*- coding: utf-8 -*-
+"""Script to rebuild vector index after adding category metadata"""
+
 import sys
+import os
+from pathlib import Path
 
-# Add current directory to path
-sys.path.insert(0, os.getcwd())
+# Fix Windows encoding
+if sys.platform == "win32":
+    os.system("chcp 65001 > nul")
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
 
-from app.rag.document_loader import DocumentLoader
-from app.rag.embeddings import EmbeddingModel
-from app.rag.vector_store import VectorStore
-from app.config import CHUNK_SIZE, CHUNK_OVERLAP, DOCUMENTS_DIR
+# Add parent directory to path
+sys.path.insert(0, str(Path(__file__).parent))
+
+from app.rag.retriever import RAGRetriever
+from app.config import DOCUMENTS_DIR, VECTOR_DB_DIR, EMBEDDING_MODEL, CHUNK_SIZE, CHUNK_OVERLAP, TOP_K, RELEVANCE_THRESHOLD
 
 def main():
-    print("=" * 50)
-    print("REBUILDING VECTOR INDEX")
-    print("=" * 50)
+    print("=" * 60)
+    print("REBUILDING VECTOR INDEX (with Category Metadata)")
+    print("=" * 60)
+
+    print(f"\nDocuments dir: {DOCUMENTS_DIR}")
+    print(f"Vector DB dir: {VECTOR_DB_DIR}")
     print(f"Config: CHUNK_SIZE={CHUNK_SIZE}, CHUNK_OVERLAP={CHUNK_OVERLAP}")
-    
-    # Category mapping based on filename patterns
-    CATEGORY_MAP = {
-        'panduan_ta': 'panduan_ta',
-        'ta_non': 'panduan_ta',
-        'tugas_akhir': 'panduan_ta',
-        'integritas': 'integritas_akademik',
-        'akademik_fatek': 'panduan_akademik',
-        'panduan_akademik': 'panduan_akademik',
-        'sinema': 'panduan_sinema',
-        'ekstrakurikuler': 'panduan_sinema',
-        'poin_ekskul': 'panduan_sinema',
-        'satuan_poin': 'panduan_sinema'
-    }
-    
-    def get_category(filename):
-        """Determine category from filename"""
-        filename_lower = filename.lower()
-        for key, category in CATEGORY_MAP.items():
-            if key in filename_lower:
-                return category
-        return 'uncategorized'
-    
-    # Load documents with config from app/config.py
-    print("\n1. Loading documents...")
-    loader = DocumentLoader(DOCUMENTS_DIR, chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
-    
-    # Load each document with category (only .md files to avoid duplicates with PDFs)
-    all_documents = []
-    documents_dir = loader.documents_dir
-    for file_path in documents_dir.iterdir():
-        # Only load .md files (PDFs have been converted to MD already)
-        if file_path.suffix.lower() in {'.md', '.markdown'}:
-            category = get_category(file_path.name)
-            try:
-                docs = loader.load_document(file_path, category=category)
-                all_documents.extend(docs)
-                print(f"   Loaded {len(docs)} chunks from {file_path.name} (category: {category})")
-            except Exception as e:
-                print(f"   Error loading {file_path.name}: {e}")
-    
-    print(f"\n   Total: {len(all_documents)} document chunks")
-    
-    # Create embeddings
-    print("\n2. Creating embeddings...")
-    embedding = EmbeddingModel()
-    
-    # Create new vector store
-    print("\n3. Building FAISS index...")
-    vector_store = VectorStore(embedding_model=embedding, persist_dir="vector_db")
-    vector_store.add_documents(all_documents)
-    
-    # Save
-    print("\n4. Saving index...")
-    vector_store.save()
-    
-    print("\n" + "=" * 50)
-    print("INDEX REBUILT SUCCESSFULLY!")
-    print("=" * 50)
+
+    # Initialize retriever with force_reload
+    print("\n[*] Initializing retriever with force_reload=True...")
+    retriever = RAGRetriever(
+        documents_dir=DOCUMENTS_DIR,
+        vector_db_dir=VECTOR_DB_DIR,
+        embedding_model_name=EMBEDDING_MODEL,
+        chunk_size=CHUNK_SIZE,
+        chunk_overlap=CHUNK_OVERLAP,
+        top_k=TOP_K,
+        use_reranker=True,
+        relevance_threshold=RELEVANCE_THRESHOLD
+    )
+
+    # Rebuild index
+    retriever.initialize(force_reload=True)
+
+    print("\n[OK] Index rebuilt successfully!")
+    print("\n" + "=" * 60)
+
+    # Verify category metadata
+    print("\n[*] Verifying category metadata...")
+    results = retriever.retrieve("poin ekstrakurikuler", top_k=5)
+
+    if results:
+        print(f"\n[OK] Sample chunks with category metadata:")
+        for i, (doc, score) in enumerate(results[:3], 1):
+            category = doc.metadata.get('category', 'unknown')
+            source = doc.metadata.get('source', 'unknown')
+            print(f"  {i}. [{category}] {source} (score: {score:.4f})")
+
+    # Test query expansion
+    print("\n[*] Testing query expansion...")
+    test_queries = [
+        "mengumpulkan poin",
+        "syarat sidang skripsi",
+        "klaim poin ekstrakurikuler"
+    ]
+
+    for query in test_queries:
+        print(f"\n  Query: '{query}'")
+        results = retriever.retrieve(query, top_k=3)
+
+        if results:
+            top_category = results[0][0].metadata.get('category', 'unknown')
+            top_source = results[0][0].metadata.get('source', 'unknown')
+            print(f"  [OK] Top result: [{top_category}] {top_source} (score: {results[0][1]:.4f})")
+        else:
+            print(f"  [X] No results found")
+
+    print("\n" + "=" * 60)
+    print("REBUILD COMPLETE! Ready to test with /chat endpoint")
+    print("=" * 60)
 
 if __name__ == "__main__":
     main()
