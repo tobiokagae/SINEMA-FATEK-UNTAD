@@ -132,6 +132,11 @@
 <!-- Marked.js for Markdown parsing -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
+<!-- KaTeX for LaTeX math rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
 <style>
     @keyframes fade-in {
         from { opacity: 0; transform: translateY(10px); }
@@ -316,10 +321,11 @@ function chatbot() {
             }
         },
 
-        addBotMessage(text) {
+        addBotMessage(text, sources = []) {
             const message = {
                 type: 'bot',
                 text: text,
+                sources: sources,
                 timestamp: new Date().toISOString()
             };
 
@@ -355,10 +361,10 @@ function chatbot() {
                 const data = await response.json();
                 
                 if (data.error) {
-                    this.addBotMessage('Maaf, terjadi kesalahan. Silakan coba lagi nanti. 😔');
+                    this.addBotMessage('Maaf, terjadi kesalahan. Silakan coba lagi nanti. 😔', []);
                 } else {
-                    // Just use the response without sources
-                    this.addBotMessage(data.response);
+                    // Pass sources for citation feature
+                    this.addBotMessage(data.response, data.sources || []);
                 }
             } catch (error) {
                 console.error('Chatbot API error:', error);
@@ -368,12 +374,11 @@ function chatbot() {
         },
         
         getSessionId() {
-            let sessionId = localStorage.getItem('sinema_chat_session');
-            if (!sessionId) {
-                sessionId = 'web_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('sinema_chat_session', sessionId);
+            // Generate new session ID on every page load (fresh start on refresh)
+            if (!this._sessionId) {
+                this._sessionId = 'web_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
             }
-            return sessionId;
+            return this._sessionId;
         },
         
         generateFallbackResponse(userMessage) {
@@ -390,7 +395,7 @@ function chatbot() {
                 response = `Maaf, server sedang tidak tersedia. 😅\n\nSilakan coba lagi nanti atau hubungi admin.`;
             }
 
-            this.addBotMessage(response);
+            this.addBotMessage(response, []);
         },
 
         renderMessages() {
@@ -428,37 +433,79 @@ function chatbot() {
                     </div>
                 `;
             } else {
-                div.innerHTML = `
-                    <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white rounded-xl p-2 flex-shrink-0 shadow-lg">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
-                        </svg>
-                    </div>
-                    <div class="flex flex-col max-w-[85%] overflow-hidden">
-                        <div class="bg-white rounded-2xl rounded-tl-md p-3 shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="text-sm text-gray-800 leading-relaxed break-words">${this.formatMessage(message.text)}</div>
-                        </div>
-                        <span class="text-[10px] text-gray-400 mt-1">${this.formatTime(message.timestamp)}</span>
-                    </div>
-                `;
+                // Build sources HTML if available
+                let sourcesHtml = '';
+                if (message.sources && message.sources.length > 0) {
+                    let sourceItems = '';
+                    for (let idx = 0; idx < message.sources.length; idx++) {
+                        const src = message.sources[idx];
+                        const borderClass = idx > 0 ? 'border-t border-gray-100' : '';
+                        const headingHtml = src.heading ? '<div class="text-xs text-amber-600 font-medium">📌 ' + src.heading + '</div>' : '';
+                        const snippetHtml = src.snippet ? '<div class="text-xs text-gray-500 italic mt-0.5">"' + src.snippet + '"</div>' : '';
+                        sourceItems += '<div class="py-2 ' + borderClass + '"><div class="text-xs font-medium text-gray-700 break-all">📄 ' + src.source + '</div>' + headingHtml + snippetHtml + '</div>';
+                    }
+                    
+                    sourcesHtml = '<div class="mt-2 pt-2 border-t border-gray-100"><details><summary class="text-xs text-amber-600 hover:text-amber-700 font-medium cursor-pointer">📚 Lihat Sumber (' + message.sources.length + ')</summary><div class="mt-2 bg-amber-50 rounded-lg p-2 text-left">' + sourceItems + '</div></details></div>';
+                }
+                
+                div.innerHTML = '<div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white rounded-xl p-2 flex-shrink-0 shadow-lg"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/></svg></div><div class="flex flex-col max-w-[85%] overflow-hidden"><div class="bg-white rounded-2xl rounded-tl-md p-3 shadow-sm border border-gray-100 overflow-hidden"><div class="text-sm text-gray-800 leading-relaxed break-words">' + this.formatMessage(message.text) + '</div>' + sourcesHtml + '</div><span class="text-[10px] text-gray-400 mt-1">' + this.formatTime(message.timestamp) + '</span></div>';
             }
 
             return div;
         },
 
         formatMessage(text) {
-            // Use marked.js to parse markdown
+            // Process LaTeX BEFORE markdown to prevent escaping
+            let processedText = text;
+            const mathPlaceholders = [];
+            
+            // Extract display math ($$...$$) and replace with placeholders
+            processedText = processedText.replace(/\$\$([\s\S]*?)\$\$/g, (match, latex) => {
+                const placeholder = `%%MATH_DISPLAY_${mathPlaceholders.length}%%`;
+                mathPlaceholders.push({ type: 'display', latex: latex.trim() });
+                return placeholder;
+            });
+            
+            // Extract inline math ($...$) and replace with placeholders
+            processedText = processedText.replace(/\$([^\$\n]+?)\$/g, (match, latex) => {
+                const placeholder = `%%MATH_INLINE_${mathPlaceholders.length}%%`;
+                mathPlaceholders.push({ type: 'inline', latex: latex.trim() });
+                return placeholder;
+            });
+            
+            // Now parse markdown
+            let html = processedText;
             if (typeof marked !== 'undefined') {
-                // Configure marked for safe rendering
                 marked.setOptions({
-                    breaks: true,  // Convert \n to <br>
-                    gfm: true,     // GitHub Flavored Markdown
+                    breaks: true,
+                    gfm: true,
                     sanitize: false
                 });
-                return '<div class="chat-message">' + marked.parse(text) + '</div>';
+                html = marked.parse(processedText);
             }
-            // Fallback if marked not loaded
-            return '<div class="chat-message"><p>' + text.replace(/\n/g, '<br>') + '</p></div>';
+            
+            // Replace placeholders with rendered KaTeX
+            if (typeof katex !== 'undefined') {
+                mathPlaceholders.forEach((item, index) => {
+                    const placeholderDisplay = `%%MATH_DISPLAY_${index}%%`;
+                    const placeholderInline = `%%MATH_INLINE_${index}%%`;
+                    
+                    try {
+                        const rendered = katex.renderToString(item.latex, {
+                            displayMode: item.type === 'display',
+                            throwOnError: false
+                        });
+                        html = html.replace(placeholderDisplay, rendered);
+                        html = html.replace(placeholderInline, rendered);
+                    } catch (e) {
+                        // If KaTeX fails, show original
+                        html = html.replace(placeholderDisplay, `$$${item.latex}$$`);
+                        html = html.replace(placeholderInline, `$${item.latex}$`);
+                    }
+                });
+            }
+            
+            return '<div class="chat-message">' + html + '</div>';
         },
 
         formatTime(timestamp) {
