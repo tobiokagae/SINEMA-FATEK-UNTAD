@@ -1,6 +1,6 @@
 # Modul Integritas Akademik Fatek Untad 2
 
-*Dokumen ini dikonversi otomatis dari PDF*
+*Dokumen ini dikonversi dan dibersihkan otomatis*
 
 ---
 
@@ -25,905 +25,6 @@ Deno Ambar Arum, M.T.
 Staf Administrasi, IT, dan : Adrin T, S.Kom.
 Dokumentasi Muhammad Dadang Anshari, S.Kom.
 Andi Muhammad Ilham A.Syahrani, S.Kom.
-i
-
-## Kata Pengantar
-Puji syukur penyusun panjatkan kehadirat Tuhan Yang Maha Esa atas segala
-rahmat dan karunia-Nya sehingga “Modul Etika Akademik untuk Mahasiswa”
-ini dapat diselesaikan dengan baik. Modul ini disusun sebagai salah satu upaya
-untuk meningkatkan pemahaman dan kesadaran mahasiswa mengenai nilai-nilai
-moral, prinsip, dan norma yang wajib dijunjung dalam setiap aktivitas akademik,
-baik di lingkungan kampus maupun dalam kehidupan bermasyarakat.
-Etika akademik menjadi fondasi penting bagi terbentuknya suasana belajar
-yang jujur, adil, dan saling menghargai. Dalam modul ini dibahas secara
-komprehensif mengenai prinsip-prinsip integritas, kejujuran, keadilan, tanggung
-jawab, hingga praktik penulisan karya ilmiah yang bebas dari plagiarisme. Harapan
-penulis, mahasiswa dapat memahami dan menerapkan seluruh materi yang tersaji
-agar mampu berpikir kritis, bertindak profesional, dan membangun budaya
-akademik yang beretika tinggi.
-Ucapan terima kasih disampaikan kepada semua pihak yang telah
-memberikan dorongan, masukan, dan kontribusi selama proses penyusunan modul
-ini. Kritik dan saran yang konstruktif sangat penulis harapkan untuk
-penyempurnaan modul di masa mendatang.
-Akhir kata, semoga modul ini menjadi pedoman dan inspirasi bagi para
-mahasiswa dalam menjalankan tanggung jawab akademik dan membentuk karakter
-pribadi yang berintegritas serta berkontribusi positif bagi masyarakat dan
-almamater tercinta.
-Palu, Oktober 2025
-Penyusun,
-Dr. Mashuri, S.T., M.Sc.
-ii
-
-## Daftar Isi
-Kata Pengantar i
-Daftar Isi iii
-Daftar Gambar v
-Daftar Tabel vi
-## Modul 1 Pendahuluan 1
-1.1 Latar Belakang Pentingnya Etika Akademik 2
-1.2 Tujuan dan Manfaat Modul 2
-1.3 Pengertian dan Ruang Lingkup Etika Akademik 3
-1.4 Integritas Akademik sebagai Nilai Kehidupan 3
-## Modul 2 Prinsip-Prinsip Dasar Etika Akademik 6
-2.1 Kejujuran (Honesty) 6
-2.2 Keterpercayaan (Trust) 6
-2.3 Keadilan (Fairness) 7
-2.4 Rasa Hormat (Respect) 8
-2.5 Tanggung Jawab (Responsibility) 8
-2.6 Keberanian (Courage) 9
-## Modul 3 Bentuk-Bentuk Pelanggaran Akademik
-## Dan Penanggulangannya 11
-3.1 Plagiarisme: Pengertian, Jenis, dan Contoh 11
-3.2 Fabrikasi dan Falsifikasi Data 12
-3.3 Menyontek (Cheating) dalam Ujian dan Tugas 13
-3.4 Penjiplakan (Copy-Paste) tanpa Atribusi 15
-3.5 Penyalahgunaan Karya Orang Lain 16
-3.6 Konflik Kepentingan 17
-3.7 Sanksi atas Pelanggaran Akademik 18
-## Modul 4 Praktik Penulisan Akademik Yang Beretika 22
-4.1 Teknik Parafrase yang Benar 22
-4.2 Kutipan Langsung dan Tidak Langsung 24
-4.3 Dasar-Dasar Sitasi dan Referensi (Gaya APA, MLA, atau
-Chicago) 27
-4.4 Pengelolaan Referensi dengan Tools (Mendeley, Zotero,
-iii
-
-EndNote) 29
-4.5 Menghindari Self-Plagiarism 31
-## Modul 5 Etika Dalam Penelitian 34
-5.1 Prinsip-Prinsip Etika Penelitian (Beneficence, Justice, Respect
-for Persons) 34
-5.2 Penulisan Proposal dan Laporan Penelitian yang Jujur 35
-5.3 Orisinalitas dalam Penemuan dan Publikasi 35
-5.4 Menjadi Penulis (Authorship) yang Beretika 36
-5.5 Peer Review yang Adil dan Objektif 36
-## Modul 6 Tantangan Etika Akademik Di Era Digital 38
-6.1 Etika Penggunaan GenAI 38
-6.2 Prinsip-prinsip pemanfaan GenAI 39
-6.3 Penggunaan GenAI oleh Mahasiswa 41
-6.4 Penggunaan Artificial Intelligence (AI) dalam Pengerjaan 44
-Tugas: Batasan dan Kewajiban PengakuanPenggunaan
-Artificial Intelligence (AI) dalam Pengerjaan Tugas:
-Batasan dan Kewajiban Pengakuan
-6.5 Etika Berkomunikasi di Platform Digital (e-mail ke Dosen,
-Forum Diskasi Online) 44
-6.6 Hak Kekayaan Intelektual (HKI) untuk Karya Digital 46
-6.7 Menghadapi Misinformasi dan Disinformasi dalam
-Literatur 48
-Lampiran I Peraturan Rektor Universitas Tadulako Nomor
-4/UN28/HK.01/2025 tentang Integrasi Akademik 54
-iv
-
-## Daftar Gambar
-Gambar 1 Skema GenAI dalam membantu Mahasiswa Mencari Acuan dan
-Sumber Bacaan 42
-Gambar 2 Skema GenAI dalam membantu Mahasiswa mencari Ide Penulisan 43
-Gambar 3 Skema GenAI dalam membantu Mahasiswa menyusun presentasi 43
-bacaan
-v
-
-## Daftar Tabel
-Tabel 1 Perbandingan Singkat Gaya Sitasi 29
-Tabel 2 Perbandingan Tiga Tools Pengelola Referensi 30
-Tabel 3 Prinsip-prinsip pemanfaat GenAI 40
-vi
-
-## Modul 1
-## Pendahuluan
-1.1 Latar Belakang Pentingnya Etika Akademik
-Kode etik akademik merupakan landasan krusial dalam lingkungan
-perguruan tinggi yang mengharuskan setiap individu untuk bertindak sesuai
-dengan kaidah dan prinsip moral yang berlaku. Dalam ranah akademik, kode etik
-ini mengatur interaksi tidak hanya antara mahasiswa dan pengajar, tetapi juga
-mencakup hubungan antar rekan mahasiswa serta relasi dengan institusi
-pendidikan. Implementasi kode etik akademik bertujuan untuk membangun
-atmosfer pembelajaran yang kondusif, di mana setiap orang merasa dihargai dan
-terdorong untuk kemajuan akademik serta pembentukan karakter (Gallant, 2017).
-Tanpa adanya kode etik, proses pembelajaran dapat terganggu oleh praktik tidak
-jujur, seperti menjiplak atau memalsukan data (Bretag, 2016).
-Signifikansi kode etik akademik juga tecermin dalam fungsinya menjaga
-reputasi institusi pendidikan di mata publik. Ketika mahasiswa, pengajar, atau
-peneliti melanggar kode etik, misalnya melalui plagiarisme atau rekayasa data,
-kredibilitas institusi tersebut akan terancam (Macfarlane et al., 2014). Konsekuensi
-ini dapat meluas, mulai dari penurunan minat calon mahasiswa hingga
-berkurangnya dukungan dari pemerintah dan masyarakat. Oleh karena itu, institusi
-pendidikan perlu menanamkan nilai-nilai kode etik akademik sejak dini kepada
-seluruh elemen komunitas akademik (Gallant, 2017).
-Lebih lanjut, kode etik akademik berfungsi sebagai panduan dalam
-menghasilkan karya ilmiah yang berkualitas dan dapat dipertanggungjawabkan.
-Proses riset dan penulisan ilmiah yang dilakukan secara etis akan menghasilkan
-temuan yang sahih dan memberikan kontribusi bagi kemajuan ilmu pengetahuan
-(Bretag, 2016). Sebaliknya, pelanggaran etika seperti penyalahgunaan data atau
-pengutipan ide tanpa atribusi dapat merusak integritas hasil penelitian dan
-menimbulkan keraguan terhadap validitas ilmiah yang dipublikasikan.
-Kode etik akademik juga berkontribusi dalam membentuk pribadi yang
-berintegritas. Melalui penerapan prinsip-prinsip etika, mahasiswa dan pengajar
-belajar untuk bertanggung jawab atas setiap tindakan dan keputusan yang diambil
-dalam lingkup akademik (Macfarlane et al., 2014). Nilai-nilai seperti kejujuran,
-keadilan, dan penghargaan menjadi bagian integral dari kepribadian yang akan
-terbawa ke lingkungan profesional (Gallant, 2017). Dengan demikian, kode etik
-akademik sangat penting tidak hanya bagi kesuksesan studi, tetapi juga untuk
-pembentukan karakter yang kokoh dan dapat dipercaya di masyarakat.
-Pada intinya, penerapan kode etik akademik merupakan prasyarat untuk
-menciptakan iklim akademik yang sehat dan berkelanjutan. Iklim ini akan
-1
-
-memfasilitasi terwujudnya inovasi, kerja sama, dan saling percaya di antara anggota
-komunitas akademik (Bretag, 2016). Dengan komitmen bersama untuk menjunjung
-tinggi kode etik, institusi pendidikan dapat menjadi lingkungan yang aman dan
-produktif untuk pengembangan ilmu pengetahuan serta pembentukan generasi
-mendatang yang berintegritas (Macfarlane et al., 2014).
-1.2 Tujuan dan Manfaat Modul
-Modul etika akademik disusun dengan tujuan utama untuk memberikan
-pemahaman yang komprehensif kepada mahasiswa mengenai pentingnya perilaku
-etis dalam lingkungan akademik. Melalui modul ini, diharapkan setiap individu
-mampu mengenali dan menghindari berbagai bentuk pelanggaran etika, seperti
-plagiarisme, manipulasi data, dan kecurangan dalam ujian. Tujuan lainnya adalah
-membentuk karakter yang bertanggung jawab, jujur, dan adil dalam menjalankan
-aktivitas akademik sehari-hari.
-Manfaat modul ini sangat signifikan dalam meningkatkan kualitas proses
-pembelajaran dan penelitian. Dengan memahami dan menerapkan etika akademik,
-mahasiswa dapat menghasilkan karya ilmiah yang orisinal dan dapat
-dipertanggungjawabkan. Mahasiswa akan lebih berhati-hati dalam menyusun dan
-mempublikasikan hasil penelitian, sehingga reputasi institusi pendidikan tetap
-terjaga. Modul ini juga membantu menciptakan lingkungan akademik yang saling
-menghargai dan mendukung perkembangan intelektual.
-Selain itu, modul etika akademik berperan dalam mencegah terjadinya
-konflik dan pelanggaran yang dapat merugikan individu maupun institusi. Dengan
-adanya pedoman yang jelas, setiap anggota civitas akademika memiliki acuan dalam
-bertindak dan mengambil keputusan. Hal ini akan meminimalisir terjadinya
-perselisihan, tuduhan plagiarisme, atau penyalahgunaan sumber daya akademik.
-Modul ini juga memberikan contoh kasus nyata yang dapat dijadikan bahan refleksi
-dan pembelajaran.
-Manfaat lain yang tidak kalah penting adalah terbentuknya budaya akademik
-yang sehat dan berintegritas. Modul ini mendorong terciptanya lingkungan belajar
-yang transparan, terbuka, dan saling percaya. Mahasiswa dan dosen yang
-memahami etika akademik akan lebih mudah berkolaborasi, berdiskusi, dan berbagi
-pengetahuan tanpa rasa takut akan penyalahgunaan atau pencurian ide. Budaya ini
-sangat penting untuk mendukung inovasi dan kemajuan ilmu pengetahuan.
-Secara keseluruhan, modul etika akademik menjadi alat yang efektif untuk
-membangun generasi akademisi yang profesional dan berkarakter. Dengan
-membiasakan diri untuk selalu bertindak sesuai prinsip etika, individu akan lebih
-siap menghadapi tantangan di dunia kerja dan masyarakat luas. Modul ini tidak
-hanya bermanfaat untuk keberhasilan akademik, tetapi juga untuk pembentukan
-pribadi yang berintegritas dan mampu memberikan kontribusi positif bagi
-lingkungan sekitar.
-2
-
-1.3 Pengertian dan Ruang Lingkup Etika Akademik
-Etika akademik merupakan sebuah kumpulan prinsip moral dan aturan
-perilaku yang memandu seluruh kegiatan di lingkungan pendidikan tinggi,
-termasuk proses belajar, kegiatan penelitian, penulisan karya ilmiah, serta interaksi
-antar individu di lingkungan perguruan tinggi. Etika akademik mengharuskan
-setiap individu untuk bertindak dengan kejujuran, keadilan, dan penuh tanggung
-jawab dalam melaksanakan kewajiban akademiknya (Gallant, 2017). Prinsip ini
-berfungsi sebagai dasar utama untuk memastikan bahwa pelaksanaan pembelajaran
-dan penelitian berlangsung secara transparan dan dapat dipertanggungjawabkan
-hasilnya (Macfarlane et al., 2014).
-Cakupan etika akademik sangatlah ekstensif, mencakup beragam aspek
-dalam kegiatan akademis. Salah satu aspek fundamental adalah kejujuran dalam
-penyusunan karya ilmiah, di mana mahasiswa dan peneliti diwajibkan untuk tidak
-melakukan plagiarisme, fabrikasi, maupun falsifikasi data (Bretag, 2016). Lebih
-lanjut, etika akademik juga mengatur tata cara berperilaku saat mengikuti evaluasi
-akademik, seperti larangan untuk mencontek atau berkolaborasi secara tidak sah.
-Ketaatan terhadap regulasi ujian merupakan komponen krusial dalam menjaga
-integritas di lingkungan akademik (Bertram Gallant & Kalichman, 2011).
-Etika akademik juga meliputi penghargaan terhadap hak kekayaan
-intelektual. Setiap gagasan, data, atau karya yang dihasilkan oleh pihak lain harus
-diakui kelayakannya serta diapresiasi melalui penyertaan sumber referensi yang
-jelas. Melakukan kutipan dan merujuk secara tepat merupakan bentuk
-penghormatan terhadap sumbangsih ilmiah yang telah diberikan oleh orang lain
-(Pupovac & Fanelli, 2015). Di samping itu, etika akademik mengatur relasi antara
-pengajar dan peserta didik, termasuk dalam proses pembimbingan, evaluasi, serta
-kerja sama penelitian (Gallant, 2017).
-Aspek lain yang tidak kalah penting adalah pencegahan terhadap potensi
-konflik kepentingan dalam kegiatan penelitian dan publikasi. Para peneliti harus
-bersikap transparan mengenai sumber pendanaan, afiliasi, serta kemungkinan bias
-yang berpotensi memengaruhi hasil penelitian (Macfarlane et al., 2014). Etika
-akademik juga menuntut keterbukaan dalam proses tinjauan sejawat (peer review) dan
-publikasi, sehingga keluaran penelitian dapat dievaluasi secara objektif oleh
-komunitas ilmiah.
-Secara garis besar, etika akademik berfungsi sebagai panduan bagi seluruh
-anggota komunitas akademik guna memelihara integritas, kejujuran, dan
-profesionalisme dalam setiap aktivitas akademis (Bretag, 2016). Melalui
-pemahaman dan penerapan ruang lingkup etika akademik, setiap individu dapat
-memberikan kontribusi positif terhadap kemajuan ilmu pengetahuan dan
-membangun kredibilitas institusi pendidikan yang dapat dipercaya.
-1.4 Integritas Akademik sebagai Nilai Kehidupan
-Integritas akademik adalah suatu komitmen untuk menjunjung tinggi nilai
-kejujuran, keadilan, tanggung jawab, serta penghormatan dalam setiap aktivitas
-akademik (Macfarlane et al., 2014). Nilai ini tidak hanya relevan di lingkungan
-3
-
-kampus, tetapi juga menjadi fondasi esensial dalam kehidupan bermasyarakat dan
-berprofesi. Integritas akademik mengharuskan setiap individu untuk senantiasa
-bertindak sesuai dengan prinsip moral, bahkan tanpa adanya pengawasan eksternal
-(Bertram Gallant & Kalichman, 2011). Dengan kata lain, integritas mencerminkan
-kesadaran untuk melakukan tindakan yang benar, bukan karena kekhawatiran akan
-sanksi, melainkan karena pemahaman mendalam mengenai urgensi kejujuran dan
-keadilan (Gallant, 2017).
-Manifestasi integritas akademik dalam kehidupan sehari-hari terlihat dari
-konsistensi antara perkataan dan perbuatan. Sebagai contoh, seorang mahasiswa
-yang mengerjakan tugas secara mandiri tanpa melakukan kecurangan, atau seorang
-peneliti yang menyajikan temuan penelitian secara faktual, meskipun hasilnya
-mungkin tidak sesuai ekspektasi (Pupovac & Fanelli, 2015). Sikap semacam ini
-membangun karakter yang dapat dipegang kepercayaan dan dihormati oleh orang
-lain. Integritas juga melatih individu untuk bertanggung jawab atas setiap
-keputusan yang diambil beserta dampaknya, baik dalam konteks akademik maupun
-di luar lingkungan kampus (Bretag, 2016).
-Integritas akademik memiliki korelasi kuat dengan citra diri individu dan
-institusi. Seseorang yang dikenal memiliki tingkat integritas yang tinggi akan lebih
-mudah memperoleh kepercayaan dari rekan kerja, atasan, maupun masyarakat luas.
-Dalam dunia kerja, integritas merupakan salah satu parameter krusial dalam
-penilaian kinerja karyawan atau kandidat pemimpin (Macfarlane et al., 2014).
-Institusi pendidikan yang menanamkan nilai integritas pada warganya juga akan
-memperoleh pengakuan dan penghormatan yang lebih besar, baik di tingkat
-nasional maupun internasional (Gallant, 2017).
-Lebih lanjut, integritas akademik berkontribusi pada terciptanya iklim
-keilmuan yang sehat dan produktif. Lingkungan yang mengutamakan integritas
-akan mendorong setiap anggotanya untuk berinovasi, berkolaborasi, dan saling
-mendukung dalam upaya pengembangan khazanah ilmu pengetahuan (Bretag,
-2016). Iklim semacam ini juga meminimalkan terjadinya pelanggaran etika, seperti
-plagiarisme atau manipulasi data, yang berpotensi merusak kepercayaan publik dan
-menghambat kemajuan ilmu pengetahuan (Pupovac & Fanelli, 2015).
-Pada akhirnya, integritas akademik merupakan bekal fundamental untuk
-menghadapi berbagai tantangan di masa mendatang. Nilai ini membentuk individu
-yang tidak hanya cerdas secara intelektual, tetapi juga memiliki ketahanan moral
-yang kuat (Gallant, 2017). Dengan integritas, seseorang mampu membuat
-keputusan yang tepat, bahkan ketika dihadapkan pada tekanan atau godaan untuk
-melakukan penyimpangan. Nilai ini akan senantiasa melekat dan berfungsi sebagai
-pedoman dalam setiap aspek kehidupan, baik sebagai pelajar, profesional, maupun
-anggota masyarakat.
-Referensi:
-Bertram Gallant, T., & Kalichman, M. (2011). Academic ethics: Teaching academic
-integrity and ethical decision-making in higher education. Teaching Ethics, 12(1), 25–38.
-https://doi.org/10.5840/tej20111218
-4
-
-Bretag, T. (2016). Challenges in addressing academic integrity in higher education. Journal of
-Academic Ethics, 14(3), 199–209. https://doi.org/10.1007/s10805-016-9259-3
-Gallant, T. B. (2017). Academic integrity in the twenty-first century: A teaching and learning
-imperative. ASHE Higher Education Report, 33(5), 1–143.
-Macfarlane, B., Zhang, J., & Pun, A. (2014). Academic integrity: A review of the
-literature. Studies in Higher Education, 39(2), 339–358.
-https://doi.org/10.1080/03075079.2012.709495
-Pupovac, V., & Fanelli, D. (2015). Scientists admitting to plagiarism: A meta-analysis of
-surveys. Science and Engineering Ethics, 21(5), 1331–1352.
-https://doi.org/10.1007/s11948-014-9600-6
-5
-
-## Modul 2
-## Prinsip-Prinsip Dasar Etika Akademik
-2.1 Kejujuran (Honesty)
-Kejujuran adalah salah satu pilar utama dalam etika akademik yang menuntut
-setiap individu untuk selalu berkata dan bertindak sesuai dengan fakta serta realitas
-yang ada. Dalam konteks akademik, kejujuran berarti tidak melakukan penipuan,
-manipulasi, atau penyembunyian informasi dalam proses belajar, penelitian,
-maupun penulisan karya ilmiah. Mahasiswa diharapkan untuk menyampaikan data,
-hasil penelitian, dan sumber referensi secara apa adanya, tanpa mengubah atau
-memalsukan demi keuntungan pribadi. Kejujuran juga tercermin dalam perilaku
-sehari-hari, seperti mengerjakan tugas sendiri tanpa mencontek, tidak melakukan
-plagiarisme, serta mengakui kontribusi orang lain dalam sebuah karya. Sikap ini
-membangun kepercayaan antara sesama anggota komunitas akademik dan
-menciptakan lingkungan belajar yang sehat. Dengan kejujuran, hasil akademik yang
-dicapai benar-benar mencerminkan kemampuan dan usaha individu, sehingga
-dapat dipertanggungjawabkan (Halabi & Suliman (2019).
-Selain itu, kejujuran menjadi dasar dalam membangun reputasi pribadi dan
-institusi, seperti tidak mengirimkan karya yang sama ke lebih dari satu jurnal (self-
-plagiarism). Individu yang jujur akan lebih dihargai dan dipercaya, baik di lingkungan
-kampus maupun di dunia kerja. Institusi yang menanamkan nilai kejujuran pada
-warganya juga akan dikenal sebagai lembaga yang kredibel dan berintegritas. Oleh
-karena itu, kejujuran harus dijadikan prinsip utama dalam setiap aktivitas akademik
-dan kehidupan sehari-hari. Kejujuran tidak hanya penting untuk keberhasilan
-akademik, tetapi juga untuk pembentukan karakter yang kuat dan beretika. Dengan
-membiasakan diri untuk selalu jujur, seseorang akan lebih siap menghadapi
-tantangan dan godaan untuk berbuat curang di masa depan. Nilai kejujuran ini
-akan menjadi bekal berharga dalam menjalani kehidupan profesional dan
-bermasyarakat.
-2.2 Kepercayaan (Trust)
-Kepercayaan adalah nilai fundamental dalam etika akademik yang
-menekankan pentingnya membangun dan menjaga kepercayaan di antara anggota
-komunitas akademik. Dalam lingkungan pendidikan, kepercayaan tercipta ketika
-mahasiswa saling memegang komitmen untuk bertindak jujur, transparan, dan
-konsisten dalam setiap aktivitas akademik. Kepercayaan ini menjadi dasar bagi
-terciptanya kolaborasi yang efektif, diskusi yang terbuka, dan pertukaran ide yang
-produktif (Artyukhov, 2025).
-6
-
-Kepercayaan juga berarti bahwa setiap individu dapat diandalkan untuk
-memenuhi tanggung jawabnya, seperti mengerjakan tugas tepat waktu, melaporkan
-hasil penelitian secara akurat, dan menjaga kerahasiaan data atau informasi yang
-bersifat sensitif. Ketika kepercayaan terjaga, proses pembelajaran dan penelitian
-dapat berjalan dengan lancar tanpa rasa curiga atau kekhawatiran akan terjadinya
-pelanggaran etika (Bilyk et al. (2024)
-Nilai kepercayaan sangat penting dalam membangun reputasi pribadi dan
-institusi. Mahasiswa atau peneliti yang dikenal dapat dipercaya akan lebih mudah
-mendapatkan kesempatan untuk berkolaborasi, menerima bimbingan, atau
-memperoleh dukungan dari berbagai pihak. Institusi pendidikan yang menanamkan
-nilai kepercayaan juga akan lebih dihormati dan diakui oleh masyarakat luas.
-Selain itu, kepercayaan mendorong terciptanya lingkungan akademik yang
-aman dan nyaman, di mana setiap anggota merasa dihargai dan didukung untuk
-berkembang. Dengan adanya kepercayaan, individu lebih berani untuk
-mengemukakan pendapat, berbagi ide, dan menerima kritik secara konstruktif. Hal
-ini sangat penting untuk mendorong inovasi dan kemajuan ilmu pengetahuan.
-Pada akhirnya, kepercayaan adalah modal sosial yang sangat berharga dalam
-kehidupan akademik dan profesional. Nilai ini harus dijaga dan dipelihara melalui
-sikap jujur, tanggung jawab, dan konsistensi dalam setiap tindakan. Dengan
-kepercayaan, komunitas akademik dapat tumbuh dan berkembang secara harmonis,
-serta memberikan kontribusi positif bagi masyarakat.
-2.3 Keadilan (Fairness)
-Keadilan adalah prinsip penting dalam etika akademik yang menuntut setiap
-individu untuk bertindak objektif, tidak memihak, dan memperlakukan semua
-pihak secara setara dalam setiap aktivitas akademik. Dalam lingkungan pendidikan,
-keadilan berarti memberikan kesempatan yang sama kepada semua mahasiswa
-untuk belajar, berpartisipasi, dan berkembang tanpa diskriminasi berdasarkan latar
-belakang, gender, agama, atau status sosial (Elisa, 2017).
-Keadilan tercermin dalam proses penilaian tugas, ujian, maupun seleksi
-beasiswa dan penghargaan. Setiap keputusan harus didasarkan pada kriteria yang
-jelas, transparan, dan dapat dipertanggungjawabkan, sehingga tidak ada pihak yang
-dirugikan atau diistimewakan secara tidak wajar. Dengan menerapkan keadilan,
-lingkungan akademik menjadi tempat yang inklusif dan mendukung perkembangan
-potensi setiap individu.
-Selain itu, keadilan juga berkaitan dengan pengakuan atas kontribusi dalam
-karya ilmiah atau penelitian. Setiap anggota tim yang berperan aktif harus
-mendapatkan penghargaan yang setara, baik dalam bentuk pencantuman nama
-penulis maupun pembagian hak cipta. Mengabaikan atau mengambil alih hasil kerja
-orang lain tanpa izin merupakan pelanggaran serius terhadap prinsip keadilan.
-Keadilan mendorong terciptanya suasana saling menghormati dan
-memperkuat kepercayaan di antara anggota komunitas akademik. Ketika keadilan
-ditegakkan, konflik dan kecemburuan dapat diminimalisir, sehingga kolaborasi dan
-7
-
-inovasi dapat berkembang dengan baik. Lingkungan yang adil juga memotivasi
-individu untuk berusaha lebih baik dan berkontribusi secara maksimal.
-Pada akhirnya, keadilan bukan hanya menjadi pedoman dalam aktivitas
-akademik, tetapi juga membentuk karakter yang siap menghadapi tantangan di
-dunia profesional dan masyarakat. Dengan membiasakan diri untuk selalu bersikap
-adil, individu akan lebih mudah diterima, dihormati, dan dipercaya dalam berbagai
-situasi kehidupan.
-2.4 Rasa Hormat (Respect)
-Rasa hormat adalah nilai utama dalam etika akademik yang menuntut setiap
-individu untuk menghargai hak, pendapat, dan kontribusi orang lain di lingkungan
-pendidikan. Dalam konteks akademik, rasa hormat diwujudkan melalui sikap sopan
-santun, keterbukaan terhadap perbedaan, serta penghargaan terhadap karya dan
-pemikiran orang lain. Mahasiswa diharapkan untuk mendengarkan pendapat rekan
-secara aktif, menerima kritik dengan lapang dada, dan tidak meremehkan ide atau
-hasil kerja siapa pun (Artyukhov, 2025).
-Rasa hormat juga tercermin dalam cara berkomunikasi, baik secara lisan
-maupun tulisan. Menggunakan bahasa yang santun, tidak menyinggung, dan
-menghindari ujaran kebencian adalah bentuk penghormatan terhadap martabat
-sesama anggota komunitas akademik. Selain itu, menghormati waktu dan
-komitmen orang lain, seperti datang tepat waktu dalam pertemuan atau
-menyelesaikan tugas sesuai jadwal, juga merupakan bagian dari rasa hormat.
-Dalam penelitian dan penulisan ilmiah, rasa hormat diwujudkan dengan
-selalu mencantumkan sumber referensi secara benar dan tidak mengklaim hasil
-kerja orang lain sebagai milik sendiri. Penghargaan terhadap hak kekayaan
-intelektual sangat penting untuk menjaga integritas dan kepercayaan di dunia
-akademik. Mengakui kontribusi setiap anggota tim dalam publikasi atau proyek
-juga merupakan bentuk penghormatan yang harus dijunjung tinggi.
-Rasa hormat menciptakan suasana belajar yang inklusif, aman, dan
-mendukung perkembangan setiap individu. Lingkungan yang saling menghargai
-akan memotivasi mahasiswa dan dosen untuk lebih aktif berpartisipasi,
-berkolaborasi, dan mengembangkan potensi diri. Konflik dan kesalahpahaman pun
-dapat diminimalisir jika setiap orang saling menghormati perbedaan dan keunikan
-masing-masing.
-Pada akhirnya, rasa hormat adalah bekal penting untuk membangun
-hubungan yang harmonis, baik di lingkungan akademik maupun di masyarakat luas.
-Dengan membiasakan diri untuk selalu menghargai orang lain, individu akan lebih
-mudah diterima, dipercaya, dan dihormati dalam berbagai situasi kehidupan. Nilai
-ini menjadi dasar bagi terciptanya komunitas akademik yang beretika, profesional,
-dan berintegritas
-2.5 Tanggung Jawab (Responsibility)
-Tanggung jawab adalah nilai inti dalam etika akademik yang menuntut setiap
-individu untuk menjalankan kewajiban dan tugasnya secara konsisten, tepat waktu,
-8
-
-dan dapat dipertanggungjawabkan. Dalam lingkungan akademik, mahasiswa
-bertanggung jawab untuk menyelesaikan tugas, penelitian, dan kewajiban akademik
-sesuai dengan standar yang telah ditetapkan. Sikap ini mencakup kejujuran dalam
-pelaporan hasil, ketelitian dalam mengutip sumber, serta kepatuhan terhadap aturan
-dan prosedur yang berlaku (Bilyk & Shpileva, 2024) Tanggung jawab juga meliputi
-kesediaan untuk menerima konsekuensi dari setiap tindakan yang diambil. Jika
-terjadi kesalahan atau pelanggaran, individu yang bertanggung jawab akan
-mengakui kesalahan tersebut dan berusaha memperbaikinya, bukan mencari alasan
-atau menyalahkan pihak lain. Sikap ini membangun kepercayaan dan menunjukkan
-integritas dalam menjalankan peran akademik.
-Dalam penelitian, tanggung jawab diwujudkan dengan menjaga validitas
-data, menghormati hak partisipan, dan memastikan bahwa proses penelitian
-dilakukan secara etis. Peneliti yang bertanggung jawab akan melaporkan hasil
-penelitian secara transparan, tanpa manipulasi atau penghilangan data yang tidak
-sesuai harapan. Hal ini penting untuk menjaga kredibilitas dan kemajuan ilmu
-pengetahuan.
-Tanggung jawab juga berarti menjaga komitmen terhadap janji dan
-kesepakatan yang telah dibuat, baik dalam kerja kelompok, proyek penelitian,
-maupun hubungan antara dosen dan mahasiswa. Individu yang bertanggung jawab
-akan berusaha memenuhi target dan menyelesaikan tugas sesuai waktu yang telah
-disepakati, sehingga proses akademik berjalan lancar dan efisien.
-Pada akhirnya, tanggung jawab membentuk karakter yang disiplin, mandiri,
-dan dapat diandalkan dalam berbagai situasi. Nilai ini sangat penting tidak hanya
-untuk keberhasilan akademik, tetapi juga untuk membangun reputasi dan
-kepercayaan di dunia profesional dan masyarakat. Dengan membiasakan diri untuk
-selalu bertanggung jawab, individu akan lebih siap menghadapi tantangan dan
-memberikan kontribusi positif bagi lingkungan sekitar.
-2.6 Keberanian (Courage)
-Keberanian adalah nilai penting dalam etika akademik yang mendorong
-individu untuk bertindak benar, meskipun menghadapi risiko, tekanan, atau
-konsekuensi yang tidak menyenangkan. Dalam lingkungan akademik, keberanian
-berarti berani mengakui kesalahan, melaporkan pelanggaran etika, serta
-mempertahankan kebenaran dan integritas meskipun mendapat tekanan dari
-lingkungan sekitar. Mahasiswa yang berani akan tetap memegang prinsip kejujuran
-dan keadilan, walaupun harus menghadapi tantangan atau ketidaksetujuan dari
-orang lain (Halabi & Suliman (2019). Keberanian juga tercermin dalam sikap kritis
-terhadap informasi, data, atau kebijakan yang tidak sesuai dengan nilai-nilai etika.
-Individu yang berani tidak ragu untuk mengemukakan pendapat, mengajukan
-pertanyaan, atau menolak ajakan untuk melakukan kecurangan, meskipun hal
-tersebut dapat menimbulkan konflik atau ketidaknyamanan. Sikap ini sangat
-penting untuk menjaga kualitas dan kredibilitas proses akademik.
-9
-
-Dalam penelitian, keberanian diperlukan untuk melaporkan hasil yang tidak
-populer atau bertentangan dengan harapan, serta mengakui keterbatasan dan
-kekurangan dalam karya ilmiah. Peneliti yang berani akan tetap mempublikasikan
-data apa adanya, tanpa manipulasi, demi menjaga integritas ilmu pengetahuan.
-Keberanian juga dibutuhkan untuk mengungkapkan pelanggaran etika yang
-dilakukan oleh rekan sejawat, meskipun berisiko menimbulkan ketegangan dalam
-hubungan profesional.
-Keberanian mendukung terciptanya budaya akademik yang terbuka, kritis,
-dan inovatif. Lingkungan yang mendorong keberanian akan memotivasi setiap
-anggota komunitas untuk berani mencoba hal baru, mengemukakan ide-ide segar,
-dan tidak takut gagal. Hal ini sangat penting untuk mendorong kemajuan ilmu
-pengetahuan dan pengembangan diri (Bilyk & Shpileva, 2024)
-Pada akhirnya, keberanian adalah bekal utama untuk menghadapi tantangan
-dan perubahan di dunia akademik maupun profesional. Dengan membiasakan diri
-untuk selalu berani bertindak benar, individu akan tumbuh menjadi pribadi yang
-tangguh, berintegritas, dan mampu memberikan kontribusi positif bagi masyarakat.
-Referensi:
-Artyukhov, A. (2025). Myths Of Academic (Mis)Conduct And Integrity. Baltic
-Journal of Legal and Social Sciences. https://doi.org/10.30525/2592-8813-2024-
-3-28.
-Bilyk, V., Shpileva, V., & Kozynets, A. (2024). Academic honesty and its
-importance in higher education: impact of innovative
-technologies. Ukrainian Journal of Applied Economics and Technology.
-https://doi.org/10.36887/2415-8453-2024-3-1.
-Elisa, B. (2017). Meyer, H.-D., St. John, E.P., Chankseliani, M. & Uribe, L. (Eds.).
-(2013). Fairness in Access to Higher Education in a Global
-Perspective: Reconciling Excellence, Efficiency, and Justice.
-Rotterdam: Sense Publishers. Journal of Student Affairs in Africa, 5.
-https://doi.org/10.24085/jsaa.v5i2.2708.
-Halabi, J., & Suliman, W. (2019). Attitudes and Behaviors of Female Nursing
-Students Toward Plagiarism, p.46.
-10
-
-## Modul 3
-## Bentuk-Bentuk Pelanggaran Akademik
-## Dan Penanggulangannya
-3.1 Plagiarisme: Pengertian, Jenis, dan Contoh
-Plagiarisme didefinisikan sebagai praktik pengambilan karya orang lain,
-termasuk gagasan, tulisan, visual, atau kumpulan data, tanpa memberikan atribusi
-yang pantas kepada pencipta asli. Perilaku ini dianggap sebagai pelanggaran etika
-yang signifikan di lingkungan akademis maupun profesional. Plagiarisme dapat
-mengikis integritas intelektual dengan menyajikan informasi tanpa pelacakan
-sumber yang akurat. Perbuatan ini dapat dilakukan secara disengaja maupun tidak
-disengaja, seringkali akibat ketidakpahaman mengenai teknik kutipan yang tepat.
-Pemahaman mendalam mengenai konsep ini menyoroti urgensi untuk
-menghormati kontribusi intelektual orang lain serta memelihara reputasi diri (Roig,
-2015).
-Terdapat berbagai macam bentuk plagiarisme, dimulai dari penjiplakan
-langsung yang mengutip karya orang lain secara harfiah tanpa memberikan kredit
-yang semestinya. Kemudian, terdapat plagiarisme mosaik, yang merupakan
-penggabungan beberapa frasa dari berbagai sumber tanpa atribusi yang akurat.
-Plagiarisme mandiri, atau *self-plagiarism*, timbul ketika individu mengajukan
-karya yang sebelumnya telah diterbitkan seolah-olah itu adalah karya orisinal yang
-baru. Lebih lanjut, ada plagiarisme tidak langsung yang melibatkan penerjemahan
-suatu karya tanpa menyebutkan sumber aslinya (Andreescu, 2013). Setiap kategori
-ini membawa implikasi yang bervariasi, namun semuanya pada akhirnya berdampak
-negatif.
-Wujud nyata dari plagiarisme dapat dijumpai dalam ranah akademis,
-contohnya ketika seorang mahasiswa menyalin karya tulis dari sumber daring tanpa
-memberikan atribusi yang semestinya. Dalam lingkungan profesional, hal ini
-terlihat pada penulis artikel yang mengadopsi karya orang lain dan mengklaimnya
-sebagai miliknya. Untuk bidang seni, plagiarisme terjadi ketika seorang seniman
-meniru rancangan atau lukisan milik orang lain tanpa memperoleh persetujuan.
-Bahkan dalam presentasi bisnis, tindakan plagiarisme dapat terjadi apabila data dari
-pihak lain ditampilkan tanpa menyebutkan sumbernya. Mengingat fenomena ini,
-sangatlah penting untuk mengidentifikasi dan menjauhi praktik-praktik tersebut
-demi mencegah sanksi hukum maupun etika.
-Guna mengatasi dan meminimalkan praktik plagiarisme, institusi pendidikan
-sudah seharusnya memberlakukan regulasi yang tegas, yang salah satunya adalah
-pemanfaatan perangkat lunak untuk mendeteksi plagiarisme. Para akademisi
-11
-
-dituntut untuk menguasai metodologi penulisan yang beretika serta kaidah
-pengutipan sumber yang akurat. Di samping itu, penyelenggaraan kampanye
-edukasi mengenai konsekuensi buruk dari plagiarisme juga merupakan bagian dari
-upaya pencegahan. Melalui serangkaian tindakan ini, diharapkan dapat terwujud
-lingkungan akademis yang menjunjung tinggi integritas dan menghargai
-kepemilikan karya intelektual.
-Sangatlah krusial untuk menanamkan etos kerja menulis yang berintegritas
-dan cermat sejak fase awal. Sebagai contoh konkret, melakukan pencatatan sumber
-informasi secara akurat dan senantiasa menggunakan kutipan langsung ketika
-mengutip pernyataan pihak eksternal. Di samping itu, dorongan terhadap
-pengembangan daya cipta perlu diberikan agar output karya yang tercipta memiliki
-keunikan serta mutu yang tinggi. Apabila terdapat ketidakpastian mengenai batasan
-legal dalam pemanfaatan materi dari sumber kepustakaan lain, konsultasi dengan
-pendidik atau pakar di bidangnya sangat direkomendasikan. Pemahaman mendalam
-mengenai plagiarisme beserta upaya pencegahannya tidak hanya berfungsi sebagai
-pelindung hak kekayaan intelektual, namun juga berperan dalam memajukan citra
-serta kredibilitas baik dalam lingkungan akademis maupun lingkungan profesional.
-3.2 Fabrikasi dan Falsifikasi Data
-Fabrikasi atau pemalsuan data merupakan suatu perbuatan menciptakan atau
-merekayasa data penelitian yang sejatinya tidak terekam atau tidak didasarkan pada
-observasi dan eksperimen yang sesungguhnya. Aktivitas ini bertujuan untuk
-memperoleh luaran yang secara tidak etis menopang hipotesis atau sasaran
-penelitian tertentu (Office of Research Integrity, 2011). Ilustrasinya mencakup
-pengisian formulir survei yang tidak otentik, pengadaan angka statistik secara
-rekaan, atau pengembangan data imajiner yang tidak bersumber dari realitas.
-Pemalsuan dapat terjadi pada beragam jenjang penelitian, mulai dari penugasan
-mahasiswa hingga proyek riset akademis tingkat lanjut. Tindakan ini menimbulkan
-kerusakan signifikan terhadap integritas keilmuan dan keyakinan publik terhadap
-temuan riset.
-Falsifikasi atau manipulasi data merupakan perbuatan mengubah,
-memodifikasi, menghapus, atau menambahkan data yang telah terhimpun
-sedemikian rupa sehingga hasil penelitian terlihat menyimpang dari kondisi yang
-sebenarnya (Shamoo & Resnik, 2015). Contoh manipulasi antara lain perubahan
-angka pada tabel hasil percobaan, penghilangan data yang tidak mendukung
-hipotesis, atau penyesuaian gambar dan ilustrasi dalam laporan riset. Manipulasi
-berbeda dengan pemalsuan yang sepenuhnya menghasilkan data baru; manipulasi
-mengolah data yang sudah ada agar sesuai dengan keinginan subjek penelitian.
-Kedua praktik ini sama-sama merupakan pelanggaran berat terhadap etika riset dan
-berpotensi merusak legitimasi ilmiah.
-Bentuk-bentuk pemalsuan dan manipulasi data mencakup penciptaan data
-rekaan yang sepenuhnya imajiner, pengubahan data agar hasilnya tampak
-signifikan, pemilihan data secara tendensius (cherry-picking), serta modifikasi hasil
-12
-
-statistik untuk mengesankan adanya korelasi yang sebenarnya tidak eksis. Pada
-manipulasi, bentuknya dapat berupa pengubahan data dasar, penyembunyian data
-yang tidak relevan, atau distorsi visual pada grafik dan gambar guna memperkuat
-pernyataan penelitian. Metode identifikasi pemalsuan dan manipulasi data meliputi
-verifikasi ulang kepada responden, analisis metadata, hingga penerapan kaidah
-statistik seperti hukum Benford untuk mendeteksi pola yang tidak lazim dalam
-angka yang dilaporkan (Fanelli, 2009).
-Sebuah ilustrasi mengenai fabrikasi data muncul ketika seorang peneliti
-mengisi kuesioner yang seharusnya dijawab oleh partisipan sebenarnya, lalu
-menyajikan data yang dihasilkan dalam analisis studi seolah-olah itu adalah respons
-dari partisipan asli. Terkait falsifikasi, contohnya adalah seorang peneliti yang
-memodifikasi hasil pengukuran yang dilaporkan agar selaras dengan hipotesis yang
-diasumsikan, atau menghapus data yang tidak mendukung. Di lingkungan akademis
-dan profesional, perbuatan semacam ini dapat berakibat pada penalti serius,
-termasuk penarikan gelar akademik, terminasi pekerjaan, serta dampak negatif
-yang bertahan lama pada citra profesional.
-Upaya pencegahan terhadap fabrikasi dan falsifikasi data dapat dicapai
-melalui peningkatan kesadaran etika dalam proses penelitian, jaminan transparansi
-alur penelitian, dan penerapan teknologi yang dirancang untuk mendeteksi
-plagiarisme serta manipulasi data. Institusi pendidikan tinggi umumnya
-memberlakukan regulasi yang ketat dan mekanisme verifikasi data untuk
-memvalidasi keakuratan informasi yang disajikan. Lebih lanjut, pemberian
-pemahaman mengenai krusialnya integritas ilmiah serta implikasi hukum dan etika
-dari manipulasi data perlu ditekankan sejak tahap awal pendidikan. Melalui strategi
-ini, diharapkan dapat terpelihara budaya kejujuran dan kredibilitas dalam penelitian
-demi kemajuan ilmiah yang otentik.
-3.3 Menyontek (Cheating) dalam Ujian dan Tugas
-Istilah menyontek berasal dari kata "sontek" yang merujuk pada praktik
-mengutip atau meniru secara ilegal (Hartanto, 2012). Menyontek dapat
-didefinisikan sebagai kegiatan menggunakan bahan atau materi yang tidak
-diperkenankan atau menggunakan pendampingan dalam tugas-tugas akademik
-yang dapat memengaruhi hasil evaluasi (Hartanto, 2012). Anderman dan Murdock
-(2007) menjelaskan bahwa menyontek mencakup memberikan, menggunakan, atau
-menerima segala informasi, menggunakan materi yang dilarang, dan memanfaatkan
-kelemahan seseorang atau prosedur untuk mendapatkan keuntungan dalam tugas
-akademik.. Menurut McCabe dan Trevino (1993), menyontek termasuk perilaku
-mengambil informasi dari luar secara ilegal saat ujian dan mengakuinya sebagai
-hasil sendiri. Melakukan kecurangan ini bertujuan untuk mencapai keberhasilan
-akademik dengan cara curang, seperti menghindari kegagalan atau memperoleh
-nilai tinggi secara tidak adil.
-Praktik kecurangan dalam kegiatan evaluasi akademik dapat terwujud dalam
-berbagai bentuk, seperti meniru hasil kerja peserta lain, menggunakan contekan
-tersembunyi, bekerja sama secara ilegal, dan memanfaatkan informasi soal yang
-13
-
-tidak semestinya diakses. Kemajuan teknologi juga telah memfasilitasi munculnya
-cara-cara baru dalam melakukan kecurangan, contohnya melalui penggunaan gawai
-seluler, perangkat hitung canggih, atau komputer jinjing untuk mendapatkan
-jawaban secara diam-diam oleh pihak lain. Terdapat pula individu yang
-menyerahkan pengerjaan tugas atau ujian mereka kepada orang lain. Perilaku
-semacam ini bertentangan dengan prinsip moralitas dan integritas dalam
-lingkungan akademis, karena mengabaikan proses pembelajaran yang sejati dan
-merusak prinsip keadilan antarpeserta ujian.
-Menyontek secara luas diakui sebagai praktik ketidakjujuran akademis yang
-lazim dan menyebabkan gangguan signifikan dalam bidang pendidikan (Davis et
-al., 2009; Whitley & Keith-Spiegel, 2002). Tindakan ini dapat merusak kualitas
-proses belajar-mengajar dan menurunkan standar integritas akademis (Fishman,
-2016). Selain dampak langsung pada individu yang terlibat, perbuatan menyontek
-juga dapat menimbulkan efek negatif jangka panjang bagi institusi pendidikan
-karena penurunan reputasi mereka (Firmantyo & Alsa, 2016; Harefa, 2024).
-Hukuman bagi pelaku tindakan menyontek dapat beragam, mulai dari teguran
-tertulis, pembatalan nilai ujian, hingga sanksi yang lebih berat seperti skorsing atau
-dikeluarkan, sebagaimana diatur dalam kebijakan masing-masing lembaga
-pendidikan (Pavela & Pavela, 2016). Oleh karena itu, implementasi langkah-langkah
-pencegahan dan sistem perbaikan yang efektif terhadap fenomena menyontek
-perlu diprioritaskan guna menjaga standar mutu akademis (Kementerian
-Pendidikan, Kebudayaan, Riset, dan Teknologi, 2021).
-Pembentukan karakter dan peningkatan kesadaran etika sangat krusial dalam
-upaya mengatasi praktik kecurangan akademik (Stephens & Wangaard, 2016).
-Pengajar dan institusi pendidikan bertanggung jawab untuk menanamkan prinsip
-integritas, kejujuran, dan etos kerja yang kuat sejak awal (Komisi Pemberantasan
-Korupsi, 2024). Hal ini bertujuan agar mahasiswa menyadari nilai pencapaian yang
-diperoleh melalui cara yang benar. Selain itu, penerapan pengawasan yang cermat
-selama ujian dan penggunaan teknologi untuk mendeteksi ketidakjujuran juga
-merupakan metode yang patut dipertimbangkan untuk mengurangi potensi
-manipulasi (Stephens & Wangaard, 2016). Lebih jauh lagi, menciptakan lingkungan
-belajar yang mendukung menjadi penting agar mahasiswa tidak merasa terpaksa
-mengambil jalan pintas untuk mencapai kesuksesan (Komisi Pemberantasan
-Korupsi, 2024).
-Pada intinya, kecurangan akademik berdampak buruk bagi individu maupun
-sistem pendidikan secara keseluruhan. Upaya untuk mencegah dan memberantas
-praktik ini membutuhkan kombinasi antara internalisasi nilai moral, implementasi
-regulasi yang ketat, serta mekanisme pengawasan yang memadai (Stephens &
-Wangaard, 2016). Dengan membina budaya yang mengedepankan integritas dan
-akuntabilitas, mutu pendidikan dan profil lulusan dapat dijaga secara efektif, yang
-pada akhirnya akan menghasilkan profesional yang berintegritas tinggi dan dapat
-dipercaya di masa depan (Komisi Pemberantasan Korupsi, 2024).
-14
-
-3.4 Penjiplakan (Copy-Paste) tanpa Atribusi
-Penjiplakan atau copy-paste tanpa atribusi adalah tindakan mengadopsi teks,
-ide, atau karya orang lain secara langsung dan mereproduksinya tanpa memberikan
-kredit yang semestinya kepada penulis asli (Neville, 2016). Fenomena ini termasuk
-dalam kategori plagiarisme yang paling kerap ditemui dan mudah terdeteksi, di
-mana individu yang bersangkutan menyalin dan menempelkan konten dari karya
-lain ke dalam karyanya sendiri seolah-olah itu adalah ciptaan orisinal (Riantoputra,
-2019). Praktik ini secara etis keliru karena sama saja dengan pencurian hak cipta
-dan mengabaikan upaya serta orisinalitas pencipta karya asli. Di lingkungan
-akademis, perbuatan ini sangat tidak diperkenankan karena mengikis prinsip
-kejujuran intelektual dan integritas seorang penulis (Neville, 2016).
-Umumnya, penyalinan tanpa atribusi timbul akibat ketidakpahaman atau
-disengaja untuk menghindari proses penalaran dan penulisan ulang menggunakan
-kata-kata sendiri (parafrase) (Riantoputra, 2019). Perilaku ini juga dapat bersumber
-dari kemalasan, desakan untuk menyelesaikan tugas dalam waktu singkat, atau
-bahkan ketidaktahuan mengenai kaidah sitasi yang tepat (Riantoputra, 2019).
-Meskipun kadang kala dilakukan tanpa kesengajaan, dampaknya sangat merugikan
-karena dapat menciptakan persepsi bahwa penulis inadequat dalam menghasilkan
-karya orisinal (Neville, 2016). Dalam penulisan akademis, walaupun hanya sebagian
-kecil yang disalin, tanpa penyebutan sumber yang jelas tetap dinilai sebagai sebuah
-pelanggaran.
-Contoh plagiarisme yang tidak dilengkapi atribusi terjadi ketika seorang
-pelajar menyalin sebuah alinea dari artikel atau buku yang dibaca, kemudian
-memasukkannya ke dalam karya tulis tanpa menyebutkan dengan jelas sumber
-acuannya (Siaputra & Santosa, 2023). Demikian pula dalam publikasi daring,
-terdapat praktik pengkopian konten artikel dari situs web lain tanpa pengakuan
-terhadap pemilik atau perizinan karya tersebut. Plagiarisme semacam ini bisa
-mencakup penggunaan kata-kata, gagasan, data, atau bahkan representasi visual
-secara langsung. Konsekuensinya, karya yang dihasilkan dapat kehilangan
-kredibilitas akademis dan berpotensi menimbulkan sanksi moral hingga hukum,
-seperti pembatalan sertifikat, pemberian nilai nol, hingga tuntutan atas pelanggaran
-hak cipta.
-Plagiarisme tanpa atribusi dapat dihindari melalui pemahaman dan
-penerapan etika penulisan yang tepat, termasuk penguasaan teknik pengutipan dan
-parafrase. Setiap kali mengambil kutipan, baik secara verbatim (menggunakan kata-
-kata persis) maupun tidak langsung (menggunakan kalimat sendiri), wajib disertai
-dengan referensi yang akurat. Pemanfaatan perangkat lunak pendeteksi plagiarisme
-juga berkontribusi dalam memastikan karya bebas dari praktik penyalinan tanpa
-atribusi yang semestinya (Siaputra & Santosa, 2023). Lebih lanjut, penanaman nilai
-integritas akademik secara berkelanjutan sangat esensial guna membentuk
-kebiasaan menghargai karya intelektual orang lain.
-Secara keseluruhan, penjiplakan tanpa atribusi bukan hanya melanggar
-norma akademik, tetapi juga merugikan pemilik karya asli dan merusak reputasi
-pelaku. Menghargai karya intelektual dengan memberikan atribusi yang tepat
-15
-
-merupakan bentuk penghormatan terhadap proses kreatif, dan juga dasar dari sikap
-profesional dalam dunia pendidikan dan pekerjaan. Oleh karena itu, kesadaran dan
-penerapan etika yang baik menjadi kunci penting untuk menjauhi praktik copy-
-paste tanpa atribut ini demi menjaga kredibilitas dan nilai karya yang dihasilkan.
-3.5 Penyalahgunaan Karya Orang Lain
-Pengambilan atau pengakuan karya, gagasan, atau pencapaian orang lain
-tanpa izin atau tanpa atribusi yang memadai merupakan pelanggaran etis (Fishman,
-2016). Dalam arena akademis, hal ini mencakup klaim atas penelitian, tulisan, atau
-hasil intelektual kolega sebagai milik pribadi. Praktik semacam itu tidak hanya
-bertentangan dengan norma moral tetapi juga berpotensi melanggar legislasi
-mengenai hak kekayaan intelektual dan hak cipta (Republik Indonesia, 2014).
-Pelanggaran integritas ilmiah secara umum dan kerugian terhadap pencipta asli
-menjadikan penyalahgunaan karya orang lain sebagai isu serius dalam lingkungan
-akademik (Siaputra & Santosa, 2023).
-Berbagai bentuk penyalahgunaan karya meliputi plagiarisme, peniruan,
-penciptaan data palsu, dan modifikasi hasil demi menampilkan orisinalitas semu
-(Siaputra & Santosa, 2023). Lebih lanjut, penyalahgunaan dapat terjadi melalui
-pengutipan yang tidak lengkap atau tidak akurat, sehingga menimbulkan
-kesalahpahaman (Fishman, 2016). Terkadang, ide atau kerangka teoretis milik
-orang lain dimanfaatkan tanpa pengakuan yang sesuai, meskipun tidak ada
-penyalinan kata per kata secara langsung. Seringkali, niatnya adalah untuk
-memperoleh keuntungan akademis atau profesional, seperti nilai, pengakuan, atau
-publikasi, tanpa upaya yang sepadan.
-Konsekuensi dari penyalahgunaan karya orang lain sangat luas dan berakibat
-negatif, termasuk rusaknya citra akademis individu dan institusi, terkikisnya
-kepercayaan terhadap temuan riset atau karya, serta terhambatnya kemajuan ilmu
-pengetahuan yang bergantung pada kejujuran (Siaputra & Santosa, 2023). Selain itu,
-pelaku juga dapat menghadapi tuntutan hukum jika terjadi pelanggaran hak cipta
-atau kekayaan intelektual (Republik Indonesia, 2014). Dalam konteks profesional,
-individu yang terbukti bersalah dapat kehilangan pekerjaan, merusak prospek karir,
-dan dikucilkan oleh rekan sejawat. Oleh karena itu, menjaga etika dan
-menghormati hak kekayaan intelektual menjadi esensial bagi keberlanjutan dan
-kredibilitas baik di bidang pendidikan maupun profesional (Fishman, 2016).
-Upaya mitigasi terhadap penyalahgunaan karya orang lain bergantung pada
-pendidikan dan peningkatan kesadaran etika akademik, mulai dari jenjang dasar
-hingga universitas (Siaputra & Santosa, 2023). Implementasi sistem deteksi
-plagiarisme serta audit karya secara berkala merupakan langkah krusial dalam
-mengidentifikasi dan mencegah praktik yang tidak etis. Institusi pendidikan dan
-riset perlu merumuskan kode etik yang tegas beserta sanksi yang jelas bagi
-pelanggar (Republik Indonesia, 2014). Selain itu, pembentukan budaya apresiasi
-terhadap karya orang lain dan pemahaman mengenai pentingnya atribusi yang tepat
-dapat meminimalkan terjadinya penyalahgunaan (Fishman, 2016).
-16
-
-Pada dasarnya, penyalahgunaan karya orang lain merupakan tindakan yang
-merusak landasan keilmuan dan moral dalam komunitas akademis serta
-profesional. Menghargai kontribusi orang lain dengan memberikan atribusi yang
-Tepat adalah manifestasi penghargaan terhadap proses pemikiran dan kreativitas
-yang telah dilalui. Dengan demikian, penegakan integritas akademik dan penguatan
-tanggung jawab moral menjadi prasyarat untuk menciptakan lingkungan yang
-kondusif bagi produksi karya orisinal yang bernilai bagi masyarakat luas (Siaputra
-& Santosa, 2023).
-3.6 Konflik Kepentingan
-Potensi benturan kepentingan terjadi ketika individu yang memegang posisi
-otoritas atau tanggung jawab, seperti pejabat publik, akademisi, atau profesional,
-menghadapi situasi di mana kepentingan pribadi mereka dapat mempengaruhi
-penilaian atau tindakan yang seharusnya dilakukan secara imparsial berdasarkan
-kewajiban resmi mereka (Resnik, 2019). Dalam skenario ini, afiliasi atau
-kepentingan pribadi seseorang berisiko menumbuhkan bias yang mengganggu
-objektivitas dan integritas dalam proses pembuatan keputusan. Awalnya, kondisi ini
-bersifat netral karena belum tentu berujung pada pelanggaran, namun jika tidak
-ditangani secara memadai, dapat mengarah pada pelanggaran etika, korupsi, atau
-penyalahgunaan kekuasaan (Transparency International Indonesia, 2020).
-Di lingkungan akademik dan institusi pendidikan tinggi, benturan
-kepentingan dapat timbul dalam berbagai konteks, termasuk penerimaan
-mahasiswa, administrasi keuangan, rekrutmen staf pengajar dan administrasi,
-pengadaan barang dan jasa, serta evaluasi dan akreditasi program (Transparency
-International Indonesia, 2020). Sebagai contoh, seorang administrator perguruan
-tinggi yang memiliki keterkaitan keluarga atau bisnis dengan pemasok layanan
-kampus mungkin dipengaruhi untuk mengutamakan keputusan pengadaan yang
-menguntungkan dirinya atau pihak terafiliasi. Apabila benturan kepentingan
-semacam ini tidak diselesaikan, hal tersebut dapat membuka jalan bagi praktik
-korupsi, kolusi, dan nepotisme yang merugikan institusi dan mengikis kepercayaan
-publik (Resnik, 2019).
-Contoh lain dari benturan kepentingan meliputi pejabat publik yang
-memiliki kepentingan finansial pribadi dalam suatu kebijakan yang dapat
-memberikan keuntungan materiil bagi diri mereka atau keluarga mereka. Hal ini
-bisa berupa penerimaan gratifikasi, suap, atau menjalankan usaha sampingan yang
-memanfaatkan posisi mereka (Kementerian Pendayagunaan Aparatur Negara dan
-Reformasi Birokrasi, 2024). Dalam sektor pendidikan, benturan kepentingan juga
-bisa bermanifestasi sebagai penerimaan gratifikasi oleh dosen dari mahasiswa atau
-penggunaan dana hibah penelitian untuk keperluan pribadi (Transparency
-International Indonesia, 2020). Jika tidak dikelola, potensi konflik ini dapat
-melemahkan prinsip tata kelola yang baik dan menimbulkan konsekuensi serius
-terhadap kredibilitas institusional.
-Upaya pencegahan dan pengelolaan benturan kepentingan sangat krusial dan
-memerlukan pendekatan yang didasarkan pada transparansi, akuntabilitas, serta
-17
-
-kepatuhan terhadap regulasi yang berlaku (Kementerian Pendayagunaan Aparatur
-Negara dan Reformasi Birokrasi, 2024). Institusi perlu mengimplementasikan
-kebijakan yang jelas terkait pengungkapan potensi konflik, pembentukan satuan
-tugas untuk mengendalikan benturan kepentingan, serta penegakan sanksi bagi
-pelanggar (Transparency International Indonesia, 2020). Peningkatan kesadaran
-mengenai etika dan integritas juga penting untuk memastikan setiap individu
-memahami implikasi dari benturan kepentingan dan cara-cara untuk
-menghindarinya (Resnik, 2019). Manajemen yang efektif adalah kunci untuk
-mencegah potensi konflik ini berkembang menjadi tindakan koruptif dan menjaga
-mutu pengambilan keputusan.
-Secara garis besar, benturan kepentingan merupakan suatu tantangan yang
-patut diwaspadai dan ditangani dengan keseriusan. Tanpa intervensi yang tepat,
-benturan kepentingan dapat merusak citra organisasi, menurunkan tingkat
-kepercayaan publik, serta mengancam prinsip keadilan dan keterbukaan dalam
-proses pengambilan keputusan (Resnik, 2019). Oleh karena itu, pengembangan
-budaya integritas dan praktik tata kelola yang kuat menjadi elemen esensial untuk
-mencegah dampak negatif yang meluas dari benturan kepentingan di berbagai
-bidang kehidupan, termasuk dalam ranah pendidikan dan pemerintahan
-(Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi, 2024).
-3.7 Sanksi atas Pelanggaran Akademik
-Tindakan disiplin atas pelanggaran akademik adalah konsekuensi yang
-diberlakukan pada mahasiswa, staf pengajar, atau personel akademik lainnya yang
-menyimpang dari prinsip etika dan ketentuan akademik yang berlaku di institusi
-pendidikan (Kementerian Pendidikan Nasional, 2010). Besaran sanksi ini umumnya
-ditentukan oleh tingkat keseriusan pelanggaran, mulai dari pelanggaran minor
-hingga mayor. Pelanggaran ringan, seperti keterlambatan dalam pendaftaran atau
-tidak memenuhi kuota kehadiran, biasanya akan dikenakan sanksi berupa teguran
-lisan atau peringatan resmi secara tertulis. Sementara itu, pelanggaran mayor,
-termasuk plagiarisme, fabrikasi data, atau kecurangan dalam ujian, dapat
-mengakibatkan pencabutan hak untuk mengikuti ujian, penangguhan status
-akademik (skorsing), hingga pemberhentian secara permanen dari status sebagai
-mahasiswa atau dosen (Kementerian Pendidikan Nasional, 2010).
-Berdasarkan regulasi yang ada di banyak universitas, mahasiswa yang terbukti
-melakukan kecurangan ujian atau plagiarisme umumnya akan menerima
-konsekuensi berupa penurunan nilai, pembatalan kelulusan mata kuliah yang
-bersangkutan, atau bahkan pembatalan nilai untuk satu atau lebih mata kuliah
-(Kementerian Pendidikan Nasional, 2010). Untuk pelanggaran yang lebih serius,
-seperti pengulangan tindakan kecurangan atau manipulasi data, institusi dapat
-menerapkan sanksi berupa skorsing sementara atau pengusiran permanen dari
-lingkungan akademik (Republik Indonesia, 2012).
-Proses penerapan sanksi akademik biasanya mencakup tahap klarifikasi,
-investigasi, serta fasilitasi dialog antara pihak yang diduga melakukan pelanggaran
-dengan otoritas yang berwenang, seperti dekan atau komisi etik (Kementerian
-18
-
-Pendidikan Nasional, 2010). Seluruh bukti terkait pelanggaran akan dikumpulkan
-secara komprehensif sebelum keputusan mengenai sanksi akhir dibuat. Institusi
-juga menyediakan hak bagi individu yang bersangkutan untuk mengajukan
-keberatan atau banding atas sanksi yang dijatuhkan. Seluruh proses dan keputusan
-mengenai sanksi didokumentasikan secara formal dan tertulis guna menjamin
-transparansi dan keadilan dalam pelaksanaannya (Republik Indonesia, 2012).
-Selain sanksi administratif, pemberian sanksi akademik juga bertujuan untuk
-menciptakan efek pencegahan serta memelihara objektivitas dan mutu akademik
-dalam lingkungan pendidikan (Kementerian Pendidikan Nasional, 2010). Dengan
-adanya penegakan sanksi yang tegas, diharapkan tindakan-tindakan seperti
-mencontek, plagiarisme, atau manipulasi data dapat dikurangi. Institusi pendidikan
-juga lazimnya menyelenggarakan program edukasi dan sosialisasi mengenai
-pentingnya integritas akademik guna meningkatkan kesadaran akan dampak negatif
-dari pelanggaran di kalangan seluruh anggota komunitas akademik (Republik
-Indonesia, 2012).
-Regulasi terkait dengan pelanggaran etika akademik di Universitas Tadulako,
-telah diatur dalam Peraturan Rektor Universitas Tadulako Nomor
-4/UN28/HK.01/2025 tentang Intergritas Akademik, pada Bab III yang
-mengguraikan tentang “Pelanggaran dan Tata Cara Pelaporan, Pemeriksaan,
-dan Pengenaan Sanksi” pasal 5 s/d pasal 14 (untuk lebih jelasnya dapat dilihat
-pada bagian lampiran dari modul ini). Secara garis besar, sanksi atas pelanggaran
-akademik berfungsi sebagai instrumen kontrol dan upaya perlindungan terhadap
-standar kualitas pendidikan serta citra institusi. Sanksi yang diberikan meliputi
-teguran, pemotongan atau pembatalan nilai, penangguhan, hingga pengeluaran,
-dengan prosedur yang jelas dan transparan untuk memastikan prinsip keadilan
-terpenuhi (Kementerian Pendidikan Nasional, 2010). Implementasi sanksi yang
-konsisten merupakan faktor krusial dalam upaya membudayakan kejujuran dan
-integritas yang kokoh di sektor pendidikan (Republik Indonesia, 2012).
-Referensi:
-Anderman, E. M., & Murdock, T. B. (Eds.). (2007). Psychology of academic cheating.
-Elsevier Academic Press.
-Andreescu, L. (2013). Self-plagiarism in academic publishing: The anatomy of a
-misnomer. Science and Engineering Ethics, 19(3), 775-797.
-https://doi.org/10.1007/s11948-012-9416-1
-Davis, S. F., Drinan, P. F., & Gallant, T. B. (2009). Cheating in school: What we know
-and what we can do. Wiley-Blackwell.
-Fanelli, D. (2009). How many scientists fabricate and falsify research? A systematic
-review and meta-analysis of survey data. PLoS ONE, 4(5), e5738.
-https://doi.org/10.1371/journal.pone.0005738
-Firmantyo, T., & Alsa, A. (2016). Integritas akademik dan kecemasan akademik
-dalam menghadapi ujian nasional pada siswa. PSIKOHUMANIORA: Jurnal
-Penelitian Psikologi, 1(1), 1-13.
-19
-
-Fishman, T. (Ed.). (2016). The fundamental values of academic integrity (3rd ed.).
-International Center for Academic Integrity.
-Hartanto, D. (2012). Bimbingan dan konseling menyontek: Mengungkap akar masalah dan
-solusinya. Indeks.
-Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi. (2024).
-Peraturan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor
-17 Tahun 2024 tentang Pengelolaan Konflik Kepentingan. Kementerian PANRB.
-Kementerian Pendidikan Nasional. (2010). Peraturan Menteri Pendidikan Nasional
-Republik Indonesia Nomor 17 Tahun 2010 tentang Pencegahan dan Penanggulangan
-Plagiat di Perguruan Tinggi. Kemendiknas.
-Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia.
-(2021). Peraturan Menteri Pendidikan, Kebudayaan, Riset, dan Teknologi Nomor 39
-Tahun 2021 tentang Integritas Akademik dalam Menghasilkan Karya Ilmiah.
-Komisi Pemberantasan Korupsi. (2024). Survei Penilaian Integritas (SPI) Pendidikan
 2024. Direktorat Pendidikan dan Peran Serta Masyarakat KPK.
 https://www.kpk.go.id
 McCabe, D. L., & Trevino, L. K. (1993). Academic dishonesty: Honor codes and
@@ -953,8 +54,6 @@ https://doi.org/10.22146/buletinpsikologi.43058
 Roig, M. (2015). Avoiding plagiarism, self-plagiarism, and other questionable writing practices:
 A guide to ethical writing. Office of Research Integrity.
 https://ori.hhs.gov/plagiarism-12
-20
-
 Shamoo, A. E., & Resnik, D. B. (2015). Responsible conduct of research (3rd ed.).
 Oxford University Press.
 Siaputra, I. B., & Santosa, D. A. (2023). Improving academic integrity in Indonesia:
@@ -969,8 +68,6 @@ Transparency International Indonesia. (2020). Panduan pencegahan dan pengendalia
 konflik kepentingan di perguruan tinggi. Yayasan Tifa.
 Whitley, B. E., Jr., & Keith-Spiegel, P. (2002). Academic dishonesty: An educator's guide.
 Lawrence Erlbaum Associates.
-21
-
 ## Modul 4
 ## Praktik Penulisan
 ## Akademik Yang Beretika
@@ -1010,8 +107,6 @@ Dengan demikian, penulis tidak hanya terhindar dari tuduhan plagiarisme, tetapi
 juga menghasilkan karya ilmiah yang autentik dan bermakna.
 Secara garis besar, kapabilitas memparafrasa merefleksikan profesionalisme
 dan kejujuran intelektual (Yuhdi, 2022). Parafrasa yang tepat bukan sekadar metode
-22
-
 penulisan ulang, melainkan manifestasi penghormatan terhadap kontribusi
 intelektual orang lain (Basori, 2017). Melalui pemahaman mendalam, restrukturisasi
 gagasan, dan penyertaan kutipan yang akurat, mahasiswa maupun peneliti dapat
@@ -1055,8 +150,6 @@ panas matahari yang seharusnya dipantulkan kembali ke luar angkasa, sehingga
 menyebabkan peningkatan suhu rata-rata bumi. Dampaknya meliputi perubahan
 iklim yang ekstrem, mencairnya es di kutub, dan meningkatnya permukaan air laut
 yang mengancam sejumlah besar populasi manusia di daerah pesisir.”
-23
-
 Parafrase:
 Peningkatan suhu global terjadi karena bertambahnya kandungan gas rumah kaca ,
 termasuk karbon dioksida, metana, serta nitro oksida , di lapisan atmosfer bumi.
@@ -1099,8 +192,6 @@ Kutipan langsung merupakan pengadaan pernyataan atau teks dari sumber asli
 secara harfiah, tanpa modifikasi sedikit pun. Teks yang dikutip mesti direproduksi
 persis sesuai aslinya, diapit oleh tanda kutip pembuka dan penutup (“...”), serta
 disertai dengan identifikasi sumbernya, mengikuti panduan gaya penulisan seperti
-24
-
 APA, MLA, atau format serupa. Terdapat dua kategori dalam kutipan langsung
 (American Psychological Association, 2020):
 a. Kutipan Langsung Pendek
@@ -1142,8 +233,6 @@ berjumlah lebih dari 40 kata atau lebih dari 4 baris teks. Dalam menulis kutipan
 panjang, ada beberapa aturan format yang harus diperhatikan (American
 Psychological Association, 2020):
 1. Kutipan ditulis terpisah dari paragraf utama, menggunakan baris baru.
-25
-
 2. Teks kutipan dibuat menjorok ke dalam (indentasi) sekitar 1 cm atau lima spasi
 dari margin kiri.
 3. Kutipan tidak menggunakan tanda petik (“...”); namun beberapa format
@@ -1187,8 +276,6 @@ tingkat kebebasan penulis dalam mengolah teks. Pada kutipan langsung, teks harus
 dipertahankan seperti aslinya; sedangkan pada kutipan tidak langsung, penulis
 memiliki keleluasaan menyusun kembali kalimat selama makna tetap sama.
 Pemilihan jenis kutipan tergantung pada tujuan penulisan, kutipan langsung
-26
-
 digunakan ketika pernyataan asli memiliki kekuatan makna tinggi, sementara
 kutipan tidak langsung digunakan untuk memperjelas pemahaman atau
 menyesuaikan alur tulisan.
@@ -1226,8 +313,6 @@ Contoh:
 - Buku: Brown, Dan. The Da Vinci Code. Doubleday, 2003.
 - Artikel Jurnal: Lee, Harper. “Gender and Morality in Modern
 Fiction.” Modern Literature Studies, vol. 10, no. 2, 2018, pp. 12–23.
-27
-
 Gaya Chicago
 Gaya Chicago, yang sering digunakan dalam bidang sejarah, humaniora, dan
 beberapa ilmu sosial. Gaya ini memiliki dua sistem utama (The University of
@@ -1265,8 +350,6 @@ American Psychological Association. 2020. Publication Manual of the American
 Psychological Association. 7th ed. Washington, DC: APA Publishing.
 Modern Language Association. 2021. MLA Handbook. 9th ed. New York: The
 Modern Language Association of America.
-28
-
 Secara ringkas:
 - Chicago NB lebih cocok untuk esai, tesis, dan tulisan naratif (karena
 memakai catatan kaki).
@@ -1307,8 +390,6 @@ Langkah umum penggunaannya:
 2. Pilih gaya sitasi (APA, MLA, Chicago, dll.).
 3. Sisipkan referensi langsung di Word menggunakan plugin Insert
 Citation dan Insert Bibliography.
-29
-
 Mendeley juga dapat bertukar data referensi dengan Zotero dan EndNote
 menggunakan format RIS atau XML.
 Zotero
@@ -1347,8 +428,6 @@ Penggunaan friendly profesional
 Sistem Operasi Windows, Mac, Windows, Mac, Windows, Mac
 Linux, Android Linux
 Sumber: Sarkar (2025)
-30
-
 Ketiga aplikasi tersebut pada dasarnya memiliki fungsi inti yang sama dalam
 mempermudah pembuatan sitasi dan daftar pustaka otomatis, namun pilihan
 terbaik tergantung kebutuhan pengguna:
@@ -1391,8 +470,6 @@ dan relevansi dengan tujuan baru (Bretag, 2019).
 3. Pencantuman Sitasi Formal untuk Karya Sendiri. Meskipun sumber materi
 berasal dari karya penulis sendiri, tetap wajib mencantumkan sitasi yang lengkap
 sesuai dengan panduan gaya penulisan yang berlaku (misalnya APA, MLA, atau
-31
-
 Chicago) apabila karya tersebut telah diterbitkan sebelumnya (Walker & White,
 2018).
 4. Pelaksanaan Riset dan Penulisan Orisinal. Kembangkan penelitian yang
@@ -1420,7 +497,6 @@ Reformulasi isi tanpa reduksi. Workshop Plagiarisme dan Pencegahannya. STAIN
 Parepare. http://repository.uin-malang.ac.id/2272/
 Bretag, T. (2019). Challenges in addressing self-plagiarism in academic publishing. Journal of
 Academic Ethics, 17(2), 121–138. https://doi.org/10.1007/s10805-018-9313-
-5
 Modern Language Association. (2021). MLA handbook (9th ed.). The Modern
 Language Association of America.
 Purdue University Online Writing Lab. (n.d.). Paraphrasing and quoting. Purdue
@@ -1436,16 +512,12 @@ Research and Review. Retrieved from https://www.iisrr.in/mainsite/wp-
 content/uploads/2025/06/17.-2509.-Shib-Prosad-Sarkar-Performance-of-
 Reference-Management-Software-A-comparative-study-between-EndNote-
 Mendeley-and-Zotero.pdf
-32
-
 The University of Chicago Press. 2024. The Chicago Manual of Style. 18th ed.
 Chicago: University of Chicago Press.
 Walker, R., & White, R. (2018). Technological impact on academic integrity: Plagiarism and
 self-plagiarism in higher education. Assessment & Evaluation in Higher Education,
 43(6), 949–962. https://doi.org/10.1080/02602938.2017.1421527
 Yuhdi, A. (2022). Penulisan akademik. Universitas Negeri Medan.
-33
-
 ## Modul 5
 ## Etika Dalam Penelitian
 5.1 Prinsip-Prinsip Etika Penelitian (Beneficence, Justice, Respect for
@@ -1480,8 +552,6 @@ era digital, keadilan juga menuntut transparansi mengenai bagaimana data akan
 digunakan, siapa yang memiliki akses, dan bagaimana partisipan dapat mengontrol
 penggunaan data mereka, sehingga menciptakan hubungan kepercayaan yang
 fundamental bagi integritas penelitian dan perlindungan hak-hak partisipan.
-34
-
 c. Respect for Persons (Menghormati Individu)
 Prinsip penghormatan terhadap individu merupakan landasan etika
 penelitian yang mengakui setiap individu sebagai agen moral otonom yang memiliki
@@ -1524,8 +594,6 @@ a. Orisinalitas merupakan nilai fundamental dalam penelitian ilmiah yang
 menandakan kontribusi baru dan autentik terhadap ilmu pengetahuan yang ada,
 serta mencerminkan integritas intelektual peneliti dalam menghasilkan karya yang
 asli. Council of Science Editors (2012) mendefinisikan penelitian orisinal sebagai
-35
-
 karya yang belum pernah dipublikasikan sebelumnya dan bukan duplikasi
 substansial dari pekerjaan yang sudah ada, baik milik peneliti sendiri maupun orang
 lain.
@@ -1567,8 +635,6 @@ etis serta akuntabilitas terhadap integritas dan akurasi karya yang dipublikasik
 5.5 Peer Review yang Adil dan Objektif
 Peer review merupakan mekanisme fundamental dalam sistem publikasi ilmiah
 yang berfungsi sebagai kontrol kualitas, proses validasi, dan penjaga gerbang untuk
-36
-
 memastikan bahwa hanya penelitian yang memenuhi standar metodologis dan etis
 yang dipublikasikan dalam jurnal ilmiah.
 Prinsip keadilan dan objektivitas dalam peer review mengharuskan reviewer
@@ -1601,8 +667,6 @@ Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology
 Undisclosed flexibility in data collection and analysis allows presenting
 anything as significant. Psychological Science, 22(11), 1359-1366.
 https://doi.org/10.1177/0956797611417632
-37
-
 ## Modul 6
 ## Tantangan Etika Akademik
 ## Di Era Digital
@@ -1640,8 +704,6 @@ mahasiswa tetap menjadi kendali gagasan dan hasil pemikiran tetap
 berada pada mahasiswa.
 b. Tetap mempertahankan ciri khas gaya penulisan dan tidak sepenuhnya
 menggunakan pola kalimat yang dihasilkan aplikasi seperti Grammarly,
-38
-
 c. Menghindari penggunaan aplikasi seperti QuillBot, yaitu aplikasi yang
 diginakan untuk melakukan parafrase secara otomatis
 d. Menjamin kualitas penulisan, terutama pada stuktur penulisan mulai dari
@@ -1680,8 +742,6 @@ yang dianjurkan dan yang perlu dihindari, sebagaimana tercantum dalam
 dokumen resmi, Panduan Penggunaan Generative Artificial Intelligence
 (GenAI) pada Pembelajaran di Perguruan Tinggi (Direktorat Pembelajaran dan
 Kemahasiswaan, 2024.
-39
-
 Tabel 3. Prinsip-prinsip Pemanfaat GenAI
 No Prinsip Do’s Don’t
 1 Menjamin Mengevaluasi Pemanfaatan GenAI
@@ -1725,8 +785,6 @@ bantu GenAI yang pada konten digital yang
 digunakan dan proses dihasilkan dalam rangka
 untuk plagiarisme dan
 menghasilkannya pelanggaran hak cipta
-40
-
 No Prinsip Do’s Don’t
 8 Kesadaran dan Meningkatkan Tidak membentuk pola
 literasi GenAI literasi GenAI bagi diri pikir yang tepat dalam
@@ -1758,8 +816,6 @@ sedangkan Connected Papers dapat digunakan untuk menemukan artikel ilmiah
 yang saling berhubungan berdasarkan tingkat relevansi dan konteks kajian.
 Pemanfaatan aplikasi tersebut membantu mahasiswa memahami lanskap
 penelitian dan memperkaya sumber bacaan secara sistematis.
-41
-
 Gambar 1. Skema GenAI dalam membantu Mahasiswa Mencari Acuan dan Sumber Bacaan
 Sumber: Panduan Penggunaan Generative Artificial Intelligence (GenAI) pada Pembelajaran
 di Perguruan Tinggi (Kemendikbudristek, 2024).
@@ -1780,8 +836,6 @@ dapat digunakan untuk membuat draf awal presentasi dengan memberikan
 rekomendasi desain dan konten yang sesuai dengan topik. Meskipun demikian,
 mahasiswa tetap bertanggung jawab untuk meninjau, menyunting, dan
 memastikan akurasi serta kualitas akademik dari seluruh materi yang dihasilkan.
-42
-
 Gambar 3. Skema GenAI dalam membantu Mahasiswa menyusun presentasi bacaan
 Sumber: Panduan Penggunaan Generative Artificial Intelligence (GenAI) pada Pembelajaran
 di Perguruan Tinggi (Kemendikbudristek, 2024).
@@ -1813,8 +867,6 @@ penggunaan kecerdasan buatan (AI) menjadi aspek etis yang sangat penting agar
 integritas akademik tetap terjaga. Nature Portfolio (2023) menegaskan bahwa AI
 tidak dapat diakui sebagai penulis dalam karya ilmiah karena tidak mampu
 bertanggung jawab atas isi karya, tetapi setiap pemanfaatannya harus dinyatakan
-43
-
 secara tegas, seperti pada bagian metode atau ucapan terima kasih. Senada dengan
 itu, International Committee of Medical Journal Editors (ICMJE, 2023)
 menekankan bahwa penulis manusia memiliki tanggung jawab penuh atas
@@ -1858,8 +910,6 @@ Komunikasi digital kini menjadi sarana utama dalam interaksi akademik
 modern, menuntut mahasiswa dan akademisi untuk memahami serta menerapkan
 etika komunikasi yang sesuai dengan norma profesional dan akademik.
 Perkembangan teknologi informasi telah mengubah dinamika komunikasi di
-44
-
 lingkungan pendidikan tinggi, di mana email, sistem manajemen pembelajaran
 (LMS), forum daring, dan platform kolaborasi digital berperan sebagai media
 utama dalam hubungan antara mahasiswa, dosen, dan staf akademik (Stephens et
@@ -1904,8 +954,6 @@ sosial umumnya tidak sesuai untuk komunikasi akademik langsung mahasiswa-
 dosen. McLoughlin dan Lee (2010) membahas pentingnya literasi digital dan
 pengembangan identitas profesional, berargumen bahwa mahasiswa harus sadar
 tentang jejak digital mereka dan bagaimana perilaku online dapat berdampak pada
-45
-
 reputasi akademik dan prospek karier masa depan. EDUCAUSE (2020)
 merekomendasikan pentingnya: menetapkan kebijakan dan harapan komunikasi
 yang jelas, menyediakan pelatihan dan sumber daya untuk mahasiswa dan dosen,
@@ -1949,8 +997,6 @@ penggunaan (komersial atau pendidikan/transformatif), sifat karya yang digunakan
 potensial (Leval, 1990). Crews (2020) menekankan bahwa tidak semua penggunaan
 untuk kepentingan pendidikan otomatis tergolong penggunaan wajar; analisis
 komprehensif terhadap empat faktor tersebut tetap diperlukan, dengan perhatian
-46
-
 khusus pada apakah penggunaan menambahkan makna, wawasan, atau
 pemahaman baru daripada hanya menggantikan karya asli.
 Technology, Education and Copyright Harmonization (TEACH) Act di Amerika
@@ -1995,8 +1041,6 @@ riset, hak publikasi, pembagian data, serta peluang komersialisasi. Akademi Ilmu
 Pengetahuan Nasional (National Academy of Sciences, 2018) merekomendasikan
 integrasi pendidikan HKI dalam pelatihan etika penelitian agar peneliti memahami
 hak dan kewajiban mereka, termasuk kepatuhan terhadap kebijakan lembaga,
-47
-
 sponsor, dan penerbit mengenai berbagi data, publikasi, serta pemanfaatan
 komersial hasil penelitian.
 6.7 Menghadapi Misinformasi dan Disinformasi dalam Literatur
@@ -2039,8 +1083,6 @@ dipublikasikan dan potensi bias. Caulfield (2017) mengadvokasi strategi
 "pembacaan lateral" di mana pembaca meninggalkan sumber asli untuk mencari
 informasi tentang kredibilitas sumber tersebut dari sumber lain, berbeda dengan
 "pembacaan vertikal" tradisional yang fokus pada mengevaluasi klaim dalam
-48
-
 dokumen itu sendiri tanpa verifikasi eksternal. IFLA (International Federation of
 Library Associations, 2017) mengembangkan infografis untuk mengidentifikasi
 berita palsu yang mencakup: pertimbangkan sumbernya, baca melampaui judul,
@@ -2083,8 +1125,6 @@ langkah untuk memerangi misinformasi: persyaratan transparansi yang
 ditingkatkan, opsi tinjauan sejawat terbuka, kebijakan berbagi data wajib, platform
 tinjauan sejawat pasca-publikasi, dan proses koreksi dan pencabutan yang lebih
 jelas (Vuong, 2020).
-49
-
 Peneliti memiliki tanggung jawab untuk melakukan penelitian yang ketat
 yang meminimalkan kesalahan, melaporkan temuan secara akurat dan lengkap,
 memperbaiki catatan ketika kesalahan ditemukan, tidak mengutip makalah yang
@@ -2127,8 +1167,6 @@ Cotton, D. R. E., Cotton, P. A., & Shipway, J. R. (2023). Chatting and cheating:
 Ensuring academic integrity in the era of ChatGPT. Innovations in Education
 and Teaching International, 1-12.
 https://doi.org/10.1080/14703297.2023.2190148
-50
-
 Creative Commons. (2022). About the licenses.
 https://creativecommons.org/licenses/
 Crews, K. D. (2020). Copyright law for librarians and educators: Creative strategies and
@@ -2173,8 +1211,6 @@ for contract cheating and academic integrity. Journal of Academic Ethics.
 https://doi.org/10.1007/s10805-023-09470-1
 Lessig, L. (2004). Free culture: How big media uses technology and the law to lock down
 culture and control creativity. Penguin Press.
-51
-
 Leval, P. N. (1990). Toward a fair use standard. Harvard Law Review, 103(5), 1105-
 1136. https://doi.org/10.2307/1341457
 Lewandowsky, S., Ecker, U. K., Seifert, C. M., Schwarz, N., & Cook, J. (2012).
@@ -2218,8 +1254,6 @@ https://russellgroup.ac.uk/news/new-principles-on-use-of-ai-in-education/
 Samuelson, P. (1999). Intellectual property and the digital economy: Why the anti-
 circumvention regulations need to be revised. Berkeley Technology Law Journal, 14(2),
 519-566.
-52
-
 Scheufele, D. A., & Krause, N. M. (2019). Science audiences, misinformation, and fake
 news. Proceedings of the National Academy of Sciences, 116(16), 7662-7669.
 https://doi.org/10.1073/pnas.1805871115
@@ -2258,8 +1292,6 @@ World Intellectual Property Organization (WIPO). (2020). Understanding copyright
 related rights. WIPO.
 Young, J. R. (2016). The new office hours: Email, texting, social media, and the
 student-professor relationship. Chronicle of Higher Education, 62(25), A24-A27.
-53
-
 (cid:0)(cid:0)(cid:0)(cid:0) (cid:0)
 (cid:30)(cid:31) (cid:31)!(cid:0)(cid:14)"#$(cid:31)%!"(cid:0)&(cid:31)’’(cid:31)(cid:0)(cid:2)( ")#’#%(cid:0)*(cid:0)(cid:6)"!+"(cid:13)(cid:0)(cid:4)(cid:31)!’($, "%#(cid:13)(cid:0)(cid:10)(cid:31) ,(cid:0)*-..*(cid:0)
 (cid:2)(cid:3)(cid:4)(cid:3)(cid:5)(cid:6)(cid:3)(cid:7)(cid:8)(cid:9)(cid:5)(cid:0)(cid:10)(cid:3)(cid:5)(cid:11)(cid:8)(cid:11)(cid:8)(cid:2)(cid:9)(cid:5)(cid:0)(cid:6)(cid:8)(cid:5)(cid:12)(cid:12)(cid:8)(cid:13)(cid:0)

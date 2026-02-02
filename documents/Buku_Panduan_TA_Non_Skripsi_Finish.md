@@ -1,135 +1,12 @@
 # Buku Panduan Ta Non Skripsi Finish
 
-*Dokumen ini dikonversi otomatis dari PDF*
+*Dokumen ini dikonversi dan dibersihkan otomatis*
 
 ---
 
-## Tim Penyusun
-## Pengarah
-Ir. Andi Arham Adam, S.T., M.Sc.(Eng)., Ph.D.
-## Penanggung Jawab
-Dr. Ir. Yuli Asmi Rahman, S.T., M.T.
-Dr. Dessy Santi, S.Kom., M.T.
-## Ketua
-Dr. Ir. Amriana, S.T., M.T.
-## Wakil Ketua
-Ayu Hernita, M.Kom.
-## Sekretaris
-Anita Pratiwi, S.T., M.T.
-## Anggota
-Anisa Yulandari, M.Kom.
-Auditha Nurul Gamalia, M.Ars.
-Anisa Rahmawati, S.P.W.K.
-Deno Ambar Arum, M.T.
-Irwan Mahmudi, S.T., M.T.
-Yulistiansyah, S.T., M.Eng.
-## Penerbit :
-## Fakultas Teknik Universitas Tadulako
-2025
-iv
-
-## Sambutan Dekan
-Puji syukur kita panjatkan ke hadirat Tuhan Yang Maha Esa atas limpahan rahmat dan
-karunia-Nya, sehingga Buku Panduan Tugas Akhir Non-Skripsi Fakultas Teknik
-Universitas Tadulako ini dapat disusun dan diterbitkan dengan baik.
-Penyusunan buku panduan ini mengacu pada Peraturan Menteri Pendidikan, Kebudayaan,
-Riset, dan Teknologi Nomor 39 Tahun 2025 tentang Penjaminan Mutu Pendidikan Tinggi,
-serta Pedoman dan Peraturan Akademik Universitas Tadulako Tahun Akademik
-2025/2026. Dengan landasan regulasi tersebut, panduan ini memastikan pelaksanaan
-Tugas Akhir Non-Skripsi tetap sejalan dengan kebijakan nasional dan kebijakan internal
-Universitas.
-Penyusunan buku panduan ini melibatkan tim dosen dan tenaga kependidikan dalam
-merumuskan mekanisme, prosedur, serta standar penilaian yang jelas dan terukur untuk
-bentuk lain tugas akhir non skripsi pada skema publikasi ilmiah, (Proyek, Prototype,
-Jurnal Nasional, Jurnal Internasional, Penerapan Teknologi Tepat Guna, Karya Prestasi,
-dan Prosiding Internasional) . Harapan kami, panduan ini dapat menjadi acuan baku bagi
-mahasiswa, dosen pembimbing, maupun dosen penguji dalam melaksanakan Tugas Akhir
-Non-Skripsi, sehingga proses akademik berjalan lebih efektif, efisien, dan terarah.
-Panduan ini resmi diberlakukan di lingkungan Fakultas Teknik Universitas Tadulako
-mulai Semester Ganjil Tahun Akademik 2025/2026,dan menjadi pedoman utama dalam
-pelaksanaan Tugas Akhir Non-Skripsi di seluruh Program Studi Sarjana dan Sarjana
-Terapan.
-Kami menyampaikan terima kasih dan apresiasi yang sebesar-besarnya kepada Tim
-Penyusun yang telah bekerja dengan penuh dedikasi, serta semua pihak yang memberikan
-dukungan dalam penyusunan panduan ini. Semoga buku ini bermanfaat dan mampu
-mendukung peningkatan mutu pendidikan tinggi di Fakultas Teknik.
-Palu, Agustus 2025
-Dekan Fakultas Teknik
-Ir. Andi Arham Adam., S.T., M.Sc(Eng)., Ph.D.
-## Nip. 19740323 199903 1 002
-v
-
-## Kata Pengantar
-Assalamu ‘alaikum warahmatullahi wabarakatuh.
-Syukur Alhamdulillah penulis panjatkan kehadiratan Allah SWT, atas berkat dan
-rahmat-Nya sehingga kami semua diberikan kesehatan sehingga dapat
-menyelesaikan buku panduan ini.
-Buku “Panduan Penulisan Tugas Akhir Skripsi dan Non-Skripsi” ini merupakan
-buku panduan yang diterbitkan oleh Fakultas Teknik Universitas Tadulako. Buku
-panduan ini bertujuan untuk menyeragamkan pembimbingan penyusunan tugas
-akhir mahasiswa, serta untuk peningkatan mutu baik dari segi format maupun
-materi karya ilmiah mahasiswa. Beberapa hal yang disesuaikan dengan
-perkembangan teknologi masa kini telah ditambahkan dalam buku panduan ini,
-serta dilengkapi dengan template penulisan dan keterangan lainnya.
-Ucapan terima kasih kami sampaikan kepada seluruh tim penyusun atas bantuan
-yang telah diberikan selama proses penyusunan buku panduan ini. Terima kasih
-juga kepada pimpinan Fakultas Teknik yang telah memberikan masukan berupa
-kritikan, saran, maupun bantuan teknis lainnya sehingga panduan penulisan ini
-dapat diterbitkan.
-Saran dan kritikan untuk pengembangan buku panduan ini agar lebih baik di masa
-mendatang sangat kami harapkan dari seluruh pihak yang menggunakan panduan
-ini. Akhir kata, mudah-mudahan panduan ini dapat memberikan manfaat sehingga
-mampu menciptakan mutu lulusan Fakultas Teknik Universitas Tadulako yang
-dapat bersaing dengan perguruan tinggi terkemuka di negeri ini.
-Wassalamu ‘alaikum warahmatullahi wabarakatuh.
-Palu, Agustus 2025
-Tim Penyusun
-Ketua,
-Dr. Ir. Amriana, S.T., M.T.
-vi
-
-## Daftar Isi
-SAMBUTAN DEKAN .............................................................................................................. v
-KATA PENGANTAR ............................................................................................................... vi
-DAFTAR ISI .......................................................................................................................... viii
-DAFTAR TABEL ...................................................................................................................... x
 BAB 1 PENDAHULUAN ......................................................................................................... 1
 BAB II KETENTUAN UMUM TUGAS AKHIR ..................................................................... 5
 BAB III TUGAS AKHIR NON SKRIPSI ............................................................................... 10
-3.1 Proyek............................................................................................................................. 10
-3.1.1 Penjelasan Umum ................................................................................................... 10
-3.1.2 Syarat Khusus .......................................................................................................... 10
-3.1.3 Sistematika Proposal Dan Laporan Proyek ............................................................. 11
-3.1.6 Penilaian Khusus ..................................................................................................... 13
-3.2 PROTOTYPE ................................................................................................................ 14
-3.2.1 Penjelasan Umum .................................................................................................... 14
-3.2.2 Syarat Khusus ...................................................................................................... 15
-3.2.3 Sistematika Proposal Dan Laporan Prototype ..................................................... 15
-3.2.4 Penilaian Khusus .................................................................................................. 17
-3.3 JURNAL ILMIAH ......................................................................................................... 19
-3.3.1 Penjelasan Umum .................................................................................................... 19
-3.3.2 Syarat Khusus .......................................................................................................... 20
-3.3.3 Sistematika Penulisan Jurnal................................................................................ 21
-3.3.4 Penilaian Khusus .................................................................................................. 24
-3.4 PENERAPAN TEKNOLOGI TEPAT GUNA ................................................................ 25
-3.4.1 Penjelasan Umum .................................................................................................... 25
-3.4.2 Syarat Khusus .......................................................................................................... 25
-3.4.2 Sistematika Proposal Dan Laporan TTG ............................................................. 26
-3.4.6 Penilaian Khusus .................................................................................................. 29
-3.5 KARYA PRESTASI ........................................................................................................ 30
-3.5.1 Penjelasan Umum ................................................................................................ 30
-3.5.2 Syarat Khusus ...................................................................................................... 30
-3.5.3 Mekanisme Dan Alur Pelaksanaan ...................................................................... 31
-3.5.4 Ketentuan Khusus ................................................................................................ 32
-viii
-
-3.5.5 Sistematika Laporan Akhir Karya Prestasi .......................................................... 32
-3.5.6 Penilaian Khusus .................................................................................................. 36
-3.6 PROSIDING ................................................................................................................... 38
-3.6.1 Penjelasan Umum ................................................................................................ 38
-3.6.2 Syarat Khusus ...................................................................................................... 38
-3.6.3 Sistematika Proposal Dan Laporan Prosiding ...................................................... 39
-3.6.4 Penilaian Khusus .................................................................................................. 42
 DAFTAR PUSTAKA ............................................................................................................... 43
 Bagan Alir Prosedur ................................................................................................................. 45
 Lampiran-Lampiran ................................................................................................................. 46
@@ -146,21 +23,6 @@ Lampiran 10 Dokumentasi Lomba ..................................................
 Lampiran 11 Piagam Penghargaan ....................................................................................... 55
 Lampiran 11 Portofolio Karya ............................................................................................. 55
 Lampiran 11 Data Diri ......................................................................................................... 56
-ix
-
-## Daftar Tabel
-1. Tabel 1. Rentang Skor/Nilai Ujian Skripsi ......................................................... 6
-2. Tabel 2. Kategori Kualitas Jurnal ........................................................................ 20
-3. Tabel 5. Skema Pembobotan Karya Prestasi ...................................................... 36
-4. Tabel 6. Rubik Kriteria Karya Prestasi ............................................................... 36
-5. Tabel SOP TA Non Skripsi .................................................................................. 44
-6. Tabel Bagan Alur TA Non Skripsi ..................................................................... 45
-x
-
-## Daftar Gambar
-1. Gambar Mekanisme Pendaftaran TA Non Skripsi ............................................................... 9
-xi
-
 ## Bab 1 Pendahuluan
 Pendidikan nasional pada dasarnya bertujuan untuk mengembangkan potensi peserta
 didik agar menjadi manusia yang beriman dan bertakwa kepada Tuhan Yang Maha Esa,
@@ -193,8 +55,6 @@ lulusan. Lulusan Program Studi diharapkan memiliki kompetensi yang tidak hanya r
 dengan kebutuhan nasional, tetapi juga mampu bersaing di pasar global, sehingga setiap
 bentuk Tugas Akhir Non-Skripsi harus dirancang untuk mencerminkan ketercapaian
 capaian pembelajaran yang adaptif, inovatif, dan berdaya saing internasional.
-1
-
 ## 1.1 Pengertian Tugas Akhir
 Tugas Akhir (TA) adalah karya ilmiah dalam bentuk skripsi atau non- skripsi yang disusun
 oleh mahasiswa berdasarkan hasil penelitian/kajian terhadap suatu masalah yang dilakukan
@@ -227,8 +87,6 @@ Akademik Universitas Tadulako. Skripsi adalah suatu karya tulis ilmiah berupa
 paparan tulisan hasil penelitian mahasiswa program sarjana (S1) yang membahas
 suatu permasalahan atau fenomena dalam bidang ilmu tertentu dengan
 menggunakan kaidah-kaidah ilmiah yang berlaku.
-2
-
 ## 2. Non Skripsi
 Tugas Akhir (TA) dalam bentuk non-skripsi merupakan salah satu alternatif yang
 dapat dipilih oleh mahasiswa sebagai pengganti skripsi, dengan tetap mengacu pada
@@ -260,8 +118,6 @@ kata lain, prototipe merupakan contoh kerja yang memungkinkan lahirnya model
 baru atau versi penyempurnaan dari suatu produk. Prototipe juga dapat dipahami
 sebagai wujud penerapan langsung dari rancangan desain produk yang akan
 dikembangkan.
-3
-
 c. Jurnal ilmiah
 Jurnal Ilmiah Tugas Akhir dalam bentuk jurnal ilmiah merupakan karya tulis
 ilmiah berupa penelitian atau artikel konseptual yang dipublikasikan pada jurnal
@@ -287,8 +143,6 @@ f. Prosiding Internasional Terindeks
 Tugas Akhir dalam bentuk artikel prosiding merupakan karya tulis ilmiah yang
 telah dipresentasikan dalam forum akademik, seperti seminar atau konferensi,
 dan dipublikasikan dalam prosiding resmi pada tingkat internasional.
-4
-
 ## Bab Ii Ketentuan Umum Tugas Akhir
 ## 2.1 Syarat Umum
 a. Definisi Tugas Akhir
@@ -320,8 +174,6 @@ dapat mengikuti seminar proposal, serta memiliki Indeks Prestasi Kumulatif (IPK)
 4. Jumlah mata kuliah dengan nilai D tidak melebihi 15% dari total SKS yang telah
 ditempuh.
 5. Telah lulus mata kuliah Metode Penelitian dengan nilai minimal C.
-5
-
 6. Kegiatan Tugas Akhir Non-Skripsi diprogramkan dalam Kartu Rencana Studi (KRS)
 pada semester yang bersangkutan.
 7. Tugas Akhir Non-Skripsi dapat dikerjakan secara tim yang terdiri atas maksimal tiga
@@ -355,8 +207,6 @@ mahasiswa.
 Penyelesaian Tugas Akhir non-skripsi dibimbing oleh maksimal dua orang
 pembimbing. Pembimbing dan penguji ditetapkan oleh Dekan berdasarkan usulan
 jurusan. Khusus untuk Tugas Akhir berbasis proyek, proses pembimbingan melibatkan
-6
-
 pembimbing pendamping yang berasal dari mitra pelaksana proyek. Jumlah pertemuan
 bimbingan ditetapkan sekurang-kurangnya (5) lima kali dan wajib didokumentasikan
 melalui kartu konsultasi.
@@ -390,8 +240,6 @@ kelengkapan ujian, pengarsipan dokumen administrasi. Selain itu, staf akademik
 membantu memastikan seluruh proses administrasi berjalan sesuai dengan ketentuan
 yang berlaku, sehingga kegiatan Tugas Akhir non-skripsi dapat terselenggara secara
 tertib dan terkoordinasi.
-7
-
 f) Mitra (Steakholder) adalah pihak luar yang menjalin kerja sama dengan Program Studi
 atau Fakultas dalam rangka mengidentifikasi, merumuskan, dan menyelesaikan
 permasalahan yang dihadapi. Mitra ini dapat berasal dari instansi pemerintah, dunia
@@ -403,12 +251,8 @@ g) Task Force Publikasi, Inovasi dan Integritas Akademik Fakultas Teknik berpera
 melakukan pengecekan tingkat kesamaan (similarity) terhadap naskah Tugas Akhir
 non-skripsi mahasiswa. Peran ini bertujuan untuk memastikan keaslian karya,
 mencegah terjadinya plagiarisasi.
-8
-
 ## 2.5 Mekanisme Pendaftaran Ta Non Skripsi
 Gambar 1 Flowchart Mekanisme Pendaftaran TA Non Skripsi
-9
-
 ## Bab Iii Tugas Akhir Non Skripsi
 3.1 Proyek
 3.1.1 Penjelasan Umum
@@ -442,8 +286,6 @@ Syarat khusus tugas akhir proyek kolaborasi adalah
 3. Harus mampu menunjukkan ketercapaian kompetensi lulusan sesuai capaian
 pembelajaran program studi.
 4. Bentuk tugas akhir proyek kolaborasi interdisipliner melibatkan mahasiswa yang
-10
-
 berasal dari prodi/fakultas yang berbeda.
 5. Mahasiswa/ Tim membuat draf laporan proyek yang memuat LogBook secara
 individual.
@@ -476,8 +318,6 @@ Peneliti Menyusun kerangka teoritis dengan terlebih dahulu mendeskripsikan
 berbagai kegiatan yang telah ada, termasuk menguraikan kelebihan, kekurangan, serta
 perbedaan dengan kegiatan yang dikembangkan. Selanjutnya, dilakukan analisis
 terhadap efektivitas kegiatan yang akan dilaksanakan hingga akhirnya ditentukan
-11
-
 pilihan kegiatan yang diimplementasikan berdasarkan landasan teori. Jika kegiatan
 yang dipilih merupakan adaptasi dari kegiatan yang sudah ada, maka perlu dijelaskan
 alasan pemilihan kegiatan tersebut, penyesuaian pada komponen-komponennya, serta
@@ -509,8 +349,6 @@ beserta tingkat keefektifan dari kegiatan tersebut.
 b. Saran
 Peneliti memberikan rekomendasi untuk pelaksanaan kegiatan serupa di masa
 mendatang agar hasil yang dicapai dapat lebih optimal.
-12
-
 ## 6. Daftar Pustaka
 Daftar pustaka mencakup seluruh referensi yang digunakan atau dikutip, baik dari
 buku teks atau buku referensi ber-ISBN, laporan hasil penelitian, tesis/disertasi, artikel
@@ -537,8 +375,6 @@ proyek,
 3. Penguasaan materi (20%)
 Penilaian didasarkan pada kemampuan dalam menyampaikan dan mengkomunikasikan
 laporan proyek dan kualitas tanya jawab.
-13
-
 ## 3.2 Prototype
 3.2.1 Penjelasan Umum
 Prototype adalah purwarupa atau model awal dari suatu produk, sistem, atau komponen
@@ -573,8 +409,6 @@ antarmuka pengguna (user interface).
 2. Low-Fidelity Prototype (Lo-Fi Prototype)
 Low-fidelity prototype adalah purwarupa dengan tingkat detail rendah yang berfokus
 pada fungsi dasar dan struktur umum, tanpa memperhatikan tampilan akhir atau estetika.
-14
-
 Dalam teknik, bentuk ini bisa berupa model kasar dari produk, simulasi sederhana, atau
 prototipe fungsional minimal (minimum viable product).
 3. High-Fidelity Prototype (Hi-Fi Prototype)
@@ -608,8 +442,6 @@ baru.
 visual/estetika (bentuk, motif, warna).
 3.2.3 Sistematika Proposal Dan Laporan Prototype
 Sistematika laporan prototype sebagai berikut:
-15
-
 ## 1. Bab I Pendahuluan
 a. Latar Belakang
 Menyajikan uraian latar belakang permasalahan berdasarkan fakta-fakta yang
@@ -643,8 +475,6 @@ dihasilkan, sekaligus dijadikan sebagai indikator keberhasilan kegiatan.
 a. Hasil Kegiatan
 Penyajian hasil penelitian dan pembahasan diawali dengan memberikan gambaran
 mengenai subjek yang terlibat, lokasi pelaksanaan, serta waktu kegiatan.
-16
-
 Selanjutnya, dipaparkan rangkaian kegiatan yang telah dilaksanakan sesuai dengan
 tujuan dan target pada setiap tahap. Penyajian hasil sebaiknya dilakukan secara
 terperinci agar memberikan gambaran yang jelas mengenai kualitas kegiatan yang
@@ -678,8 +508,6 @@ terbit.
 Bobot penilaian Tugas Akhir Non-Skripsi dalam bentuk Prototype terdiri atas tiga
 komponen utama, yaitu:
 1. Laporan (20%)
-17
-
 Kriteria Penilaian Laporan pada prototype yakni tata cara penulisan laporan,
 sistematika penulisan, bahasa yang digunakan dan bukti kelengkapan lampiran.
 2. Luaran prototype (60%)
@@ -701,8 +529,6 @@ menuju sistem/kegiatan yang sesungguhnya.
 3. Penguasaan materi (20%)
 Penilaian didasarkan pada kemampuan dalam menyampaikan dan
 mengkomunikasikan laporan prototype dan kualitas tanya jawab.
-18
-
 ## 3.3 Jurnal Ilmiah
 3.3.1 Penjelasan Umum
 Jalur Jurnal Ilmiah merupakan salah satu bentuk Tugas Akhir Non-Skripsi yang diakui
@@ -736,8 +562,6 @@ diselenggarakan oleh institusi nasional atau internasional.
 Jurnal ilmiah dapat pula didefinisikan sebagai karya tulis yang menyajikan fakta umum,
 disusun berdasarkan metodologi penulisan yang benar, dan dimuat pada jurnal yang diakui
 serta terindeks oleh database Kementerian atau database internasional.
-19
-
 3.3.2 Syarat Khusus
 1. Kriteria Penulis
 - Mahasiswa yang mendapatkan rekognisi Jurnal ilmiah sebagai tugas akhir Non
@@ -764,14 +588,11 @@ kualitas Jurnal yang dipersyaratkan dapat dilihat pada Tabel 1.
 Tabel 2. Kategori Kualitas Jurnal
 No. Kategori Jurnal
 Jurnal Internasional Ter indeks Scopus / Web of Science (WOS) pada kategori Q2
-1
 hingga Q1
 2 Jurnal Internasional Ter indeks Scopus / Web of Science (WOS) pada kategori Q3
 3 Jurnal Internasional Ter indeks Scopus / Web of Science (WOS) pada kategori Q4
 4 Jurnal Nasional Terakreditasi Sinta 2 hingga Sinta 1
 5 Jurnal Nasional Terakreditasi Sinta 3
-20
-
 4. Kriteria Artikel
 - Artikel harus berupa hasil penelitian asli yang relevan dengan bidang ilmu
 mahasiswa.
@@ -792,20 +613,12 @@ hasil dan pembahasan, kesimpulan, serta daftar pustaka).
 Sistematika Penulisan Laporan TA Non-Skripsi Jalur Jurnal
 Bagian Awal
 Halaman Sampul Depan Tugas Akhir Non Skripsi (Cover)
-Kata Pengantar
-Daftar Isi
-Daftar Tabel
-Daftar Gambar
-Daftar Lampiran
-Bagian Utama
 BAB I Pendahuluan
 1.1 Latar Belakang Masalah
 Bagian ini menjelaskan alasan mendasar mengapa penelitian perlu dilakukan.
 Mahasiswa diharapkan menguraikan kondisi nyata yang berkaitan dengan topik
 penelitian, dilengkapi dengan data dan fakta terkini baik dari laporan resmi, publikasi
 ilmiah, maupun sumber kredibel lainnya. Mahasiswa perlu menegaskan urgensi
-21
-
 penelitian yang dilakukan serta kontribusi yang diharapkan, baik bagi ilmu pengetahuan
 maupun penerapan praktis di lapangan.
 1.2 Rumusan Masalah
@@ -838,8 +651,6 @@ pengambilan data, hingga analisis, agar rencana penelitian lebih terstruktur.
 Populasi adalah keseluruhan objek atau subjek yang memiliki karakteristik tertentu sesuai
 dengan penelitian. Sampel atau subjek adalah bagian dari populasi yang dijadikan sumber
 data. Teknik pengambilan sampel juga perlu dijelaskan, misalnya random sampling,
-22
-
 stratified, cluster, atau purposive. Jika penelitian menggunakan jumlah sampel tertentu,
 sertakan dasar perhitungannya agar lebih meyakinkan.
 3.3 Prosedur Pengumpulan Data
@@ -873,8 +684,6 @@ mendatang agar hasil yang dicapai dapat lebih optimal.
 Daftar Pustaka
 Berisi referensi yang digunakan dalam penyusunan proposal, ditulis sesuai sesuai panduan
 Program Studi
-23
-
 Lampiran-Lampiran:
 Lampiran Proposal:
 1. Rancangan artikel ilmiah yang akan disusun.
@@ -908,8 +717,6 @@ tambahan penilaian hingga 20% dari dosen penguji pada saat ujian Tugas Akhir. Na
 Mahasiswa yang menulis Jurnal ilmiah Internasional dan memenuhi kewajiban publikasi
 pada Jurnal bereputasi Q1-Q4 dapat mengajukan karya tersebut sebagai Tugas Akhir, serta
 berhak memperoleh nilai akhir A pada mata kuliah Tugas Akhir.
-24
-
 ## 3.4 Penerapan Teknologi Tepat Guna
 3.4.1 Penjelasan Umum
 Tugas Akhir dalam bentuk penerapan Teknologi Tepat Guna (TTG) merupakan karya
@@ -943,8 +750,6 @@ pembelajaran program studi.
 yang sudah ada, dengan pendekatan kreatif.
 5. TTG wajib diterapkan di masyarakat atau Dunia Usaha/Dunia Industri (DUDI) sebagai
 bentuk pengabdian.
-25
-
 6. Produk TTG telah digunakan oleh mitra (lembaga/instansi/industri) yang dibuktikan
 dengan surat keterangan resmi dari pihak terkait.
 7. Mahasiswa wajib mendaftarkan hasil TTG-nya ke HKI.
@@ -979,8 +784,6 @@ Bagian ini memuat tujuan umum (misi utama pengembangan TTG) dan tujuan khusus
 (sasaran operasional yang terukur—fitur, performa, biaya, atau dampak). Jelaskan
 pula manfaat bagi masyarakat/mitra (efisiensi, keselamatan, produktivitas), bagi
 mahasiswa (penguatan kompetensi teknis dan soft skills), serta bagi pengembangan
-26
-
 keilmuan (kontribusi pada praktik TTG atau validasi konsep/teknologi tertentu).
 ## Bab Ii Gambaran Umum Teknologi Tepat Guna
 2.1 Gambaran Umum Mitra
@@ -1015,8 +818,6 @@ hubungan antar komponen yang berperan dalam pelaksanaan kegiatan.
 1.1 Spesifikasi Umum Produk TTG
 Definisikan spesifikasi target (ukuran, kapasitas, kinerja, daya, material, keselamatan,
 keandalan). Spesifikasi harus selaras dengan kebutuhan mitra dan batasan yang telah
-27
-
 ditetapkan, serta menjadi acuan pengujian.
 1.2 Desain Fungsional
 Jelaskan arsitektur solusi melalui blok diagram atau skema sistem yang
@@ -1051,8 +852,6 @@ maknanya terhadap keberhasilan solusi. Jika memungkinkan, sertakan analisis sing
 reliabilitas dan keselamatan.
 4. Analisis Keunggulan dan Keterbatasan
 Bahas kekuatan utama TTG (kinerja, biaya, kemudahan operasional) serta
-28
-
 keterbatasannya (misalnya kondisi lingkungan tertentu, kebutuhan pemeliharaan, atau
 ketergantungan komponen). Tunjukkan dampak praktis keterbatasan dan peluang
 peningkatan di masa depan.
@@ -1087,8 +886,6 @@ o Ramah lingkungan.
 3. Penguasaan materi (20%)
 Penilaian didasarkan pada kemampuan dalam menyampaikan dan
 mengkomunikasikan laporan teknologi tepat guna dan kualitas tanya jawab.
-29
-
 ## 3.5 Karya Prestasi
 3.5.1 Penjelasan Umum
 Tugas Akhir berbentuk Karya Prestasi adalah pengakuan akademik atas capaian
@@ -1123,8 +920,6 @@ penyelenggara.
 dan foto resmi penyerahan piagam prestasi yang terdapat backdrop kegiatan yang
 meyakinkan.
 3. Portofolio karya sesuai ketentuan program studi
-30
-
 4. Surat tugas ke pesertaan mahasiswa, baik secara individu maupun kelompok
 untuk mengikuti perlombaan. Apabila kegiatan kejuaraan berupa kegiatan
 invitasi, bisa melampirkan bukti undangan invitasi kejuaraan tersebut.
@@ -1158,8 +953,6 @@ Tugas Akhir Non-Skripsi dalam bentuk Karya Prestasi.
 yang diikuti oleh mahasiswa dan menilai bukti kinerja prestasi mahasiswa.
 3. Program Studi mengeluarkan surat penyetujuan rekognisi Tugas Akhir Non-Skripsi
 dalam bentuk Karya Prestasi dan menjadwalkan sidang akhir mahasiswa/tim.
-31
-
 4. KDK atau Program Studi menugaskan dosen pembimbing yang berkompetensi
 dalam lingkup lomba dan sesuai ketentuan prodi untuk membimbing mahasiswa
 dalam penyusunan laporan hingga sidang akhir
@@ -1177,12 +970,6 @@ mempublikasikan.
 3. Karya Prestasi yang dapat di rekognisi maksimal sejak mahasiswa berada pada
 semester 5 perkuliahan saat mengikuti lomba tersebut.
 3.5.5 Sistematika Laporan Akhir Karya Prestasi
-Halaman Pengesahan
-Pernyataan Keaslian
-Abstrak
-Daftar Isi
-Daftar Tabel
-Daftar Lampiran
 Bab 1 Pendahuluan
 1.1 Latar Belakang
 Pada bagian Latar Belakang menjelaskan konteks umum masalah atau tema lomba
@@ -1195,8 +982,6 @@ industri/pengguna). Cantumkan data atau referensi singkat bila perlu (mis. stand
 studi terdahulu, statistik terkait masalah yang dipecahkan).
 Hal-hal yang perlu dicantumkan di latar belakang, yaitu
 - Identifikasi masalah atau tantangan yang menjadi latar perlombaan
-32
-
 - Relevansi topik dengan keilmuan prodi (sebutkan substansi ilmu dan
 kompetensi yang dikembangkan).
 - Alasan personal/kelompok memilih tema/konsep tersebut.
@@ -1230,8 +1015,6 @@ Berisi penjelasan mengapa penyelenggara dan lomba dianggap bereputasi (mis.
 asosiasi profesi, track record lomba, publikasi hasil lomba, sponsor/institusi
 pendukung). Jika lomba internasional, sebutkan asosiasi atau lembaga yang
 mengakreditasi atau bermitra. Cantumkan dokumen verifikasi (lampiran) seperti
-33
-
 halaman web resmi, undangan, atau surat keterangan panitia. Bagian ini membantu
 tim penguji menilai bobot prestasi (mis. finalis internasional pada lomba bereputasi
 memiliki bobot lebih tinggi).
@@ -1263,8 +1046,6 @@ karya, bahan, alat, proses dan durasi tiap tahapan kerja.
 3.3 Pembuatan Karya
 Berisi deskripsikan secara lengkap dan terstruktur hasil dari tiap tahapan
 pembuatan karya. Jelaskan bagaimana karya memenuhi aspek fungsional dan
-34
-
 teknis terkait ruang lingkup dan konteks lomba. Sajikan visualisasi pengolahan
 data dan bahan dalam proses pembuatan karya hingga menghasilkan karya final.
 Hasil visualisasi ditampilkan pada laporan menggunakan penulisan keterangan
@@ -1297,8 +1078,6 @@ stakeholders yang relevan.
 Bagian ini berisi pembelajaran utama yang diperoleh selama proses
 perancangan karya dari segi keilmuan program studi dan keterampilan abad 21 atau
 7C’s (Critical thinking, Creativity and Innovation, Collaboration, Cross-cultural
-35
-
 understanding, Communication, Computing Technology, and Career Learning).
 Sertakan rekomendasi pribadi untuk pengembangan kompetensi lebih lanjut.
 ## Daftar Pustaka
@@ -1342,8 +1121,6 @@ s ignifikan.
 Struktur & kelengkapan 5 0: tidak ada;
 1: kurang;
 2: cukup;
-36
-
 3: baik;
 4 : sangat sistematis.
 Relevansi terhadap 5 0: tidak relevan;
@@ -1394,8 +1171,6 @@ lomba (foto, video, 1: minim;
 publikasi di media) 2: cukup;
 3: lengkap
 4: Terdokumentasi rapi
-37
-
 ## 3.6 Prosiding
 3.6.1 Penjelasan Umum
 Prosiding Internasional
@@ -1427,8 +1202,6 @@ a) Artikel prosiding harus berupa hasil penelitian asli yang relevan dengan bida
 mahasiswa.
 b) Ditulis sesuai kaidah penulisan ilmiah (memiliki abstrak, pendahuluan, metodologi,
 hasil dan pembahasan, kesimpulan, serta daftar pustaka).
-38
-
 c) Menggunakan bahasa yang formal dan memenuhi standar etika publikasi ilmiah (tidak
 mengandung plagiarisme, hasil uji plagiarisme ≤ 20%).
 5. Kelengkapan Administratif
@@ -1444,12 +1217,6 @@ g) Bukti hasil uji plagiarisme ≤ 20%
 Sistematika penulisan proposal jalur prosiding sebagai berikut :
 ## Bagian Awal :
 Halaman Sampul Depan Tugas Akhir Non Skripsi (Cover)
-Kata Pengantar
-Daftar Isi
-Daftar Tabel
-Daftar Gambar
-Daftar Lampiran
-## Bagian Utama :
 ## Bab I Pendahuluan
 a) Latar Belakang
 Bagian ini menjelaskan alasan mendasar mengapa penelitian perlu dilakukan.
@@ -1463,8 +1230,6 @@ Rumusan masalah berfungsi sebagai panduan arah penelitian. Bagian ini harus
 dirumuskan dalam bentuk pertanyaan penelitian yang jelas, spesifik, dan dapat
 dijawab dengan metode yang dipilih.
 c) Tujuan Penelitian
-39
-
 Tujuan penelitian merupakan pernyataan yang menjawab rumusan masalah. Tujuan
 harus dirumuskan secara terukur, realistis, serta dapat dicapai dengan desain
 penelitian yang dipilih.
@@ -1498,8 +1263,6 @@ hingga pasca-pengumpulan. Tahap persiapan bisa berupa uji coba instrumen atau
 perizinan penelitian. Tahap pelaksanaan menjelaskan langkah-langkah operasional saat
 mengumpulkan data di lapangan atau laboratorium. Tahap pasca-pengumpulan
 mencakup verifikasi data, hingga pengecekan konsistensi agar data siap dianalisis.
-40
-
 3.4 Teknik Analisis Data
 Bagian ini menjelaskan bagaimana data yang diperoleh akan diolah dan dianalisis.
 Misalnya untuk penelitian kuantitatif, analisis dapat meliputi statistik deskriptif, uji
@@ -1533,8 +1296,6 @@ Lampiran pada saat ujian akhir:
 5. Lampiran Sertifikat atau Bukti Peringkat Prosiding
 6. Surat Rekomendasi Kelayakan Submit oleh Dosen Pembimbing
 7. Bukti publikasi (tautan resmi DOI atau link prosiding).
-41
-
 8. Halaman pertama artikel.
 9. Bukti indeksasi (Scopus, WOS, atau lainnya).
 10. Surat pernyataan keaslian karya.
@@ -1553,8 +1314,6 @@ dan kemampuan menjawab pertanyaan.
 Mahasiswa yang mengikuti Seminar Internasional sebagai presenter dan memenuhi
 kewajiban publikasi dalam bentuk prosiding internasional dapat mengajukan karya
 tersebut sebagai Tugas Akhir, serta berhak memperoleh nilai akhir A pada Tugas Akhir.
-42
-
 ## Daftar Pustaka
 [1] T. Ronzon et al., “sALINAN PERMENDIKTI NO 39 TAHUN
 2025,” Sustain., vol. 11, no. 1, pp. 1–14, 2025, [Online].
@@ -1567,8 +1326,6 @@ Universitas Nusa Cendana Tahun 2023,” 2023.
 [5] P. yayasan unjani Rekognisi, Peraturan rekognisi.
 [6] “ii | Pedoman dan Peraturan Akademik Universitas Tadulako
 2025 – 2026,” 2026.
-43
-
 Nomor SOP :
 Tanggal Pembuatan : Senin, 15 September 2025
 Disahkan Oleh Dekan Fakultas Teknik
@@ -1607,8 +1364,6 @@ d. TTG (Teknologi Tepat Guna):
 Produk/jasa yang diadopsi oleh
 masyarakat/dunia usaha dengan
 bukti HKI atau penerapan nyata,.
-44
-
 SOP Tugas Akhir Non Skripsi
 Bagan Alir Prosedur
 Pihak
@@ -1632,15 +1387,12 @@ Karya Prestasi Piagam Prestasi, Portofolio Karya, Dokumentasi
 Prosiding Bukti accepted, Bukti publikasi, bukti bereputasi,pernyataan keaslian karya
 9 Similarity Laporan TA Non Skripsi 1 Minggu
 Pengajuan Ujian Hasil Tugas Akhir
-10
 Non Skripsi
 11 Ujian Tugas Akhir Non-Skripsi 1 hari
 12 Revisi Hasil Ujian 1–2 minggu
 13 Pengumpulan Laporan Akhir 3 hari
 14 Penetapan Nilai & Arsip 1 hari
 15 Nilai Ujian TA Non Skripsi 1 Hari
-45
-
 Lampiran-Lampiran
 Lampiran 1
 ## Pernyataan Keaslian
@@ -1653,8 +1405,6 @@ Tempat, Tanggal
 Nama Mahasiswa
 NIM
 *Pilih Salah Satu Jalur TA Non SKripsi
-46
-
 Lampiran 2
 ## Contoh Template Sampul Ta Non Skripsi
 ## Tugas Akhir Mahasiswa Non-Skripsi Jalur *
@@ -1666,8 +1416,6 @@ NIM
 ## Universitas Tadulako
 ## Tahun Usulan
 *Pilih Salah Satu Jalur TA Non SKripsi
-47
-
 Lampiran 3 Contoh Halaman Pernyataan Keaslian Tugas Akhir Non Skripsi
 ## Halaman Pernyataan Keaslian Tugas Akhir
 (Times New Roman, Uppercase, Size 12, Bold, Spasi 1,5, Center)
@@ -1691,8 +1439,6 @@ Materai Rp 10.000
 Nama mahasiswa
 Nim
 *Pilih Salah Satu Jalur TA Non SKripsi
-48
-
 Lampiran 5 Surat Permohonan Rekognisi
 (dilampirkan hasil scan dokumen asli)
 Perihal : Surat Permohonan Rekognisi
@@ -1729,8 +1475,6 @@ Materai 10.000
 Nama lengkap Mahasiswa
 NIM
 *Pilih Salah Satu Jalur TA Non SKripsi
-50
-
 Lampiran 6 Surat Penyetujuan Rekognisi
 (Dikeluarkan oleh Admin Program Studi dan dilampirkan hasil scan dokumen asli)
 (Kop Surat)
@@ -1762,8 +1506,6 @@ Fakultas Teknik, Universitas Tadulako
 Nama Ketua Prodi
 ## Nip.
 *Note : Pilih Salah Satu Jalur TA Non SKripsi
-51
-
 Lampiran 7 : Format Surat Rekomendasi Kelayakan Jurnal Ilmiah
 ## Surat Rekomendasi Kelayakan
 Yang bertanda tangan di bawah ini:
@@ -1787,160 +1529,4 @@ Tanda tangan dan Nama Jelas
 ## Nip. ………………………………
 *Note:
 Khusus Jurnal Ilmiah dan Prosiding
-52
-
 Lampiran 8 Pengesahan
-## Halaman Pengesahan
-## Distribusi Spasial Kerawanan Kekeringan Di Das Miu
-## Menggunakan Quantum Gis (Qgis)
-Yang dipersiapkan dan disusun oleh:
-## Muhammad Shamil Basayev
-## F11117288
-Telah dipertahankan didepan Majelis Penguji dan dinyatakan diterima sebagai salah satu
-persyaratan untuk memperoleh gelar Sarjana Strata Satu (S1) Teknik Sipil
-Pada tanggal 03 Maret 2021
-Mengesahkan,
-Dekan Fakultas Teknik Ketua Jurusan Teknik Sipil
-Universitas Tadulako, Fakultas Teknik Universitas Tadulako,
-Ir. Andi Arham Adam, S.T., M.Eng., Ph.D Dr. Ir. Sriyati Ramadhani, S.T., M.T.
-## Nip. 19740323 199903 1 002 Nip. 19750925 200501 2 011
-53
-
-Lampiran 9 Flyer Lomba
-(contoh)
-*Jalur TA Non Skripsi Karya Prestasi
-54
-
-Lampiran 10 Dokumentasi Lomba
-(Lampirkan foto saat membuat karya, screenshot informasi pemenang, dan foto saat penerimaan
-hadiah)
-*Jalur TA Non Skripsi Karya Prestasi
-Lampiran 11 Piagam Penghargaan
-(Lampirkan piagam bukti mendapatkan juara dalam format scan warna)
-*Jalur TA Non Skripsi Karya Prestasi
-Lampiran 11 Portofolio Karya
-(Dilampirkan dalam format landscape atau portrait menyesuaikan kertas ukuran A4 dengan
-mengikuti ketentuan Program Studi)
-*Jalur TA Non Skripsi Karya Prestasi
-55
-
-Lampiran 11 Data Diri
-## Data Diri Penulis
-[Nama Lengkap], lahir di [Tempat, Tanggal Lahir], adalah mahasiswa
-Program Studi [Nama Prodi] di Jurusan [Nama Jurusan] dengan minat
-khusus [deskripsi minat keilmuan mahasiswa]. Ia mengkhususkan diri
-pada pengembangan [deskripsi keterampilan yang dikembangkan dan
-Foto formal
-yang dikuasai mahasiswa],. Untuk komunikasi akademik dan profesional
-dapat dihubungi melalui email: mahasiswa.arsi@untad.ac.id Lampirkan
-5cm x 4cm
-foto diri ukuran 5cm x 4 cm.
-*Pilih Salah Satu Jalur TA Non SKripsi
-56
-
-## Tabel yang Diekstrak
-
-### Tabel (Halaman 9, #1)
-
-| 1. Tabel 1. Rentang Skor/Nilai Ujian Skripsi ......................................................... 6 |
-|---|
-| 2. Tabel 2. Kategori Kualitas Jurnal ........................................................................ 20 |
-| 3. Tabel 5. Skema Pembobotan Karya Prestasi ...................................................... 36 |
-| 4. Tabel 6. Rubik Kriteria Karya Prestasi ............................................................... 36 |
-| 5. Tabel SOP TA Non Skripsi .................................................................................. 44 |
-| 6. Tabel Bagan Alur TA Non Skripsi ..................................................................... 45 |
-
-### Tabel (Halaman 16, #1)
-
-| N0 | Nilai Mentah | Nilai Masak | | Keterangan kelulusan |
-|---|---|---|---|---|
-| | | Huruf | Angka | |
-| 1 | > 85,00 | A | 4.00 | Lulus |
-| 2 | > 80 – ≤ 85 | A- | 3.75 | Lulus |
-| 3 | 75 – ≤ 80 | B+ | 3.50 | Lulus dengan Perbaikan |
-| 4 | > 70 – ≤ 75 | B | 3.25 | Lulus dengan Perbaikan |
-
-### Tabel (Halaman 30, #1)
-
-| No. | Kategori Jurnal |
-|---|---|
-| 1 | Jurnal Internasional Ter indeks Scopus / Web of Science (WOS) pada kategori Q2 hingga Q1 |
-| 2 | Jurnal Internasional Ter indeks Scopus / Web of Science (WOS) pada kategori Q3 |
-| 3 | Jurnal Internasional Ter indeks Scopus / Web of Science (WOS) pada kategori Q4 |
-| 4 | Jurnal Nasional Terakreditasi Sinta 2 hingga Sinta 1 |
-| 5 | Jurnal Nasional Terakreditasi Sinta 3 |
-
-### Tabel (Halaman 46, #1)
-
-| No. | Kriteria Utama | Bobot |
-|---|---|---|
-| 1 | Portofolio Karya | 50% |
-| 2 | Laporan Akhir | 20% |
-| 3 | Presentasi dan pertanggungjawaban karya | 20% |
-| 4 | Kelengkapan dokumen kinerja prestasi | 10% |
-
-### Tabel (Halaman 46, #2)
-
-| Sub-Kriteria | | Bobot Internal | Deskripsi Indikator | |
-|---|---|---|---|---|
-| 1. Portofolio (50%) | | | | |
-| Fungsi dan kelayakan sesuai keilmuan program studi | | 15 | 0 tidak ada; 1: kurang layak dan kurang aplikatif; 2: cukup layak dan cukup aplikatif; 3: fungsi baik dan aplikatif; 4 : solusi teknis lengkap | |
-| Kelengkapan Portofolio Karya | | 15 | 0: tidak ada; 1: sangat minim; 2: di bawah standar; 3: memenuhi standar; 4: lengkap | |
-| Inovasi dan orisinalitas | | 20 | 0 plagiarisme/duplikasi; 1: sangat minim; 2: ada unsur baru; 3: inovatif; 4: ide orisinal dengan nilai tambah s ignifikan. | |
-| | 2. Laporan Akhir (20%) | | | |
-| Struktur & kelengkapan | | 5 | 0: tidak ada; 1: kurang; 2: cukup; | |
-
-### Tabel (Halaman 47, #1)
-
-| | | | 3: baik; 4 : sangat sistematis. | |
-|---|---|---|---|---|
-| Relevansi terhadap substansi keilmuan program studi | | 5 | 0: tidak relevan; 1: kurang; 2: cukup; 3: relevan; 4 : sangat kuat keterkaitannya | |
-| Pembahasan karya | | 5 | 0: tidak ada; 1: minim pembahasan; 2: cukup; 3: baik; 4 : kritis dan pembahasan komprehensif. | |
-| Lampiran bukti (piagam, portofolio, dokumentasi kegiatan, bukti submit) | | 5 | 0: tidak ada; 1: minim; 2: sesuai; 3: lengkap; 4 : sangat terdokumentasi rapi. | |
-| | 3. Presentasi dan pertanggungjawaban Sidang (20%) | | | |
-| Keterpaduan presentasi dan alur penyajian | | 5 | 0: tidak presentasi; 1: kacau; 2: cukup; 3: jelas; 4 : sangat terstruktur & menarik. | |
-| Penguasaan materi dan kemampuan berargumen | | 5 | 0: tidak mampu; 1: lemah; 2: cukup; 3: baik; 4 : sangat menguasai & tanggap | |
-| Visualisasi Karya | | 5 | 0: tidak ada; 1: buruk; 2: standar; 3: efektif; 4: sangat mendukung presentasi . | |
-| Profesionalisme dan Etika akademik | | 5 | 0: tidak profesional; 1: kurang; 2: cukup; 3: baik; 4: sangat profesional. | |
-| | 4. Kelengkapan Dokumen (10%) | | | |
-| Keaslian & otentikasi bukti kinerja prestasi | | 5 | 0: tidak ada; 1: tidak resmi; 2: ada tapi kurang bukti resmi; 3: resmi; 4 : resmi dan mudah diverifikasi. | |
-| Kelengkapan dokumentasi lomba (foto, video, publikasi di media) | | 5 | 0: tidak ada; 1: minim; 2: cukup; 3: lengkap 4: Terdokumentasi rapi | |
-
-### Tabel (Halaman 54, #1)
-
-| UNIVERSITAS TADULAKO PUSAT PENJAMINAN MUTU FAKULTAS TEKNIK UNIVERSITAS TADULAKO | Nomor SOP : Tanggal Pembuatan : Senin, 15 September 2025 | | |
-|---|---|---|---|
-| | Disahkan Oleh | | Dekan Fakultas Teknik Ir. Andi Arham Adam, ST., M.Sc(Eng)., Ph.D NIP. 19740323 199903 1 002 |
-| | Nama SOP | | Tugas Akhir Non Skripsi |
-| Dasar Hukum : | | Tujuan: | |
-| 1. Undang-Undang No. 12 Tahun 2012 tentang Pendidikan Tinggi. 2. Peraturan Menteri Pendidikan dan Kebudayaan No. 3 Tahun 2020 tentang Standar Nasional Pendidikan Tinggi. 3. Panduan Penyelenggaraan SPMI (Sistem Penjaminan Mutu Internal) Perguruan Tinggi. 4. Peraturan Rektor/Keputusan Fakultas terkait pedoman akademik dan penyelesaian studi. | | 1. Memberikan panduan pelaksanaan Tugas Akhir Non-Skripsi (Jurnal, Prototype, Proyek, atau TTG) secara terstruktur, transparan, dan akuntabel. 2. Menjamin keseragaman prosedur pelaksanaan mulai dari pendaftaran, pembimbingan, pelaksanaan, pengujian, hingga penetapan nilai. 3. Mendukung pencapaian capaian pembelajaran lulusan (CPL) melalui produk akademik yang aplikatif dan bermanfaat bagi masyarakat atau dunia usaha. | |
-| Ruang Lingkup: | | Definisi | |
-| 1. SOP ini berlaku bagi mahasiswa program sarjana yang menempuh Tugas Akhir Non- Skripsi. 2. Jenis Tugas Akhir Non-Skripsi mencakup: a. Jurnal: Artikel ilmiah yang diterima/diterbitkan pada jurnal ilmiah terkait. b. Prototype: Produk atau model teknis yang dilengkapi Hak Kekayaan Intelektual (HKI), Video dan Poster. c. Proyek: Produk akhir berbasis project sesuai bidang keilmuan. d. TTG (Teknologi Tepat Guna): Produk/jasa yang diadopsi oleh masyarakat/dunia usaha dengan bukti HKI atau penerapan nyata,. | | 1. Tugas Akhir Non-Skripsi: Bentuk karya akhir mahasiswa berupa jurnal, prototype, proyek, atau TTG sebagai alternatif skripsi, yang berorientasi pada aplikasi, inovasi, atau publikasi. 2. Pihak Terkait: Lembaga eksternal (jurnal, mitra masyarakat, industri, dunia usaha) yang menjadi bukti sahih pelaksanaan Tugas Akhir Non-Skripsi. 3. HKI (Hak Kekayaan Intelektual): Pengakuan legal terhadap hasil karya inovasi (prototype/TTG) yang dihasilkan mahasiswa. | |
-
-### Tabel (Halaman 55, #1)
-
-| No | | | Kegiatan | | | | Dosen Pembimbing | | | Admin Prodi | | | Mahasiswa | | | KDK | | | Kaprodi | | | | Pihak | | Waktu | | |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | | | | | | | | | | | | | | | | Terkait | | | | |
-| 1 | | | Pendaftaran Tugas Akhir | | | | | | | | | | | | | | | | | | | | | | 3 hari | | |
-| 2 | | | Penetapan Dosen Pembimbing | | | | | | | | | | | | | | | | | | | | | | 3 hari | | |
-| | 3 | | | Penyusunan Proposal | | | | | | | | | | | | | | | | | | | | | | 2–4 minggu | |
-| 4 | | | Seminar Proposal | | | | | | | | | | | | | | | | | | | | | | 1 hari | | |
-| | 5 | | | Revisi Proposal | | | | | | | | | | | | | | | | | | | | | | 1–2 minggu | |
-| 6 | | | Proses Penelitian Tugas Akhir | | | | | | | | | | | | | | | | | | | | | | 2–3 bulan | | |
-| | 7 | | | Bimbingan dan Monitoring | | | | | | | | | | | | | | | | | | | | | | Selama TA | |
-| 8 | | | Kelengkapan Syarat Tugas Akhir | | Jurnal | | LOA dari Jurnal Ilmiah Terkait | | | | | | | | | | | | | | | | | | 3 hari | | |
-| | | | | | Prototype | | Video, Poster, HKI | | | | | | | | | | | | | | | | | | | | |
-| | | | | | Proyek: | | IA, Produk Akhir Project | | | | | | | | | | | | | | | | | | | | |
-| | | | | | TTG | | | Produk/Jasa yang diadopsi oleh Masyarakat/Dunia Usaha, HKI, Dan Video | | | | | | | | | | | | | | | | | | | |
-| | | | | | | | | Penerapan Produk | | | | | | | | | | | | | | | | | | | |
-| | | | | | Karya Prestasi | | Piagam Prestasi, Portofolio Karya, Dokumentasi | | | | | | | | | | | | | | | | | | | | |
-| | | | | | Prosiding | | Bukti accepted, Bukti publikasi, bukti bereputasi,pernyataan keaslian karya | | | | | | | | | | | | | | | | | | | | |
-| 9 | | | Similarity Laporan TA Non Skripsi | | | | | | | | | | | | | | | | | | | | | | 1 Minggu | | |
-| 10 | | | | Pengajuan Ujian Hasil Tugas Akhir | | | | | | | | | | | | | | | | | | | | | | | |
-| | | | | Non Skripsi | | | | | | | | | | | | | | | | | | | | | | | |
-| 11 | | | Ujian Tugas Akhir Non-Skripsi | | | | | | | | | | | | | | | | | | | | | | 1 hari | | |
-| | 12 | | | Revisi Hasil Ujian | | | | | | | | | | | | | | | | | | | | | | 1–2 minggu | |
-| 13 | | | Pengumpulan Laporan Akhir | | | | | | | | | | | | | | | | | | | | | | 3 hari | | |
-| | 14 | | | Penetapan Nilai & Arsip | | | | | | | | | | | | | | | | | | | | | | 1 hari | |
-| 15 | | | Nilai Ujian TA Non Skripsi | | | | | | | | | | | | | | | | | | | | | | 1 Hari | | |

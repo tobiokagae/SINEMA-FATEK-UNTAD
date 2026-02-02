@@ -1,6 +1,6 @@
 # Panduan Satuan Poin Ekstrakurikuler Fix
 
-*Dokumen ini dikonversi otomatis dari PDF*
+*Dokumen ini dikonversi dan dibersihkan otomatis*
 
 ---
 
@@ -8,42 +8,6 @@
 ## Kegiatan Ekstrakurikuler Mahasiswa
 ## Universitas Tadulako
 2024
-i
-
-## Kata Pengantar
-Dengan mengucap syukur Alhamdulilah atas terbitnya Buku Panduan Kegiatan
-Ekstrakurikuler Mahasiswa Universitas Tadulako Edisi Tahun 2024. Buku panduan ini dibuat
-sebagai rujukan bagi semua pihak yang terkait dalam pelaksanaan kegiatan Ekstrakurikuler
-Mahasiswa di Lingkungan Universitas Tadulako.
-Universitas Tadulako berusaha untuk mempersiapkan mahasiswa agar menjadi individu
-yang unggul dalam bidang akademik dan non-akademik. Mahasiswa diharapkan terlibat dalam
-berbagai kegiatan yang diselenggarakan oleh perguruan tinggi atau institusi lain, yang akan
-membentuk karakter mereka menjadi individu yang kreatif, aktif, mampu bekerja dalam tim, dan
-kompetitif dalam mencapai prestasi. Untuk memberikan penghargaan kepada mahasiswa yang
-telah aktif berkontribusi melalui berbagai kegiatan, maka Universitas Tadulako melalui tim yang
-dibentuk oleh bagian kemahasiswaan dan alumni telah menyusun Panduan Ekstrakurikuler
-Mahasiswa.
-Panduan Kegiatan kemahasiswaan non akademik umumnya merupakan inisiatif dan
-kreativitas mahasiswa sendiri. Dengan demikian, agar kegiatan-kegiatan tersebut terarah,
-sistematis, efektif, efisien, akuntabel, dan berkelanjutan, maka diperlukan suatu pedoman yang
-mengatur sistem tersebut.
-Dengan selesainya penulisan buku panduan ini, ucapan terima kasih yang tak terhingga
-disampaikan kepada semua pihak yang telah membantu dalam penyusunan dan penyelesaianya.
-Semoga apa yang telah dilakukan akan membawa manfaat yang sebesar-besarnya bagi
-peningkatan kualitas kegiatan Ekstrakurikuler di Universitas Tadulako. Dan apabila ada hal-hal
-yang belum dimasukan dalam panduan ini, maka penyesuaian yang diperlukan akan diatur
-kemudian melalui buku panduan edisi berikutnya. Kami menyadari sepenuhnya bahwa buku
-panduan ini masih jauh dari yang diharapkan. Oleh karena itu, dengan segala kerendahan hati,
-kami menerima saran dan kritik dari semua pihak demi penyempurnaanya.
-Palu, 2024
-## Tim Penyusun
-ii
-
-## Daftar Isi
-Halaman
-KATA PENGANTAR ii
-DAFTAR ISI iv
-DAFTAR TABEL v
 ## Bab I Pendahuluan
 1.1. Latar Belakang 1
 1.2. Dasar Hukum 2
@@ -60,21 +24,6 @@ DAFTAR TABEL v
 3.2. Instruksi Kerja Perhitungan Spe Mahasiswa Universitas 20
 Tadulako
 ## Lampiran
-iii
-
-## Daftar Tabel
-Halaman
-Tabel 1. Bidang Pengembangan Penalaran dan Kreativitas 5
-Tabel 2. Bidang Kesejahteraan dan Kewirausahaan 9
-Tabel 3. Bidang Minat, Bakat dan Organisasi Kemahasiswaan 9
-Tabel 4. Bidang Penyelarasan dan Pengembangan Karier 13
-Tabel 5. Bidang Pengembangan Mental Spritualitas Kebangsaaan 13
-Tabel 6. Bidang Internasioalisasi 13
-Tabel 7. Bidang Penyelarasan dan Pengembangan Karier 14
-Tabel 8. Bidang Khusus Fakultas 14
-Tabel 9. Kisaran Nilai Bobot 15
-iv
-
 ## Bab I
 ## Pendahuluan
 1.1. Latar Belakang
@@ -104,8 +53,6 @@ bertujuan membantu memberi wawasan cinta kepada almamater serta kemampuan soft s
 of thingking, management skill, communication skill) kepada mahasiswa sehingga menghasilkan
 lulusan yang berwawasan luas, dapat bekerja sama, penuh inisiatif, kreatif, inovatif, mandiri,
 bekerja secara cermat, bersemangat, penuh tanggung jawab, bermoral, gigih dan penuh percaya
-1
-
 diri. untuk memberikan apresiasi kepada mahasiswa yang telah mengikuti kegiatan
 kemahasiswaan/ekstrakurikuler, maka akan diberikan transkrip berisi nilai kredit kegiatan
 ekstrakurikuler. Nilai kredit kegiatan ekstrakurikuler dinyatakan dalam Satuan Kredit Kegiatan
@@ -134,8 +81,6 @@ Merdeka Belajar-Kampus Merdeka Program Sarjana dan Sarjana Terapan di
 Universitas Tadulako;
 10. Peraturan Rektor Nomor Manual 3 Tahun 2024 tentang Pedoman dan Peraturan
 Akademik Tahun Universitas Tadulako 2024-2025;
-2
-
 11. Direktorat Pembelajaran dan Kemahasiswaan Tahun 2023, Panduan Sistem
 Informasi Manajemen Pemeringkatan Kemahasiswaan (SIMKATMAWA) -
 Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi Kementerian
@@ -145,8 +90,6 @@ Pendidikan, Kebudayaan, Riset, dan Teknologi.
 lingkungan Universitas Tadulako.
 2. Memberikan informasi tentang bidang kegiatan, jenis dan bobot poin untuk masing-
 masing kegiatan ekstrakurikuler mahasiswa, di lingkup Universitas Tadulako.
-3
-
 ## Bab Ii
 ## Bidang, Jenis, Dan Bobot Nilai Aktivitas
 ## Kegiatan Ekstrakurikuler Mahasiswa.
@@ -174,8 +117,6 @@ sebagaimana tertuang dalam pedoman pelaksanaan ekstrakurikuler ini.
 dalam proses belajar setiap mahasiswa yang sifatnya wajib diikuti yang termuat dalam
 kurikulum setiap Program Studi minimal 1 sks dan maksimal 2 sks dan disajikan di
 semester akhir (semester 8)
-4
-
 2.2. Ketentuan Khusus
 Beberapa ketentuan khusus yang harus diperhatikan oleh mahasiswa dalam mengikuti
 setiap kegiatan ekstrakurikuler yaitu:
@@ -203,8 +144,6 @@ Sebagai acuan dalam pemberian nilai untuk setiap aktivitas kegiatan ekstrakuriku
 mahasiswa, maka diuraikan setiap aktivitas ekstrakurikuler mahasiswa menurut bidang kegiatan,
 jenis dan bobot nilai untuk masing-masing kegiatan, sesuai Tabel 1, Tabel 2, Tabel 3, Tabel 4,
 Tabel 5, Tabel 6, Tabel 7, dan Tabel 8 berikut ini:
-5
-
 Tabel 1. Bidang Pengembangan Penalaran dan Kreativitas
 Peringkat/ Bobot
 No Kegiatan Tingkat
@@ -245,8 +184,6 @@ Juara II 50
 Juara III 25
 Favorit 20
 Peserta 15
-6
-
 2 Mengikuti Kegiatan/Forum Ilmiah (Seminar,
 Internasional 600
 Lokakarya, Workshop, Pameran/Poster)
@@ -280,25 +217,17 @@ Penyusunan Karya Tulis/Proposal
 32-56 jam 100
 <32 jam 50
 6 Mengikuti Seminar Proposal/Hasil Penelitian
-50
 Dosen
 7 Membuat karya ilmiah jurnal (kegiatan Jurnal Internasional
-700
 mandiri dan tidak direkognisi ke SKS MK) bereputasi
 Jurnal Internasional 600
 Jurnal Nasional Sinta
-600
 1 dan 2
 Jurnal Nasional Sinta
-500
 3 dan 4
-7
-
 Jurnal Nasional Sinta
-400
 5 dan 6
 Jurnal Nasional tidak
-200
 terakreditasi
 8 Menjadi Asisten Matakuliah/Praktikum/
 Laboratorium/
@@ -340,8 +269,6 @@ Peserta 50
 Universitas Juara I 150
 Juara II 100
 Juara III 75
-8
-
 Favorit 50
 Peserta 50
 Fakultas Juara I 100
@@ -381,20 +308,14 @@ Peringkat/ Bobot
 No Kegiatan Tingkat
 Jabatan Nilai
 1 Mengelola Usaha/Koperasi Universitas Ketua 350
-9
-
 Wakil
-300
 Ketua
 Sekretaris 250
 Wakil
-200
 Sekretaris
 Pengurus
-150
 Bidang
 Anggota
-100
 Penggurus
 2 Mengikuti Ekspo Kewirausahaan (kegiatan Nasional 250
 mandiri dan tidak direkognisi ke SKS MK)
@@ -412,239 +333,169 @@ No Kegiatan Tingkat
 Jabatan Nilai
 1 Pengurus Organisasi Keilmuan Internasional Ketua 700
 Wakil
-600
 Ketua
 Sekretaris 500
 Wakil
-400
 Sekretaris
 Pengurus
-300
 Bidang
 Anggota
-200
 Pengurus
 Nasional Ketua 500
 Wakil
-400
 Ketua
 Sekretaris 300
 Wakil
-200
 Sekretaris
 Pengurus
-100
 Bidang
-10
-
 Anggota
-75
 Pengurus
 Regional Ketua 400
 Wakil
-300
 Ketua
 Sekretaris 200
 Wakil
-100
 Sekretaris
 Pengurus
-75
 Bidang
 Anggota
-50
 Pengurus
 Universitas Ketua 300
 Wakil
-200
 Ketua
 Sekretaris 100
 Wakil
-75
 Sekretaris
 Pengurus
-50
 Bidang
 Anggota
-25
 Pengurus
 Fakultas Ketua 200
 Wakil
-100
 Ketua
 Sekretaris 75
 Wakil
-50
 Sekretaris
 Pengurus
-25
 Bidang
 Anggota
-20
 Pengurus
 Jurusan/ Program
 Ketua 100
 Studi/Bidang
 Wakil
-75
 Ketua
 Sekretaris 50
 Wakil
-25
 Sekretaris
 Pengurus
-20
 Bidang
-11
-
 Anggota
-15
 Pengurus
 Internasional Ketua 500
 2 Pengurus Organisasi Non Keilmuan Wakil
-400
 Ketua
 Sekretaris 300
 Wakil
-200
 Sekretaris
 Pengurus
-100
 Bidang
 Anggota
-75
 Pengurus
 Nasional Ketua 400
 Wakil
-300
 Ketua
 Sekretaris 200
 Wakil
-100
 Sekretaris
 Pengurus
-75
 Bidang
 Anggota
-50
 Pengurus
 Regional Ketua 300
 Wakil
-200
 Ketua
 Sekretaris 100
 Wakil
-75
 Sekretaris
 Pengurus
-50
 Bidang
 Anggota
-25
 Penggurus
 Universitas Ketua 200
 Wakil
-100
 Ketua
 Sekretaris 75
 Wakil
-50
 Sekretaris
 Pengurus
-25
 Bidang
 Anggota
-15
 Penggurus
 Fakultas Ketua 100
-12
-
 Wakil
-75
 Ketua
 Sekretaris 50
 Wakil
-25
 Sekretaris
 Pengurus
-15
 Bidang
 Anggota
-10
 Penggurus
 Jurusan/Prodi Ketua 75
 Wakil
-50
 Ketua
 Sekretaris 25
 Wakil
-15
 Sekretaris
 Pengurus
-10
 Bidang
 Anggota
-5
 Penggurus
 3 Pengurus Organisasi Kemahasiswaan Universitas
 Ketua 500
 ## Mm/Bem/Ukm/Ukf/Hmj/Hmp
 Wakil
-400
 Ketua
 Sekretaris 300
 Wakil
-200
 Sekretaris
 Bendahara 300
 Wakil
-200
 Bendahara
 Ketua
 Pengurus 100
 Bidang
 Anggota
-75
 Pengurus
 Fakultas Ketua 400
 Wakil
-300
 Ketua
 Sekretaris 200
 Wakil
-100
 Sekretaris
-200
 Bendahara
-13
-
 Wakil
-100
 Bendahara
 Ketua
 Pengurus 75
 Bidang
 Anggota
-50
 Penggurus
 Jurusan/Prodi/Bagian Ketua 300
 Wakil
-200
 Ketua
 Sekretaris 100
 Wakil
-75
 Sekretaris
-100
 Bendahara
 Wakil
-75
 Bendahara
 Ketua
 Pengurus 50
 Bidang
 Anggota
-25
 Penggurus
 4 Memperoleh Prestasi dalam Kegiatan Minat
 Internasional Juara I 700
@@ -667,8 +518,6 @@ Favorit 75
 Peserta 50
 Universitas Juara I 200
 Juara II 150
-14
-
 Juara III 100
 Favorit 75
 Peserta 50
@@ -678,60 +527,45 @@ Juara III 75
 Favorit 50
 Peserta 25
 5 Panitia dalam Suatu Kegiatan keilmuan/Non
-100
 Keilmuan Ketua
 Wakil
-75
 Ketua
 Nasional
 Sekretaris 75
 Wakil
-50
 Sekretaris
 Bendahara 75
 Wakil
-50
 Bendahara
 Anggota 50
 Universitas Ketua 75
 Wakil
-50
 Ketua
 Sekretaris 50
 Wakil
-25
 Sekretaris
 Bendahara 50
 Wakil
-25
 Bendahara
 Anggota 15
 Fakultas Ketua 50
 Wakil
-25
 Ketua
 Sekretaris 25
 Wakil
-15
 Sekretaris
 Bendahara 25
 Wakil
-15
 Bendahara
 Anggota 10
 Jurusan/Prodi Ketua 25
 Wakil
-15
 Ketua
-15
-
 Sekretaris 15
 Wakil
-10
 Sekretaris
 Bendahara 15
 Wakil
-10
 Bendahara
 Anggota 5
 6 Mengikuti Kegiatan yang di Surat Tugaskan
@@ -741,7 +575,6 @@ Regional 150
 Universitas 100
 Fakultas 50
 7 Mengikuti Kegiatan berdasarkan penugasan
-100
 oleh Instansi Daerah
 8 Mengikuti Kegiatan/Latihan yang Diatur
 oleh Masing-Masing UKM/UKF (Setiap Universitas 5
@@ -773,8 +606,6 @@ Program Studi 100
 6 Duta Kampus Internasional 700
 Nasional 500
 Regional 400
-16
-
 Universitas 300
 Tabel 5. Bidang Pengembangan Mental Spritualitas Kebangsaaan
 Peringkat/ Bobot
@@ -816,8 +647,6 @@ Universitas 100
 Melakukan Pengabdian/Penyuluhan Pada
 5 Masyarakat (kegiatan mandiri dan tidak 100
 direkognisi ke SKS MK)
-17
-
 Tabel 8. Bidang Khusus Fakultas
 Peringkat/
 No Kegiatan Tingkat Bobot Nilai
@@ -840,8 +669,6 @@ Nilai Mutu Total Bobot Poin
 Penilaian bobot kegiatan ekstrakurikuler seperti pada Tabel 9 diberlakukan mulai
 mahasiswa Angkatan 2024 dan program studi yang sudah memiliki mata kuliah
 ekstrakurikuler di kurikulum.
-18
-
 ## Bab Iii
 ## Administrasi Sistem Penilaian Ekstrakurikuler (Spe)
 Administrasi kegiatan Sistem Penilaian Ekstrakurikuler (SPE) dilaksanakan berdasarkan
@@ -871,8 +698,6 @@ Kegiatan Ektrakurikuler Mahasiswa
 6. Didistriibusikan Kepada
 Semua Fakultas di Lingkungan Universitas Tadulako
 7. Prosedur Umum
-19
-
 1. Prosedur ini berlaku sejak tanggal ditetapkan. Setiap perubahan atas langkah dalam
 prosedur, instruksi kerja dan borang yang digunakan harus dibahas dalam forum yang
 ditentukan dan kemudian disahkan oleh Rektor.
@@ -889,8 +714,6 @@ monitoring dan evaluasi pelaksanaan SPE.
 3. Langkah-langkah teknis pelaksanaan SPE dituangkan dalam bentuk instruksi kerja bagi
 mahasiswa, Bagian Kemahasiswaan dan alumni di Fakultas sebagai acuan teknis.
 4. Struktur standar operasional Prosedur Sistem Penilaian Ekstrakuriler (SOP- SPE):
-20
-
 ## Sop - Spe
 ## Ik - Mahasiswa
 ## Formulir – 01 (Kre)
@@ -907,8 +730,6 @@ IK : Instruksi Kerja
 KRE : Kartu Rencana Esktrakurikuler
 KHE : Kartu Hasil Esktrakurikuler
 TEM : Transkip Esktrakurikuler Mahasiswa
-21
-
 Pelaksanaan SPE bagi mahasiswa.
 1. Pengisian Kartu Rencana Esktrakurikuler (KRE) menggunakan formulir 01.
 2. Pelaksanaan kegiatan kemahasiswaan oleh mahasiswa.
@@ -935,8 +756,6 @@ Transkrip Esktrakurikuler Mahasiswa (formular 03) di bagian kemahasiswaan Fakuta
 5. Mahasiswa menerima Transkrip Esktrakurikuler Mahasiswa (TEM) dan diserahkan ke
 Program Studi untuk dikonversi nilai Mata Kuliah Ekstrakurikuler.
 6. Selesai.
-22
-
 Formulir Kartu Rencana Esktrakurikuler (KRE) (Formulir 01)
 ## Kartu Rencana Ekstrakurikuler (Kre)
 ## Nama Mahasiswa :
@@ -951,8 +770,6 @@ No. SK
 Penalaran dan Kreativitas
 2. Bidang Kesejahteraan dan
 Kewirausahaan
-23
-
 3. Bidang Minat, Bakat dan
 Organisasi Kemahasiswaan
 4. Bidang Penyelarasan dan
@@ -960,8 +777,6 @@ Pengembangan Karier
 5. Bidang Pengembangan
 Mental Spritualitas
 Kebangsaaan
-24
-
 6. Bidang Internasionalisasi
 7. Bidang Pengabdian pada
 Masyarakat dan Lingkungan
@@ -974,8 +789,6 @@ Wakil Dekan Bidang Kemahasiswaan dan
 Alumni
 -------------------------------------------- (………………………………………)
 Stambuk. NIP.
-25
-
 Formulir Konsep Kartu Hasil Ekrakurikuler (KHE) (Formulir 02)
 ## Kartu Hasil Ekstrakurikuler (Khe)
 ## Fakultas ……………………
@@ -1004,8 +817,6 @@ Wakil Dekan Bidang Kemahasiswaan Verifikator,
 dan Alumni
 (…………………………………………) (…………………..………….)
 ## Nip.
-26
-
 Formulir Konsep Transkrip Ekstrakurikuler Mahasiswa (TEM) (Formulir 03)
 ## Transkrip Ekstrakurikuler Mahasiswa (Tem)
 ## Fakultas ………………..
@@ -1027,8 +838,6 @@ a.n. Dekan
 Wakil Dekan Bidang Kemahasiswaan dan Alumni
 (……………………………………..)
 ## Nip. ……………………..
-27
-
 ## Tabel yang Diekstrak
 
 ### Tabel (Halaman 10, #1)

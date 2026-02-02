@@ -81,19 +81,83 @@ class DocumentLoader:
         
         chunks = self._split_text(content)
         
-        return [
-            Document(
+        documents = []
+        for i, chunk in enumerate(chunks):
+            # Extract heading and snippet for source citation
+            heading = self._extract_heading(chunk, content)
+            snippet = self._extract_snippet(chunk)
+            
+            documents.append(Document(
                 content=chunk,
                 metadata={
                     'source': file_path.name,
                     'chunk_index': i,
                     'total_chunks': len(chunks),
                     'original_type': ext,
-                    'category': category or 'uncategorized'
+                    'category': category or 'uncategorized',
+                    'heading': heading,
+                    'snippet': snippet
                 }
-            )
-            for i, chunk in enumerate(chunks)
+            ))
+        
+        return documents
+    
+    def _extract_heading(self, chunk: str, full_content: str) -> str:
+        """Extract the nearest heading/section for a chunk.
+        
+        Looks for markdown headings (## or ###) in the chunk or preceding content.
+        """
+        import re
+        
+        # First try to find heading in the chunk itself
+        heading_patterns = [
+            r'^#{1,3}\s+(.+)$',  # Markdown headings
+            r'^(BAB\s+[IVX\d]+[.:]\s*.+)$',  # BAB format
+            r'^(\d+\.\d*\s+[A-Z].+)$',  # Numbered sections like "7.1 Tugas Akhir"
+            r'^(Pasal\s+\d+.*)$',  # Pasal format
         ]
+        
+        for line in chunk.split('\n'):
+            stripped = line.strip()
+            for pattern in heading_patterns:
+                match = re.match(pattern, stripped, re.IGNORECASE | re.MULTILINE)
+                if match:
+                    heading = match.group(1).strip()
+                    # Clean up heading
+                    heading = re.sub(r'^#+\s*', '', heading)
+                    return heading[:80]  # Limit length
+        
+        # If no heading in chunk, look for the preceding heading in full content
+        try:
+            chunk_start = full_content.find(chunk[:50])
+            if chunk_start > 0:
+                preceding = full_content[:chunk_start]
+                # Find the last heading before this chunk
+                for pattern in heading_patterns:
+                    matches = list(re.finditer(pattern, preceding, re.IGNORECASE | re.MULTILINE))
+                    if matches:
+                        heading = matches[-1].group(1).strip()
+                        heading = re.sub(r'^#+\s*', '', heading)
+                        return heading[:80]
+        except Exception:
+            pass
+        
+        return ''
+    
+    def _extract_snippet(self, chunk: str) -> str:
+        """Extract a clean snippet preview from chunk content."""
+        # Remove markdown formatting
+        import re
+        snippet = chunk.strip()
+        snippet = re.sub(r'^#+\s+', '', snippet)  # Remove heading markers
+        snippet = re.sub(r'\*+([^*]+)\*+', r'\1', snippet)  # Remove bold/italic
+        snippet = re.sub(r'\s+', ' ', snippet)  # Normalize whitespace
+        
+        # Take first 60 characters
+        if len(snippet) > 60:
+            snippet = snippet[:57] + '...'
+        
+        return snippet
     
     def convert_to_markdown(self, file_path: Path, output_dir: Path = None) -> Path:
         """
@@ -147,53 +211,194 @@ class DocumentLoader:
     def _text_to_markdown(self, text: str, title: str) -> str:
         """
         Convert raw text to a structured Markdown format.
+        Includes cleaning of unnecessary sections like page numbers, TOC, etc.
         
         Args:
             text: Raw text from PDF
             title: Document title (usually filename without extension)
         
         Returns:
-            Formatted markdown string
+            Formatted markdown string (cleaned and ready for chunking)
         """
         import re
         
-        # Clean up the text
+        # Step 1: Remove page numbers with surrounding blank lines FIRST
+        # Pattern: detect standalone page numbers (1-3 digits or roman numerals)
+        text = re.sub(r'\n\s*\n\s*(\d{1,3})\s*\n\s*\n', '\n', text)  # Number between blanks
+        text = re.sub(r'\n\s*(\d{1,3})\s*\n\s*\n', '\n', text)  # Number followed by blank
+        text = re.sub(r'\n\s*\n\s*(\d{1,3})\s*\n', '\n', text)  # Number preceded by blank
+        text = re.sub(r'\n\s*(\d{1,3})\s*\n', '\n', text)  # Just page number line
+        
+        # Also handle roman numerals
+        text = re.sub(r'\n\s*\n\s*([ivxlc]+)\s*\n\s*\n', '\n', text, flags=re.IGNORECASE)
+        text = re.sub(r'\n\s*([ivxlc]+)\s*\n', '\n', text, flags=re.IGNORECASE)
+        
+        # Clean up the text line by line
         lines = text.split('\n')
         cleaned_lines = []
         
+        # Patterns for sections to skip entirely
+        skip_section_patterns = [
+            r'^DAFTAR\s+(ISI|TABEL|GAMBAR|LAMPIRAN)',
+            r'^KATA\s+PENGANTAR',
+            r'^SAMBUTAN',
+            r'^SUSUNAN\s+(PANITIA|TIM|PENYUSUN)',
+            r'^TIM\s+PENYUSUN',
+            r'^DAFTAR\s+PIMPINAN',
+            r'^HALAMAN\s+PENGESAHAN',
+            r'^COVER$',
+            r'^LEMBAR\s+(PENGESAHAN|PERSETUJUAN)',
+        ]
+        
+        skip_until_next_section = False
+        
         for line in lines:
-            line = line.strip()
-            if not line:
-                cleaned_lines.append('')
+            stripped = line.strip()
+            
+            # Skip empty lines at the start
+            if not stripped and not cleaned_lines:
+                continue
+            
+            # Check if this line starts a section to skip
+            for pattern in skip_section_patterns:
+                if re.match(pattern, stripped, re.IGNORECASE):
+                    skip_until_next_section = True
+                    break
+            
+            # Check if we've hit a new major section (ends the skip)
+            if skip_until_next_section:
+                # A new major section starts with BAB, Pasal, or numbered section
+                if re.match(r'^(BAB|Pasal|\d+\.(\d+\.)?)\s+\w', stripped, re.IGNORECASE):
+                    skip_until_next_section = False
+                else:
+                    continue  # Skip this line
+            
+            # Skip standalone page numbers (backup)
+            if re.match(r'^(\d{1,3}|[ivxlc]+)$', stripped, re.IGNORECASE):
+                continue
+            
+            # Skip TOC-style entries with dots (e.g., "7.3. Seminar Proposal ......... 57")
+            if re.match(r'^[\d.]+\s+\w+.*[.]{3,}\s*\d+$', stripped):
+                continue
+            
+            # Skip lines that are just page markers with dots
+            if re.match(r'^[.\s]+\d+$', stripped):
                 continue
             
             # Remove excessive whitespace
-            line = ' '.join(line.split())
+            if stripped:
+                stripped = ' '.join(stripped.split())
+                
+                # Detect potential headers (all caps, short lines)
+                if stripped.isupper() and len(stripped) < 80 and len(stripped) > 3:
+                    stripped = f"## {stripped.title()}"
+                
+                # Detect numbered lists
+                if re.match(r'^\d+[.\)]\s', stripped):
+                    stripped = re.sub(r'^(\d+)[.\)]\s', r'\1. ', stripped)
+                
+                # Detect bullet points
+                if stripped.startswith(('- ', '• ', '* ', '○ ')):
+                    stripped = '- ' + stripped[2:]
             
-            # Detect potential headers (all caps, short lines)
-            if line.isupper() and len(line) < 80 and len(line) > 3:
-                # Convert to header
-                line = f"## {line.title()}"
-            
-            # Detect numbered lists
-            if re.match(r'^\d+[.\)]\s', line):
-                line = re.sub(r'^(\d+)[.\)]\s', r'\1. ', line)
-            
-            # Detect bullet points
-            if line.startswith(('- ', '• ', '* ', '○ ')):
-                line = '- ' + line[2:]
-            
-            cleaned_lines.append(line)
+            cleaned_lines.append(stripped if stripped else '')
         
         # Join lines and fix multiple blank lines
         content = '\n'.join(cleaned_lines)
         content = re.sub(r'\n{3,}', '\n\n', content)
         
+        # Auto-detect and format inline tables
+        content = self._detect_and_format_inline_tables(content)
+        
         # Add document header
         header = f"# {title.replace('_', ' ').title()}\n\n"
-        header += f"*Dokumen ini dikonversi otomatis dari PDF*\n\n---\n\n"
+        header += f"*Dokumen ini dikonversi dan dibersihkan otomatis*\n\n---\n\n"
         
         return header + content.strip()
+    
+    def _detect_and_format_inline_tables(self, text: str) -> str:
+        """
+        Detect and reformat poorly structured inline tables in text.
+        
+        This handles cases like:
+        - "Tabel 6.1. Nilai dan Angka Mutu Penilaian"
+        - "Rentang Nilai Akhir (NA) Nilai Mutu (NM) Angka Mutu (AM)"
+        - "## 85,01 - 100 A 4,00"
+        
+        Converts to proper markdown table with clear column structure.
+        """
+        import re
+        
+        lines = text.split('\n')
+        result_lines = []
+        i = 0
+        
+        while i < len(lines):
+            line = lines[i]
+            
+            # Detect table header pattern: multiple column names in parentheses
+            # e.g., "Rentang Nilai Akhir (NA) Nilai Mutu (NM) Angka Mutu (AM)"
+            header_match = re.match(
+                r'^([\w\s]+)\s*\((\w+)\)\s+([\w\s]+)\s*\((\w+)\)\s+([\w\s]+)\s*\((\w+)\)',
+                line.strip()
+            )
+            
+            if header_match:
+                # Found a table header, extract column names
+                col1_name = header_match.group(1).strip()
+                col1_abbr = header_match.group(2).strip()
+                col2_name = header_match.group(3).strip()
+                col2_abbr = header_match.group(4).strip()
+                col3_name = header_match.group(5).strip()
+                col3_abbr = header_match.group(6).strip()
+                
+                # Build proper markdown table
+                table_lines = []
+                table_lines.append(f"| {col1_name} ({col1_abbr}) | {col2_name} ({col2_abbr}) | {col3_name} ({col3_abbr}) |")
+                table_lines.append("|---|---|---|")
+                
+                # Look for data rows (pattern: ## or number range followed by letter and number)
+                # e.g., "## 85,01 - 100 A 4,00"
+                j = i + 1
+                while j < len(lines):
+                    data_line = lines[j].strip()
+                    
+                    # Skip empty lines
+                    if not data_line:
+                        j += 1
+                        continue
+                    
+                    # Match data row patterns:
+                    # "## 85,01 - 100 A 4,00" or "85,01 - 100 A 4,00"
+                    data_match = re.match(
+                        r'^(?:##\s*)?([\d,]+(?:\s*[-–]\s*[\d,]+)?)\s+([A-E][+-]?)\s+([\d,]+)',
+                        data_line
+                    )
+                    
+                    if data_match:
+                        range_val = data_match.group(1).strip()
+                        letter_val = data_match.group(2).strip()
+                        number_val = data_match.group(3).strip()
+                        table_lines.append(f"| {range_val} | {letter_val} | {number_val} |")
+                        j += 1
+                    else:
+                        # Not a data row anymore, stop collecting
+                        break
+                
+                # Only output as table if we found at least 2 data rows
+                if len(table_lines) > 3:
+                    result_lines.append("\n" + "\n".join(table_lines) + "\n")
+                    i = j
+                    continue
+                else:
+                    # Not enough data rows, keep original line
+                    result_lines.append(line)
+            else:
+                result_lines.append(line)
+            
+            i += 1
+        
+        return '\n'.join(result_lines)
     
     def _convert_table_to_markdown(self, table: list) -> str:
         """
@@ -524,6 +729,92 @@ class DocumentLoader:
         """Fallback text loader for binary files"""
         return ""
     
+    def _preprocess_content(self, text: str) -> str:
+        """
+        Preprocess document content to remove unnecessary sections before chunking.
+        
+        Removes:
+        - Page numbers (standalone numbers like "57", "58")
+        - Blank lines around page numbers (to prevent chunk splitting)
+        - Table of contents (Daftar Isi)
+        - Preface sections (Kata Pengantar)
+        - Author/committee lists
+        - Headers that are just page markers
+        """
+        import re
+        
+        # Step 1: Remove page numbers with surrounding blank lines
+        # Pattern: optional blank line, page number only line, optional blank line
+        text = re.sub(r'\n\s*\n\s*(\d{1,3})\s*\n\s*\n', '\n', text)  # Number between blanks
+        text = re.sub(r'\n\s*(\d{1,3})\s*\n\s*\n', '\n', text)  # Number followed by blank
+        text = re.sub(r'\n\s*\n\s*(\d{1,3})\s*\n', '\n', text)  # Number preceded by blank
+        text = re.sub(r'\n\s*(\d{1,3})\s*\n', '\n', text)  # Just page number line
+        
+        # Also handle roman numerals (i, ii, iii, iv, v, vi, vii, viii, ix, x)
+        text = re.sub(r'\n\s*\n\s*([ivxlc]+)\s*\n\s*\n', '\n', text, flags=re.IGNORECASE)
+        text = re.sub(r'\n\s*([ivxlc]+)\s*\n', '\n', text, flags=re.IGNORECASE)
+        
+        lines = text.split('\n')
+        cleaned_lines = []
+        
+        # Patterns to skip entirely (headers/sections to remove)
+        skip_section_patterns = [
+            r'^DAFTAR\s+(ISI|TABEL|GAMBAR|LAMPIRAN)',
+            r'^KATA\s+PENGANTAR',
+            r'^SAMBUTAN',
+            r'^SUSUNAN\s+(PANITIA|TIM|PENYUSUN)',
+            r'^TIM\s+PENYUSUN',
+            r'^DAFTAR\s+PIMPINAN',
+            r'^HALAMAN\s+PENGESAHAN',
+            r'^COVER',
+            r'^LEMBAR\s+(PENGESAHAN|PERSETUJUAN)',
+        ]
+        
+        skip_until_next_section = False
+        
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            
+            # Skip empty lines at the start
+            if not stripped and not cleaned_lines:
+                continue
+            
+            # Check if this line starts a section to skip
+            for pattern in skip_section_patterns:
+                if re.match(pattern, stripped, re.IGNORECASE):
+                    skip_until_next_section = True
+                    break
+            
+            # Check if we've hit a new major section (ends the skip)
+            if skip_until_next_section:
+                # A new major section starts with BAB, Pasal, or numbered section like "7.3."
+                if re.match(r'^(BAB|Pasal|\d+\.(\d+\.)?)\s+\w', stripped, re.IGNORECASE):
+                    skip_until_next_section = False
+                else:
+                    continue  # Skip this line
+            
+            # Skip standalone page numbers (e.g., "57", "58")
+            # This is a backup in case the regex above missed some
+            if re.match(r'^(\d{1,3}|[ivxlc]+)$', stripped, re.IGNORECASE):
+                continue
+            
+            # Skip lines that are just page markers with dots (e.g., ".................. 57")
+            if re.match(r'^[.\s]+\d+$', stripped):
+                continue
+            
+            # Skip table of contents style entries (e.g., "7.3. Seminar Proposal ......... 57")
+            if re.match(r'^[\d.]+\s+\w+.*[.]{3,}\s*\d+$', stripped):
+                continue
+            
+            cleaned_lines.append(line)
+        
+        result = '\n'.join(cleaned_lines)
+        
+        # Clean up multiple blank lines (but keep maximum 2 for paragraph separation)
+        result = re.sub(r'\n{3,}', '\n\n', result)
+        
+        return result.strip()
+    
     def _split_text(self, text: str) -> List[str]:
         """Split text into overlapping chunks using semantic chunking.
         
@@ -537,6 +828,9 @@ class DocumentLoader:
         except ImportError:
             # Fallback for older langchain versions
             from langchain.text_splitter import RecursiveCharacterTextSplitter
+        
+        # Preprocess to remove unnecessary sections
+        text = self._preprocess_content(text)
         
         # Clean text
         text = text.strip()

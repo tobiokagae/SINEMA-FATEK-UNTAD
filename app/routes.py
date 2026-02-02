@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Flask routes for SINEMA Chatbot API - Database Version"""
+
 import os
 from flask import Blueprint, render_template, request, jsonify
 from werkzeug.utils import secure_filename
@@ -8,7 +9,8 @@ from pathlib import Path
 from .config import (
     DOCUMENTS_DIR, VECTOR_DB_DIR, MODEL_DIR, BASE_DIR,
     EMBEDDING_MODEL, CHUNK_SIZE, CHUNK_OVERLAP, TOP_K,
-    MAX_NEW_TOKENS, TEMPERATURE, TOP_P, DEVICE, SYSTEM_PROMPT
+    MAX_NEW_TOKENS, TEMPERATURE, TOP_P, DEVICE, SYSTEM_PROMPT,
+    RELEVANCE_THRESHOLD
 )
 from .rag import RAGRetriever
 from .llm import APIGenerator
@@ -31,7 +33,9 @@ def get_retriever() -> RAGRetriever:
             embedding_model_name=EMBEDDING_MODEL,
             chunk_size=CHUNK_SIZE,
             chunk_overlap=CHUNK_OVERLAP,
-            top_k=TOP_K
+            top_k=TOP_K,
+            use_reranker=False,  # Reranking dinonaktifkan
+            relevance_threshold=RELEVANCE_THRESHOLD
         )
         _retriever.initialize()
     return _retriever
@@ -94,26 +98,82 @@ def chat():
         # Save user message
         DatabaseService.add_message(session_id, "user", query)
         
-        # Check cache first
-        cached = DatabaseService.get_cached_response(query)
-        if cached:
-            cached_response, sources, original_latency = cached
-            logger.info(f"Cache hit for query: {query[:50]}...")
-            
-            # Save to message log as cached
-            DatabaseService.add_message(session_id, "assistant", cached_response, sources, original_latency, cached=True)
-            
+        # # Check cache first (TEMPORARILY DISABLED)
+        # cached = DatabaseService.get_cached_response(query)
+        # if cached:
+        #     cached_response, sources, original_latency = cached
+        #     logger.info(f"Cache hit for query: {query[:50]}...")
+        #     
+        #     # Save to message log as cached
+        #     DatabaseService.add_message(session_id, "assistant", cached_response, sources, original_latency, cached=True)
+        #     
+        #     return jsonify({
+        #         'response': cached_response,
+        #         'sources': sources,
+        #         'latency': round(original_latency, 2),
+        #         'cached': True,
+        #         'session_id': session_id
+        #     })
+        # Fast pattern matching with text normalization
+        import re
+        
+        # Normalize repeated letters (haiiii → hai, halooo → halo)
+        def normalize_text(text):
+            return re.sub(r'(.)\1{2,}', r'\1', text.lower().strip())
+        
+        query_normalized = normalize_text(query)
+        
+        # Greeting/simple message patterns (skip retrieval for these)
+        greeting_patterns = ['halo', 'hai', 'hello', 'hi', 'hey', 'morning', 'selamat pagi', 'selamat siang', 
+                           'selamat sore', 'selamat malam', 'terima kasih', 'thanks', 'makasih', 'thx',
+                           'ok', 'oke', 'baik', 'siap', 'good morning', 'good afternoon']
+        
+        # Identity keywords - if query contains these combinations, skip retrieval
+        identity_keywords = ['siapa kamu', 'kamu siapa', 'who are you', 'what can you do',
+                             'kamu fungsinya', 'fungsi kamu', 'kamu bisa', 'bisa apa',
+                             'tugas kamu', 'kamu itu', 'kamu untuk', 'kegunaan kamu']
+        has_identity_keyword = ('kamu' in query_normalized and any(k in query_normalized for k in ['fungsi', 'bisa', 'tugas', 'apa', 'untuk', 'kegunaan'])) or \
+                               any(k in query_normalized for k in identity_keywords)
+
+        is_greeting = any(query_normalized == p or query_normalized.startswith(p + ' ') or
+                          query_normalized.startswith(p + ',') or query_normalized.startswith(p + '?')
+                          for p in greeting_patterns)
+
+        # Simple queries: greetings OR identity questions (identity can be longer than 60 chars)
+        is_simple_query = is_greeting or (has_identity_keyword and len(query_normalized) < 150)
+        
+        generator = get_generator()
+        
+        if is_simple_query:
+            # Direct response without retrieval
+            logger.info(f"Query classification: DIRECT for: {query[:50]}...")
+            response, latency = generator.generate(
+                query=query,
+                context="",
+                system_prompt=SYSTEM_PROMPT
+            )
+            logger.info(f"[DIRECT] Generated response in {latency:.2f}s for session {session_id[:8]}...")
+            DatabaseService.add_message(session_id, "assistant", response, [], latency)
             return jsonify({
-                'response': cached_response,
-                'sources': sources,
-                'latency': round(original_latency, 2),
-                'cached': True,
+                'response': response,
+                'sources': [],  # No sources for direct responses
+                'latency': round(latency, 2),
                 'session_id': session_id
             })
         
-        # Get RAG context
+        # Get RAG context for actual questions
         retriever = get_retriever()
         context = retriever.get_context(query)
+
+        # Early return if no relevant documents found (prevent hallucination)
+        if not context or len(context.strip()) < 50:
+            logger.warning(f"No relevant documents found for query: {query[:50]}...")
+            return jsonify({
+                'response': "Maaf, saya tidak menemukan informasi yang relevan tentang pertanyaan Anda dalam dokumen. Silakan coba pertanyaan lain atau hubungi admin FATEK untuk informasi lebih lanjut. 😊",
+                'sources': [],
+                'latency': 0.0,
+                'session_id': session_id
+            })
         
         # Get conversation context using sliding window + summary
         older_msgs, recent_msgs = DatabaseService.get_context_sliding_window(session_id, recent_turns=2)
@@ -157,12 +217,18 @@ Ringkasan singkat:"""
             conv_context = "\n\n---\n\n".join(conv_context_parts)
             full_context = f"{conv_context}\n\n---\n\n📚 Konteks dokumen:\n{context}"
         
-        # Get sources
+        # Get sources with heading and snippet for source citation
+        # Filter by relevance score and limit to top 5
         results = retriever.retrieve(query)
         sources = [
-            {'source': doc.metadata.get('source', 'unknown'), 'score': round(score, 3)}
+            {
+                'source': doc.metadata.get('source', 'unknown'),
+                'heading': doc.metadata.get('heading', ''),
+                'snippet': doc.metadata.get('snippet', '')
+            }
             for doc, score in results
-        ]
+            if score > 0.4  # Only include relevant sources
+        ][:5]  # Limit to top 5
         
         # Generate response
         generator = get_generator()
@@ -171,7 +237,12 @@ Ringkasan singkat:"""
             context=full_context,
             system_prompt=SYSTEM_PROMPT
         )
-        
+
+        # Add disclaimer for RAG responses (not for simple queries)
+        disclaimer = "\n\n⚠️ Informasi di atas berdasarkan dokumen yang tersedia. Silakan cek dokumen resmi atau hubungi admin FATEK untuk kepastian terbaru."
+        response = response + disclaimer
+
+
         # Cache the response ONLY if it's a valid successful response
         # Skip caching error responses
         error_indicators = [
@@ -195,15 +266,15 @@ Ringkasan singkat:"""
         # Only match if pattern is an EXACT WORD in query (not substring)
         is_generic_query = any(pattern in query_words or query_lower == pattern for pattern in skip_query_patterns)
         
-        # Cache the response if it's valid
-        should_cache = not is_error_response and not is_short_query and not is_generic_query
-        
-        logger.info(f"[CACHE DEBUG] query='{query[:30]}...', is_error={is_error_response}, is_short={is_short_query}, is_generic={is_generic_query}, should_cache={should_cache}")
-        
-        if should_cache:
-            DatabaseService.cache_response(query, response, sources, latency)
-        else:
-            logger.info(f"[CACHE DEBUG] Skipped caching due to filters")
+        # # Cache the response if it's valid (TEMPORARILY DISABLED)
+        # should_cache = not is_error_response and not is_short_query and not is_generic_query
+        # 
+        # logger.info(f"[CACHE DEBUG] query='{query[:30]}...', is_error={is_error_response}, is_short={is_short_query}, is_generic={is_generic_query}, should_cache={should_cache}")
+        # 
+        # if should_cache:
+        #     DatabaseService.cache_response(query, response, sources, latency)
+        # else:
+        #     logger.info(f"[CACHE DEBUG] Skipped caching due to filters")
         
         # Save assistant message
         DatabaseService.add_message(session_id, "assistant", response, sources, latency)

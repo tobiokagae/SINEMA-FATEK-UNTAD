@@ -39,13 +39,13 @@ Sistem chatbot berbasis RAG (Retrieval-Augmented Generation) yang terintegrasi d
 
 | Parameter | Nilai | Deskripsi |
 |-----------|-------|-----------|
-| Chunk Size | 500 chars | Ukuran potongan dokumen |
-| Chunk Overlap | 50 chars | Overlap antar chunk |
-| Top-K | 8 | Jumlah chunk diambil per query |
+| Chunk Size | 800 chars | Ukuran potongan dokumen (untuk konteks lengkap) |
+| Chunk Overlap | 200 chars | Overlap antar chunk (25% untuk menjaga kontinuitas) |
+| Top-K | 20 | Jumlah chunk diambil per query (meningkatkan akurasi) |
 | Relevance Threshold | 0.2 | Batas minimum relevansi |
-| Embedding Model | `paraphrase-multilingual-MiniLM-L12-v2` | Model multilingual |
+| Embedding Model | `paraphrase-multilingual-MiniLM-L12-v2` | Model multilingual untuk Bahasa Indonesia |
 | LLM | `openai/gpt-oss-20b:free` via OpenRouter | Model untuk generate jawaban |
-| Temperature | 0.7 | Kreativitas jawaban |
+| Temperature | 0.2 | Kreativitas jawaban (rendah untuk mengurangi halusinasi) |
 | Max Tokens | 2048 | Panjang maksimal respons |
 
 ## ⚙️ Instalasi
@@ -83,13 +83,13 @@ DEVICE=cuda
 
 # LLM Generation
 MAX_NEW_TOKENS=2048
-TEMPERATURE=0.7
+TEMPERATURE=0.2
 TOP_P=0.9
 
 # RAG Configuration
-TOP_K=8
-CHUNK_SIZE=500
-CHUNK_OVERLAP=50
+TOP_K=20
+CHUNK_SIZE=800
+CHUNK_OVERLAP=200
 RELEVANCE_THRESHOLD=0.2
 
 # Rate Limiting

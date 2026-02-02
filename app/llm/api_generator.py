@@ -109,14 +109,24 @@ Maaf, terjadi masalah saat memproses pertanyaan Anda. Silakan coba lagi."""
         
         # Build the prompt
         if context:
-            user_message = f"""KONTEKS:
+            user_message = f"""KONTEKS DOKUMEN (SUMBER TUNGGAL KEBENARAN):
 {context}
 
 PERTANYAAN: {query}
 
-Jawab berdasarkan konteks di atas."""
+INSTRUKSI JAWABAN (WAJIB DIPATUHI - PELANGGARAN AKAN DIPERIKSA):
+1. Jawab HANYA berdasarkan KONTEKS di atas - DILARANG KERAS gunakan pengetahuan luar/pribadi
+2. JANGAN mengarang informasi yang tidak ada di konteks - ini FATAL ERROR
+3. Jika informasi tidak lengkap atau tidak ada di konteks, katakan: "Maaf, informasi ini tidak tersedia dalam dokumen"
+4. Gunakan ANGKA PERSIS seperti tertulis di konteks (misal: "2,00" bukan "2")
+5. JANGAN menambahkan detail yang tidak disebutkan di konteks
+6. JAWABAN TIDAK BOLEH mengandung informasi di luar konteks di atas
+
+INGAT: Konteks di atas adalah SATU-SATUNYA sumber kebenaran. JANGAN gunakan pengetahuan umum atau asumsi pribadi."""
         else:
-            user_message = query
+            user_message = f"""PERTANYAAN: {query}
+
+JAWABAN: Maaf, saya tidak memiliki akses ke dokumen untuk menjawab pertanyaan ini. Silakan hubungi admin atau cek dokumentasi resmi."""
         
         # Build messages array
         messages = [{"role": "system", "content": system_prompt}]
@@ -134,24 +144,46 @@ Jawab berdasarkan konteks di atas."""
         # Add current user message
         messages.append({"role": "user", "content": user_message})
         
-        try:
-            response = self.client.chat.completions.create(
-                model=self.model,
-                messages=messages,
-                max_tokens=2048,
-                temperature=0.7,
-            )
-            
-            latency = time.time() - start
-            result = response.choices[0].message.content.strip()
-            
-            return result, latency
-            
-        except Exception as e:
-            latency = time.time() - start
-            error_type, user_message = self._parse_error(e)
-            print(f"⚠️ API Error [{error_type}]: {str(e)}")
-            return user_message, latency
+        max_retries = 2
+        
+        for attempt in range(max_retries + 1):
+            try:
+                response = self.client.chat.completions.create(
+                    model=self.model,
+                    messages=messages,
+                    max_tokens=4096,  # Increased for longer responses
+                    temperature=float(os.getenv('TEMPERATURE', '0.2')),  # Lowered to reduce hallucination
+                )
+                
+                result = response.choices[0].message.content
+                
+                # Handle empty or None response
+                if not result or not result.strip():
+                    if attempt < max_retries:
+                        print(f"⚠️ Empty response (attempt {attempt + 1}/{max_retries + 1}), retrying...")
+                        time.sleep(0.5)  # Brief pause before retry
+                        continue
+                    else:
+                        print("⚠️ Warning: Empty response after all retries")
+                        latency = time.time() - start
+                        return "Maaf, tidak ada respons dari sistem. Silakan coba lagi.", latency
+                
+                latency = time.time() - start
+                return result.strip(), latency
+                
+            except Exception as e:
+                if attempt < max_retries:
+                    print(f"⚠️ API Error (attempt {attempt + 1}/{max_retries + 1}): {str(e)}, retrying...")
+                    time.sleep(0.5)
+                    continue
+                latency = time.time() - start
+                error_type, user_message = self._parse_error(e)
+                print(f"⚠️ API Error [{error_type}]: {str(e)}")
+                return user_message, latency
+        
+        # Fallback (should not reach here)
+        latency = time.time() - start
+        return "Maaf, terjadi kesalahan. Silakan coba lagi.", latency
     
     def is_loaded(self) -> bool:
         """Check if API is configured"""
