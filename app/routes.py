@@ -218,7 +218,7 @@ Ringkasan singkat:"""
             full_context = f"{conv_context}\n\n---\n\n📚 Konteks dokumen:\n{context}"
         
         # Get sources with heading and snippet for source citation
-        # Filter by relevance score and limit to top 5
+        # Filter by relevance score and limit to top 1 (only show best match)
         results = retriever.retrieve(query)
         sources = [
             {
@@ -228,7 +228,7 @@ Ringkasan singkat:"""
             }
             for doc, score in results
             if score > 0.4  # Only include relevant sources
-        ][:5]  # Limit to top 5
+        ][:1]  # Limit to top 1 only
         
         # Generate response
         generator = get_generator()

@@ -1,0 +1,43 @@
+======================================================================
+TEST TYPO REALISTIS PADA RETRIEVAL
+======================================================================
+
+[HURUF HILANG]
+  Typo:  'seminar propsal' -> Score: 0.6956
+  Benar: 'seminar proposal' -> Score: 0.7395
+  Status: OK (diff: 0.0439)
+
+[HURUF HILANG]
+  Typo:  'semster genap' -> Score: 0.4325
+  Benar: 'semester genap' -> Score: 0.7998
+  Status: TURUN (diff: 0.3673)
+
+[HURUF TERTUKAR]
+  Typo:  'ekstarkurikuler' -> Score: 0.4786
+  Benar: 'ekstrakurikuler' -> Score: 0.5507
+  Status: OK (diff: 0.0721)
+
+[HURUF HILANG]
+  Typo:  'persyratan skripsi' -> Score: 0.6467
+  Benar: 'persyaratan skripsi' -> Score: 0.6092
+  Status: OK (diff: -0.0376)
+
+[HURUF TERTUKAR]
+  Typo:  'nilai minimla' -> Score: 0.6538
+  Benar: 'nilai minimal' -> Score: 0.6502
+  Status: OK (diff: -0.0036)
+
+[HURUF TERTUKAR]
+  Typo:  'jadwal sidnag' -> Score: 0.6179
+  Benar: 'jadwal sidang' -> Score: 0.6761
+  Status: OK (diff: 0.0582)
+
+[HURUF HILANG]
+  Typo:  'dosen pembmbing' -> Score: 0.3817
+  Benar: 'dosen pembimbing' -> Score: 0.6674
+  Status: TURUN (diff: 0.2857)
+
+[HURUF TERTUKAR]
+  Typo:  'transkrip niali' -> Score: 0.5462
+  Benar: 'transkrip nilai' -> Score: 0.5400
+  Status: OK (diff: -0.0063)

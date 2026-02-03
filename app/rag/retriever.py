@@ -116,22 +116,65 @@ class RAGRetriever:
         return results
 
     def _expand_query(self, query: str) -> str:
-        """Expand query with synonyms and related terms for better retrieval
+        """Expand query with synonyms, abbreviations, and related terms for better retrieval
 
         Args:
             query: Original query
 
         Returns:
-            Expanded query with synonyms
+            Expanded query with synonyms and expanded abbreviations
         """
         query_lower = query.lower()
+        expanded_query = query
+        
+        # Common academic abbreviations mapping
+        abbreviations = {
+            'ipk': 'indeks prestasi kumulatif',
+            'sks': 'satuan kredit semester',
+            'ta': 'tugas akhir',
+            'krs': 'kartu rencana studi',
+            'khs': 'kartu hasil studi',
+            'spe': 'sistem penilaian ekstrakurikuler',
+            'kre': 'kartu rencana ekstrakurikuler',
+            'khe': 'kartu hasil ekstrakurikuler',
+            'tem': 'transkrip ekstrakurikuler mahasiswa',
+            'ukm': 'unit kegiatan mahasiswa',
+            'ukf': 'unit kegiatan fakultas',
+            'hmj': 'himpunan mahasiswa jurusan',
+            'hmp': 'himpunan mahasiswa program studi',
+            'bem': 'badan eksekutif mahasiswa',
+            'dpa': 'dosen pembimbing akademik',
+            'mk': 'mata kuliah',
+            'uts': 'ujian tengah semester',
+            'uas': 'ujian akhir semester',
+            'kpm': 'kuliah pengabdian masyarakat',
+            'kkn': 'kuliah kerja nyata',
+            'ppl': 'praktik pengalaman lapangan',
+            'fatek': 'fakultas teknik',
+        }
+        
+        # Expand abbreviations in query
+        words = query_lower.split()
+        expanded_words = []
+        has_abbreviation = False
+        
+        for word in words:
+            # Clean word from punctuation for matching
+            clean_word = word.strip('.,?!')
+            if clean_word in abbreviations:
+                expanded_words.append(f"{word} {abbreviations[clean_word]}")
+                has_abbreviation = True
+            else:
+                expanded_words.append(word)
+        
+        if has_abbreviation:
+            expanded_query = ' '.join(expanded_words)
+            print(f"[ABBREV EXPANSION] '{query}' -> '{expanded_query[:80]}...'")
 
-        # Define expansion rules
+        # Define additional expansion rules for phrases
         expansions = {
-            # "mengumpulkan poin" → add "klaim", "pengajuan", "ekstrakurikuler"
-            'mengumpulkan poin': ['mengumpulkan poin klaim ekstrakurikuler pengajuan'],
-            'poin': ['poin ekstrakurikuler kegiatan spe'],
-            # Add more expansions as needed
+            'mengumpulkan poin': ['klaim ekstrakurikuler pengajuan'],
+            'poin': ['ekstrakurikuler kegiatan spe'],
             'ekstrakurikuler': ['kegiatan kemahasiswaan organisasi lomba'],
             'klaim': ['pengajuan bukti sertifikat'],
         }
@@ -139,13 +182,11 @@ class RAGRetriever:
         # Check if query matches any expansion pattern
         for pattern, synonyms in expansions.items():
             if pattern in query_lower:
-                # Add synonyms to query
-                # Use both original and expanded for retrieval
-                expanded = query + ' ' + ' '.join(synonyms)
-                print(f"[QUERY EXPANSION] '{query}' -> '{expanded[:100]}...'")
-                return expanded
+                expanded_query = expanded_query + ' ' + ' '.join(synonyms)
+                print(f"[QUERY EXPANSION] '{query}' -> '{expanded_query[:100]}...'")
+                break
 
-        return query
+        return expanded_query
 
     def _detect_query_category(self, query: str) -> str:
         """Detect the likely category of a query for better filtering
