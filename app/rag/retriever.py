@@ -6,7 +6,6 @@ from typing import List, Tuple
 from .document_loader import Document, DocumentLoader
 from .embeddings import EmbeddingModel
 from .vector_store import VectorStore
-from .reranker import Reranker
 
 class RAGRetriever:
     """Retrieval-Augmented Generation retriever"""
@@ -19,13 +18,11 @@ class RAGRetriever:
         chunk_size: int = 500,
         chunk_overlap: int = 50,
         top_k: int = 3,
-        use_reranker: bool = True,
         relevance_threshold: float = 0.3
     ):
         self.documents_dir = Path(documents_dir)
         self.vector_db_dir = Path(vector_db_dir)
         self.top_k = top_k
-        self.use_reranker = use_reranker
         self.relevance_threshold = relevance_threshold
         
         # Initialize components
@@ -39,9 +36,6 @@ class RAGRetriever:
             embedding_model=self.embedding_model,
             persist_dir=self.vector_db_dir
         )
-        
-        # Initialize reranker if enabled
-        self.reranker = Reranker() if use_reranker else None
         
         self._initialized = False
     
@@ -86,32 +80,23 @@ class RAGRetriever:
         # Apply query expansion for better matching
         expanded_query = self._expand_query(query)
 
-        # For reranking, fetch more candidates initially (increased for better coverage)
-        fetch_k = k * 3 if self.use_reranker else k
-
         if use_mmr:
             # Use MMR for diverse results (fetch more candidates, return top_k)
             results = self.vector_store.search_mmr(
                 expanded_query,  # Use expanded query
-                top_k=fetch_k,
-                fetch_k=fetch_k * 3,  # Fetch 3x candidates for better diversity
+                top_k=k,
+                fetch_k=k * 3,  # Fetch 3x candidates for better diversity
                 lambda_mult=0.7,  # 70% relevance, 30% diversity
                 diversity_boost=0.3  # Extra boost for new source documents
             )
         else:
             # Standard similarity search
-            results = self.vector_store.search(expanded_query, top_k=fetch_k)
+            results = self.vector_store.search(expanded_query, top_k=k)
 
-        # Apply category-based filtering before reranking
+        # Apply category-based filtering
         if results:
             results = self._filter_by_category(query, results)
             print(f"[CATEGORY FILTER] After filtering: {len(results)} results")
-
-        # Apply reranking if enabled - use ORIGINAL query for reranking
-        if self.use_reranker and self.reranker and results:
-            print(f"[RERANKER] Reranking {len(results)} results...")
-            results = self.reranker.rerank(query, results, top_k=k)  # Use original query for reranking
-            print(f"[RERANKER] Top result score: {results[0][1]:.4f}" if results else "")
 
         return results
 
@@ -217,6 +202,13 @@ class RAGRetriever:
 
         return 'general'
 
+    # Related categories that should not be filtered out from each other
+    RELATED_CATEGORIES = {
+        'poin_ekstrakurikuler': ['website_sinema'],   # SINEMA = tool untuk poin
+        'website_sinema': ['poin_ekstrakurikuler'],   # Sebaliknya juga
+        'transkrip_tem': ['website_sinema', 'poin_ekstrakurikuler'],  # TEM juga via SINEMA
+    }
+
     def _filter_by_category(self, query: str, results: List[Tuple[Document, float]]) -> List[Tuple[Document, float]]:
         """Filter results by category to improve relevance
 
@@ -233,12 +225,15 @@ class RAGRetriever:
         if query_category == 'general':
             return results
 
-        # Filter documents by matching category
+        # Get related categories for this query category
+        related = self.RELATED_CATEGORIES.get(query_category, [])
+
+        # Filter documents by matching category + related categories
         filtered = []
         for doc, score in results:
             doc_category = doc.metadata.get('category', 'general')
-            # Keep if category matches OR if document is general (could be relevant)
-            if doc_category == query_category or doc_category == 'general' or doc_category == 'panduan_akademik':
+            # Keep if: category matches OR related category OR general OR panduan_akademik
+            if doc_category == query_category or doc_category in related or doc_category == 'general' or doc_category == 'panduan_akademik':
                 filtered.append((doc, score))
 
         return filtered if filtered else results  # Return filtered if non-empty, else original
@@ -259,12 +254,20 @@ class RAGRetriever:
             print(f"[RAG] No results found for query")
             return ""
 
-        # Debug: Print all retrieved chunks
+        # Debug: Print all retrieved chunks with keyword highlighting
         print(f"\n[RAG DEBUG] Retrieved {len(results)} chunks:")
-        for i, (doc, score) in enumerate(results[:5], 1):  # Show top 5
+        for i, (doc, score) in enumerate(results, 1):
             source = doc.metadata.get('source', 'unknown')
-            preview = doc.content[:80].replace('\n', ' ')[:80]
-            print(f"  {i}. [{score:.4f}] {source}: {preview}...")
+            preview = doc.content[:200].replace('\n', ' ')
+            # Check for key terms
+            content_lower = doc.content.lower()
+            has_sks = 'sks' in content_lower
+            has_ekstra = 'ekstrakurikuler' in content_lower or 'ekstra' in content_lower
+            flags = []
+            if has_sks: flags.append('📌SKS')
+            if has_ekstra: flags.append('📌EKSTRA')
+            flag_str = f" {' '.join(flags)}" if flags else ""
+            print(f"  {i}. [{score:.4f}] {source}{flag_str}: {preview}...")
 
         # Check if top result has very low relevance score (potential hallucination risk)
         top_score = results[0][1]

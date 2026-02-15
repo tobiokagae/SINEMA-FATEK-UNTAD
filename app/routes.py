@@ -34,7 +34,6 @@ def get_retriever() -> RAGRetriever:
             chunk_size=CHUNK_SIZE,
             chunk_overlap=CHUNK_OVERLAP,
             top_k=TOP_K,
-            use_reranker=False,  # Reranker dinonaktifkan
             relevance_threshold=RELEVANCE_THRESHOLD
         )
         _retriever.initialize()

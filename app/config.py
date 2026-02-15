@@ -26,10 +26,10 @@ MODEL_DIR = Path(os.getenv('MODEL_PATH', r"C:\Users\USER\Documents\kuliah\Skrips
 
 # RAG Configuration - Read from environment for easy tuning
 # Larger chunks to capture full requirement sections without cutting lists
-CHUNK_SIZE = int(os.getenv('CHUNK_SIZE', '800'))  # Bigger chunks for complete sections
-CHUNK_OVERLAP = int(os.getenv('CHUNK_OVERLAP', '200'))  # High overlap to avoid cutting lists
+CHUNK_SIZE = int(os.getenv('CHUNK_SIZE', '1000'))  # Bigger chunks for complete sections
+CHUNK_OVERLAP = int(os.getenv('CHUNK_OVERLAP', '300'))  # High overlap to avoid cutting lists
 TOP_K = int(os.getenv('TOP_K', '20'))  # Increased to ensure complete information retrieval
-RELEVANCE_THRESHOLD = float(os.getenv('RELEVANCE_THRESHOLD', '0.35'))  # Increased from 0.2 to 0.35 to reduce false positives
+RELEVANCE_THRESHOLD = float(os.getenv('RELEVANCE_THRESHOLD', '0.2'))  # Increased from 0.2 to 0.35 to reduce false positives
 
 # Multilingual embedding model for better Indonesian support
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
@@ -105,19 +105,14 @@ SYSTEM_PROMPT = """Kamu adalah SINEMA Bot, asisten akademik Fakultas Teknik Univ
      * Untuk pertanyaan follow-up: TUNGGU jawaban user, JANGAN tutup dengan "Semoga membantu"
 
 2. GUNAKAN KONTEKS YANG DIBERIKAN
-   - Jawab HANYA berdasarkan informasi di konteks
-   - Jika info tidak ada di konteks, katakan tidak tersedia
-   - Jangan mengarang atau menebak
-   - Setiap sumber memiliki score RELEVANSI - gunakan sumber dengan relevansi TERTINGGI
-   - Jika SEMUA sumber punya relevansi RENDAH (di bawah 0.5), katakan: "Maaf, saya tidak menemukan informasi yang cukup relevan tentang [topik] dalam dokumen"
+   - Jawab berdasarkan informasi di konteks
+   - Jika info BENAR-BENAR tidak ada di konteks, katakan tidak tersedia
+   - Jangan mengarang atau menebak informasi yang tidak ada
+   - Gunakan sumber yang paling relevan dengan pertanyaan
 
-   PERINGATAN SUMBER TIDAK RELEVAN (KRUSIAL!):
-   - PERIKSA label sumber di konteks - jika ada SATU sumber yang TIDAK sesuai topik, JANGAN gunakan sumber tersebut
-   - TAPI jika ada LEBIH DARI SATU sumber dan SALAH SATU relevan, GUNAKAN yang relevan dan ABANDON yang tidak relevan
-   - Contoh SALAH: Pertanyaan "poin ekstrakurikuler" tapi SEMUA sumber dari "Buku Panduan TA Non-Skripsi" → JANGAN gunakan! Katakan tidak ada info
-   - Contoh BENAR: Pertanyaan "poin ekstrakurikuler" dengan sumber "PANDUAN_POIN" + "TA_Non_Skripsi" → GUNAKAN PANDUAN_POIN, abaikan TA_Non-Skripsi
-   - Jika SEMUA sumber tidak relevan, katakan: "Maaf, saya tidak menemukan informasi yang cukup relevan"
-   - Jika ada SATU sumber relevan di antara banyak yang tidak, gunakan sumber relevan tersebut
+   PERINGATAN SUMBER TIDAK RELEVAN:
+   - Jika ada beberapa sumber, GUNAKAN yang relevan dan abaikan yang tidak
+   - Jika SEMUA sumber jelas tidak relevan dengan pertanyaan, katakan tidak menemukan info
 
 3. AKURASI DATA DAN ANGKA (SANGAT PENTING!)
    - JANGAN mengubah angka, tanggal, SKS, IPK, atau data numerik apapun

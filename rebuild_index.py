@@ -35,7 +35,6 @@ def main():
         chunk_size=CHUNK_SIZE,
         chunk_overlap=CHUNK_OVERLAP,
         top_k=TOP_K,
-        use_reranker=True,
         relevance_threshold=RELEVANCE_THRESHOLD
     )
 
