@@ -28,6 +28,10 @@ openpyxl>=3.1.0
 beautifulsoup4>=4.12.0
 openai>=1.0.0
 
+# RAGAS evaluation framework
+ragas>=0.2.0
+datasets>=2.14.0
+
 # NOTE: PyTorch with CUDA must be installed separately:
 # pip install torch --index-url https://download.pytorch.org/whl/cu121
 # (use cu118 for CUDA 11.8, cu121 for CUDA 12.1)

@@ -1,0 +1,317 @@
+{
+    "metadata": {
+        "description": "Dataset benchmark 50 pertanyaan untuk evaluasi RAGAS - SINEMA RAG Chatbot",
+        "version": "1.0",
+        "total_questions": 50,
+        "categories": {
+            "panduan_akademik": 15,
+            "poin_ekstrakurikuler": 10,
+            "ta_skripsi": 10,
+            "integritas_akademik": 8,
+            "website_sinema": 7
+        },
+        "note": "Ground truth answers harus diverifikasi dengan dokumen asli sebelum menjalankan evaluasi RAGAS"
+    },
+    "questions": [
+        {
+            "id": 1,
+            "question": "Berapa IPK minimal untuk lulus program S1?",
+            "ground_truth": "IPK minimal untuk lulus program S1 adalah 2.75.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 2,
+            "question": "Berapa lama masa studi maksimal untuk program S1?",
+            "ground_truth": "Masa studi maksimal untuk program S1 adalah 5 tahun ditambah perpanjangan 2 tahun, sehingga total maksimal 7 tahun atau 14 semester.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 3,
+            "question": "Berapa lama masa studi maksimal untuk program D4?",
+            "ground_truth": "Masa studi maksimal untuk program D4 adalah 4 tahun ditambah perpanjangan 1 tahun, sehingga total maksimal 5 tahun atau 10 semester.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 4,
+            "question": "Bagaimana prosedur pengajuan cuti akademik?",
+            "ground_truth": "Prosedur pengajuan cuti akademik meliputi mengajukan permohonan tertulis, mendapat persetujuan dari Penasehat Akademik (PA) dan Ketua Program Studi (Kaprodi), kemudian mendaftar melalui sistem SINAWA.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 5,
+            "question": "Apakah bisa mengulang mata kuliah untuk perbaikan nilai?",
+            "ground_truth": "Ya, mahasiswa dapat mengulang mata kuliah. Mata kuliah yang belum lulus wajib diulang pada semester berikutnya. Nilai yang digunakan adalah nilai terbaik dari pengulangan tersebut.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 6,
+            "question": "Berapa SKS maksimal yang bisa diambil dalam satu semester?",
+            "ground_truth": "Jumlah SKS maksimal yang bisa diambil per semester ditentukan berdasarkan Indeks Prestasi Semester (IPS) pada semester sebelumnya. Mahasiswa dengan IPS tinggi dapat mengambil lebih banyak SKS.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 7,
+            "question": "Apa itu Indeks Prestasi Semester (IPS)?",
+            "ground_truth": "Indeks Prestasi Semester (IPS) adalah rata-rata nilai yang diperoleh mahasiswa dalam satu semester, dihitung dari jumlah perkalian SKS dengan angka mutu dibagi total SKS yang diambil pada semester tersebut.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 8,
+            "question": "Apa itu Indeks Prestasi Kumulatif (IPK)?",
+            "ground_truth": "Indeks Prestasi Kumulatif (IPK) adalah rata-rata nilai yang diperoleh mahasiswa secara kumulatif dari semester pertama hingga semester terakhir yang ditempuh, dihitung dari total perkalian SKS dengan angka mutu dibagi total SKS yang telah diambil.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 9,
+            "question": "Bagaimana sistem penilaian dan angka mutu di FATEK UNTAD?",
+            "ground_truth": "Sistem penilaian menggunakan huruf mutu A, A-, B+, B, B-, C+, C, D, dan E, dengan angka mutu berturut-turut 4.00, 3.75, 3.50, 3.00, 2.75, 2.50, 2.00, 1.00, dan 0. Nilai akhir dihitung berdasarkan rentang nilai tertentu.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 10,
+            "question": "Apa saja syarat kelulusan mahasiswa S1 di FATEK UNTAD?",
+            "ground_truth": "Syarat kelulusan program S1 meliputi menyelesaikan seluruh beban SKS yang ditetapkan kurikulum, mencapai IPK minimal 2.75, lulus tugas akhir/skripsi, dan memenuhi persyaratan administratif lainnya termasuk TEM (Transkrip Ekstrakurikuler Mahasiswa).",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 11,
+            "question": "Apa itu Penasehat Akademik (PA) dan apa tugasnya?",
+            "ground_truth": "Penasehat Akademik (PA) adalah dosen yang ditugaskan untuk membimbing mahasiswa dalam perencanaan studi. Tugas PA meliputi membantu mahasiswa menyusun Kartu Rencana Studi (KRS), memantau perkembangan akademik, dan memberikan nasihat terkait masalah akademik.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 12,
+            "question": "Bagaimana cara mengisi Kartu Rencana Studi (KRS)?",
+            "ground_truth": "Mahasiswa mengisi KRS dengan memilih mata kuliah yang akan diambil pada semester berjalan, dengan bimbingan dari Penasehat Akademik (PA). Jumlah SKS yang dapat diambil disesuaikan dengan IPS semester sebelumnya.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 13,
+            "question": "Apa yang terjadi jika mahasiswa tidak registrasi selama beberapa semester?",
+            "ground_truth": "Mahasiswa yang tidak melakukan registrasi atau herregistrasi dalam periode tertentu tanpa mengajukan cuti akademik dapat dikenai sanksi administratif dan dinyatakan mengundurkan diri atau putus studi.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 14,
+            "question": "Apa itu Satuan Kredit Semester (SKS)?",
+            "ground_truth": "Satuan Kredit Semester (SKS) adalah takaran penghargaan terhadap pengalaman belajar yang diperoleh selama satu semester. SAtu SKS setara dengan kegiatan belajar tatap muka, kegiatan terstruktur, dan kegiatan mandiri per minggu selama satu semester.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 15,
+            "question": "Berapa beban SKS minimal untuk lulus program S1?",
+            "ground_truth": "Beban SKS minimal untuk lulus program S1 adalah sekitar 144 SKS, termasuk mata kuliah wajib, pilihan, dan tugas akhir/skripsi, sesuai dengan kurikulum masing-masing program studi.",
+            "category": "panduan_akademik"
+        },
+        {
+            "id": 16,
+            "question": "Bagaimana cara mendapatkan poin ekstrakurikuler?",
+            "ground_truth": "Poin ekstrakurikuler didapat dengan mengikuti kegiatan kemahasiswaan yang diakui universitas. Setiap kegiatan memiliki bobot poin tertentu berdasarkan jenis, tingkat (lokal hingga internasional), dan peran mahasiswa (peserta, panitia, juara). Kegiatan meliputi 8 bidang: Penalaran dan Kreativitas, Kesejahteraan dan Kewirausahaan, Minat Bakat dan Organisasi, Penyelarasan Karier, Mental Spiritual Kebangsaan, Internasionalisasi, Pengabdian Masyarakat, serta Bidang Khusus Fakultas.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 17,
+            "question": "Berapa total poin minimal untuk mendapat nilai mutu A?",
+            "ground_truth": "Untuk mendapat nilai mutu A, mahasiswa harus mengumpulkan total bobot poin lebih dari 3000. Nilai mutu A- diperoleh dengan poin 2501-3000, B+ dengan poin 2001-2500, dan B dengan poin 1500-2000.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 18,
+            "question": "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
+            "ground_truth": "Ada 8 bidang kegiatan ekstrakurikuler: (1) Pengembangan Penalaran dan Kreativitas, (2) Kesejahteraan dan Kewirausahaan, (3) Minat Bakat dan Organisasi Kemahasiswaan, (4) Penyelarasan dan Pengembangan Karier, (5) Pengembangan Mental Spiritual Kebangsaan, (6) Internasionalisasi, (7) Pengabdian pada Masyarakat dan Lingkungan Hidup, dan (8) Bidang Khusus sesuai Fakultas.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 19,
+            "question": "Berapa poin untuk juara 1 lomba tingkat nasional?",
+            "ground_truth": "Juara 1 lomba tingkat nasional di bidang Penalaran dan Kreativitas (lomba karya tulis ilmiah, debat, sains, pidato, dll) mendapat bobot poin 500.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 20,
+            "question": "Apa itu PKKMB dan apakah wajib diikuti?",
+            "ground_truth": "PKKMB (Pengenalan Kehidupan Kampus bagi Mahasiswa Baru) adalah kegiatan wajib yang harus diikuti setiap mahasiswa baru. Keikutsertaan PKKMB dibuktikan dengan sertifikat dan merupakan syarat untuk mengikuti kegiatan ekstrakurikuler lainnya. PKKMB bernilai 150 poin.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 21,
+            "question": "Apa syarat wajib untuk mendapatkan Transkrip Ekstrakurikuler Mahasiswa (TEM)?",
+            "ground_truth": "Syarat wajib untuk mendapatkan TEM adalah minimal 1 kegiatan PKKMB yang sudah diverifikasi dan minimal 1 kegiatan bakti lingkungan yang sudah diverifikasi. Kedua syarat ini harus terpenuhi sebelum mahasiswa bisa mengajukan TEM.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 22,
+            "question": "Berapa poin untuk mengikuti seminar tingkat universitas?",
+            "ground_truth": "Mengikuti kegiatan/forum ilmiah seperti seminar, lokakarya, workshop, atau pameran tingkat universitas mendapat bobot poin 200.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 23,
+            "question": "Apakah mahasiswa wajib mengikuti bakti lingkungan?",
+            "ground_truth": "Ya, setiap mahasiswa baru wajib mengikuti kegiatan bakti lingkungan dan penghijauan kampus selama 2 semester. Kegiatan ini merupakan syarat wajib mata kuliah Kajian Lingkungan Hidup (KLH) dan juga menjadi syarat untuk pengajuan TEM.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 24,
+            "question": "Berapa poin untuk menjadi asisten praktikum?",
+            "ground_truth": "Menjadi asisten matakuliah/praktikum/laboratorium/lapang mendapat poin 250 per semester.",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 25,
+            "question": "Bagaimana cara mengumpulkan bukti kegiatan ekstrakurikuler?",
+            "ground_truth": "Setiap kegiatan harus dibuktikan dengan sertifikat, piagam, plakat, surat keputusan, atau bukti lainnya yang dianggap sah. Setiap akhir semester, mahasiswa menukar bukti asli ekstrakurikuler ke Bagian Kemahasiswaan dengan membawa formulir KRE (Kartu Rencana Ekstrakurikuler).",
+            "category": "poin_ekstrakurikuler"
+        },
+        {
+            "id": 26,
+            "question": "Apa syarat untuk mengikuti tugas akhir?",
+            "ground_truth": "Syarat mengikuti tugas akhir meliputi terdaftar sebagai mahasiswa aktif, telah menyelesaikan minimal sejumlah SKS tertentu sesuai kurikulum prodi, memiliki IPK yang memenuhi syarat, dan telah memperoleh Transkrip Ekstrakurikuler Mahasiswa (TEM).",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 27,
+            "question": "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+            "ground_truth": "Tugas akhir skripsi adalah karya ilmiah berbasis penelitian yang mengharuskan mahasiswa melakukan riset original, sedangkan tugas akhir non-skripsi bisa berupa proyek perancangan, studi kasus, atau bentuk karya lain yang sesuai dengan program studi.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 28,
+            "question": "Bagaimana prosedur seminar proposal tugas akhir?",
+            "ground_truth": "Prosedur seminar proposal tugas akhir meliputi penyusunan proposal di bawah bimbingan dosen pembimbing, pendaftaran seminar ke program studi setelah proposal disetujui pembimbing, pelaksanaan presentasi di hadapan dosen penguji, serta revisi berdasarkan masukan penguji.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 29,
+            "question": "Berapa jumlah dosen pembimbing tugas akhir?",
+            "ground_truth": "Tugas akhir dibimbing oleh dosen pembimbing yang ditunjuk oleh program studi. Biasanya terdiri dari pembimbing utama dan pembimbing pendamping.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 30,
+            "question": "Apa saja komponen penilaian tugas akhir?",
+            "ground_truth": "Komponen penilaian tugas akhir umumnya meliputi kualitas proposal, pelaksanaan penelitian/proyek, penulisan laporan, presentasi dan pertahanan (sidang), serta penilaian dari dosen pembimbing dan penguji.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 31,
+            "question": "Apa syarat untuk mengikuti sidang tugas akhir?",
+            "ground_truth": "Syarat untuk mengikuti sidang tugas akhir meliputi penyelesaian seluruh bab laporan yang disetujui pembimbing, kelengkapan administrasi, bebas tunggakan, dan persyaratan akademik lainnya yang ditetapkan program studi.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 32,
+            "question": "Bagaimana format penulisan tugas akhir?",
+            "ground_truth": "Format penulisan tugas akhir mengikuti pedoman yang ditetapkan oleh fakultas, meliputi ketentuan tentang struktur bab, format halaman, penulisan daftar pustaka, tata bahasa, dan standar tipografi.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 33,
+            "question": "Apakah TEM menjadi syarat untuk seminar proposal TA?",
+            "ground_truth": "Ya, Transkrip Ekstrakurikuler Mahasiswa (TEM) merupakan prasyarat untuk mengikuti seminar proposal tugas akhir/skripsi. Mahasiswa harus sudah memiliki TEM sebelum bisa mendaftar seminar proposal.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 34,
+            "question": "Berapa lama waktu maksimal untuk menyelesaikan tugas akhir?",
+            "ground_truth": "Waktu penyelesaian tugas akhir dibatasi sesuai dengan sisa masa studi mahasiswa. Jika masa studi habis sebelum tugas akhir selesai, mahasiswa harus mengajukan perpanjangan masa studi.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 35,
+            "question": "Apa peran dosen pembimbing dalam tugas akhir?",
+            "ground_truth": "Dosen pembimbing bertugas membimbing mahasiswa dalam penyusunan proposal, pelaksanaan penelitian/proyek, dan penulisan laporan tugas akhir. Pembimbing juga memberikan persetujuan sebelum mahasiswa mendaftar seminar atau sidang.",
+            "category": "ta_skripsi"
+        },
+        {
+            "id": 36,
+            "question": "Apa itu plagiarisme?",
+            "ground_truth": "Plagiarisme adalah tindakan mengambil, menggunakan, atau mengakui karya, ide, tulisan, atau hasil pemikiran orang lain sebagai milik sendiri tanpa memberikan pengakuan atau atribusi yang tepat kepada sumber aslinya.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 37,
+            "question": "Apa sanksi untuk plagiarisme?",
+            "ground_truth": "Sanksi plagiarisme dapat berupa pembatalan sertifikat, pemberian nilai nol pada tugas/ujian yang bersangkutan, skorsing, hingga tuntutan hak cipta tergantung tingkat keparahan pelanggaran.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 38,
+            "question": "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+            "ground_truth": "Bentuk pelanggaran integritas akademik meliputi plagiarisme (menjiplak karya orang lain), fabrikasi (memalsukan data), falsifikasi (mengubah data), kolusi (kerja sama yang tidak diizinkan), dan berbagai bentuk kecurangan dalam ujian atau tugas.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 39,
+            "question": "Bagaimana cara menghindari plagiarisme dalam penulisan karya ilmiah?",
+            "ground_truth": "Cara menghindari plagiarisme meliputi selalu mencantumkan kutipan dan referensi yang jelas, menggunakan parafrase dengan benar, menyertakan daftar pustaka lengkap, menggunakan tools deteksi plagiarisme, dan memahami aturan sitasi yang berlaku.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 40,
+            "question": "Apa itu fabrikasi data dalam konteks integritas akademik?",
+            "ground_truth": "Fabrikasi data adalah tindakan membuat atau menciptakan data, hasil penelitian, atau informasi yang sebenarnya tidak pernah ada atau tidak pernah diperoleh melalui penelitian yang sebenarnya. Ini merupakan pelanggaran serius terhadap integritas akademik.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 41,
+            "question": "Apa itu falsifikasi dalam penelitian?",
+            "ground_truth": "Falsifikasi adalah tindakan memanipulasi, mengubah, atau menghilangkan data atau hasil penelitian sehingga informasi yang dilaporkan tidak sesuai dengan fakta yang sebenarnya diperoleh dari penelitian.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 42,
+            "question": "Bagaimana mekanisme pelaporan pelanggaran integritas akademik?",
+            "ground_truth": "Pelaporan pelanggaran integritas akademik dapat dilakukan melalui saluran resmi yang disediakan oleh fakultas atau universitas. Laporan akan ditindaklanjuti oleh pihak yang berwenang sesuai dengan prosedur yang berlaku.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 43,
+            "question": "Apa pentingnya integritas akademik bagi mahasiswa?",
+            "ground_truth": "Integritas akademik penting karena menjamin kualitas dan kredibilitas pendidikan, melatih kejujuran dan tanggung jawab, menghasilkan lulusan yang berkualitas, serta menjaga reputasi institusi pendidikan.",
+            "category": "integritas_akademik"
+        },
+        {
+            "id": 44,
+            "question": "Apa itu SINEMA?",
+            "ground_truth": "SINEMA (Sistem Informasi Ekstrakurikuler Mahasiswa) adalah platform digital Universitas Tadulako, khususnya Fakultas Teknik, untuk pencatatan dan pengelolaan kegiatan ekstrakurikuler mahasiswa. Melalui SINEMA, mahasiswa dapat mengajukan klaim poin kegiatan, melihat riwayat, dan mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM).",
+            "category": "website_sinema"
+        },
+        {
+            "id": 45,
+            "question": "Bagaimana cara mengajukan klaim kegiatan di SINEMA?",
+            "ground_truth": "Cara mengajukan klaim kegiatan di SINEMA: (1) klik menu Pengajuan Klaim atau Buat Pengajuan, (2) pilih jenis kegiatan dari daftar yang tersedia, (3) unggah bukti pendukung seperti sertifikat, surat keterangan, atau foto kegiatan, (4) klik Submit untuk mengirim pengajuan.",
+            "category": "website_sinema"
+        },
+        {
+            "id": 46,
+            "question": "Apa saja status pengajuan di SINEMA?",
+            "ground_truth": "Ada 3 status pengajuan di SINEMA: Submitted (kuning) yang berarti menunggu verifikasi, Verified (hijau) yang berarti sudah divalidasi dan poin ditambahkan, serta Rejected (merah) yang berarti ditolak dan perlu memeriksa alasan penolakan.",
+            "category": "website_sinema"
+        },
+        {
+            "id": 47,
+            "question": "Bagaimana cara mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM) di SINEMA?",
+            "ground_truth": "Cara mengajukan TEM di SINEMA: (1) buka menu Permohonan Transkrip, (2) sistem akan mengecek apakah syarat terpenuhi (minimal 1 PKKMB dan 1 bakti lingkungan yang terverifikasi), (3) jika syarat terpenuhi klik Ajukan Transkrip, (4) tunggu admin memproses, (5) setelah disetujui transkrip dapat diunduh.",
+            "category": "website_sinema"
+        },
+        {
+            "id": 48,
+            "question": "Apa informasi yang ditampilkan di dashboard mahasiswa SINEMA?",
+            "ground_truth": "Dashboard mahasiswa SINEMA menampilkan: Total Poin Terverifikasi (jumlah poin yang sudah divalidasi verifikator), Nilai Mutu Saat Ini (grade berdasarkan total poin), Pengajuan Diproses (jumlah pengajuan yang menunggu validasi), serta 5 Pengajuan Terakhir.",
+            "category": "website_sinema"
+        },
+        {
+            "id": 49,
+            "question": "Berapa lama proses verifikasi pengajuan di SINEMA?",
+            "ground_truth": "Proses verifikasi pengajuan dilakukan oleh admin kemahasiswaan dan biasanya memakan waktu 1-3 hari kerja. Status pengajuan akan berubah setelah diperiksa oleh verifikator.",
+            "category": "website_sinema"
+        },
+        {
+            "id": 50,
+            "question": "Apa yang harus dilakukan jika pengajuan ditolak di SINEMA?",
+            "ground_truth": "Jika pengajuan ditolak, mahasiswa harus memeriksa alasan penolakan pada detail pengajuan, memperbaiki dokumen atau bukti yang diperlukan sesuai alasan penolakan, lalu mengajukan ulang klaim kegiatan tersebut.",
+            "category": "website_sinema"
+        }
+    ]
+}
