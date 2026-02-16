@@ -19,7 +19,7 @@ from pathlib import Path
 # =========================
 # Project Setup
 # =========================
-PROJECT_ROOT = Path(__file__).parent
+PROJECT_ROOT = Path(__file__).parent.parent  # backend/ (parent of evaluation/)
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from dotenv import load_dotenv
@@ -542,6 +542,15 @@ with st.sidebar:
     st.markdown("---")
     st.markdown(f"**Target:** ≥ {TARGET_SCORE} per aspek")
     st.markdown(f"**Total Evaluasi:** {len(data['evaluations'])}")
+    # --- Progress per Expert (Tabel 20) ---
+    st.markdown("---")
+    st.markdown("### 👥 Progress Expert")
+    _expert_list = ["Expert 1", "Expert 2", "Expert 3"]
+    for _ename in _expert_list:
+        _count = sum(1 for ev in data["evaluations"] if ev.get("expert_name") == _ename)
+        _pct = min(_count / 10, 1.0)
+        _status = "✅" if _count >= 10 else f"{_count}/10"
+        st.progress(_pct, text=f"{_ename}: {_status}")
     st.markdown("---")
     if data["evaluations"]:
         csv = export_csv(data)
@@ -562,16 +571,31 @@ if page == "🤖 Uji Chatbot":
     </div>
     """, unsafe_allow_html=True)
 
-    # --- Expert info (persisted in session) ---
-    if 'expert_name' not in st.session_state:
-        st.session_state.expert_name = ""
+    # --- Expert info (fixed 3 experts, 10 questions per expert) ---
+    EXPERT_LIST = ["Expert 1", "Expert 2", "Expert 3"]
+    MAX_EVALUATIONS_PER_EXPERT = 10
+
+    # Count completed evaluations per expert
+    expert_counts = {e: 0 for e in EXPERT_LIST}
+    for ev in data["evaluations"]:
+        ename = ev.get("expert_name", "")
+        if ename in expert_counts:
+            expert_counts[ename] += 1
+
     col_e1, col_e2 = st.columns(2)
     with col_e1:
-        st.session_state.expert_name = st.text_input(
-            "👤 Nama Expert / Evaluator",
-            value=st.session_state.expert_name,
-            placeholder="Contoh: Staff Bag. Kemahasiswaan"
+        expert_name = st.selectbox(
+            "👤 Pilih Identitas Expert",
+            EXPERT_LIST,
+            help="Pilih identitas expert Anda. Setiap expert mengevaluasi 10 pertanyaan."
         )
+        st.session_state.expert_name = expert_name
+        completed = expert_counts[expert_name]
+        remaining = MAX_EVALUATIONS_PER_EXPERT - completed
+        if remaining > 0:
+            st.info(f"📊 Progress: **{completed}/{MAX_EVALUATIONS_PER_EXPERT}** evaluasi selesai ({remaining} tersisa)")
+        else:
+            st.success(f"✅ **{expert_name}** telah menyelesaikan semua {MAX_EVALUATIONS_PER_EXPERT} evaluasi!")
     with col_e2:
         eval_category = st.selectbox("📂 Kategori Pertanyaan", [
             "Panduan Ekstrakurikuler", "Panduan Akademik", "Panduan TA",
@@ -631,7 +655,12 @@ if page == "🤖 Uji Chatbot":
         send_btn = True
 
     # --- Process question ---
-    if send_btn and user_question and user_question.strip():
+    # Block if expert has completed maximum evaluations
+    expert_done = expert_counts.get(st.session_state.get('expert_name', ''), 0) >= MAX_EVALUATIONS_PER_EXPERT
+    if expert_done:
+        st.warning(f"⚠️ **{st.session_state.expert_name}** sudah menyelesaikan {MAX_EVALUATIONS_PER_EXPERT} evaluasi. Pilih expert lain atau lihat hasil di Dashboard.")
+
+    if send_btn and user_question and user_question.strip() and not expert_done:
         st.session_state.chat_history.append({"role": "user", "content": user_question.strip()})
 
         with st.spinner("🤔 Chatbot sedang berpikir..."):
