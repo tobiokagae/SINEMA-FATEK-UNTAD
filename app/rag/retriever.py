@@ -98,6 +98,10 @@ class RAGRetriever:
             results = self._filter_by_category(query, results)
             print(f"[CATEGORY FILTER] After filtering: {len(results)} results")
 
+        # Boost: ensure related category chunks are included
+        if results:
+            results = self._boost_related_categories(query, expanded_query, results)
+
         return results
 
     def _expand_query(self, query: str) -> str:
@@ -237,6 +241,74 @@ class RAGRetriever:
                 filtered.append((doc, score))
 
         return filtered if filtered else results  # Return filtered if non-empty, else original
+
+    def _boost_related_categories(self, query: str, expanded_query: str, results: List[Tuple[Document, float]]) -> List[Tuple[Document, float]]:
+        """Ensure related category chunks are included even if FAISS didn't rank them highly.
+        
+        Small document collections (e.g., SINEMA with only 5 chunks out of 1621) may never
+        appear in FAISS top-K results. This method finds and appends them if missing.
+        """
+        query_category = self._detect_query_category(query)
+        related = self.RELATED_CATEGORIES.get(query_category, [])
+        
+        # All categories that SHOULD be present: query's own category + related
+        desired_categories = [query_category] + related
+        
+        if not desired_categories or query_category == 'general':
+            return results
+        
+        # Check which desired categories are already in results
+        existing_categories = set(doc.metadata.get('category', '') for doc, _ in results)
+        missing_categories = [cat for cat in desired_categories if cat not in existing_categories]
+        
+        if not missing_categories:
+            return results  # All desired categories already present
+        
+        # Find and score chunks from missing related categories
+        try:
+            import numpy as np
+            import faiss as _faiss
+            
+            # Embed the query using same method as VectorStore.search
+            query_emb = self.vector_store.embedding_model.embed_text(expanded_query)
+            query_emb = query_emb.reshape(1, -1)
+            _faiss.normalize_L2(query_emb)
+            
+            boosted = list(results)
+            for missing_cat in missing_categories:
+                # Collect chunks from this category
+                cat_chunks = [
+                    doc for doc in self.vector_store.documents
+                    if doc.metadata.get('category', '') == missing_cat
+                ]
+                if not cat_chunks:
+                    continue
+                
+                # Embed each chunk and compute similarity
+                scored = []
+                for doc in cat_chunks:
+                    doc_emb = self.vector_store.embedding_model.embed_text(doc.content)
+                    doc_emb = doc_emb.reshape(1, -1)
+                    _faiss.normalize_L2(doc_emb)
+                    # Dot product of normalized vectors = cosine similarity
+                    sim = float(np.dot(query_emb[0], doc_emb[0]))
+                    scored.append((doc, sim))
+                
+                # Sort by score, take top 3
+                scored.sort(key=lambda x: x[1], reverse=True)
+                added = scored[:3]
+                
+                if added:
+                    print(f"[CATEGORY BOOST] Added {len(added)} chunks from '{missing_cat}' (scores: {', '.join(f'{s:.4f}' for _, s in added)})")
+                    boosted.extend(added)
+            
+            # Re-sort all by score descending
+            boosted.sort(key=lambda x: x[1], reverse=True)
+            return boosted
+            
+        except Exception as e:
+            print(f"[CATEGORY BOOST] Error: {e}")
+            return results
     
     def _generate_source_label(self, source_file: str) -> str:
         """Generate readable label from filename dynamically (no hardcoding)"""
