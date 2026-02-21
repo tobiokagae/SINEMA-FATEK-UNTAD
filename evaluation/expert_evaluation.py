@@ -7,6 +7,9 @@ Berdasarkan BAB II Bagian 2.6.3 - Expert Validation (Skala Likert 1-5)
 Expert dapat langsung menguji chatbot dari dashboard ini, lalu menilai jawabannya.
 """
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
 import streamlit as st
 import json
 import math
@@ -393,15 +396,16 @@ def save_evaluations(data):
 
 
 def export_csv(data):
-    lines = ["No,Expert,Kategori,Pertanyaan,Jawaban Chatbot,Akurasi,Relevansi,Kelengkapan,Kejelasan,Rata-rata,Komentar,Waktu"]
+    lines = ["No,Expert,Jabatan,Kategori,Pertanyaan,Jawaban Chatbot,Akurasi,Relevansi,Kelengkapan,Kejelasan,Rata-rata,Komentar,Waktu"]
     for i, ev in enumerate(data["evaluations"], 1):
         scores = ev["scores"]
         avg = sum(scores.values()) / len(scores)
         comment = ev.get("comment", "").replace(",", ";").replace("\n", " ")
         answer = ev.get("answer", "").replace(",", ";").replace("\n", " ")
         question = ev["question"].replace(",", ";").replace("\n", " ")
+        jabatan = ev.get("expert_jabatan", "-").replace(",", ";").replace("\n", " ")
         lines.append(
-            f'{i},{ev.get("expert_name", "-")},{ev.get("category", "-")},'
+            f'{i},{ev.get("expert_name", "-")},{jabatan},{ev.get("category", "-")},'
             f'"{question}","{answer}",'
             f'{scores["akurasi"]},{scores["relevansi"]},'
             f'{scores["kelengkapan"]},{scores["kejelasan"]},'
@@ -435,8 +439,12 @@ def render_score_bar(score, max_score=5):
     return f'<div class="score-bar-container"><div class="score-bar {color_class}" style="width: {pct}%"></div></div>'
 
 def render_radar_svg(averages, size=300):
-    cx, cy = size / 2, size / 2
+    pad_x = 20  # Horizontal padding for side labels
+    pad_y = 15  # Vertical padding (top/bottom)
+    cx, cy = size / 2 + pad_x, size / 2 + pad_y
     r = size * 0.35
+    vw = size + pad_x * 2
+    vh = size + pad_y * 2
     n = len(ASPECTS)
     labels = [a["label"] for a in ASPECTS]
     values = [averages.get(a["key"], 0) for a in ASPECTS]
@@ -463,19 +471,23 @@ def render_radar_svg(averages, size=300):
 
     label_elems = ""
     for i, lbl in enumerate(labels):
-        lx, ly = polar(angles[i], r + 30)
+        lx, ly = polar(angles[i], r + 35)
         v = values[i]
         label_elems += f'<text x="{lx}" y="{ly}" text-anchor="middle" dominant-baseline="middle" fill="#a0aec0" font-size="13" font-weight="600">{lbl}</text>'
         label_elems += f'<text x="{lx}" y="{ly+16}" text-anchor="middle" dominant-baseline="middle" fill="{_score_hex(v)}" font-size="12" font-weight="700">{v:.1f}</text>'
 
-    return f'<svg viewBox="0 0 {size} {size}" xmlns="http://www.w3.org/2000/svg" style="max-width:{size}px;margin:auto;display:block;">{grid}{axes}{target_poly}{data_poly}{dots}{label_elems}</svg>'
+    return f'<svg viewBox="0 0 {vw} {vh}" xmlns="http://www.w3.org/2000/svg" style="max-width:350px;width:100%;margin:auto;display:block;">{grid}{axes}{target_poly}{data_poly}{dots}{label_elems}</svg>'
 
 
 def render_gauge(score, label="Rata-rata", size=200):
-    cx, cy = size / 2, size * 0.6
-    r = size * 0.38
+    pad = 20  # Horizontal padding
+    cx = size / 2 + pad
+    r = size * 0.35
+    cy = r + 20  # Arc center
     pct = min(score / 5, 1.0)
     color = _score_hex(score)
+    vw = size + pad * 2
+    vh = cy + 65
 
     def arc(angle_deg):
         rad = math.radians(angle_deg)
@@ -484,18 +496,18 @@ def render_gauge(score, label="Rata-rata", size=200):
     sx, sy = arc(180)
     end_angle = 180 - (pct * 180)
     ex, ey = arc(end_angle)
-    large = 1 if pct > 0.5 else 0
+    large = 0  # Always 0: gauge arc is max 180° (semicircle), never > 180°
     tx, ty = arc(180 - (TARGET_SCORE / 5 * 180))
 
     bg_ex, bg_ey = arc(0)
-    return f"""<svg viewBox="0 0 {size} {size*0.7}" xmlns="http://www.w3.org/2000/svg" style="max-width:{size}px;margin:auto;display:block;">
+    return f"""<svg viewBox="0 0 {vw} {vh}" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;width:100%;margin:auto;display:block;">
     <path d="M {sx} {sy} A {r} {r} 0 1 1 {bg_ex} {bg_ey}" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
     <path d="M {sx} {sy} A {r} {r} 0 {large} 1 {ex} {ey}" fill="none" stroke="{color}" stroke-width="12" stroke-linecap="round"/>
     <circle cx="{tx}" cy="{ty}" r="5" fill="#f56565" stroke="white" stroke-width="2"/>
-    <text x="{cx}" y="{cy-8}" text-anchor="middle" fill="{color}" font-size="32" font-weight="800">{score:.2f}</text>
-    <text x="{cx}" y="{cy+14}" text-anchor="middle" fill="#a0aec0" font-size="11" font-weight="500">{label}</text>
-    <circle cx="{cx-40}" cy="{cy+32}" r="4" fill="#f56565"/>
-    <text x="{cx-32}" y="{cy+36}" fill="#a0aec0" font-size="10">Target ≥{TARGET_SCORE}</text>
+    <text x="{cx}" y="{cy+2}" text-anchor="middle" fill="{color}" font-size="32" font-weight="800">{score:.2f}</text>
+    <text x="{cx}" y="{cy+36}" text-anchor="middle" fill="#a0aec0" font-size="15" font-weight="500">{label}</text>
+    <circle cx="{cx-40}" cy="{cy+52}" r="4" fill="#f56565"/>
+    <text x="{cx-32}" y="{cy+56}" fill="#a0aec0" font-size="12">Target ≥{TARGET_SCORE}</text>
     </svg>"""
 
 
@@ -518,7 +530,7 @@ data = st.session_state.eval_data
 st.markdown("""
 <div class="hero-header">
     <h1>📊 Dashboard Evaluasi Expert</h1>
-    <p>Uji chatbot langsung & nilai jawabannya — Skala Likert 1-5 · SINEMA RAG Chatbot</p>
+    <p>Uji chatbot langsung & nilai jawabannya • SINEMA RAG Chatbot</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -534,29 +546,33 @@ with st.sidebar:
         ["🤖 Uji Chatbot", "📈 Dashboard", "📋 Detail Data"],
         label_visibility="collapsed"
     )
-    st.markdown("---")
-    st.markdown("### ℹ️ Panduan Skor")
-    for val, lbl in LIKERT_LABELS.items():
-        emoji = "🟢" if val >= 4 else ("🟡" if val >= 3 else "🔴")
-        st.markdown(f"{emoji} **{val}** — {lbl}")
-    st.markdown("---")
-    st.markdown(f"**Target:** ≥ {TARGET_SCORE} per aspek")
-    st.markdown(f"**Total Evaluasi:** {len(data['evaluations'])}")
-    # --- Progress per Expert (Tabel 20) ---
-    st.markdown("---")
-    st.markdown("### 👥 Progress Expert")
-    _expert_list = ["Expert 1", "Expert 2", "Expert 3"]
-    for _ename in _expert_list:
-        _count = sum(1 for ev in data["evaluations"] if ev.get("expert_name") == _ename)
-        _pct = min(_count / 10, 1.0)
-        _status = "✅" if _count >= 10 else f"{_count}/10"
-        st.progress(_pct, text=f"{_ename}: {_status}")
-    st.markdown("---")
-    if data["evaluations"]:
-        csv = export_csv(data)
-        st.download_button("📥 Ekspor CSV", csv,
-            file_name=f"expert_evaluation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
-            mime="text/csv")
+    # --- Hidden for now ---
+    # st.markdown("---")
+    # st.markdown("### ℹ️ Panduan Skor")
+    # for val, lbl in LIKERT_LABELS.items():
+    #     emoji = "🟢" if val >= 4 else ("🟡" if val >= 3 else "🔴")
+    #     st.markdown(f"{emoji} **{val}** — {lbl}")
+    # st.markdown("---")
+    # st.markdown(f"**Target:** ≥ {TARGET_SCORE} per aspek")
+    # st.markdown(f"**Total Evaluasi:** {len(data['evaluations'])}")
+    # --- Progress per Expert (hidden for now) ---
+    # st.markdown("---")
+    # st.markdown("### 👥 Progress Expert")
+    # _expert_names = list(set(ev.get("expert_name", "-") for ev in data["evaluations"]))
+    # if _expert_names:
+    #     for _ename in sorted(_expert_names):
+    #         _count = sum(1 for ev in data["evaluations"] if ev.get("expert_name") == _ename)
+    #         _pct = min(_count / 10, 1.0)
+    #         _status = "✅" if _count >= 10 else f"{_count}/10"
+    #         st.progress(_pct, text=f"{_ename}: {_status}")
+    # else:
+    #     st.caption("Belum ada evaluasi.")
+    # st.markdown("---")
+    # if data["evaluations"]:
+    #     csv = export_csv(data)
+    #     st.download_button("📥 Ekspor CSV", csv,
+    #         file_name=f"expert_evaluation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+    #         mime="text/csv")
 
 
 # =================================================================
@@ -564,43 +580,78 @@ with st.sidebar:
 # =================================================================
 if page == "🤖 Uji Chatbot":
 
-    st.markdown("""
-    <div class="info-box">
-        <strong>Alur:</strong> (1) Masukkan pertanyaan → (2) Chatbot menjawab secara langsung → (3) Berikan skor evaluasi.<br>
-        Sesuai instrumen <strong>Tabel 8 BAB II (2.6.3)</strong>.
-    </div>
-    """, unsafe_allow_html=True)
+    with st.expander("📖 Alur & Penjelasan Metrik Evaluasi", expanded=False):
+        st.markdown("""
+        <div style="color:#e2e8f0; font-size:0.92rem; line-height:1.6;">
+            <p><strong>Alur Evaluasi:</strong> (1) Masukkan pertanyaan → (2) Chatbot menjawab secara langsung → (3) Berikan skor evaluasi.</p>
+            <p style="color:#f6e05e;">⚠️ Setiap expert wajib mengevaluasi <strong>minimal 5 pertanyaan</strong>.</p>
+            <p>Setiap jawaban chatbot dinilai berdasarkan <strong>4 aspek</strong> menggunakan skala Likert 1–5:</p>
+            <table class="detail-table" style="width:100%; margin-top:0.5rem;">
+                <thead>
+                    <tr><th>Aspek</th><th>Indikator</th><th>Pertanyaan Panduan</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🎯 <strong>Akurasi</strong></td>
+                        <td>Jawaban sesuai dokumen resmi</td>
+                        <td>Apakah jawaban chatbot sesuai dengan isi dokumen resmi yang menjadi knowledge base?</td>
+                    </tr>
+                    <tr>
+                        <td>🔗 <strong>Relevansi</strong></td>
+                        <td>Jawaban sesuai pertanyaan</td>
+                        <td>Apakah jawaban chatbot menjawab apa yang ditanyakan, bukan informasi yang tidak nyambung?</td>
+                    </tr>
+                    <tr>
+                        <td>📋 <strong>Kelengkapan</strong></td>
+                        <td>Informasi penting tercakup</td>
+                        <td>Apakah semua informasi penting yang relevan tercakup dalam jawaban?</td>
+                    </tr>
+                    <tr>
+                        <td>💡 <strong>Kejelasan</strong></td>
+                        <td>Mudah dipahami</td>
+                        <td>Apakah jawaban mudah dipahami oleh mahasiswa?</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="margin-top:1rem;"><strong>Skala Penilaian:</strong></p>
+            <p>🔴 <strong>1</strong> = Sangat Buruk &nbsp;|&nbsp; 🔴 <strong>2</strong> = Buruk &nbsp;|&nbsp; 🟡 <strong>3</strong> = Cukup &nbsp;|&nbsp; 🟢 <strong>4</strong> = Baik &nbsp;|&nbsp; 🟢 <strong>5</strong> = Sangat Baik</p>
+            <p style="color:#a0aec0; font-size:0.85rem;">Target kelulusan: rata-rata ≥ 4.0 per aspek.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # --- Expert info (fixed 3 experts, 10 questions per expert) ---
-    EXPERT_LIST = ["Expert 1", "Expert 2", "Expert 3"]
-    MAX_EVALUATIONS_PER_EXPERT = 10
+    # --- Expert info ---
+    MIN_EVALUATIONS_PER_EXPERT = 5
 
-    # Count completed evaluations per expert
-    expert_counts = {e: 0 for e in EXPERT_LIST}
-    for ev in data["evaluations"]:
-        ename = ev.get("expert_name", "")
-        if ename in expert_counts:
-            expert_counts[ename] += 1
-
-    col_e1, col_e2 = st.columns(2)
+    col_e1, col_e2, col_e3 = st.columns(3)
     with col_e1:
-        expert_name = st.selectbox(
-            "👤 Pilih Identitas Expert",
-            EXPERT_LIST,
-            help="Pilih identitas expert Anda. Setiap expert mengevaluasi 10 pertanyaan."
+        expert_name = st.text_input(
+            "👤 Nama Expert",
+            value=st.session_state.get("expert_name", ""),
+            placeholder="Contoh: Alisha Faiqihah",
+            help="Masukkan nama lengkap expert evaluator."
         )
         st.session_state.expert_name = expert_name
-        completed = expert_counts[expert_name]
-        remaining = MAX_EVALUATIONS_PER_EXPERT - completed
-        if remaining > 0:
-            st.info(f"📊 Progress: **{completed}/{MAX_EVALUATIONS_PER_EXPERT}** evaluasi selesai ({remaining} tersisa)")
-        else:
-            st.success(f"✅ **{expert_name}** telah menyelesaikan semua {MAX_EVALUATIONS_PER_EXPERT} evaluasi!")
     with col_e2:
+        expert_jabatan = st.text_input(
+            "🏢 Jabatan / Keahlian",
+            value=st.session_state.get("expert_jabatan", ""),
+            placeholder="Contoh: Staff Kemahasiswaan",
+            help="Masukkan jabatan atau bidang keahlian."
+        )
+        st.session_state.expert_jabatan = expert_jabatan
+    with col_e3:
         eval_category = st.selectbox("📂 Kategori Pertanyaan", [
             "Panduan Ekstrakurikuler", "Panduan Akademik", "Panduan TA",
             "Integritas Akademik", "SINEMA", "Lainnya"
         ])
+
+    if expert_name.strip():
+        completed = sum(1 for ev in data["evaluations"] if ev.get("expert_name") == expert_name.strip())
+        pct = min(completed / MIN_EVALUATIONS_PER_EXPERT, 1.0)
+        if completed < MIN_EVALUATIONS_PER_EXPERT:
+            st.progress(pct, text=f"📊 {expert_name.strip()}: {completed}/{MIN_EVALUATIONS_PER_EXPERT} evaluasi (kurang {MIN_EVALUATIONS_PER_EXPERT - completed} lagi)")
+        else:
+            st.progress(1.0, text=f"✅ {expert_name.strip()}: {completed} evaluasi selesai — target minimum tercapai!")
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
@@ -609,29 +660,44 @@ if page == "🤖 Uji Chatbot":
         if msg["role"] == "user":
             st.markdown(f'<div class="chat-bubble-user">{msg["content"]}</div>', unsafe_allow_html=True)
         else:
-            with st.container():
-                st.markdown('<div class="chat-bubble-bot">', unsafe_allow_html=True)
-                st.markdown(msg["content"])
-                if msg.get("sources"):
-                    src_list = ", ".join(s['source'] for s in msg['sources'][:3])
-                    st.caption(f"📚 Sumber: {src_list}")
-                st.markdown('</div>', unsafe_allow_html=True)
+            # Build bot bubble as single HTML block so content stays inside
+            bot_content = msg["content"].replace('\n', '<br>')
+            source_html = ""
+            if msg.get("sources"):
+                src_list = ", ".join(s['source'] for s in msg['sources'][:3])
+                source_html = f'<div class="chat-meta">📚 Sumber: {src_list}</div>'
+            latency_html = ""
             if msg.get("latency") and msg["latency"] > 0:
-                st.caption(f"⚡ Response time: {msg['latency']:.2f}s")
+                latency_html = f'<div class="chat-meta">⚡ Response time: {msg["latency"]:.2f}s</div>'
+            st.markdown(
+                f'<div class="chat-bubble-bot">{bot_content}{source_html}{latency_html}</div>',
+                unsafe_allow_html=True
+            )
 
     st.markdown("---")
 
     # --- Question Input ---
+    # Use on_change callback to detect Enter key press reliably
+    def _on_submit():
+        st.session_state._send_flag = True
+
     col_q, col_btn = st.columns([5, 1])
     with col_q:
         user_question = st.text_input(
             "❓ Ketik pertanyaan untuk chatbot...",
             placeholder="Contoh: Berapa poin minimal ekstrakurikuler yang harus dikumpulkan?",
             label_visibility="collapsed",
-            key=f"q_input_{len(st.session_state.chat_history)}"
+            key=f"q_input_{len(st.session_state.chat_history)}",
+            on_change=_on_submit
         )
     with col_btn:
         send_btn = st.button("Kirim 📤", use_container_width=True)
+
+    # Enter key triggers via on_change callback
+    if st.session_state.get("_send_flag", False):
+        st.session_state._send_flag = False
+        if user_question and user_question.strip():
+            send_btn = True
 
     # --- Suggested questions ---
     if not st.session_state.chat_history:
@@ -655,23 +721,22 @@ if page == "🤖 Uji Chatbot":
         send_btn = True
 
     # --- Process question ---
-    # Block if expert has completed maximum evaluations
-    expert_done = expert_counts.get(st.session_state.get('expert_name', ''), 0) >= MAX_EVALUATIONS_PER_EXPERT
-    if expert_done:
-        st.warning(f"⚠️ **{st.session_state.expert_name}** sudah menyelesaikan {MAX_EVALUATIONS_PER_EXPERT} evaluasi. Pilih expert lain atau lihat hasil di Dashboard.")
+    # No longer blocking — MIN_EVALUATIONS_PER_EXPERT is a target, not a hard cap
+    expert_done = False
 
     if send_btn and user_question and user_question.strip() and not expert_done:
-        st.session_state.chat_history.append({"role": "user", "content": user_question.strip()})
+        q_text = user_question.strip()
+        st.session_state.chat_history.append({"role": "user", "content": q_text})
 
         with st.spinner("🤔 Chatbot sedang berpikir..."):
             try:
-                response, sources, latency = ask_chatbot(user_question.strip())
+                response, sources, latency = ask_chatbot(q_text)
                 st.session_state.chat_history.append({
                     "role": "assistant", "content": response,
                     "sources": sources, "latency": latency
                 })
                 st.session_state.pending_response = {
-                    "question": user_question.strip(),
+                    "question": q_text,
                     "answer": response,
                     "sources": sources,
                     "latency": latency
@@ -680,6 +745,7 @@ if page == "🤖 Uji Chatbot":
                 st.error(f"❌ Error: {str(e)}")
                 st.session_state.pending_response = None
 
+        # Rerun to refresh UI (dynamic key auto-clears input)
         st.rerun()
 
     # --- Evaluation Form (appears after chatbot responds) ---
@@ -721,9 +787,13 @@ if page == "🤖 Uji Chatbot":
                 skipped = st.form_submit_button("⏭️ Lewati (Tidak Dinilai)", use_container_width=True)
 
             if submitted:
+                if not st.session_state.get("expert_name", "").strip():
+                    st.error("❌ Silakan isi nama expert terlebih dahulu!")
+                    st.stop()
                 ev = {
                     "id": len(data["evaluations"]) + 1,
-                    "expert_name": st.session_state.expert_name.strip() or "Anonymous",
+                    "expert_name": st.session_state.expert_name.strip(),
+                    "expert_jabatan": st.session_state.get("expert_jabatan", "").strip(),
                     "category": eval_category,
                     "question": pr["question"],
                     "answer": pr["answer"],
@@ -796,20 +866,29 @@ elif page == "📈 Dashboard":
         col_r, col_g = st.columns([3, 2])
         with col_r:
             st.markdown("#### 🕸️ Radar Chart — Rata-rata per Aspek")
-            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-            st.markdown(render_radar_svg(aspect_avgs, 320), unsafe_allow_html=True)
-            st.markdown('<div class="target-line"><div class="target-dot"></div>Garis putus-putus merah = Target ≥4.0</div>', unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+            radar_svg = render_radar_svg(aspect_avgs, 320)
+            st.markdown(
+                f'<div class="metric-card">'
+                f'{radar_svg}'
+                f'<div class="target-line"><div class="target-dot"></div>Garis putus-putus merah = Target ≥4.0</div>'
+                f'</div>',
+                unsafe_allow_html=True
+            )
 
         with col_g:
             st.markdown("#### 🎯 Skor Keseluruhan")
-            st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-            st.markdown(render_gauge(overall_avg, "Rata-rata Keseluruhan", 260), unsafe_allow_html=True)
+            gauge_svg = render_gauge(overall_avg, "Rata-rata Keseluruhan", 260)
             if overall_avg >= TARGET_SCORE:
-                st.markdown('<div style="text-align:center;margin-top:1rem;"><span class="metric-status status-pass" style="font-size:1rem;padding:0.5rem 1.5rem;">✅ LULUS — Memenuhi Target</span></div>', unsafe_allow_html=True)
+                status_html = '<div style="text-align:center;margin-top:1rem;"><span class="metric-status status-pass" style="font-size:1rem;padding:0.5rem 1.5rem;">✅ LULUS — Memenuhi Target</span></div>'
             else:
-                st.markdown('<div style="text-align:center;margin-top:1rem;"><span class="metric-status status-fail" style="font-size:1rem;padding:0.5rem 1.5rem;">❌ BELUM LULUS — Perlu Perbaikan</span></div>', unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+                status_html = '<div style="text-align:center;margin-top:1rem;"><span class="metric-status status-fail" style="font-size:1rem;padding:0.5rem 1.5rem;">❌ BELUM LULUS — Perlu Perbaikan</span></div>'
+            st.markdown(
+                f'<div class="metric-card">'
+                f'{gauge_svg}'
+                f'{status_html}'
+                f'</div>',
+                unsafe_allow_html=True
+            )
 
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
@@ -847,6 +926,23 @@ elif page == "📈 Dashboard":
 # Page: 📋 Detail Data
 # =================================================================
 elif page == "📋 Detail Data":
+    st.markdown("#### 🔐 Halaman Terkunci")
+    st.info("Halaman ini berisi data evaluasi lengkap. Masukkan PIN admin untuk mengakses.")
+    
+    ADMIN_PIN = os.getenv("EVAL_ADMIN_PIN", "admin123")
+    entered_pin = st.text_input(
+        "🔐 Masukkan PIN Admin:",
+        type="password",
+        key="detail_data_pin"
+    )
+    
+    if not entered_pin:
+        st.stop()
+    elif entered_pin != ADMIN_PIN:
+        st.error("❌ PIN salah! Hubungi peneliti untuk mendapatkan PIN admin.")
+        st.stop()
+    
+    st.success("🔓 Akses diberikan!")
     evaluations = data["evaluations"]
 
     if not evaluations:
@@ -928,8 +1024,54 @@ elif page == "📋 Detail Data":
         st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
         with st.expander("⚠️ Zona Bahaya"):
             st.warning("Tindakan di bawah ini tidak dapat dibatalkan!")
+            
+            # --- Individual delete ---
+            st.markdown("##### 🗑️ Hapus Evaluasi Tertentu")
+            st.caption("Pilih evaluasi yang ingin dihapus (misal salah pencet atau salah input).")
+            
+            for idx, ev in enumerate(evaluations):
+                sc = ev["scores"]
+                avg = sum(sc.values()) / len(sc)
+                q_short = ev["question"][:50] + ("..." if len(ev["question"]) > 50 else "")
+                expert = ev.get("expert_name", "-")
+                ts = datetime.fromisoformat(ev["timestamp"]).strftime("%d/%m %H:%M")
+                
+                col_info, col_del = st.columns([5, 1])
+                with col_info:
+                    st.markdown(
+                        f'<div class="eval-entry" style="margin-bottom:0.4rem;padding:0.75rem 1rem;">'
+                        f'<span style="color:#667eea;font-weight:600;font-size:0.8rem;">#{idx+1} {expert}</span> '
+                        f'<span style="color:#a0aec0;font-size:0.8rem;">({ts})</span><br>'
+                        f'<span style="color:#e2e8f0;font-size:0.85rem;">{q_short}</span> '
+                        f'<span class="{score_css_class(avg)}" style="font-size:0.85rem;">avg: {avg:.1f}</span>'
+                        f'</div>',
+                        unsafe_allow_html=True
+                    )
+                with col_del:
+                    if st.button("🗑️", key=f"del_{idx}", help=f"Hapus evaluasi #{idx+1}"):
+                        st.session_state[f"confirm_del_{idx}"] = True
+                
+                # Confirmation step
+                if st.session_state.get(f"confirm_del_{idx}", False):
+                    st.warning(f'⚠️ Yakin hapus evaluasi **#{idx+1}** dari **{expert}**? ("{q_short}")')
+                    col_yes, col_no = st.columns(2)
+                    with col_yes:
+                        if st.button(f"✅ Ya, Hapus", key=f"confirm_yes_{idx}", use_container_width=True):
+                            data["evaluations"].pop(idx)
+                            save_evaluations(data)
+                            st.session_state.eval_data = data
+                            st.session_state.pop(f"confirm_del_{idx}", None)
+                            st.rerun()
+                    with col_no:
+                        if st.button(f"❌ Batal", key=f"confirm_no_{idx}", use_container_width=True):
+                            st.session_state.pop(f"confirm_del_{idx}", None)
+                            st.rerun()
+            
+            st.markdown("---")
+            st.markdown("##### 💣 Hapus Semua Data")
             if st.button("🗑️ Hapus Semua Data Evaluasi", type="secondary"):
                 data["evaluations"] = []
                 save_evaluations(data)
                 st.session_state.eval_data = data
                 st.rerun()
+

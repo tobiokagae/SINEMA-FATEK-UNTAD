@@ -1,11 +1,15 @@
 """
 OpenRouter API Generator for SINEMA Chatbot
 Uses OpenRouter API (OpenAI-compatible) instead of local model
+
+Features:
+- Multiple API key rotation: automatically switches to next key on rate limit
+- Supports OPENROUTER_API_KEYS (comma-separated) with fallback to OPENROUTER_API_KEY
 """
 
 import os
 import time
-from typing import Tuple
+from typing import Tuple, List
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -13,7 +17,7 @@ load_dotenv()
 
 
 class APIGenerator:
-    """Generator that uses OpenRouter API for LLM responses"""
+    """Generator that uses OpenRouter API for LLM responses with key rotation"""
     
     # User-friendly error messages in Indonesian
     ERROR_MESSAGES = {
@@ -21,6 +25,13 @@ class APIGenerator:
 
 Maaf, limit API gratis (50 request/hari) sudah habis. 
 Silakan coba lagi besok atau hubungi admin untuk upgrade akun.
+
+💡 **Tips:** Limit akan reset setiap hari pada pukul 00:00 UTC.""",
+        
+        'all_keys_exhausted': """⚠️ **Semua API key sudah mencapai batas limit**
+
+Seluruh API key yang tersedia telah mencapai batas penggunaan harian.
+Silakan coba lagi besok atau hubungi admin.
 
 💡 **Tips:** Limit akan reset setiap hari pada pukul 00:00 UTC.""",
         
@@ -42,19 +53,53 @@ Maaf, terjadi masalah saat memproses pertanyaan Anda. Silakan coba lagi."""
     }
     
     def __init__(self):
-        self.api_key = os.getenv('OPENROUTER_API_KEY')
         self.model = os.getenv('OPENROUTER_MODEL', 'openai/gpt-4o-mini-2024-07-18')
-        self.rate_limited = False  # Track rate limit status
         
-        if not self.api_key:
-            raise ValueError("OPENROUTER_API_KEY not found in environment")
+        # Load API keys: prefer multi-key, fallback to single key
+        keys_str = os.getenv('OPENROUTER_API_KEYS', '')
+        if keys_str:
+            self.api_keys: List[str] = [k.strip() for k in keys_str.split(',') if k.strip()]
+        else:
+            single_key = os.getenv('OPENROUTER_API_KEY', '')
+            self.api_keys = [single_key] if single_key else []
         
+        if not self.api_keys:
+            raise ValueError("No API keys found. Set OPENROUTER_API_KEYS or OPENROUTER_API_KEY in .env")
+        
+        self.current_key_index = 0
+        self.exhausted_keys = set()  # Track which keys are rate-limited
+        
+        # Initialize client with first key
+        self._init_client()
+        
+        print(f"✅ OpenRouter API initialized with {len(self.api_keys)} key(s), model: {self.model}")
+    
+    def _init_client(self):
+        """Initialize/reinitialize OpenAI client with current key"""
         self.client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
-            api_key=self.api_key,
+            api_key=self.api_keys[self.current_key_index],
         )
+    
+    def _rotate_key(self) -> bool:
+        """
+        Switch to the next available API key.
+        Returns True if a new key is available, False if all keys are exhausted.
+        """
+        self.exhausted_keys.add(self.current_key_index)
         
-        print(f"✅ OpenRouter API initialized with model: {self.model}")
+        # Find next non-exhausted key
+        for i in range(len(self.api_keys)):
+            candidate = (self.current_key_index + 1 + i) % len(self.api_keys)
+            if candidate not in self.exhausted_keys:
+                self.current_key_index = candidate
+                self._init_client()
+                key_preview = self.api_keys[candidate][-8:]
+                print(f"🔄 Switched to API key #{candidate + 1} (…{key_preview})")
+                return True
+        
+        print("❌ All API keys exhausted!")
+        return False
     
     def _parse_error(self, error: Exception) -> Tuple[str, str]:
         """
@@ -64,7 +109,6 @@ Maaf, terjadi masalah saat memproses pertanyaan Anda. Silakan coba lagi."""
         
         # Check for rate limit (429)
         if '429' in error_str or 'rate limit' in error_str:
-            self.rate_limited = True
             return 'rate_limit', self.ERROR_MESSAGES['rate_limit']
         
         # Check for authentication errors (401, 403)
@@ -90,7 +134,7 @@ Maaf, terjadi masalah saat memproses pertanyaan Anda. Silakan coba lagi."""
         conversation_history: list = None
     ) -> Tuple[str, float]:
         """
-        Generate a response using OpenRouter API.
+        Generate a response using OpenRouter API with automatic key rotation.
         
         Args:
             query: Current user question
@@ -103,9 +147,9 @@ Maaf, terjadi masalah saat memproses pertanyaan Anda. Silakan coba lagi."""
         """
         start = time.time()
         
-        # Check if we're already rate limited
-        if self.rate_limited:
-            return self.ERROR_MESSAGES['rate_limit'], 0.0
+        # Check if all keys are exhausted
+        if len(self.exhausted_keys) >= len(self.api_keys):
+            return self.ERROR_MESSAGES['all_keys_exhausted'], 0.0
         
         # Build the prompt
         if context:
@@ -172,14 +216,33 @@ JAWABAN: Maaf, saya tidak memiliki akses ke dokumen untuk menjawab pertanyaan in
                 return result.strip(), latency
                 
             except Exception as e:
+                error_type, user_msg = self._parse_error(e)
+                
+                # Rate limit → try rotating to next key
+                if error_type == 'rate_limit':
+                    key_num = self.current_key_index + 1
+                    print(f"⚠️ Key #{key_num} rate limited, attempting rotation...")
+                    
+                    if self._rotate_key():
+                        # Successfully switched key — retry immediately (don't count as attempt)
+                        print(f"🔄 Retrying with new key...")
+                        time.sleep(0.3)
+                        # Recursive call with new key
+                        return self.generate(query, context, system_prompt, conversation_history)
+                    else:
+                        # All keys exhausted
+                        latency = time.time() - start
+                        return self.ERROR_MESSAGES['all_keys_exhausted'], latency
+                
+                # Other errors: retry or return
                 if attempt < max_retries:
                     print(f"⚠️ API Error (attempt {attempt + 1}/{max_retries + 1}): {str(e)}, retrying...")
                     time.sleep(0.5)
                     continue
+                
                 latency = time.time() - start
-                error_type, user_message = self._parse_error(e)
                 print(f"⚠️ API Error [{error_type}]: {str(e)}")
-                return user_message, latency
+                return user_msg, latency
         
         # Fallback (should not reach here)
         latency = time.time() - start
@@ -187,9 +250,20 @@ JAWABAN: Maaf, saya tidak memiliki akses ke dokumen untuk menjawab pertanyaan in
     
     def is_loaded(self) -> bool:
         """Check if API is configured"""
-        return self.api_key is not None
+        return len(self.api_keys) > 0
     
     def reset_rate_limit(self):
-        """Reset rate limit flag (call when day changes)"""
-        self.rate_limited = False
-
+        """Reset rate limit flags for all keys (call when day changes)"""
+        self.exhausted_keys.clear()
+        self.current_key_index = 0
+        self._init_client()
+        print("🔄 All API keys reset")
+    
+    def get_status(self) -> dict:
+        """Get current key rotation status"""
+        return {
+            "total_keys": len(self.api_keys),
+            "current_key": self.current_key_index + 1,
+            "exhausted_keys": len(self.exhausted_keys),
+            "available_keys": len(self.api_keys) - len(self.exhausted_keys),
+        }
