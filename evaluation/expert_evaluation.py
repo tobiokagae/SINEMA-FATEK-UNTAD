@@ -622,7 +622,7 @@ if page == "🤖 Uji Chatbot":
     # --- Expert info ---
     MIN_EVALUATIONS_PER_EXPERT = 5
 
-    col_e1, col_e2, col_e3 = st.columns(3)
+    col_e1, col_e2 = st.columns(2)
     with col_e1:
         expert_name = st.text_input(
             "👤 Nama Expert",
@@ -639,11 +639,6 @@ if page == "🤖 Uji Chatbot":
             help="Masukkan jabatan atau bidang keahlian."
         )
         st.session_state.expert_jabatan = expert_jabatan
-    with col_e3:
-        eval_category = st.selectbox("📂 Kategori Pertanyaan", [
-            "Panduan Ekstrakurikuler", "Panduan Akademik", "Panduan TA",
-            "Integritas Akademik", "SINEMA", "Lainnya"
-        ])
 
     if expert_name.strip():
         completed = sum(1 for ev in data["evaluations"] if ev.get("expert_name") == expert_name.strip())
@@ -794,7 +789,7 @@ if page == "🤖 Uji Chatbot":
                     "id": len(data["evaluations"]) + 1,
                     "expert_name": st.session_state.expert_name.strip(),
                     "expert_jabatan": st.session_state.get("expert_jabatan", "").strip(),
-                    "category": eval_category,
+                    "category": "",
                     "question": pr["question"],
                     "answer": pr["answer"],
                     "sources": [s['source'] for s in pr.get("sources", [])[:3]],

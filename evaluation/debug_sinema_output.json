@@ -1,0 +1,161 @@
+{
+  "category_counts": {
+    "panduan_akademik": 1493,
+    "poin_ekstrakurikuler": 123,
+    "website_sinema": 5
+  },
+  "sinema_chunk_count": 5,
+  "sinema_chunk_previews": [
+    "# SINEMA - Panduan Penggunaan untuk Mahasiswa\n\n## 1. Dashboard Mahasiswa\n\nSetelah login, mahasiswa akan melihat dashboard dengan informasi:\n\n- **Total",
+    "---\n\n## 2. Pengajuan Kegiatan Ekstrakurikuler\n\n### Langkah-langkah:\n1. Klik menu **\"Pengajuan Klaim\"** atau **\"Buat Pengajuan\"**\n2. Pilih jenis kegiat",
+    "---\n\n## 4. Permohonan Transkrip (TEM)\n\nTEM (Transkrip Ekstrakurikuler Mahasiswa) adalah dokumen resmi yang merekap semua kegiatan ekstrakurikuler.\n\n##",
+    "---\n\n## 5. Edit Profil\n\nMahasiswa dapat mengubah data profil melalui menu **\"Edit Profile\"**:\n- Nama lengkap\n- Email\n- Nomor telepon\n- Foto profil\n\n--",
+    "5. **Pengabdian**\n   - KKN (Kuliah Kerja Nyata)\n   - Kegiatan sosial dan pengabdian masyarakat\n\n---\n\n## 7. FAQ Mahasiswa\n\n### Berapa lama proses verif"
+  ],
+  "category_detection": {
+    "Apa itu SINEMA?": {
+      "detected": "website_sinema",
+      "related": [
+        "poin_ekstrakurikuler"
+      ]
+    },
+    "Bagaimana cara mengajukan klaim kegiatan di SINEMA?": {
+      "detected": "poin_ekstrakurikuler",
+      "related": [
+        "website_sinema"
+      ]
+    },
+    "Apa saja status pengajuan di SINEMA?": {
+      "detected": "website_sinema",
+      "related": [
+        "poin_ekstrakurikuler"
+      ]
+    },
+    "Apa itu Penasehat Akademik (PA) dan apa tugasnya?": {
+      "detected": "general",
+      "related": []
+    }
+  },
+  "retrieval_results": [
+    {
+      "rank": 1,
+      "score": 0.4087,
+      "category": "panduan_akademik",
+      "source": "PANDUAN_AKADEMIK_FATEK_2025-2026.md",
+      "is_sinema": false,
+      "preview": "e ru m a h a n d a n\ne rm u k im a n\ne re n c a n a a n\na p a k\n## T U D Io\n## E R E N C A N A A N\n## Il A Y A H\no ta T "
+    },
+    {
+      "rank": 2,
+      "score": 0.2834,
+      "category": "panduan_akademik",
+      "source": "Buku_Panduan_TA_Non_Skripsi_Finish.pdf",
+      "is_sinema": false,
+      "preview": "membantu memastikan seluruh proses administrasi berjalan sesuai dengan ketentuan\nyang berlaku, sehingga kegiatan Tugas A"
+    },
+    {
+      "rank": 3,
+      "score": 0.2005,
+      "category": "website_sinema",
+      "source": "SINEMA_Website_Info.md",
+      "is_sinema": true,
+      "preview": "---\n\n## 4. Permohonan Transkrip (TEM)\n\nTEM (Transkrip Ekstrakurikuler Mahasiswa) adalah dokumen resmi yang merekap semua"
+    },
+    {
+      "rank": 4,
+      "score": 0.2772,
+      "category": "panduan_akademik",
+      "source": "Buku_Panduan_TA_Non_Skripsi_Finish.md",
+      "is_sinema": false,
+      "preview": "Lampiran 1\n## Pernyataan Keaslian\n“Dengan ini saya menyatakan bahwa laporan Karya Prestasi ini dengan judul “Judul” bena"
+    },
+    {
+      "rank": 5,
+      "score": 0.3237,
+      "category": "panduan_akademik",
+      "source": "PANDUAN_AKADEMIK_FATEK_2025-2026.pdf",
+      "is_sinema": false,
+      "preview": "untuk menunjang penyelenggaraan pendidikan.\n(11) Tridharma Perguruan Tinggi yang selanjutnya disebut tridharma adalah ke"
+    },
+    {
+      "rank": 6,
+      "score": 0.0903,
+      "category": "website_sinema",
+      "source": "SINEMA_Website_Info.md",
+      "is_sinema": true,
+      "preview": "5. **Pengabdian**\n   - KKN (Kuliah Kerja Nyata)\n   - Kegiatan sosial dan pengabdian masyarakat\n\n---\n\n## 7. FAQ Mahasiswa"
+    },
+    {
+      "rank": 7,
+      "score": 0.2624,
+      "category": "panduan_akademik",
+      "source": "Modul_Integritas_Akademik_FATEK_UNTAD_2.pdf",
+      "is_sinema": false,
+      "preview": "\"pembacaan vertikal\" tradisional yang fokus pada mengevaluasi klaim dalam\ndokumen itu sendiri tanpa verifikasi eksternal"
+    },
+    {
+      "rank": 8,
+      "score": 0.2781,
+      "category": "panduan_akademik",
+      "source": "Modul_Integritas_Akademik_FATEK_UNTAD_2.md",
+      "is_sinema": false,
+      "preview": "brain. New York: Brunner-Routledge.\n- Jurnal: Mellers, B. A. (2000). Choice and the relative pleasure of\nconsequences. P"
+    },
+    {
+      "rank": 9,
+      "score": 0.0849,
+      "category": "website_sinema",
+      "source": "SINEMA_Website_Info.md",
+      "is_sinema": true,
+      "preview": "# SINEMA - Panduan Penggunaan untuk Mahasiswa\n\n## 1. Dashboard Mahasiswa\n\nSetelah login, mahasiswa akan melihat dashboar"
+    },
+    {
+      "rank": 10,
+      "score": 0.2805,
+      "category": "poin_ekstrakurikuler",
+      "source": "PANDUAN_SATUAN_POIN_EKSTRAKURIKULER_Fix.pdf",
+      "is_sinema": false,
+      "preview": "FAKULTAS ……………………\nNAMA MAHASISWA :\nSTAMBUK :\nPROGRAM STUDI :\nSEMESTER :\nNo. Kriteria Kegiatan Ekstrakurikuler Mahasiswa "
+    },
+    {
+      "rank": 11,
+      "score": 0.3131,
+      "category": "panduan_akademik",
+      "source": "Buku_Panduan_TA_Non_Skripsi_Finish.pdf",
+      "is_sinema": false,
+      "preview": "studi. dunia usaha.\nRuang Lingkup: Definisi\n1. SOP ini berlaku bagi mahasiswa program 1. Tugas Akhir Non-Skripsi: Bentuk"
+    },
+    {
+      "rank": 12,
+      "score": 0.3354,
+      "category": "panduan_akademik",
+      "source": "Buku_Panduan_TA_Non_Skripsi_Finish.pdf",
+      "is_sinema": false,
+      "preview": "BAB 1 PENDAHULUAN ......................................................................................................"
+    },
+    {
+      "rank": 13,
+      "score": 0.3102,
+      "category": "panduan_akademik",
+      "source": "PANDUAN_AKADEMIK_FATEK_2025-2026.pdf",
+      "is_sinema": false,
+      "preview": "Sekretaris Jurusan, c) Program studi dan d) Kelompok Jabatan Fungsional Dosen.\nProgram Studi adalah kesatuan kegiatan pe"
+    },
+    {
+      "rank": 14,
+      "score": 0.2728,
+      "category": "panduan_akademik",
+      "source": "PANDUAN_AKADEMIK_FATEK_2025-2026.md",
+      "is_sinema": false,
+      "preview": "xii. Pas foto 4 × 6 berwarna sebanyak 2 lembar.\nxiii. Pelaksanaan yudisium pada Program Sarjana dan Magister dilakukan o"
+    },
+    {
+      "rank": 15,
+      "score": 0.2996,
+      "category": "panduan_akademik",
+      "source": "PANDUAN_AKADEMIK_FATEK_2025-2026.pdf",
+      "is_sinema": false,
+      "preview": "dan pengembangan teknologi yang lokal adaptif.\nGambar 9.6. Bagan Mata Kuliah Program Studi S1 Perencanaan Wilayah dan Ko"
+    }
+  ]
+}

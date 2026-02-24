@@ -4,10 +4,10 @@
         "version": "1.0",
         "total_questions": 50,
         "categories": {
-            "panduan_akademik": 15,
+            "panduan_akademik": 16,
             "poin_ekstrakurikuler": 10,
             "ta_skripsi": 10,
-            "integritas_akademik": 8,
+            "integritas_akademik": 7,
             "website_sinema": 7
         },
         "note": "Ground truth answers harus diverifikasi dengan dokumen asli sebelum menjalankan evaluasi RAGAS"
@@ -75,8 +75,8 @@
         },
         {
             "id": 11,
-            "question": "Apa itu Penasehat Akademik (PA) dan apa tugasnya?",
-            "ground_truth": "Penasehat Akademik (PA) adalah dosen yang ditugaskan untuk membimbing mahasiswa dalam perencanaan studi. Tugas PA meliputi membantu mahasiswa menyusun Kartu Rencana Studi (KRS), memantau perkembangan akademik, dan memberikan nasihat terkait masalah akademik.",
+            "question": "Kapan mahasiswa dinyatakan tidak aktif dan apa konsekuensinya?",
+            "ground_truth": "Mahasiswa dinyatakan tidak aktif jika tidak melakukan registrasi pada semester berjalan, tidak membayar UKT sampai batas waktu, atau dikenai skorsing. Status tidak aktif tetap terhitung dalam masa studi. Mahasiswa dapat aktif kembali setelah membayar UKT semester berjalan ditambah UKT terutang. Jika tidak melakukan registrasi dua semester berturut-turut, mahasiswa dinyatakan mengundurkan diri melalui SK Rektor dan otomatis hilang dari SIAKAD.",
             "category": "panduan_akademik"
         },
         {
@@ -219,8 +219,8 @@
         },
         {
             "id": 35,
-            "question": "Apa peran dosen pembimbing dalam tugas akhir?",
-            "ground_truth": "Dosen pembimbing bertugas membimbing mahasiswa dalam penyusunan proposal, pelaksanaan penelitian/proyek, dan penulisan laporan tugas akhir. Pembimbing juga memberikan persetujuan sebelum mahasiswa mendaftar seminar atau sidang.",
+            "question": "Apa saja syarat untuk mengikuti ujian sarjana (ujian tutup)?",
+            "ground_truth": "Syarat ujian sarjana (ujian tutup) antara lain: telah lulus seminar hasil minimal B, jumlah SKS mata kuliah wajib dengan nilai D tidak lebih dari 15 SKS, telah lulus seluruh mata kuliah wajib dengan minimal 144 SKS dan IPK minimal 2,00, nilai skripsi sudah ditetapkan pembimbing, telah menyelesaikan lembar kliring, memperlihatkan transkrip sementara yang disahkan jurusan, membuktikan hasil tes TOEFL minimal Prediction, serta minimal telah membuat draf artikel ilmiah.",
             "category": "ta_skripsi"
         },
         {
@@ -249,8 +249,8 @@
         },
         {
             "id": 40,
-            "question": "Apa itu fabrikasi data dalam konteks integritas akademik?",
-            "ground_truth": "Fabrikasi data adalah tindakan membuat atau menciptakan data, hasil penelitian, atau informasi yang sebenarnya tidak pernah ada atau tidak pernah diperoleh melalui penelitian yang sebenarnya. Ini merupakan pelanggaran serius terhadap integritas akademik.",
+            "question": "Apa itu self-plagiarism dan bagaimana cara menghindarinya?",
+            "ground_truth": "Self-plagiarism adalah praktik menggunakan kembali sebagian atau keseluruhan materi dari karya tulis sendiri yang sebelumnya telah diterbitkan tanpa memberikan atribusi yang memadai. Cara menghindarinya antara lain: (1) transparansi penggunaan karya sebelumnya dengan menyertakan referensi yang jelas, (2) melakukan parafrase dan sintesis inovatif alih-alih menyalin langsung, dan (3) mencantumkan sitasi formal untuk karya sendiri.",
             "category": "integritas_akademik"
         },
         {
@@ -261,9 +261,9 @@
         },
         {
             "id": 42,
-            "question": "Bagaimana mekanisme pelaporan pelanggaran integritas akademik?",
-            "ground_truth": "Pelaporan pelanggaran integritas akademik dapat dilakukan melalui saluran resmi yang disediakan oleh fakultas atau universitas. Laporan akan ditindaklanjuti oleh pihak yang berwenang sesuai dengan prosedur yang berlaku.",
-            "category": "integritas_akademik"
+            "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+            "ground_truth": "Predikat kelulusan program sarjana terdiri dari tiga tingkatan: (1) Pujian, untuk IPK di atas 3,50 dengan ketentuan masa studi maksimal 8 semester, tidak pernah mengulang mata kuliah, serta nilai ujian skripsi A; (2) Sangat Memuaskan, untuk IPK di atas 3,00 sampai dengan 3,50 dengan ketentuan nilai ujian akhir sekurang-kurangnya B; dan (3) Memuaskan, untuk IPK 3,00 atau di bawahnya.",
+            "category": "panduan_akademik"
         },
         {
             "id": 43,

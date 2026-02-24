@@ -189,7 +189,7 @@ class RAGRetriever:
         query_lower = query.lower()
 
         # Keyword-based category detection
-        if any(word in query_lower for word in ['poin', 'ekstrakurikuler', 'spe', 'kegiatan', 'lomba', 'organisasi', 'ukm']):
+        if any(word in query_lower for word in ['poin', 'ekstrakurikuler', 'spe', 'lomba', 'organisasi', 'ukm']):
             return 'poin_ekstrakurikuler'
         elif any(word in query_lower for word in ['skripsi', 'seminar proposal', 'seminar hasil', 'sidang skripsi']):
             return 'ta_skripsi'
@@ -246,7 +246,8 @@ class RAGRetriever:
         """Ensure related category chunks are included even if FAISS didn't rank them highly.
         
         Small document collections (e.g., SINEMA with only 5 chunks out of 1621) may never
-        appear in FAISS top-K results. This method finds and appends them if missing.
+        appear in FAISS top-K results. This method finds and INTERLEAVES them into top
+        positions so they are guaranteed to be within TOP_K.
         """
         query_category = self._detect_query_category(query)
         related = self.RELATED_CATEGORIES.get(query_category, [])
@@ -257,14 +258,25 @@ class RAGRetriever:
         if not desired_categories or query_category == 'general':
             return results
         
-        # Check which desired categories are already in results
-        existing_categories = set(doc.metadata.get('category', '') for doc, _ in results)
-        missing_categories = [cat for cat in desired_categories if cat not in existing_categories]
+        # Check which desired categories are underrepresented in results
+        # A category is "underrepresented" if it has fewer than MIN chunks.
+        # Previously we only boosted MISSING categories, but a category with
+        # just 1 chunk (out of 5 total) still needs boosting.
+        MIN_CATEGORY_CHUNKS = 3
+        category_counts = {}
+        for doc, _ in results:
+            cat = doc.metadata.get('category', '')
+            category_counts[cat] = category_counts.get(cat, 0) + 1
         
-        if not missing_categories:
-            return results  # All desired categories already present
+        underrepresented = [
+            cat for cat in desired_categories
+            if category_counts.get(cat, 0) < MIN_CATEGORY_CHUNKS
+        ]
         
-        # Find and score chunks from missing related categories
+        if not underrepresented:
+            return results  # All desired categories have enough representation
+        
+        # Find and score chunks from underrepresented categories
         try:
             import numpy as np
             import faiss as _faiss
@@ -274,12 +286,13 @@ class RAGRetriever:
             query_emb = query_emb.reshape(1, -1)
             _faiss.normalize_L2(query_emb)
             
-            boosted = list(results)
-            for missing_cat in missing_categories:
-                # Collect chunks from this category
+            all_boosted = []
+            for boost_cat in underrepresented:
+                # Collect chunks from this category (exclude already-present ones)
+                existing_docs = set(id(doc) for doc, _ in results if doc.metadata.get('category', '') == boost_cat)
                 cat_chunks = [
                     doc for doc in self.vector_store.documents
-                    if doc.metadata.get('category', '') == missing_cat
+                    if doc.metadata.get('category', '') == boost_cat and id(doc) not in existing_docs
                 ]
                 if not cat_chunks:
                     continue
@@ -294,17 +307,32 @@ class RAGRetriever:
                     sim = float(np.dot(query_emb[0], doc_emb[0]))
                     scored.append((doc, sim))
                 
-                # Sort by score, take top 3
+                # Sort by score, take top 5 (include all chunks for small documents like SINEMA)
                 scored.sort(key=lambda x: x[1], reverse=True)
-                added = scored[:3]
+                added = scored[:5]
                 
                 if added:
-                    print(f"[CATEGORY BOOST] Added {len(added)} chunks from '{missing_cat}' (scores: {', '.join(f'{s:.4f}' for _, s in added)})")
-                    boosted.extend(added)
+                    print(f"[CATEGORY BOOST] Added {len(added)} chunks from '{boost_cat}' (scores: {', '.join(f'{s:.4f}' for _, s in added)})")
+                    all_boosted.extend(added)
             
-            # Re-sort all by score descending
-            boosted.sort(key=lambda x: x[1], reverse=True)
-            return boosted
+            if not all_boosted:
+                return results
+            
+            # INTERLEAVE boosted chunks into top positions instead of appending
+            # at the end (where they would be sorted past TOP_K).
+            # Strategy: insert boosted chunks at positions 2, 4, 6, 8, 10, ...
+            # so they are guaranteed to be within TOP_K results.
+            merged = list(results)
+            insert_positions = [2, 4, 6, 8, 10]  # Insert at these indices (0-based)
+            for idx, (doc, score) in enumerate(all_boosted):
+                if idx < len(insert_positions):
+                    pos = min(insert_positions[idx], len(merged))
+                else:
+                    pos = min(12, len(merged))  # Extra boosted go near position 12
+                merged.insert(pos, (doc, score))
+            
+            print(f"[CATEGORY BOOST] Interleaved {len(all_boosted)} boosted chunks into top positions")
+            return merged
             
         except Exception as e:
             print(f"[CATEGORY BOOST] Error: {e}")

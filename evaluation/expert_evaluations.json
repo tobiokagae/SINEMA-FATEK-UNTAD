@@ -1,25 +1,7 @@
 {
-  "evaluations": [
-    {
-      "id": 1,
-      "expert_name": "Expert 1",
-      "category": "Panduan Ekstrakurikuler",
-      "question": "hai bangg",
-      "answer": "Hai! Ada yang bisa aku bantu hari ini?",
-      "sources": [],
-      "latency": 22.56312608718872,
-      "scores": {
-        "akurasi": 3,
-        "relevansi": 3,
-        "kelengkapan": 3,
-        "kejelasan": 3
-      },
-      "comment": "",
-      "timestamp": "2026-02-16T16:23:52.725583"
-    }
-  ],
+  "evaluations": [],
   "metadata": {
-    "last_updated": "2026-02-16T16:23:52.725583",
-    "total_evaluations": 1
+    "last_updated": "2026-02-23T07:39:40.999962",
+    "total_evaluations": 0
   }
 }
