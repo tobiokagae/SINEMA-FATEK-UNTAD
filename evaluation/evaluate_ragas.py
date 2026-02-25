@@ -205,47 +205,47 @@ def collect_rag_responses(retriever, generator, questions, cached_results=None):
     return results
 
 
-def _load_api_keys():
-    """
-    Load all available OpenRouter API keys.
-    Supports OPENROUTER_API_KEYS (comma-separated) and fallback OPENROUTER_API_KEY.
-    """
-    keys = []
-    keys_str = os.getenv("OPENROUTER_API_KEYS", "")
-    if keys_str:
-        keys = [k.strip() for k in keys_str.split(",") if k.strip()]
-    if not keys:
-        single_key = os.getenv("OPENROUTER_API_KEY", "")
-        if single_key:
-            keys = [single_key]
-    return keys
+# def _load_api_keys():
+#     """
+#     Load all available OpenRouter API keys.
+#     Supports OPENROUTER_API_KEYS (comma-separated) and fallback OPENROUTER_API_KEY.
+#     """
+#     keys = []
+#     keys_str = os.getenv("OPENROUTER_API_KEYS", "")
+#     if keys_str:
+#         keys = [k.strip() for k in keys_str.split(",") if k.strip()]
+#     if not keys:
+#         single_key = os.getenv("OPENROUTER_API_KEY", "")
+#         if single_key:
+#             keys = [single_key]
+#     return keys
 
 
-class _RotatingKeyManager:
-    """Thread-safe API key rotation manager."""
-    def __init__(self, keys):
-        self.keys = keys
-        self.index = 0
-        self.lock = threading.Lock()
-        self.call_count = 0
+# class _RotatingKeyManager:
+#     """Thread-safe API key rotation manager."""
+#     def __init__(self, keys):
+#         self.keys = keys
+#         self.index = 0
+#         self.lock = threading.Lock()
+#         self.call_count = 0
 
-    def get_key(self):
-        with self.lock:
-            key = self.keys[self.index]
-            self.call_count += 1
-            # Rotate to next key every N calls to spread load
-            if self.call_count % 3 == 0:
-                self.index = (self.index + 1) % len(self.keys)
-            return key
+#     def get_key(self):
+#         with self.lock:
+#             key = self.keys[self.index]
+#             self.call_count += 1
+#             # Rotate to next key every N calls to spread load
+#             if self.call_count % 3 == 0:
+#                 self.index = (self.index + 1) % len(self.keys)
+#             return key
 
-    def force_rotate(self):
-        with self.lock:
-            self.index = (self.index + 1) % len(self.keys)
-            return self.keys[self.index]
+#     def force_rotate(self):
+#         with self.lock:
+#             self.index = (self.index + 1) % len(self.keys)
+#             return self.keys[self.index]
 
-    def set_key_index(self, idx):
-        with self.lock:
-            self.index = idx % len(self.keys)
+#     def set_key_index(self, idx):
+#         with self.lock:
+#             self.index = idx % len(self.keys)
 
 
 # Global key manager (initialized in _setup_ragas_llm)
@@ -254,216 +254,164 @@ _key_manager = None
 
 def _setup_ragas_llm():
     """
-    Configure LLM for RAGAS evaluation using OpenRouter API.
-    Supports multiple API keys with automatic rotation to avoid rate limits.
+    Konfigurasi LLM Gemini sebagai evaluator RAGAS.
+    Menggunakan gemini-2.0-flash untuk kuota lebih besar.
     """
-    global _key_manager
-    keys = _load_api_keys()
-    model = os.getenv("OPENROUTER_MODEL", "openai/gpt-4o-mini")
-    base_url = "https://openrouter.ai/api/v1"
-
-    if not keys:
-        print("❌ Tidak ada API key ditemukan di .env!")
-        return None
-
-    print(f"   🔑 Ditemukan {len(keys)} API key(s)")
-    _key_manager = _RotatingKeyManager(keys)
-
-    # CRITICAL: Set env vars so RAGAS internal clients (embeddings, etc.) work
-    os.environ["OPENAI_API_KEY"] = keys[0]
-    os.environ["OPENAI_BASE_URL"] = base_url
-
-    # Use LangchainLLMWrapper with ChatOpenAI (most reliable for key rotation)
     try:
+        from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
         from ragas.llms import LangchainLLMWrapper
-        from langchain_openai import ChatOpenAI
+        from ragas.embeddings import LangchainEmbeddingsWrapper
 
-        llm = ChatOpenAI(
-            model=model,
-            api_key=keys[0],
-            base_url=base_url,
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            print("❌ GOOGLE_API_KEY tidak ditemukan di .env!")
+            return None, None
+
+        # LLM Gemini sebagai Hakim - pakai gemini-2.0-flash (kuota besar)
+        gemini_llm = ChatGoogleGenerativeAI(
+            model="gemini-2.0-flash",
+            google_api_key=api_key,
+            temperature=0
         )
-        wrapped = LangchainLLMWrapper(llm)
-        print(f"   ✅ RAGAS LLM configured via LangchainLLMWrapper ({model})")
-        return wrapped, llm  # Return both so we can swap keys on the ChatOpenAI
-    except (ImportError, Exception) as e:
-        print(f"   ⚠️ LangchainLLMWrapper gagal: {e}")
+        ragas_llm = LangchainLLMWrapper(gemini_llm)
 
-    # Fallback: Set OPENAI_API_KEY env var
-    try:
-        os.environ["OPENAI_API_KEY"] = keys[0]
-        os.environ["OPENAI_BASE_URL"] = base_url
-        print(f"   ✅ RAGAS configured via env var (fallback, 1 key only)")
-        return None, None
+        # Google Embeddings untuk Answer Relevancy
+        gemini_embeddings = GoogleGenerativeAIEmbeddings(
+            model="models/embedding-004",
+            google_api_key=api_key
+        )
+        ragas_emb = LangchainEmbeddingsWrapper(gemini_embeddings)
+
+        print(f"   ✅ RAGAS LLM (gemini-2.0-flash) & Embeddings dikonfigurasi")
+        return ragas_llm, ragas_emb
+
     except Exception as e:
-        print(f"   ❌ Semua metode konfigurasi gagal: {e}")
+        print(f"   ❌ Gagal konfigurasi Gemini: {e}")
         return None, None
 
 
-def run_ragas_evaluation(collected_results, batch_size=5, delay_between_batches=5):
+PROGRESS_FILE = PROJECT_ROOT / "evaluation" / "ragas_progress.csv"
+DELAY_BETWEEN_QUESTIONS = 120  # detik antar soal
+
+
+def run_ragas_evaluation(collected_results, batch_size=5):
     """
-    Run RAGAS evaluation on collected results with batch processing
-    and API key rotation to avoid rate limits.
-
-    Computes: context_precision, context_recall, faithfulness, answer_relevancy
-
-    Args:
-        collected_results: list of dicts from collect_rag_responses
-        batch_size: number of questions per batch (default 5)
-        delay_between_batches: seconds to wait between batches (default 5)
-
-    Returns dict with per-question scores and aggregated metrics.
+    Run RAGAS evaluation satu per satu dengan Gemini + delay besar.
+    Progress disimpan ke CSV agar bisa resume kalau terhenti.
     """
-    global _key_manager
+    from ragas import evaluate, RunConfig
+    from ragas.metrics import faithfulness, answer_relevancy, context_precision, context_recall
+    from datasets import Dataset
+    import pandas as pd
 
-    try:
-        from ragas import evaluate
-        from ragas.metrics import (
-            context_precision,
-            context_recall,
-            faithfulness,
-            answer_relevancy,
-        )
-        from datasets import Dataset
-        import pandas as pd
-    except ImportError as e:
-        print(f"\n❌ Error: Library RAGAS belum terinstal!")
-        print(f"   Jalankan: pip install ragas datasets")
-        print(f"   Detail: {e}")
+    print("\n🔧 Mengkonfigurasi LLM Gemini untuk RAGAS...")
+    llm_judge, emb_judge = _setup_ragas_llm()
+    if not llm_judge:
         return None
 
-    print("\n🔧 Mengkonfigurasi LLM untuk RAGAS...")
-    setup_result = _setup_ragas_llm()
-    if setup_result is None:
-        return None
-    ragas_llm, raw_llm = setup_result
+    metrics = [faithfulness, answer_relevancy, context_precision, context_recall]
 
-    metrics = [context_precision, context_recall, faithfulness, answer_relevancy]
+    # Load progress agar tidak mengulang yang sudah sukses
+    if PROGRESS_FILE.exists():
+        evaluated_df = pd.read_csv(PROGRESS_FILE)
+        evaluated_ids = set(evaluated_df['id'].tolist())
+        print(f"   ⏩ Melanjutkan... ({len(evaluated_ids)}/{len(collected_results)} soal sudah dinilai)")
+    else:
+        evaluated_df = pd.DataFrame()
+        evaluated_ids = set()
+
+    # Timeout 10 menit per soal, single-threaded
+    run_config = RunConfig(max_workers=1, timeout=600)
+
+    remaining = [r for r in collected_results if r["id"] not in evaluated_ids]
     total = len(collected_results)
-    num_batches = (total + batch_size - 1) // batch_size
 
-    print(f"\n🔬 Menjalankan evaluasi RAGAS...")
-    print(f"   Total pertanyaan: {total}")
-    print(f"   Batch size: {batch_size} | Total batches: {num_batches}")
-    print(f"   Delay antar batch: {delay_between_batches}s")
-    if _key_manager:
-        print(f"   API keys: {len(_key_manager.keys)} keys (auto-rotation)")
-    print(f"   Metrik: context_precision, context_recall, faithfulness, answer_relevancy")
+    if not remaining:
+        print(f"\n✅ Semua {total} soal sudah dinilai!")
+    else:
+        print(f"\n🔬 Evaluasi RAGAS: {len(remaining)} soal tersisa (delay {DELAY_BETWEEN_QUESTIONS}s antar soal)...")
 
-    all_batch_dfs = []
-    failed_batches = []
+    for idx, item in enumerate(remaining):
+        qnum = item["id"]
+        print(f"\n   📊 [{qnum}/{total}] {item['question'][:55]}...")
 
-    for batch_idx in range(num_batches):
-        start = batch_idx * batch_size
-        end = min(start + batch_size, total)
-        batch = collected_results[start:end]
+        ds = Dataset.from_dict({
+            "question": [item["question"]],
+            "answer": [item["answer"]],
+            "contexts": [item["contexts"]],
+            "ground_truth": [item["ground_truth"]],
+        })
 
-        # Rotate API key for this batch
-        if _key_manager:
-            _key_manager.set_key_index(batch_idx)
-            new_key = _key_manager.get_key()
-            # Update env var so RAGAS internal clients also use the rotated key
-            os.environ["OPENAI_API_KEY"] = new_key
-            if raw_llm is not None:
-                raw_llm.openai_api_key = new_key
-            key_suffix = new_key[-6:]
-        else:
-            key_suffix = "default"
-
-        print(f"\n   📦 Batch {batch_idx + 1}/{num_batches} "
-              f"(Q{start + 1}-Q{end}) | Key: ...{key_suffix}")
-
-        # Prepare data for this batch
-        ragas_data = {
-            "question": [r["question"] for r in batch],
-            "answer": [r["answer"] for r in batch],
-            "contexts": [r["contexts"] for r in batch],
-            "ground_truth": [r["ground_truth"] for r in batch],
-        }
-        dataset = Dataset.from_dict(ragas_data)
-
-        max_retries = 3
-        for attempt in range(max_retries):
+        success = False
+        for attempt in range(5):
             try:
-                if ragas_llm is not None:
-                    result = evaluate(dataset, metrics=metrics, llm=ragas_llm)
-                else:
-                    result = evaluate(dataset, metrics=metrics)
+                result = evaluate(
+                    ds,
+                    metrics=metrics,
+                    llm=llm_judge,
+                    embeddings=emb_judge,
+                    run_config=run_config
+                )
 
-                batch_df = result.to_pandas()
-                all_batch_dfs.append(batch_df)
-                print(f"      ✅ Batch {batch_idx + 1} selesai!")
+                res_df = result.to_pandas()
+                res_df['id'] = qnum
 
-                # Print batch summary
-                for m in ["context_precision", "context_recall",
-                          "faithfulness", "answer_relevancy"]:
-                    if m in batch_df.columns:
-                        avg = batch_df[m].mean()
-                        print(f"         {m}: {avg:.4f}")
+                # Print skor per pertanyaan
+                for m in ["faithfulness", "answer_relevancy", "context_precision", "context_recall"]:
+                    if m in res_df.columns:
+                        print(f"      {m}: {res_df[m].iloc[0]:.4f}")
+
+                evaluated_df = pd.concat([evaluated_df, res_df], ignore_index=True)
+                evaluated_df.to_csv(PROGRESS_FILE, index=False)
+
+                success = True
                 break
 
             except Exception as e:
-                error_msg = str(e)
-                is_rate_limit = "429" in error_msg or "rate limit" in error_msg.lower()
-
-                if is_rate_limit and attempt < max_retries - 1:
-                    # Rotate to next key and wait longer
-                    if _key_manager:
-                        new_key = _key_manager.force_rotate()
-                        os.environ["OPENAI_API_KEY"] = new_key
-                        if raw_llm is not None:
-                            raw_llm.openai_api_key = new_key
-                        key_suffix = new_key[-6:]
-                    wait = delay_between_batches * (attempt + 2)
-                    print(f"      ⚠️ Rate limit hit! Rotating key → ...{key_suffix}")
-                    print(f"         Menunggu {wait}s sebelum retry "
-                          f"(attempt {attempt + 2}/{max_retries})...")
-                    time.sleep(wait)
+                err = str(e)
+                if "429" in err or "RESOURCE_EXHAUSTED" in err:
+                    wait_time = DELAY_BETWEEN_QUESTIONS * (attempt + 1)
+                    print(f"      ⚠️ Rate limit! Menunggu {wait_time}s (attempt {attempt+1}/5)...")
+                    time.sleep(wait_time)
                 else:
-                    print(f"      ❌ Batch {batch_idx + 1} gagal: {error_msg[:120]}")
-                    failed_batches.append(batch_idx + 1)
+                    print(f"      ❌ Error: {err[:150]}")
                     break
 
-        # Delay between batches to respect rate limits
-        if batch_idx < num_batches - 1:
-            print(f"      ⏳ Menunggu {delay_between_batches}s...", end="", flush=True)
-            time.sleep(delay_between_batches)
-            print(" lanjut!")
+        if success:
+            print(f"      ✅ Selesai!")
+            # Delay antar soal (kecuali soal terakhir)
+            if idx < len(remaining) - 1:
+                print(f"      ⏳ Menunggu {DELAY_BETWEEN_QUESTIONS}s sebelum soal berikutnya...")
+                time.sleep(DELAY_BETWEEN_QUESTIONS)
 
-    if not all_batch_dfs:
-        print("\n❌ Semua batch gagal!")
-        return None
+    # --- Build final result object dari CSV ---
+    if PROGRESS_FILE.exists():
+        final_df = pd.read_csv(PROGRESS_FILE)
+        evaluated_count = len(final_df)
+        print(f"\n📊 Total soal yang berhasil dinilai: {evaluated_count}/{total}")
 
-    if failed_batches:
-        print(f"\n⚠️ Batch yang gagal: {failed_batches}")
-        print(f"   Evaluasi dilanjutkan dengan {len(all_batch_dfs)}/{num_batches} batch")
+        if evaluated_count == 0:
+            return None
 
-    # Merge all batch results into a single DataFrame
-    merged_df = pd.concat(all_batch_dfs, ignore_index=True)
+        overall = {}
+        for m in ["context_precision", "context_recall", "faithfulness", "answer_relevancy"]:
+            if m in final_df.columns:
+                overall[m] = float(final_df[m].mean())
+            else:
+                overall[m] = 0.0
 
-    # Compute overall averages
-    overall = {}
-    for m in ["context_precision", "context_recall",
-              "faithfulness", "answer_relevancy"]:
-        if m in merged_df.columns:
-            overall[m] = float(merged_df[m].mean())
-        else:
-            overall[m] = 0.0
+        class BatchedRagasResult:
+            def __init__(self, scores_dict, dataframe):
+                self._scores = scores_dict
+                self._df = dataframe
+            def __getitem__(self, key):
+                return self._scores[key]
+            def to_pandas(self):
+                return self._df
 
-    # Create a result-like object that has both dict access and to_pandas()
-    class BatchedRagasResult:
-        def __init__(self, scores_dict, dataframe):
-            self._scores = scores_dict
-            self._df = dataframe
+        return BatchedRagasResult(overall, final_df)
 
-        def __getitem__(self, key):
-            return self._scores[key]
-
-        def to_pandas(self):
-            return self._df
-
-    return BatchedRagasResult(overall, merged_df)
-
+    return None
 
 def compute_per_category(collected_results, ragas_result):
     """
@@ -632,6 +580,7 @@ def run_evaluation():
         print(f"\n⚠️ Masih ada {error_count} pertanyaan dengan jawaban error.")
         print(f"   Jalankan ulang script ini nanti setelah API limit reset.")
         print(f"   Progress tersimpan di cache, tidak perlu ulang dari awal.")
+
 
     # 4. Run RAGAS evaluation
     ragas_result = run_ragas_evaluation(collected_results)

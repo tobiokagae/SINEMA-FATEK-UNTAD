@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-02-24T21:52:56.116578",
+  "timestamp": "2026-02-24T23:40:57.577837",
   "total": 50,
-  "valid": 49,
-  "error": 1,
+  "valid": 50,
+  "error": 0,
   "responses": [
     {
       "id": 1,
@@ -1594,7 +1594,7 @@
     {
       "id": 50,
       "question": "Apa yang harus dilakukan jika pengajuan ditolak di SINEMA?",
-      "answer": "⚠️ **Semua API key sudah mencapai batas limit**\n\nSeluruh API key yang tersedia telah mencapai batas penggunaan harian.\nSilakan coba lagi besok atau hubungi admin.\n\n💡 **Tips:** Limit akan reset setiap hari pada pukul 00:00 UTC.",
+      "answer": "Siap! Kalau pengajuan kamu ditolak di SINEMA, langkah yang perlu kamu lakukan cukup simpel.\n\n1. Periksa alasan penolakan pada detail pengajuan di dashboard.  \n2. Perbaiki dokumen atau bukti yang diperlukan sesuai alasan yang tertera.  \n3. Ajukan kembali pengajuan setelah semua berkas sudah lengkap dan sesuai.\n\nKalau sudah cek detail penolakan, dokumen apa yang masih perlu diperbaiki? Saya bisa bantu beri tips supaya proses selanjutnya lebih lancar.",
       "contexts": [
         "(3) Jika kriteria pada ayat (1) tidak dipenuhi, maka fakultas akan menerbitkan surat\nperingatan bahwa jika periode evaluasi berikutnya tidak memenuhi syarat, maka\nmahasiswa yang bersangkutan akan dinyatakan keluar atau drop out (DO) berdasarkan\nKeputusan Rektor.\n(4) Mahasiswa dinyatakan DO karena:\ni. Melewati masa studi yang telah ditetapkan;\nii. Melakukan pelanggaran akademik/ kode etik dan telah melalui proses\npemberian sanksi;\niii. Melakukan pelanggaran hukum yang telah berkekuatan hukum tetap;\n(5) Mahasiswa yang telah memenuhi syarat untuk dinyatakan DO, diusulkan ke rektor\noleh Dekan untuk dicabut haknya sebagai mahasiswa melalui Keputusan Rektor.\n(6) Evaluasi Masa Studi khusus S1:\ni. Surat Peringatan (SP) 1 bagi mahasiswa yang belum lulus di akhir semester 11\ndan dikirim oleh fakultas di awal semester 12.\nii. Surat Peringatan (SP) 2 bagi mahasiswa yang belum lulus diakhir semester 12\ndan dikirim oleh Fakultas di awal Semester 13.",
         "ii. Publikasi di Jurnal Ilmiah minimal terakreditasi SINTA 2.\n(17) Pemeriksaan rencana penelitian (proposal tugas akhir) atau sejenisnya pada Program\nSarjana/ Sarjana Terapan dan Magister oleh pembimbing , dan perbaikannya tidak\nlebih dari 1 (satu) bulan. Jika proses bimbingan proposal lebih dari 1 (satu) bulan,\nmaka Dosen Pembimbing dapat dipertimbangkan untuk diganti, dan selanjutnya diatur\npada panduan akademik program pascasarjana/fakultas masing-masing.\n(18) Pemeriksaan naskah hasil penelitian oleh dosen pembimbing termasuk perbaikannya\ntidak lebih dari 2 (dua) bulan. Proses penyelesaian studi dari seminar hasil ke ujian\ntugas akhir tidak lebih dari 1 (satu) bulan\n7.2. Pembimbing\n(1) Syarat-syarat pembimbing berdasarkan Surat Keputusan Rektor\nNo.6067/UN28/KP/2018 dalam penulisan skripsi, mahasiswa dibimbing oleh 1 orang\npembimbing dan/atau 2 orang pembimbing yang memenuhi persyaratan akademik.\nPenambahan jumlah pembimbing (dua dosen pembimbing) jika dianggap perlu oleh",
@@ -1619,9 +1619,9 @@
       ],
       "ground_truth": "Jika pengajuan ditolak, mahasiswa harus memeriksa alasan penolakan pada detail pengajuan, memperbaiki dokumen atau bukti yang diperlukan sesuai alasan penolakan, lalu mengajukan ulang klaim kegiatan tersebut.",
       "category": "website_sinema",
-      "retrieval_latency": 3.9446,
-      "generation_latency": 5.8227,
-      "total_latency": 9.7672,
+      "retrieval_latency": 9.977,
+      "generation_latency": 19.4997,
+      "total_latency": 29.4767,
       "avg_score": 0.308
     }
   ]
