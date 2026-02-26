@@ -90,6 +90,16 @@ LIKERT_LABELS = {
 
 TARGET_SCORE = 4.0
 
+FIXED_QUESTIONS = [
+    "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+    "Bagaimana prosedur pengajuan cuti akademik?",
+    "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+    "Bagaimana cara mengajukan klaim kegiatan di SINEMA?",
+    "Berapa total poin minimal untuk mendapat nilai mutu A?",
+    "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
+    "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+]
+
 # =========================
 # Page Configuration
 # =========================
@@ -583,8 +593,8 @@ if page == "🤖 Uji Chatbot":
     with st.expander("📖 Alur & Penjelasan Metrik Evaluasi", expanded=False):
         st.markdown("""
         <div style="color:#e2e8f0; font-size:0.92rem; line-height:1.6;">
-            <p><strong>Alur Evaluasi:</strong> (1) Masukkan pertanyaan → (2) Chatbot menjawab secara langsung → (3) Berikan skor evaluasi.</p>
-            <p style="color:#f6e05e;">⚠️ Setiap expert wajib mengevaluasi <strong>maksimal 7 pertanyaan</strong>.</p>
+            <p><strong>Alur Evaluasi:</strong> (1) Pilih pertanyaan dari daftar → (2) Chatbot menjawab secara langsung → (3) Berikan skor evaluasi.</p>
+            <p style="color:#f6e05e;">⚠️ Setiap expert wajib mengevaluasi <strong>7 pertanyaan</strong> yang telah ditentukan.</p>
             <p>Setiap jawaban chatbot dinilai berdasarkan <strong>4 aspek</strong> menggunakan skala Likert 1–5:</p>
             <table class="detail-table" style="width:100%; margin-top:0.5rem;">
                 <thead>
@@ -620,7 +630,7 @@ if page == "🤖 Uji Chatbot":
         """, unsafe_allow_html=True)
 
     # --- Expert info ---
-    MIN_EVALUATIONS_PER_EXPERT = 5
+    MIN_EVALUATIONS_PER_EXPERT = len(FIXED_QUESTIONS)
 
     col_e1, col_e2 = st.columns(2)
     with col_e1:
@@ -640,13 +650,19 @@ if page == "🤖 Uji Chatbot":
         )
         st.session_state.expert_jabatan = expert_jabatan
 
+    # Track which fixed questions this expert has already evaluated
+    evaluated_questions = set()
     if expert_name.strip():
-        completed = sum(1 for ev in data["evaluations"] if ev.get("expert_name") == expert_name.strip())
+        evaluated_questions = set(
+            ev["question"] for ev in data["evaluations"]
+            if ev.get("expert_name") == expert_name.strip()
+        )
+        completed = len(evaluated_questions & set(FIXED_QUESTIONS))
         pct = min(completed / MIN_EVALUATIONS_PER_EXPERT, 1.0)
         if completed < MIN_EVALUATIONS_PER_EXPERT:
             st.progress(pct, text=f"📊 {expert_name.strip()}: {completed}/{MIN_EVALUATIONS_PER_EXPERT} evaluasi (kurang {MIN_EVALUATIONS_PER_EXPERT - completed} lagi)")
         else:
-            st.progress(1.0, text=f"✅ {expert_name.strip()}: {completed} evaluasi selesai — target minimum tercapai!")
+            st.progress(1.0, text=f"✅ {expert_name.strip()}: {completed}/{MIN_EVALUATIONS_PER_EXPERT} evaluasi selesai — semua pertanyaan sudah dinilai!")
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
@@ -671,53 +687,39 @@ if page == "🤖 Uji Chatbot":
 
     st.markdown("---")
 
-    # --- Question Input ---
-    # Use on_change callback to detect Enter key press reliably
-    def _on_submit():
-        st.session_state._send_flag = True
+    # --- Fixed Question Selection ---
+    st.markdown("**📋 Pilih pertanyaan untuk dievaluasi:**")
+    user_question = None
+    send_btn = False
 
-    col_q, col_btn = st.columns([5, 1])
-    with col_q:
-        user_question = st.text_input(
-            "❓ Ketik pertanyaan untuk chatbot...",
-            placeholder="Contoh: Berapa poin minimal ekstrakurikuler yang harus dikumpulkan?",
-            label_visibility="collapsed",
-            key=f"q_input_{len(st.session_state.chat_history)}",
-            on_change=_on_submit
-        )
-    with col_btn:
-        send_btn = st.button("Kirim 📤", use_container_width=True)
+    remaining = [q for q in FIXED_QUESTIONS if q not in evaluated_questions]
+    all_done = len(remaining) == 0
 
-    # Enter key triggers via on_change callback
-    if st.session_state.get("_send_flag", False):
-        st.session_state._send_flag = False
-        if user_question and user_question.strip():
-            send_btn = True
+    if all_done and expert_name.strip():
+        st.markdown("""
+        <div class="pending-eval-box" style="text-align:center;">
+            <h4 style="color: #48bb78; margin: 0;">🎉 Semua pertanyaan sudah dievaluasi!</h4>
+            <p style="color: #a0aec0; margin: 0.5rem 0 0 0;">Terima kasih atas partisipasi Anda.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # --- Suggested questions ---
-    if not st.session_state.chat_history:
-        st.markdown("**💡 Contoh pertanyaan:**")
-        suggestions = [
-            "📚 Apa syarat untuk mengambil Tugas Akhir?",
-            "🌐 Bagaimana cara mendapatkan poin SINEMA?",
-            "⚖️ Apa sanksi plagiarisme?",
-        ]
-        cols = st.columns(3)
-        for i, sq in enumerate(suggestions):
-            with cols[i]:
-                if st.button(sq, key=f"sug_{i}", use_container_width=True):
-                    st.session_state._suggested_q = sq.split(" ", 1)[1]
-                    st.rerun()
-
-    # Handle suggested question
-    if '_suggested_q' in st.session_state and st.session_state._suggested_q:
-        user_question = st.session_state._suggested_q
-        st.session_state._suggested_q = None
-        send_btn = True
+    for idx, q in enumerate(FIXED_QUESTIONS):
+        is_done = q in evaluated_questions
+        col_icon, col_q, col_btn_q = st.columns([0.5, 8, 2])
+        with col_icon:
+            st.markdown(f"{'✅' if is_done else f'**{idx+1}.**'}")
+        with col_q:
+            st.markdown(f"{'~~' + q + '~~' if is_done else q}")
+        with col_btn_q:
+            if is_done:
+                st.button("Sudah Dinilai", key=f"fq_{idx}", disabled=True, use_container_width=True)
+            else:
+                if st.button("Kirim 📤", key=f"fq_{idx}", use_container_width=True):
+                    user_question = q
+                    send_btn = True
 
     # --- Process question ---
-    # No longer blocking — MIN_EVALUATIONS_PER_EXPERT is a target, not a hard cap
-    expert_done = False
+    expert_done = all_done
 
     if send_btn and user_question and user_question.strip() and not expert_done:
         q_text = user_question.strip()
