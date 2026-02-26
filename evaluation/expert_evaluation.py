@@ -666,27 +666,6 @@ if page == "🤖 Uji Chatbot":
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
-    # --- Chat History Display ---
-    for msg in st.session_state.chat_history:
-        if msg["role"] == "user":
-            st.markdown(f'<div class="chat-bubble-user">{msg["content"]}</div>', unsafe_allow_html=True)
-        else:
-            # Build bot bubble as single HTML block so content stays inside
-            bot_content = msg["content"].replace('\n', '<br>')
-            source_html = ""
-            if msg.get("sources"):
-                src_list = ", ".join(s['source'] for s in msg['sources'][:3])
-                source_html = f'<div class="chat-meta">📚 Sumber: {src_list}</div>'
-            latency_html = ""
-            if msg.get("latency") and msg["latency"] > 0:
-                latency_html = f'<div class="chat-meta">⚡ Response time: {msg["latency"]:.2f}s</div>'
-            st.markdown(
-                f'<div class="chat-bubble-bot">{bot_content}{source_html}{latency_html}</div>',
-                unsafe_allow_html=True
-            )
-
-    st.markdown("---")
-
     # --- Fixed Question Selection ---
     st.markdown("**📋 Pilih pertanyaan untuk dievaluasi:**")
     user_question = None
@@ -744,6 +723,28 @@ if page == "🤖 Uji Chatbot":
 
         # Rerun to refresh UI (dynamic key auto-clears input)
         st.rerun()
+
+    # --- Display latest response right below questions ---
+    if st.session_state.pending_response:
+        pr = st.session_state.pending_response
+        st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+
+        # Show the question
+        st.markdown(f'<div class="chat-bubble-user">{pr["question"]}</div>', unsafe_allow_html=True)
+
+        # Show the chatbot response
+        bot_content = pr["answer"].replace('\n', '<br>')
+        source_html = ""
+        if pr.get("sources"):
+            src_list = ", ".join(s['source'] for s in pr['sources'][:3])
+            source_html = f'<div class="chat-meta">📚 Sumber: {src_list}</div>'
+        latency_html = ""
+        if pr.get("latency") and pr["latency"] > 0:
+            latency_html = f'<div class="chat-meta">⚡ Response time: {pr["latency"]:.2f}s</div>'
+        st.markdown(
+            f'<div class="chat-bubble-bot">{bot_content}{source_html}{latency_html}</div>',
+            unsafe_allow_html=True
+        )
 
     # --- Evaluation Form (appears after chatbot responds) ---
     if st.session_state.pending_response:
