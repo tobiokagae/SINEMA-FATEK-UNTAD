@@ -584,7 +584,7 @@ if page == "🤖 Uji Chatbot":
         st.markdown("""
         <div style="color:#e2e8f0; font-size:0.92rem; line-height:1.6;">
             <p><strong>Alur Evaluasi:</strong> (1) Masukkan pertanyaan → (2) Chatbot menjawab secara langsung → (3) Berikan skor evaluasi.</p>
-            <p style="color:#f6e05e;">⚠️ Setiap expert wajib mengevaluasi <strong>minimal 5 pertanyaan</strong> dan <strong>maksimal 7 pertanyaan</strong>.</p>
+            <p style="color:#f6e05e;">⚠️ Setiap expert wajib mengevaluasi <strong>maksimal 7 pertanyaan</strong>.</p>
             <p>Setiap jawaban chatbot dinilai berdasarkan <strong>4 aspek</strong> menggunakan skala Likert 1–5:</p>
             <table class="detail-table" style="width:100%; margin-top:0.5rem;">
                 <thead>
