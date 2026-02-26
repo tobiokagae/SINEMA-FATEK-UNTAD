@@ -1,7 +1,26 @@
 {
-  "evaluations": [],
+  "evaluations": [
+    {
+      "id": 1,
+      "expert_name": "Alisha Cantik",
+      "expert_jabatan": "",
+      "category": "",
+      "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+      "answer": "Siap! Berikut predikat kelulusan untuk program Sarjana beserta syarat IPK‑nya:\n\n1. **Pujian** – IPK > 3,50, dengan ketentuan masa studi maksimal (8) delapan semester, tidak pernah mengulang mata kuliah, serta nilai ujian skripsi A.  \n2. **Sangat Memuaskan** – IPK > 3,00 dan ≤ 3,50, dengan ketentuan nilai ujian akhir sekurang‑kurangnya B.  \n3. **Memuaskan** – IPK ≤ 3,00.\n\nJika IPK kamu sudah berada di salah satu rentang di atas, kamu tinggal pastikan persyaratan tambahan (masa studi, nilai ujian, dll.) terpenuhi supaya predikatnya sesuai.\n\nBoleh tahu, IPK kamu saat ini berapa? Saya bisa bantu cek apakah sudah memenuhi salah satu predikat tersebut.",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 3,
+        "kelengkapan": 3,
+        "kejelasan": 3
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T00:01:16.676487"
+    }
+  ],
   "metadata": {
-    "last_updated": "2026-02-23T07:39:40.999962",
-    "total_evaluations": 0
+    "last_updated": "2026-02-27T00:01:16.677488",
+    "total_evaluations": 1
   }
 }

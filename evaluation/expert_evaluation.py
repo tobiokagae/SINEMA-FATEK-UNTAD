@@ -54,8 +54,8 @@ ASPECTS = [
         "key": "akurasi",
         "label": "Akurasi",
         "icon": "🎯",
-        "indicator": "Jawaban sesuai dokumen resmi",
-        "description": "Apakah jawaban chatbot sesuai dengan isi dokumen resmi yang menjadi knowledge base?"
+        "indicator": "Jawaban sesuai dokumen resmi dan informasi penting tercakup",
+        "description": "Apakah jawaban chatbot sesuai dengan isi dokumen resmi dan mencakup semua informasi penting yang relevan?"
     },
     {
         "key": "relevansi",
@@ -63,13 +63,6 @@ ASPECTS = [
         "icon": "🔗",
         "indicator": "Jawaban sesuai pertanyaan",
         "description": "Apakah jawaban chatbot menjawab apa yang ditanyakan, bukan informasi yang tidak nyambung?"
-    },
-    {
-        "key": "kelengkapan",
-        "label": "Kelengkapan",
-        "icon": "📋",
-        "indicator": "Informasi penting tercakup",
-        "description": "Apakah semua informasi penting yang relevan tercakup dalam jawaban?"
     },
     {
         "key": "kejelasan",
@@ -98,7 +91,13 @@ FIXED_QUESTIONS = [
     "Berapa total poin minimal untuk mendapat nilai mutu A?",
     "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
     "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+    "Bagaimana prosedur seminar proposal tugas akhir?",
+    "Bagaimana cara mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM) di SINEMA?",
+    "Bagaimana cara menghindari plagiarisme dalam penulisan karya ilmiah?",
 ]
+
+# Pre-generated answers cache file
+PREGENERATED_CACHE = EVAL_DIR / "collected_cache_fixed.json"
 
 # =========================
 # Page Configuration
@@ -219,47 +218,22 @@ st.markdown("""
 
 
 # =========================
-# Load RAG Models (cached)
+# Load Pre-generated Answers
 # =========================
-def get_index_timestamp():
-    index_path = VECTOR_DB_DIR / "index.faiss"
-    if index_path.exists():
-        return int(index_path.stat().st_mtime)
-    return 0
+@st.cache_data(show_spinner=False)
+def load_pregenerated_answers():
+    """Load pre-generated answers from collected_cache_fixed.json.
+    Returns a dict mapping question text -> answer text."""
+    answer_map = {}
+    if PREGENERATED_CACHE.exists():
+        with open(PREGENERATED_CACHE, 'r', encoding='utf-8') as f:
+            cache_data = json.load(f)
+        for item in cache_data.get('responses', []):
+            answer_map[item['question'].strip()] = item['answer']
+    return answer_map
 
-@st.cache_resource(show_spinner=False)
-def load_retriever(_index_timestamp: int):
-    retriever = RAGRetriever(
-        documents_dir=DOCUMENTS_DIR,
-        vector_db_dir=VECTOR_DB_DIR,
-        embedding_model_name=EMBEDDING_MODEL,
-        chunk_size=CHUNK_SIZE,
-        chunk_overlap=CHUNK_OVERLAP,
-        top_k=TOP_K,
-        relevance_threshold=RELEVANCE_THRESHOLD
-    )
-    retriever.initialize()
-    return retriever
-
-@st.cache_resource(show_spinner=False)
-def load_generator():
-    if USE_API:
-        return LLMGenerator()
-    else:
-        gen = LLMGenerator(
-            model_path=MODEL_DIR,
-            device=DEVICE,
-            max_new_tokens=MAX_NEW_TOKENS,
-            temperature=TEMPERATURE,
-            top_p=TOP_P
-        )
-        _ = gen.model
-        return gen
-
-# Preload at startup
-with st.spinner("🚀 Memuat model AI (hanya sekali saat startup)..."):
-    _retriever = load_retriever(get_index_timestamp())
-    _generator = load_generator()
+# Load answers at startup (instant — no model loading needed)
+_pregenerated_answers = load_pregenerated_answers()
 
 
 def ask_chatbot(question: str):
@@ -593,9 +567,9 @@ if page == "🤖 Uji Chatbot":
     with st.expander("📖 Alur & Penjelasan Metrik Evaluasi", expanded=False):
         st.markdown("""
         <div style="color:#e2e8f0; font-size:0.92rem; line-height:1.6;">
-            <p><strong>Alur Evaluasi:</strong> (1) Pilih pertanyaan dari daftar → (2) Chatbot menjawab secara langsung → (3) Berikan skor evaluasi.</p>
-            <p style="color:#f6e05e;">⚠️ Setiap expert wajib mengevaluasi <strong>7 pertanyaan</strong> yang telah ditentukan.</p>
-            <p>Setiap jawaban chatbot dinilai berdasarkan <strong>4 aspek</strong> menggunakan skala Likert 1–5:</p>
+            <p><strong>Alur Evaluasi:</strong> (1) Pilih pertanyaan dari daftar → (2) Jawaban chatbot ditampilkan → (3) Berikan skor evaluasi.</p>
+            <p style="color:#f6e05e;">⚠️ Setiap expert wajib mengevaluasi <strong>10 pertanyaan</strong> yang telah ditentukan.</p>
+            <p>Setiap jawaban chatbot dinilai berdasarkan <strong>3 aspek</strong> menggunakan skala Likert 1–5:</p>
             <table class="detail-table" style="width:100%; margin-top:0.5rem;">
                 <thead>
                     <tr><th>Aspek</th><th>Indikator</th><th>Pertanyaan Panduan</th></tr>
@@ -603,18 +577,13 @@ if page == "🤖 Uji Chatbot":
                 <tbody>
                     <tr>
                         <td>🎯 <strong>Akurasi</strong></td>
-                        <td>Jawaban sesuai dokumen resmi</td>
-                        <td>Apakah jawaban chatbot sesuai dengan isi dokumen resmi yang menjadi knowledge base?</td>
+                        <td>Jawaban sesuai dokumen resmi dan informasi penting tercakup</td>
+                        <td>Apakah jawaban chatbot sesuai dengan isi dokumen resmi dan mencakup semua informasi penting yang relevan?</td>
                     </tr>
                     <tr>
                         <td>🔗 <strong>Relevansi</strong></td>
                         <td>Jawaban sesuai pertanyaan</td>
                         <td>Apakah jawaban chatbot menjawab apa yang ditanyakan, bukan informasi yang tidak nyambung?</td>
-                    </tr>
-                    <tr>
-                        <td>📋 <strong>Kelengkapan</strong></td>
-                        <td>Informasi penting tercakup</td>
-                        <td>Apakah semua informasi penting yang relevan tercakup dalam jawaban?</td>
                     </tr>
                     <tr>
                         <td>💡 <strong>Kejelasan</strong></td>
@@ -666,10 +635,8 @@ if page == "🤖 Uji Chatbot":
 
     st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
-    # --- Fixed Question Selection ---
-    st.markdown("**📋 Pilih pertanyaan untuk dievaluasi:**")
-    user_question = None
-    send_btn = False
+    # --- 10 Question Dropdowns (each with answer + evaluation form) ---
+    st.markdown("**📋 Daftar Pertanyaan Evaluasi:**")
 
     remaining = [q for q in FIXED_QUESTIONS if q not in evaluated_questions]
     all_done = len(remaining) == 0
@@ -684,143 +651,108 @@ if page == "🤖 Uji Chatbot":
 
     for idx, q in enumerate(FIXED_QUESTIONS):
         is_done = q in evaluated_questions
-        col_icon, col_q, col_btn_q = st.columns([0.5, 8, 2])
-        with col_icon:
-            st.markdown(f"{'✅' if is_done else f'**{idx+1}.**'}")
-        with col_q:
-            st.markdown(f"{'~~' + q + '~~' if is_done else q}")
-        with col_btn_q:
-            if is_done:
-                st.button("Sudah Dinilai", key=f"fq_{idx}", disabled=True, use_container_width=True)
+        status_icon = "✅" if is_done else f"📌"
+        label = f"{status_icon} {idx+1}. {q}"
+
+        with st.expander(label, expanded=False):
+            # --- Show pre-generated answer ---
+            answer = _pregenerated_answers.get(q, None)
+            if answer:
+                bot_content = answer.replace('\n', '<br>')
+                st.markdown(f"""
+                <div style="background: rgba(102,126,234,0.08); border: 1px solid rgba(102,126,234,0.2);
+                     border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; color: #e2e8f0; line-height: 1.7;">
+                    <div style="color: #667eea; font-weight: 600; margin-bottom: 0.5rem;">🤖 Jawaban Chatbot:</div>
+                    {bot_content}
+                </div>
+                """, unsafe_allow_html=True)
             else:
-                if st.button("Kirim 📤", key=f"fq_{idx}", use_container_width=True):
-                    user_question = q
-                    send_btn = True
+                st.warning("⚠️ Jawaban belum tersedia untuk pertanyaan ini.")
 
-    # --- Process question ---
-    expert_done = all_done
+            # --- Evaluation form or status ---
+            if is_done:
+                # Show existing evaluation scores
+                existing_ev = None
+                for ev in data["evaluations"]:
+                    if ev.get("expert_name") == expert_name.strip() and ev.get("question") == q:
+                        existing_ev = ev
+                        break
+                if existing_ev:
+                    scores_html = " | ".join(
+                        f"**{a['icon']} {a['label']}**: {existing_ev['scores'].get(a['key'], '-')}/5"
+                        for a in ASPECTS
+                    )
+                    avg_score = sum(existing_ev['scores'].values()) / len(existing_ev['scores'])
+                    st.markdown(f"**Skor Anda:** {scores_html} — **Rata-rata: {avg_score:.2f}**")
+                    if existing_ev.get("comment"):
+                        st.markdown(f"💬 *{existing_ev['comment']}*")
+                st.success("✅ Pertanyaan ini sudah dievaluasi.")
 
-    if send_btn and user_question and user_question.strip() and not expert_done:
-        q_text = user_question.strip()
-        st.session_state.chat_history.append({"role": "user", "content": q_text})
+            elif not expert_name.strip() or not st.session_state.get("expert_jabatan", "").strip():
+                st.info("ℹ️ Isi nama expert dan jabatan di atas untuk mulai mengevaluasi.")
 
-        with st.spinner("🤔 Chatbot sedang berpikir..."):
-            try:
-                response, sources, latency = ask_chatbot(q_text)
-                st.session_state.chat_history.append({
-                    "role": "assistant", "content": response,
-                    "sources": sources, "latency": latency
-                })
-                st.session_state.pending_response = {
-                    "question": q_text,
-                    "answer": response,
-                    "sources": sources,
-                    "latency": latency
-                }
-            except Exception as e:
-                st.error(f"❌ Error: {str(e)}")
-                st.session_state.pending_response = None
+            elif answer:
+                # Show evaluation form
+                with st.form(f"eval_form_{idx}", clear_on_submit=False):
+                    st.markdown("""
+                    <div style="color: #a0aec0; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        📝 Nilai kualitas jawaban chatbot berdasarkan 4 aspek berikut:
+                    </div>
+                    """, unsafe_allow_html=True)
 
-        # Rerun to refresh UI (dynamic key auto-clears input)
-        st.rerun()
+                    scores = {}
+                    for ai in range(0, len(ASPECTS), 2):
+                        cols = st.columns(2)
+                        for aj, col in enumerate(cols):
+                            if ai + aj < len(ASPECTS):
+                                aspect = ASPECTS[ai + aj]
+                                with col:
+                                    st.markdown(f"""
+                                    <div class="aspect-card">
+                                        <div class="aspect-title">{aspect['icon']} {aspect['label']}</div>
+                                        <div class="aspect-indicator">{aspect['indicator']}</div>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                                    scores[aspect['key']] = st.slider(
+                                        f"{aspect['label']}", 1, 5, 3,
+                                        help=aspect['description'],
+                                        label_visibility="collapsed",
+                                        key=f"slider_{idx}_{aspect['key']}"
+                                    )
 
-    # --- Display latest response right below questions ---
-    if st.session_state.pending_response:
-        pr = st.session_state.pending_response
-        st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+                    comment = st.text_area(
+                        "💬 Komentar (opsional)",
+                        placeholder="Catatan tambahan...",
+                        height=60,
+                        key=f"comment_{idx}"
+                    )
 
-        # Show the question
-        st.markdown(f'<div class="chat-bubble-user">{pr["question"]}</div>', unsafe_allow_html=True)
+                    submitted = st.form_submit_button("✅ Simpan Evaluasi", use_container_width=True)
 
-        # Show the chatbot response
-        bot_content = pr["answer"].replace('\n', '<br>')
-        source_html = ""
-        if pr.get("sources"):
-            src_list = ", ".join(s['source'] for s in pr['sources'][:3])
-            source_html = f'<div class="chat-meta">📚 Sumber: {src_list}</div>'
-        latency_html = ""
-        if pr.get("latency") and pr["latency"] > 0:
-            latency_html = f'<div class="chat-meta">⚡ Response time: {pr["latency"]:.2f}s</div>'
-        st.markdown(
-            f'<div class="chat-bubble-bot">{bot_content}{source_html}{latency_html}</div>',
-            unsafe_allow_html=True
-        )
-
-    # --- Evaluation Form (appears after chatbot responds) ---
-    if st.session_state.pending_response:
-        pr = st.session_state.pending_response
-        st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        st.markdown("""
-        <div class="pending-eval-box">
-            <h4 style="color: #e2e8f0; margin: 0 0 0.5rem 0;">📝 Berikan Penilaian untuk Jawaban Terakhir</h4>
-            <p style="color: #a0aec0; margin: 0; font-size: 0.9rem;">Nilai kualitas jawaban chatbot di atas berdasarkan 4 aspek berikut.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-        with st.form("eval_form", clear_on_submit=False):
-            scores = {}
-            for i in range(0, len(ASPECTS), 2):
-                cols = st.columns(2)
-                for j, col in enumerate(cols):
-                    if i + j < len(ASPECTS):
-                        aspect = ASPECTS[i + j]
-                        with col:
-                            st.markdown(f"""
-                            <div class="aspect-card">
-                                <div class="aspect-title">{aspect['icon']} {aspect['label']}</div>
-                                <div class="aspect-indicator">{aspect['indicator']}</div>
-                            </div>
-                            """, unsafe_allow_html=True)
-                            scores[aspect['key']] = st.slider(
-                                f"{aspect['label']}", 1, 5, 3,
-                                help=aspect['description'], label_visibility="collapsed"
-                            )
-
-            comment = st.text_area("💬 Komentar (opsional)", placeholder="Catatan tambahan...", height=60)
-
-            col_submit, col_skip = st.columns(2)
-            with col_submit:
-                submitted = st.form_submit_button("✅ Simpan Evaluasi", use_container_width=True)
-            with col_skip:
-                skipped = st.form_submit_button("⏭️ Lewati (Tidak Dinilai)", use_container_width=True)
-
-            if submitted:
-                if not st.session_state.get("expert_name", "").strip():
-                    st.error("❌ Silakan isi nama expert terlebih dahulu!")
-                    st.stop()
-                ev = {
-                    "id": len(data["evaluations"]) + 1,
-                    "expert_name": st.session_state.expert_name.strip(),
-                    "expert_jabatan": st.session_state.get("expert_jabatan", "").strip(),
-                    "category": "",
-                    "question": pr["question"],
-                    "answer": pr["answer"],
-                    "sources": [s['source'] for s in pr.get("sources", [])[:3]],
-                    "latency": pr.get("latency", 0),
-                    "scores": scores,
-                    "comment": comment.strip(),
-                    "timestamp": datetime.now().isoformat()
-                }
-                data["evaluations"].append(ev)
-                save_evaluations(data)
-                st.session_state.eval_data = data
-                st.session_state.pending_response = None
-                avg = sum(scores.values()) / len(scores)
-                if avg >= TARGET_SCORE:
-                    st.balloons()
-                st.rerun()
-
-            if skipped:
-                st.session_state.pending_response = None
-                st.rerun()
-
-    # Clear chat button
-    if st.session_state.chat_history:
-        st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-        if st.button("🗑️ Hapus Riwayat Chat", use_container_width=False):
-            st.session_state.chat_history = []
-            st.session_state.pending_response = None
-            st.rerun()
+                    if submitted:
+                        if not st.session_state.get("expert_name", "").strip() or not st.session_state.get("expert_jabatan", "").strip():
+                            st.error("❌ Silakan isi nama expert dan jabatan terlebih dahulu!")
+                            st.stop()
+                        ev = {
+                            "id": len(data["evaluations"]) + 1,
+                            "expert_name": st.session_state.expert_name.strip(),
+                            "expert_jabatan": st.session_state.get("expert_jabatan", "").strip(),
+                            "category": "",
+                            "question": q,
+                            "answer": answer,
+                            "sources": [],
+                            "latency": 0,
+                            "scores": scores,
+                            "comment": comment.strip(),
+                            "timestamp": datetime.now().isoformat()
+                        }
+                        data["evaluations"].append(ev)
+                        save_evaluations(data)
+                        st.session_state.eval_data = data
+                        avg = sum(scores.values()) / len(scores)
+                        if avg >= TARGET_SCORE:
+                            st.balloons()
+                        st.rerun()
 
 
 # =================================================================
