@@ -18,8 +18,22 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask
-from app.config import DATABASE_URL
-from app.models import db, ExpertEvaluation
+
+# Import app modules directly to avoid app/__init__.py (which triggers RAG/LLM imports)
+import importlib.util
+
+def _import_module_direct(name, filepath):
+    spec = importlib.util.spec_from_file_location(name, str(filepath))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+_config_mod = _import_module_direct("app_config", PROJECT_ROOT / "app" / "config.py")
+DATABASE_URL = _config_mod.DATABASE_URL
+
+_models_mod = _import_module_direct("app_models", PROJECT_ROOT / "app" / "models.py")
+db = _models_mod.db
+ExpertEvaluation = _models_mod.ExpertEvaluation
 from datetime import datetime
 
 def create_app():
