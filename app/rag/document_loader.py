@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Document loading and chunking for RAG - Universal File Support"""
 import os
+import re
 from pathlib import Path
 from typing import List, Dict, Any
 import PyPDF2
@@ -38,14 +39,27 @@ class DocumentLoader:
             print(f"Documents directory not found: {self.documents_dir}")
             return documents
         
-        for file_path in self.documents_dir.iterdir():
-            if file_path.suffix.lower() in self.SUPPORTED_EXTENSIONS:
-                try:
-                    docs = self.load_document(file_path)
-                    documents.extend(docs)
-                    print(f"Loaded {len(docs)} chunks from {file_path.name}")
-                except Exception as e:
-                    print(f"Error loading {file_path.name}: {e}")
+        # Collect all files (non-recursive, skip subdirectories like raw/)
+        files = [f for f in self.documents_dir.iterdir() if f.is_file()]
+        
+        # Track MD stems to skip duplicate PDF/DOCX files
+        md_stems = {f.stem for f in files if f.suffix.lower() in {'.md', '.markdown'}}
+        
+        for file_path in files:
+            if file_path.suffix.lower() not in self.SUPPORTED_EXTENSIONS:
+                continue
+            
+            # Skip PDF/DOCX if a corresponding .md file exists (prevent double chunking)
+            if file_path.suffix.lower() in {'.pdf', '.docx', '.doc'} and file_path.stem in md_stems:
+                print(f"Skipping {file_path.name} (MD version exists)")
+                continue
+            
+            try:
+                docs = self.load_document(file_path)
+                documents.extend(docs)
+                print(f"Loaded {len(docs)} chunks from {file_path.name}")
+            except Exception as e:
+                print(f"Error loading {file_path.name}: {e}")
         
         print(f"Total documents loaded: {len(documents)} chunks")
         return documents
@@ -322,11 +336,25 @@ class DocumentLoader:
                 stripped = ' '.join(stripped.split())
                 
                 # Detect potential headers (all caps, short lines)
-                if stripped.isupper() and len(stripped) < 80 and len(stripped) > 3:
+                # Use stricter validation to avoid turning data into headings
+                if stripped.isupper() and len(stripped) < 80 and len(stripped) > 3 and self._is_valid_heading(stripped):
                     stripped = f"## {stripped.title()}"
                 
-                # Detect numbered lists
-                if re.match(r'^\d+[.\)]\s', stripped):
+                # Detect numbered sub-chapter headings: "1.1 PENGERTIAN TUGAS AKHIR", "3.1 Proyek", "1.1. Sejarah"
+                # Pattern: {digit}.{digit}[.{digit}][.] followed by text starting with uppercase
+                # Trailing dot is optional to handle both "1.1 Text" and "1.1. Text" formats
+                elif re.match(r'^\d+\.\d+(\.\d+)?\.?\s+[A-Z]', stripped) and len(stripped) < 100:
+                    section_match = re.match(r'^(\d+\.\d+(?:\.\d+)?\.?)\s+(.+)$', stripped)
+                    if section_match:
+                        sec_num = section_match.group(1)
+                        sec_text = section_match.group(2)
+                        # Accept as heading if text is short (not a full sentence)
+                        # Full sentences typically have commas, "yang", "untuk", etc. and are long
+                        if len(sec_text) < 80:
+                            stripped = f"## {sec_num} {sec_text.title()}"
+                
+                # Detect numbered lists (but not section headings we just converted)
+                if not stripped.startswith('## ') and re.match(r'^\d+[.\)]\s', stripped):
                     stripped = re.sub(r'^(\d+)[.\)]\s', r'\1. ', stripped)
                 
                 # Detect bullet points
@@ -347,6 +375,50 @@ class DocumentLoader:
         header += f"*Dokumen ini dikonversi dan dibersihkan otomatis*\n\n---\n\n"
         
         return header + content.strip()
+    
+    def _is_valid_heading(self, text: str) -> bool:
+        """
+        Check if an uppercase line is actually a heading (BAB, section title)
+        vs data that happens to be uppercase (NIP, table values, abbreviations).
+        
+        Returns True if the text looks like a real heading.
+        """
+        # Contains long numbers (NIP, phone numbers, SK numbers)
+        if re.search(r'\d{5,}', text):
+            return False
+        
+        # Starts with numbers/scores (table data like "85,01 - 100 A 4,00")
+        if re.match(r'^\d[\d,.\s\-]+', text):
+            return False
+        
+        # Too short — likely abbreviation like "(MKWK)" or "IPS"
+        words = text.split()
+        if len(words) <= 1 and len(text) < 6:
+            return False
+        
+        # Wrapped in parentheses — abbreviation like "(MKWK)."
+        if re.match(r'^\(.*\)\.?$', text.strip()):
+            return False
+        
+        # Contains formula/code characters
+        if re.search(r'[=`\[\]{}]', text):
+            return False
+        
+        # Looks like table header row (many short words like "JABATAN NAMA")
+        # Real headings are usually phrases, not column labels
+        if len(words) >= 2 and all(len(w) <= 12 for w in words) and len(text) < 30:
+            # But allow known heading patterns
+            if not re.match(r'^(BAB|PASAL|LAMPIRAN|PENDAHULUAN|DAFTAR|PROFIL)', text, re.IGNORECASE):
+                # Check if it looks like "NOUN NOUN" (table header) vs "VERB NOUN" (heading)
+                # Simple heuristic: if every word is a single capitalized word, likely table header
+                if not any(kw in text for kw in ['DAN', 'ATAU', 'UNTUK', 'DALAM', 'DENGAN', 'PADA']):
+                    return False
+        
+        # Contains slash-separated codes like "SK/LAM/TEKNIK"
+        if text.count('/') >= 2:
+            return False
+        
+        return True
     
     def _detect_and_format_inline_tables(self, text: str) -> str:
         """
@@ -570,33 +642,21 @@ class DocumentLoader:
         return text
 
     def _load_pdf(self, file_path: Path) -> str:
-        """Load PDF file with OCR support for scanned documents and table extraction"""
+        """Load PDF file with inline table extraction and OCR fallback"""
         text = ""
-        tables_md = []
         
-        # First try pdfplumber for text-based PDFs
+        # First try pdfplumber for text-based PDFs with inline table handling
         try:
             import pdfplumber
             with pdfplumber.open(str(file_path)) as pdf:
-                for page in pdf.pages:
-                    page_text = page.extract_text()
-                    if page_text and len(page_text.strip()) > 50:
-                        text += page_text + "\n\n"
+                for page_num, page in enumerate(pdf.pages, 1):
+                    page_content = self._extract_page_with_inline_tables(page, page_num)
+                    if page_content and len(page_content.strip()) > 20:
+                        text += page_content + "\n\n"
             
-            # If we got substantial text, also extract tables
             if len(text.strip()) > 200:
-                print(f"Extracted {len(text)} chars from {file_path.name} using pdfplumber")
-                
-                # Extract tables separately
-                tables_md = self._extract_tables_from_pdf(file_path)
-                
-                # Apply formula formatting
+                print(f"Extracted {len(text)} chars from {file_path.name} using pdfplumber (inline tables)")
                 text = self._detect_and_format_formulas(text)
-                
-                # Append tables to the end of the text
-                if tables_md:
-                    text += "\n\n## Tabel yang Diekstrak\n" + "\n".join(tables_md)
-                
                 return text
         except Exception as e:
             print(f"pdfplumber failed: {e}")
@@ -641,6 +701,131 @@ class DocumentLoader:
             print(f"PyPDF2 failed: {e}")
         
         return self._detect_and_format_formulas(text)
+    
+    def _extract_page_with_inline_tables(self, page, page_num: int) -> str:
+        """
+        Extract text from a single page with tables inserted inline.
+        
+        Instead of extracting text and tables separately (which causes garbled
+        table text + duplicated tables appended at end), this method:
+        1. Finds table bounding boxes on the page
+        2. Extracts text OUTSIDE table areas (avoiding garbled table text)
+        3. Inserts clean Markdown tables at their correct vertical position
+        """
+        try:
+            # Find tables with their bounding boxes
+            tables = page.find_tables()
+            
+            if not tables:
+                # No tables on this page - just extract text normally
+                page_text = page.extract_text()
+                return page_text or ""
+            
+            # Get page height for positioning
+            page_height = page.height
+            
+            # Collect table info: position (top y) and markdown content
+            table_items = []
+            table_bboxes = []
+            
+            for table in tables:
+                bbox = table.bbox  # (x0, top, x1, bottom)
+                table_data = table.extract()
+                
+                if table_data and len(table_data) > 1:
+                    md_table = self._convert_table_to_markdown(table_data)
+                    if md_table:
+                        table_items.append({
+                            'top': bbox[1],       # vertical position
+                            'bottom': bbox[3],
+                            'content': md_table
+                        })
+                        table_bboxes.append(bbox)
+            
+            # Extract text OUTSIDE table areas
+            # Use crop to get text from non-table regions
+            if table_bboxes:
+                # Create a filtered page that excludes table areas
+                filtered_page = page
+                for bbox in table_bboxes:
+                    # pdfplumber's filter: remove chars inside table bounding boxes
+                    filtered_page = filtered_page.filter(
+                        lambda obj, tb=bbox: not (
+                            obj.get('top', 0) >= tb[1] - 2 and 
+                            obj.get('bottom', 0) <= tb[3] + 2 and
+                            obj.get('x0', 0) >= tb[0] - 2 and
+                            obj.get('x1', 0) <= tb[2] + 2
+                        )
+                    )
+                text_outside_tables = filtered_page.extract_text() or ""
+            else:
+                text_outside_tables = page.extract_text() or ""
+            
+            # If no tables were successfully extracted, return plain text
+            if not table_items:
+                return text_outside_tables
+            
+            # Split text into lines and try to insert tables at approximate positions
+            # We use a simple heuristic: insert table after the text that comes before
+            # its vertical position on the page
+            lines = text_outside_tables.split('\n')
+            
+            # Sort tables by vertical position (top to bottom)
+            table_items.sort(key=lambda t: t['top'])
+            
+            # Build final content by inserting tables between text sections
+            # Simple approach: split text proportionally based on table positions
+            result_parts = []
+            
+            if len(lines) > 0 and len(table_items) > 0:
+                total_lines = len(lines)
+                
+                for table_info in table_items:
+                    # Estimate which line the table appears after
+                    # based on its vertical position relative to page height
+                    position_ratio = table_info['top'] / page_height if page_height > 0 else 0.5
+                    insert_after_line = int(position_ratio * total_lines)
+                    
+                    # Find a good break point (empty line or end of paragraph)
+                    for k in range(insert_after_line, min(insert_after_line + 5, total_lines)):
+                        if k < total_lines and lines[k].strip() == '':
+                            insert_after_line = k
+                            break
+                    
+                    table_info['insert_line'] = insert_after_line
+                
+                # Build content with tables inserted
+                current_line = 0
+                for table_info in table_items:
+                    insert_at = table_info['insert_line']
+                    
+                    # Add text lines before this table
+                    if insert_at > current_line:
+                        result_parts.append('\n'.join(lines[current_line:insert_at]))
+                    
+                    # Add the table
+                    result_parts.append('\n\n' + table_info['content'] + '\n')
+                    current_line = insert_at
+                
+                # Add remaining text after last table
+                if current_line < total_lines:
+                    result_parts.append('\n'.join(lines[current_line:]))
+                
+                return '\n'.join(result_parts)
+            else:
+                # Fallback: just append tables after text
+                result = text_outside_tables
+                for table_info in table_items:
+                    result += '\n\n' + table_info['content'] + '\n'
+                return result
+                
+        except Exception as e:
+            print(f"Error extracting page {page_num} with inline tables: {e}")
+            # Fallback to simple text extraction
+            try:
+                return page.extract_text() or ""
+            except:
+                return ""
     
     def _load_docx(self, file_path: Path) -> str:
         """Load DOCX file with table extraction"""
@@ -847,53 +1032,276 @@ class DocumentLoader:
         
         return result.strip()
     
-    def _split_text(self, text: str) -> List[str]:
-        """Split text into overlapping chunks using semantic chunking.
+    def _split_into_sections(self, text: str) -> List[dict]:
+        """
+        Pecah teks Markdown menjadi sections berdasarkan heading ##.
         
-        Uses LangChain's RecursiveCharacterTextSplitter which:
-        1. Splits by sentence/paragraph boundaries first
-        2. Falls back to smaller separators if needed
-        3. Properly implements overlap between chunks
+        Returns:
+            List of {'heading': str, 'content': str}
+            - heading kosong untuk konten sebelum heading pertama
+        """
+        sections = []
+        current_heading = ""
+        current_lines = []
+        
+        for line in text.split('\n'):
+            stripped = line.strip()
+            # Deteksi heading: ## ... (tapi bukan | tabel |)
+            if stripped.startswith('## ') and not stripped.startswith('## |'):
+                # Simpan section sebelumnya
+                content = '\n'.join(current_lines).strip()
+                if content:
+                    sections.append({
+                        'heading': current_heading,
+                        'content': content
+                    })
+                # Mulai section baru
+                current_heading = stripped.lstrip('#').strip()
+                current_lines = []
+            else:
+                current_lines.append(line)
+        
+        # Jangan lupa section terakhir
+        content = '\n'.join(current_lines).strip()
+        if content:
+            sections.append({
+                'heading': current_heading,
+                'content': content
+            })
+        
+        return sections
+    
+    def _separate_table_blocks(self, content: str) -> List[tuple]:
+        """
+        Pisahkan konten menjadi blok tabel dan blok teks biasa.
+        Tabel = baris berturut-turut yang dimulai dengan '|'.
+        
+        Returns:
+            List of (type, content) tuples: type = 'table' atau 'text'
+        """
+        blocks = []
+        current_type = 'text'
+        current_lines = []
+        
+        for line in content.split('\n'):
+            stripped = line.strip()
+            is_table_line = stripped.startswith('|') and stripped.endswith('|')
+            
+            if is_table_line and current_type == 'text':
+                # Simpan blok teks sebelumnya
+                text = '\n'.join(current_lines).strip()
+                if text:
+                    blocks.append(('text', text))
+                current_lines = [line]
+                current_type = 'table'
+            elif not is_table_line and current_type == 'table':
+                # Simpan blok tabel sebelumnya
+                table = '\n'.join(current_lines).strip()
+                if table:
+                    blocks.append(('table', table))
+                current_lines = [line]
+                current_type = 'text'
+            else:
+                current_lines.append(line)
+        
+        # Blok terakhir
+        remaining = '\n'.join(current_lines).strip()
+        if remaining:
+            blocks.append((current_type, remaining))
+        
+        return blocks
+
+    def _split_numbered_table(self, table_content: str) -> List[str]:
+        """
+        Pecah tabel besar yang punya kolom nomor (| 1 |, | 2 |, ...)
+        menjadi sub-tabel per-item. Setiap sub-tabel mendapat header.
+        
+        Hanya berlaku untuk tabel yang:
+        1. Ukurannya > chunk_size
+        2. Punya baris bernomor (kolom pertama berisi angka)
+        
+        Returns:
+            List of sub-table strings, atau [table_content] jika tidak perlu split.
+        """
+        # Hanya split tabel yang lebih besar dari chunk_size
+        if len(table_content) <= self.chunk_size:
+            return [table_content]
+        
+        lines = table_content.split('\n')
+        
+        # Cari header dan separator
+        header_line = None
+        separator_line = None
+        data_start = 0
+        
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            if not stripped:
+                continue
+            if re.match(r'^\|[\s\-|]+\|$', stripped):
+                separator_line = line
+                data_start = i + 1
+                if i > 0:
+                    header_line = lines[i - 1]
+            elif header_line is None and separator_line is None:
+                header_line = line
+        
+        if not header_line or not separator_line:
+            return [table_content]
+        
+        # Cek apakah header sebenarnya data row (kolom pertama berisi angka)
+        header_cells = [c.strip() for c in header_line.strip().split('|')]
+        header_first_col = header_cells[1] if len(header_cells) > 1 else ''
+        header_is_data = bool(re.match(r'^\d+$', header_first_col.strip()))
+        
+        # Kumpulkan SEMUA baris tabel (termasuk header jika itu data)
+        all_data_lines = []
+        if header_is_data:
+            all_data_lines.append(header_line)
+        all_data_lines.extend([l for l in lines[data_start:] if l.strip()])
+        
+        # Kelompokkan per nomor
+        groups = []
+        current_group = []
+        has_numbered_rows = False
+        
+        for line in all_data_lines:
+            stripped = line.strip()
+            cells = [c.strip() for c in stripped.split('|')]
+            first_col = cells[1] if len(cells) > 1 else ''
+            
+            is_numbered = bool(re.match(r'^\d+$', first_col.strip()))
+            is_separator = bool(re.match(r'^[\s\-]+$', first_col))
+            
+            if is_numbered:
+                has_numbered_rows = True
+                if current_group:
+                    groups.append(current_group)
+                current_group = [line]
+            elif is_separator:
+                if current_group:
+                    current_group.append(line)
+            else:
+                # Continuation row — join current group
+                current_group.append(line)
+        
+        if current_group:
+            groups.append(current_group)
+        
+        if not has_numbered_rows or len(groups) < 3:
+            return [table_content]
+        
+        # Buat header block
+        # Jika header asli = data row, gunakan header generik berdasarkan jumlah kolom
+        if header_is_data:
+            num_cols = len(header_cells) - 2  # minus leading/trailing empty
+            header_block = separator_line  # Only separator, no misleading header
+        else:
+            header_block = header_line + '\n' + separator_line
+        
+        sub_tables = []
+        for group in groups:
+            group_content = '\n'.join(group)
+            sub_table = header_block + '\n' + group_content
+            sub_tables.append(sub_table)
+        
+        print(f"   [TABLE SPLIT] Split large table ({len(table_content)} chars) into {len(sub_tables)} sub-tables by numbered rows")
+        return sub_tables
+    
+    
+    def _split_text(self, text: str) -> List[str]:
+        """
+        Structure-aware chunking: pecah teks berdasarkan heading ##,
+        lalu sub-split section yang terlalu panjang.
+        
+        Setiap chunk mendapat prefix [Konteks: heading] agar embedding model
+        tahu chunk ini berada di section mana.
         """
         try:
             from langchain_text_splitters import RecursiveCharacterTextSplitter
         except ImportError:
-            # Fallback for older langchain versions
             from langchain.text_splitter import RecursiveCharacterTextSplitter
         
-        # Preprocess to remove unnecessary sections
+        # Preprocess (hapus TOC, page numbers, dll)
         text = self._preprocess_content(text)
-        
-        # Clean text
         text = text.strip()
         if not text:
             return []
         
-        # Create semantic text splitter
-        # Separators are tried in order - prefers paragraph > sentence > word boundaries
+        # Pecah berdasarkan heading
+        sections = self._split_into_sections(text)
+        
+        # Splitter fallback untuk section yang terlalu panjang
         text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=self.chunk_size,
             chunk_overlap=self.chunk_overlap,
             length_function=len,
             is_separator_regex=False,
             separators=[
-                "\n\n",      # Paragraphs (highest priority)
-                "\n",        # Lines
-                ". ",        # Sentences
-                "? ",        # Questions
-                "! ",        # Exclamations
-                "; ",        # Semicolons
-                ", ",        # Commas
-                " ",         # Words
-                ""           # Characters (last resort)
+                "\n\n",      # Paragraf
+                "\n",        # Baris (penting: pisah antar list item / baris tabel)
+                ". ",        # Kalimat
+                "? ",
+                "! ",
+                "; ",
+                ", ",
+                " ",
+                ""
             ]
         )
         
-        # Split the text
-        chunks = text_splitter.split_text(text)
+        all_chunks = []
         
-        print(f"   Semantic chunking: {len(text)} chars -> {len(chunks)} chunks "
-              f"(size={self.chunk_size}, overlap={self.chunk_overlap})")
+        for section in sections:
+            heading = section['heading']
+            content = section['content']
+            
+            # Buat prefix konteks heading
+            if heading:
+                prefix = f"[Konteks: {heading}]\n\n"
+            else:
+                prefix = ""
+            
+            # Hitung space yang tersedia untuk konten (kurangi prefix)
+            available_size = self.chunk_size - len(prefix)
+            
+            if len(content) <= available_size:
+                # Section muat dalam 1 chunk
+                chunk = prefix + content
+                all_chunks.append(chunk.strip())
+            else:
+                # Section terlalu panjang — pisahkan tabel dari teks biasa
+                # Tabel (blok | ... |) dijadikan chunk utuh, sisanya di-sub-split
+                blocks = self._separate_table_blocks(content)
+                
+                sub_splitter = RecursiveCharacterTextSplitter(
+                    chunk_size=max(available_size, 200),
+                    chunk_overlap=self.chunk_overlap,
+                    length_function=len,
+                    is_separator_regex=False,
+                    separators=["\n\n", "\n", ". ", "? ", "! ", "; ", ", ", " ", ""]
+                )
+                
+                for block_type, block_content in blocks:
+                    if block_type == 'table':
+                        # Try splitting large numbered tables into per-item sub-tables
+                        sub_tables = self._split_numbered_table(block_content)
+                        for sub_table in sub_tables:
+                            chunk = prefix + sub_table
+                            all_chunks.append(chunk.strip())
+                    else:
+                        # Teks biasa = sub-split jika perlu
+                        if len(block_content) <= available_size:
+                            chunk = prefix + block_content
+                            all_chunks.append(chunk.strip())
+                        else:
+                            sub_chunks = sub_splitter.split_text(block_content)
+                            for sub_chunk in sub_chunks:
+                                chunk = prefix + sub_chunk
+                                all_chunks.append(chunk.strip())
         
-        return chunks
+        print(f"   Structure-aware chunking: {len(text)} chars -> {len(all_chunks)} chunks "
+              f"({len(sections)} sections, size={self.chunk_size}, overlap={self.chunk_overlap})")
+        
+        return all_chunks
 

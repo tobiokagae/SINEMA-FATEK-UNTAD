@@ -28,26 +28,42 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from dotenv import load_dotenv
 load_dotenv()
 
-from app.config import (
-    DOCUMENTS_DIR, VECTOR_DB_DIR, MODEL_DIR,
-    EMBEDDING_MODEL, CHUNK_SIZE, CHUNK_OVERLAP, TOP_K,
-    MAX_NEW_TOKENS, TEMPERATURE, TOP_P, DEVICE, SYSTEM_PROMPT,
-    RELEVANCE_THRESHOLD
-)
-from app.rag import RAGRetriever
+from flask import Flask
+from app.config import DATABASE_URL
+from app.models import db, ExpertEvaluation
 
-# Choose generator
-USE_API = os.getenv('USE_API', 'false').lower() == 'true'
-if USE_API:
-    from app.llm.api_generator import APIGenerator as LLMGenerator
-else:
-    from app.llm import LLMGenerator
+# =========================
+# Database Setup
+# =========================
+@st.cache_resource
+def get_flask_app():
+    """Create minimal Flask app for database operations"""
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'pool_recycle': 280,
+        'pool_pre_ping': True
+    }
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+        # Auto-seed if table is empty (first deploy)
+        if ExpertEvaluation.query.count() == 0:
+            try:
+                from evaluation.seed_expert_data import seed as run_seed
+                print("🌱 Auto-seeding expert evaluation data...")
+                run_seed()
+            except Exception as e:
+                print(f"⚠️ Auto-seed failed: {e}")
+    return app
+
+_flask_app = get_flask_app()
 
 # =========================
 # Configuration
 # =========================
 EVAL_DIR = PROJECT_ROOT / "evaluation"
-EVAL_FILE = EVAL_DIR / "expert_evaluations.json"
 
 ASPECTS = [
     {
@@ -362,25 +378,55 @@ def ask_chatbot(question: str):
 # Data Management
 # =========================
 def load_evaluations():
-    if EVAL_FILE.exists():
-        try:
-            with open(EVAL_FILE, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except (json.JSONDecodeError, Exception):
-            return {"evaluations": [], "metadata": {}}
-    return {"evaluations": [], "metadata": {}}
+    """Load evaluations from MySQL database"""
+    with _flask_app.app_context():
+        evals = ExpertEvaluation.query.order_by(ExpertEvaluation.id).all()
+        evaluations = [ev.to_dict() for ev in evals]
+    return {
+        "evaluations": evaluations,
+        "metadata": {
+            "last_updated": datetime.now().isoformat(),
+            "total_evaluations": len(evaluations)
+        }
+    }
 
 
-def save_evaluations(data):
-    EVAL_DIR.mkdir(exist_ok=True)
-    data["metadata"]["last_updated"] = datetime.now().isoformat()
-    data["metadata"]["total_evaluations"] = len(data["evaluations"])
-    with open(EVAL_FILE, 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+def save_evaluation(expert_name, expert_jabatan, question, answer, scores, comment):
+    """Save a single evaluation to MySQL database"""
+    with _flask_app.app_context():
+        ev = ExpertEvaluation(
+            expert_name=expert_name,
+            expert_jabatan=expert_jabatan,
+            question=question,
+            answer=answer,
+            score_akurasi=scores['akurasi'],
+            score_relevansi=scores['relevansi'],
+            score_kejelasan=scores['kejelasan'],
+            comment=comment,
+        )
+        db.session.add(ev)
+        db.session.commit()
+        return ev.to_dict()
+
+
+def delete_evaluation(eval_id):
+    """Delete a single evaluation from MySQL database"""
+    with _flask_app.app_context():
+        ev = ExpertEvaluation.query.get(eval_id)
+        if ev:
+            db.session.delete(ev)
+            db.session.commit()
+
+
+def delete_all_evaluations():
+    """Delete all evaluations from MySQL database"""
+    with _flask_app.app_context():
+        ExpertEvaluation.query.delete()
+        db.session.commit()
 
 
 def export_csv(data):
-    lines = ["No,Expert,Jabatan,Kategori,Pertanyaan,Jawaban Chatbot,Akurasi,Relevansi,Kelengkapan,Kejelasan,Rata-rata,Komentar,Waktu"]
+    lines = ["No,Expert,Jabatan,Pertanyaan,Jawaban Chatbot,Akurasi,Relevansi,Kejelasan,Rata-rata,Komentar,Waktu"]
     for i, ev in enumerate(data["evaluations"], 1):
         scores = ev["scores"]
         avg = sum(scores.values()) / len(scores)
@@ -389,10 +435,10 @@ def export_csv(data):
         question = ev["question"].replace(",", ";").replace("\n", " ")
         jabatan = ev.get("expert_jabatan", "-").replace(",", ";").replace("\n", " ")
         lines.append(
-            f'{i},{ev.get("expert_name", "-")},{jabatan},{ev.get("category", "-")},'
+            f'{i},{ev.get("expert_name", "-")},{jabatan},'
             f'"{question}","{answer}",'
             f'{scores["akurasi"]},{scores["relevansi"]},'
-            f'{scores["kelengkapan"]},{scores["kejelasan"]},'
+            f'{scores["kejelasan"]},'
             f'{avg:.2f},"{comment}",{ev["timestamp"]}'
         )
     return "\n".join(lines)
@@ -733,22 +779,17 @@ if page == "🤖 Uji Chatbot":
                         if not st.session_state.get("expert_name", "").strip() or not st.session_state.get("expert_jabatan", "").strip():
                             st.error("❌ Silakan isi nama expert dan jabatan terlebih dahulu!")
                             st.stop()
-                        ev = {
-                            "id": len(data["evaluations"]) + 1,
-                            "expert_name": st.session_state.expert_name.strip(),
-                            "expert_jabatan": st.session_state.get("expert_jabatan", "").strip(),
-                            "category": "",
-                            "question": q,
-                            "answer": answer,
-                            "sources": [],
-                            "latency": 0,
-                            "scores": scores,
-                            "comment": comment.strip(),
-                            "timestamp": datetime.now().isoformat()
-                        }
-                        data["evaluations"].append(ev)
-                        save_evaluations(data)
-                        st.session_state.eval_data = data
+                        saved_ev = save_evaluation(
+                            expert_name=st.session_state.expert_name.strip(),
+                            expert_jabatan=st.session_state.get("expert_jabatan", "").strip(),
+                            question=q,
+                            answer=answer,
+                            scores=scores,
+                            comment=comment.strip()
+                        )
+                        # Reload from database
+                        st.session_state.eval_data = load_evaluations()
+                        data = st.session_state.eval_data
                         avg = sum(scores.values()) / len(scores)
                         if avg >= TARGET_SCORE:
                             st.balloons()
@@ -909,7 +950,7 @@ elif page == "📋 Detail Data":
         st.markdown(f"""
         <div style="overflow-x:auto;">
         <table class="detail-table">
-        <thead><tr><th>No</th><th>Expert</th><th>Pertanyaan</th><th>🎯</th><th>🔗</th><th>📋</th><th>💡</th><th>Avg</th><th>Waktu</th></tr></thead>
+        <thead><tr><th>No</th><th>Expert</th><th>Pertanyaan</th><th>🎯</th><th>🔗</th><th>💡</th><th>Avg</th><th>Waktu</th></tr></thead>
         <tbody>{rows}</tbody>
         <tfoot><tr style="background:rgba(102,126,234,0.1);"><td colspan="3" style="font-weight:700;">📊 RATA-RATA</td>{footer_cells}<td class="{score_css_class(overall)}" style="font-weight:700;">{overall:.2f}</td><td>—</td></tr></tfoot>
         </table></div>
@@ -987,9 +1028,10 @@ elif page == "📋 Detail Data":
                     col_yes, col_no = st.columns(2)
                     with col_yes:
                         if st.button(f"✅ Ya, Hapus", key=f"confirm_yes_{idx}", use_container_width=True):
-                            data["evaluations"].pop(idx)
-                            save_evaluations(data)
-                            st.session_state.eval_data = data
+                            eval_id = ev.get('id')
+                            if eval_id:
+                                delete_evaluation(eval_id)
+                            st.session_state.eval_data = load_evaluations()
                             st.session_state.pop(f"confirm_del_{idx}", None)
                             st.rerun()
                     with col_no:
@@ -1000,8 +1042,7 @@ elif page == "📋 Detail Data":
             st.markdown("---")
             st.markdown("##### 💣 Hapus Semua Data")
             if st.button("🗑️ Hapus Semua Data Evaluasi", type="secondary"):
-                data["evaluations"] = []
-                save_evaluations(data)
-                st.session_state.eval_data = data
+                delete_all_evaluations()
+                st.session_state.eval_data = load_evaluations()
                 st.rerun()
 

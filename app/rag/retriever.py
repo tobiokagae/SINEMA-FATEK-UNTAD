@@ -93,16 +93,89 @@ class RAGRetriever:
             # Standard similarity search
             results = self.vector_store.search(expanded_query, top_k=k)
 
-        # Apply category-based filtering
+        # Re-rank by cosine similarity — highest first
         if results:
-            results = self._filter_by_category(query, results)
-            print(f"[CATEGORY FILTER] After filtering: {len(results)} results")
+            results.sort(key=lambda x: x[1], reverse=True)
 
-        # Boost: ensure related category chunks are included
+        # Filter chunks below relevance threshold
         if results:
-            results = self._boost_related_categories(query, expanded_query, results)
+            before_count = len(results)
+            results = [(doc, score) for doc, score in results if score >= self.relevance_threshold]
+            filtered_count = before_count - len(results)
+            if filtered_count > 0:
+                print(f"[THRESHOLD FILTER] Removed {filtered_count} chunks below threshold ({self.relevance_threshold})")
+
+        # SINEMA boost: dokumen SINEMA sangat kecil (~5 chunk dari 1260+)
+        # sehingga sering tidak masuk TOP_K. Boost khusus SINEMA saja.
+        if results:
+            results = self._boost_sinema(query, expanded_query, results)
 
         return results
+
+    # Keywords yang menunjukkan query terkait SINEMA
+    SINEMA_KEYWORDS = [
+        'sinema', 'dashboard', 'login sinema',
+    ]
+
+    def _boost_sinema(self, query: str, expanded_query: str, results):
+        """
+        Boost khusus untuk SINEMA — satu-satunya dokumen yang sangat
+        underrepresented (~5 chunk dari 1260+). Jika query menyebut
+        keyword SINEMA, pastikan semua chunk SINEMA masuk ke hasil.
+        """
+        query_lower = query.lower()
+        
+        # Cek apakah query terkait SINEMA
+        if not any(kw in query_lower for kw in self.SINEMA_KEYWORDS):
+            return results
+        
+        # Hitung chunk SINEMA yang sudah ada di results
+        existing_sinema = set()
+        for doc, _ in results:
+            if doc.metadata.get('source', '').upper().startswith('SINEMA'):
+                existing_sinema.add(id(doc))
+        
+        # Ambil semua chunk SINEMA yang belum ada di results
+        missing_sinema = [
+            doc for doc in self.vector_store.documents
+            if doc.metadata.get('source', '').upper().startswith('SINEMA')
+            and id(doc) not in existing_sinema
+        ]
+        
+        if not missing_sinema:
+            return results  # Semua chunk SINEMA sudah ada
+        
+        # Hitung similarity score untuk chunk yang missing
+        import numpy as np
+        try:
+            import faiss as _faiss
+        except ImportError:
+            import faiss_cpu as _faiss
+        
+        query_emb = self.vector_store.embedding_model.embed_text(expanded_query)
+        query_emb = query_emb.reshape(1, -1)
+        _faiss.normalize_L2(query_emb)
+        
+        scored = []
+        for doc in missing_sinema:
+            doc_emb = self.vector_store.embedding_model.embed_text(doc.content)
+            doc_emb = doc_emb.reshape(1, -1)
+            _faiss.normalize_L2(doc_emb)
+            sim = float(np.dot(query_emb[0], doc_emb[0]))
+            scored.append((doc, sim))
+        
+        scored.sort(key=lambda x: x[1], reverse=True)
+        
+        # Interleave di posisi awal (2, 4, 6, ...) 
+        merged = list(results)
+        for idx, (doc, score) in enumerate(scored):
+            pos = min(2 + idx * 2, len(merged))
+            merged.insert(pos, (doc, score))
+        
+        print(f"[SINEMA BOOST] Added {len(scored)} SINEMA chunks into results")
+        
+        # Cap di TOP_K
+        return merged[:self.top_k]
 
     def _expand_query(self, query: str) -> str:
         """Expand query with synonyms, abbreviations, and related terms for better retrieval
@@ -162,182 +235,30 @@ class RAGRetriever:
 
         # Define additional expansion rules for phrases
         expansions = {
+            'seminar tingkat universitas': ['kegiatan forum ilmiah lokakarya workshop pameran poster bobot nilai'],
+            'asisten praktikum': ['asisten matakuliah praktikum laboratorium lapang mentor bobot nilai'],
             'mengumpulkan poin': ['klaim ekstrakurikuler pengajuan'],
-            'poin': ['ekstrakurikuler kegiatan spe'],
+            'poin': ['bobot nilai ekstrakurikuler kegiatan spe satuan'],
             'ekstrakurikuler': ['kegiatan kemahasiswaan organisasi lomba'],
             'klaim': ['pengajuan bukti sertifikat'],
+            'bukti kegiatan': ['sertifikat piagam plakat surat keputusan'],
+            'sinema': ['sistem informasi ekstrakurikuler mahasiswa pengajuan klaim'],
         }
 
-        # Check if query matches any expansion pattern
+        # Check if query matches any expansion pattern (allow multiple matches)
+        applied = False
         for pattern, synonyms in expansions.items():
             if pattern in query_lower:
                 expanded_query = expanded_query + ' ' + ' '.join(synonyms)
-                print(f"[QUERY EXPANSION] '{query}' -> '{expanded_query[:100]}...'")
-                break
+                applied = True
+
+        if applied:
+            print(f"[QUERY EXPANSION] '{query}' -> '{expanded_query[:100]}...'")
 
         return expanded_query
 
-    def _detect_query_category(self, query: str) -> str:
-        """Detect the likely category of a query for better filtering
 
-        Args:
-            query: The search query
 
-        Returns:
-            Detected category
-        """
-        query_lower = query.lower()
-
-        # Keyword-based category detection
-        if any(word in query_lower for word in ['poin', 'ekstrakurikuler', 'spe', 'lomba', 'organisasi', 'ukm']):
-            return 'poin_ekstrakurikuler'
-        elif any(word in query_lower for word in ['skripsi', 'seminar proposal', 'seminar hasil', 'sidang skripsi']):
-            return 'ta_skripsi'
-        elif any(word in query_lower for word in ['non-skripsi', 'ta non', 'prototipe', 'karya']):
-            return 'ta_non_skripsi'
-        elif any(word in query_lower for word in ['sinema', 'dashboard', 'login', 'pengajuan']):
-            return 'website_sinema'
-        elif any(word in query_lower for word in ['plagiarisme', 'integritas', 'etalase']):
-            return 'integritas'
-        elif any(word in query_lower for word in ['transkrip', 'tem']):
-            return 'transkrip_tem'
-        elif any(word in query_lower for word in ['ipk', 'sks', 'nilai', 'krs', 'semester']):
-            return 'panduan_akademik'
-
-        return 'general'
-
-    # Related categories that should not be filtered out from each other
-    RELATED_CATEGORIES = {
-        'poin_ekstrakurikuler': ['website_sinema'],   # SINEMA = tool untuk poin
-        'website_sinema': ['poin_ekstrakurikuler'],   # Sebaliknya juga
-        'transkrip_tem': ['website_sinema', 'poin_ekstrakurikuler'],  # TEM juga via SINEMA
-    }
-
-    def _filter_by_category(self, query: str, results: List[Tuple[Document, float]]) -> List[Tuple[Document, float]]:
-        """Filter results by category to improve relevance
-
-        Args:
-            query: The search query
-            results: Retrieved documents with scores
-
-        Returns:
-            Filtered results
-        """
-        query_category = self._detect_query_category(query)
-
-        # If query is general, don't filter
-        if query_category == 'general':
-            return results
-
-        # Get related categories for this query category
-        related = self.RELATED_CATEGORIES.get(query_category, [])
-
-        # Filter documents by matching category + related categories
-        filtered = []
-        for doc, score in results:
-            doc_category = doc.metadata.get('category', 'general')
-            # Keep if: category matches OR related category OR general OR panduan_akademik
-            if doc_category == query_category or doc_category in related or doc_category == 'general' or doc_category == 'panduan_akademik':
-                filtered.append((doc, score))
-
-        return filtered if filtered else results  # Return filtered if non-empty, else original
-
-    def _boost_related_categories(self, query: str, expanded_query: str, results: List[Tuple[Document, float]]) -> List[Tuple[Document, float]]:
-        """Ensure related category chunks are included even if FAISS didn't rank them highly.
-        
-        Small document collections (e.g., SINEMA with only 5 chunks out of 1621) may never
-        appear in FAISS top-K results. This method finds and INTERLEAVES them into top
-        positions so they are guaranteed to be within TOP_K.
-        """
-        query_category = self._detect_query_category(query)
-        related = self.RELATED_CATEGORIES.get(query_category, [])
-        
-        # All categories that SHOULD be present: query's own category + related
-        desired_categories = [query_category] + related
-        
-        if not desired_categories or query_category == 'general':
-            return results
-        
-        # Check which desired categories are underrepresented in results
-        # A category is "underrepresented" if it has fewer than MIN chunks.
-        # Previously we only boosted MISSING categories, but a category with
-        # just 1 chunk (out of 5 total) still needs boosting.
-        MIN_CATEGORY_CHUNKS = 3
-        category_counts = {}
-        for doc, _ in results:
-            cat = doc.metadata.get('category', '')
-            category_counts[cat] = category_counts.get(cat, 0) + 1
-        
-        underrepresented = [
-            cat for cat in desired_categories
-            if category_counts.get(cat, 0) < MIN_CATEGORY_CHUNKS
-        ]
-        
-        if not underrepresented:
-            return results  # All desired categories have enough representation
-        
-        # Find and score chunks from underrepresented categories
-        try:
-            import numpy as np
-            import faiss as _faiss
-            
-            # Embed the query using same method as VectorStore.search
-            query_emb = self.vector_store.embedding_model.embed_text(expanded_query)
-            query_emb = query_emb.reshape(1, -1)
-            _faiss.normalize_L2(query_emb)
-            
-            all_boosted = []
-            for boost_cat in underrepresented:
-                # Collect chunks from this category (exclude already-present ones)
-                existing_docs = set(id(doc) for doc, _ in results if doc.metadata.get('category', '') == boost_cat)
-                cat_chunks = [
-                    doc for doc in self.vector_store.documents
-                    if doc.metadata.get('category', '') == boost_cat and id(doc) not in existing_docs
-                ]
-                if not cat_chunks:
-                    continue
-                
-                # Embed each chunk and compute similarity
-                scored = []
-                for doc in cat_chunks:
-                    doc_emb = self.vector_store.embedding_model.embed_text(doc.content)
-                    doc_emb = doc_emb.reshape(1, -1)
-                    _faiss.normalize_L2(doc_emb)
-                    # Dot product of normalized vectors = cosine similarity
-                    sim = float(np.dot(query_emb[0], doc_emb[0]))
-                    scored.append((doc, sim))
-                
-                # Sort by score, take top 5 (include all chunks for small documents like SINEMA)
-                scored.sort(key=lambda x: x[1], reverse=True)
-                added = scored[:5]
-                
-                if added:
-                    print(f"[CATEGORY BOOST] Added {len(added)} chunks from '{boost_cat}' (scores: {', '.join(f'{s:.4f}' for _, s in added)})")
-                    all_boosted.extend(added)
-            
-            if not all_boosted:
-                return results
-            
-            # INTERLEAVE boosted chunks into top positions instead of appending
-            # at the end (where they would be sorted past TOP_K).
-            # Strategy: insert boosted chunks at positions 2, 4, 6, 8, 10, ...
-            # so they are guaranteed to be within TOP_K results.
-            merged = list(results)
-            insert_positions = [2, 4, 6, 8, 10]  # Insert at these indices (0-based)
-            for idx, (doc, score) in enumerate(all_boosted):
-                if idx < len(insert_positions):
-                    pos = min(insert_positions[idx], len(merged))
-                else:
-                    pos = min(12, len(merged))  # Extra boosted go near position 12
-                merged.insert(pos, (doc, score))
-            
-            print(f"[CATEGORY BOOST] Interleaved {len(all_boosted)} boosted chunks into top positions")
-            return merged
-            
-        except Exception as e:
-            print(f"[CATEGORY BOOST] Error: {e}")
-            return results
-    
     def _generate_source_label(self, source_file: str) -> str:
         """Generate readable label from filename dynamically (no hardcoding)"""
         # Remove extension

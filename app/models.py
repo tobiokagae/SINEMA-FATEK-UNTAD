@@ -142,3 +142,39 @@ class Document(db.Model):
             'uploaded_at': self.uploaded_at.isoformat() if self.uploaded_at else None,
             'indexed_at': self.indexed_at.isoformat() if self.indexed_at else None
         }
+
+
+class ExpertEvaluation(db.Model):
+    """Expert evaluation for chatbot responses"""
+    __tablename__ = 'expert_evaluations'
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    expert_name = db.Column(db.String(100), nullable=False, index=True)
+    expert_jabatan = db.Column(db.String(200), nullable=True)
+    question = db.Column(db.Text, nullable=False)
+    answer = db.Column(db.Text, nullable=True)
+    score_akurasi = db.Column(db.Integer, nullable=False)
+    score_relevansi = db.Column(db.Integer, nullable=False)
+    score_kejelasan = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    def to_dict(self):
+        scores = {
+            'akurasi': self.score_akurasi,
+            'relevansi': self.score_relevansi,
+            'kejelasan': self.score_kejelasan,
+        }
+        return {
+            'id': self.id,
+            'expert_name': self.expert_name,
+            'expert_jabatan': self.expert_jabatan or '',
+            'category': '',
+            'question': self.question,
+            'answer': self.answer or '',
+            'sources': [],
+            'latency': 0,
+            'scores': scores,
+            'comment': self.comment or '',
+            'timestamp': self.created_at.isoformat() if self.created_at else None
+        }

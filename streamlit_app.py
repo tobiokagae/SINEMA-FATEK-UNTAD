@@ -288,46 +288,8 @@ def get_document_list():
             })
     return docs
 
-def rewrite_query(user_query: str, generator) -> str:
-    """
-    Use LLM to understand and rewrite user query into search-friendly keywords.
-    This improves retrieval by converting conversational questions to keyword-based search.
-    """
-    rewrite_prompt = f"""Tugas: Ubah pertanyaan user berikut menjadi kata kunci pencarian yang efektif untuk mencari di dokumen akademik.
 
-Pertanyaan user: "{user_query}"
 
-Instruksi:
-1. Pahami maksud sebenarnya dari pertanyaan user
-2. Ekstrak konsep-konsep kunci yang perlu dicari
-3. Tulis ulang sebagai kata kunci pencarian (bukan kalimat lengkap)
-4. Gunakan istilah akademik formal yang mungkin ada di dokumen
-
-Contoh:
-- "kalau dapat B bisa mengulang untuk dapat A tidak?" → "pengulangan mata kuliah perbaikan nilai syarat"
-- "berapa lama waktu kuliah sampai lulus?" → "masa studi maksimal semester program sarjana"
-- "gimana cara ngurus skripsi?" → "prosedur tugas akhir skripsi persyaratan pendaftaran"
-
-Kata kunci pencarian:"""
-
-    try:
-        # Generate rewritten query using LLM
-        result = generator.generate(
-            query=rewrite_prompt,
-            context="",  # No context needed for query rewriting
-            conversation_history=[]
-        )
-        # Result is (response, latency) tuple - extract response
-        rewritten = result[0] if isinstance(result, tuple) else result
-        # Clean up the response - take first line, remove quotes and extra spaces
-        rewritten = rewritten.strip().split('\n')[0].strip('"\'').strip()
-        # If response is too long or empty, use original query
-        if len(rewritten) < 5 or len(rewritten) > 200:
-            return user_query
-        return rewritten
-    except Exception as e:
-        print(f"Query rewriting failed: {e}")
-        return user_query  # Fallback to original query
 
 def process_uploaded_file(uploaded_file):
     """Process and save uploaded file"""
@@ -546,76 +508,39 @@ Jelaskan bahwa kamu bisa membantu tentang: KRS, UKT, skripsi, beasiswa, dan laya
                         conversation_history=st.session_state.messages
                     )
                 else:
-                    # Check cache first for similar questions
-                    cached_info = None
-                    with _flask_app.app_context():
-                        cached = DatabaseService.get_cached_response(user_input)
-                        if cached:
-                            cached_response, sources, cached_latency = cached
-                            cached_info = cached_response
+                    # Direct RAG retrieval (no cache, no query rewriting - matches Flask server)
+                    results = retriever.retrieve(user_input)
                     
-                    if cached_info:
-                        # SMART CACHE: Use cached response as context, but let LLM adapt to current question
-                        st.caption("⚡ Smart cache - menyesuaikan jawaban...")
-                        adapt_prompt = f"""Kamu adalah asisten akademik. Berikut adalah informasi yang sudah diketahui tentang topik ini:
-
-INFORMASI TERSIMPAN:
-{cached_info}
-
-PERTANYAAN USER SAAT INI:
-{user_input}
-
-Tugas: Jawab pertanyaan user berdasarkan informasi di atas. Sesuaikan jawaban agar relevan dengan cara user bertanya, tapi jangan ubah fakta yang ada. Gunakan bahasa yang ramah dan emoji 😊"""
-                        
-                        response, latency = generator.generate(
-                            query=adapt_prompt,
-                            context="",
-                            system_prompt="Kamu adalah SINEMA Bot, asisten akademik yang membantu mahasiswa.",
-                            conversation_history=[]
-                        )
+                    # Use documents with relevance score > 0.01 (low threshold for better recall)
+                    RELEVANCE_THRESHOLD = 0.01
+                    relevant_results = [(doc, score) for doc, score in results if score > RELEVANCE_THRESHOLD]
+                    
+                    if relevant_results:
+                        # Build context from relevant documents with safe access
+                        context_parts = []
+                        sources = []
+                        for doc, score in relevant_results:
+                            try:
+                                content = getattr(doc, 'page_content', str(doc))
+                                context_parts.append(content)
+                                source = doc.metadata.get('source', 'unknown') if hasattr(doc, 'metadata') else 'unknown'
+                                sources.append({'source': source, 'score': round(score, 3)})
+                            except Exception as e:
+                                print(f"Error accessing document: {e}")
+                                continue
+                        context = "\n\n".join(context_parts)
                     else:
-                        # Step 1: Rewrite query for better retrieval
-                        search_query = rewrite_query(user_input, generator)
-                        if search_query != user_input:
-                            st.caption(f"🔍 Mencari: {search_query}")
-                        
-                        # Step 2: Get RAG context using rewritten query
-                        results = retriever.retrieve(search_query)
-                        
-                        # Use documents with relevance score > 0.01 (low threshold for better recall)
-                        RELEVANCE_THRESHOLD = 0.01
-                        relevant_results = [(doc, score) for doc, score in results if score > RELEVANCE_THRESHOLD]
-                        
-                        if relevant_results:
-                            # Build context from relevant documents with safe access
-                            context_parts = []
-                            sources = []
-                            for doc, score in relevant_results:
-                                try:
-                                    content = getattr(doc, 'page_content', str(doc))
-                                    context_parts.append(content)
-                                    source = doc.metadata.get('source', 'unknown') if hasattr(doc, 'metadata') else 'unknown'
-                                    sources.append({'source': source, 'score': round(score, 3)})
-                                except Exception as e:
-                                    print(f"Error accessing document: {e}")
-                                    continue
-                            context = "\n\n".join(context_parts)
-                        else:
-                            # No relevant documents
-                            context = ""
-                            sources = []
-                        
-                        # Use LLM with RAG context and conversation history
-                        response, latency = generator.generate(
-                            query=user_input,
-                            context=context,
-                            system_prompt=SYSTEM_PROMPT,
-                            conversation_history=st.session_state.messages
-                        )
-                        
-                        # Cache the response
-                        with _flask_app.app_context():
-                            DatabaseService.cache_response(user_input, response, sources, latency)
+                        # No relevant documents
+                        context = ""
+                        sources = []
+                    
+                    # Use LLM with RAG context and conversation history
+                    response, latency = generator.generate(
+                        query=user_input,
+                        context=context,
+                        system_prompt=SYSTEM_PROMPT,
+                        conversation_history=st.session_state.messages
+                    )
                 
                 # Clean response from any HTML tags that might leak
                 import re

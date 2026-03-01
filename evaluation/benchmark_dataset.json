@@ -22,37 +22,37 @@
         {
             "id": 2,
             "question": "Berapa lama masa studi maksimal untuk program S1?",
-            "ground_truth": "Masa studi maksimal untuk program S1 adalah 5 tahun ditambah perpanjangan 2 tahun, sehingga total maksimal 7 tahun atau 14 semester.",
+            "ground_truth": "Masa studi maksimal untuk program S1 adalah 5 tahun ditambah perpanjangan 2 tahun. Mahasiswa dapat melanjutkan studi di tahun ke-6 (enam) dan 7 (tujuh) setelah mendapat persetujuan Rektor berdasarkan usulan Dekan.",
             "category": "panduan_akademik"
         },
         {
             "id": 3,
             "question": "Berapa lama masa studi maksimal untuk program D4?",
-            "ground_truth": "Masa studi maksimal untuk program D4 adalah 4 tahun ditambah perpanjangan 1 tahun, sehingga total maksimal 5 tahun atau 10 semester.",
+            "ground_truth": "Masa studi maksimal untuk program D4 adalah 4 tahun ditambah perpanjangan 1 tahun, dengan menggunakan sistem paket.",
             "category": "panduan_akademik"
         },
         {
             "id": 4,
             "question": "Bagaimana prosedur pengajuan cuti akademik?",
-            "ground_truth": "Prosedur pengajuan cuti akademik meliputi mengajukan permohonan tertulis, mendapat persetujuan dari Penasehat Akademik (PA) dan Ketua Program Studi (Kaprodi), kemudian mendaftar melalui sistem SINAWA.",
+            "ground_truth": "Prosedur pengajuan cuti akademik meliputi mengajukan permohonan kepada Dekan melalui Wakil Dekan Bidang Akademik, mendapat persetujuan dari Penasehat Akademik (PA) dan koordinator program studi/ketua jurusan, kemudian mendaftar melalui sistem SINAWA dengan melampirkan slip pembayaran UKT semester terakhir, alasan permohonan cuti, dan daftar nilai mata kuliah yang telah diluluskan. Persetujuan cuti dinyatakan dengan Surat Keputusan Dekan.",
             "category": "panduan_akademik"
         },
         {
             "id": 5,
             "question": "Apakah bisa mengulang mata kuliah untuk perbaikan nilai?",
-            "ground_truth": "Ya, mahasiswa dapat mengulang mata kuliah. Mata kuliah yang belum lulus wajib diulang pada semester berikutnya. Nilai yang digunakan adalah nilai terbaik dari pengulangan tersebut.",
+            "ground_truth": "Ya, mahasiswa diperkenankan mengulang mata kuliah untuk perbaikan nilai. Nilai akhir yang diakui adalah nilai dari mata kuliah yang diprogramkan terakhir (nilai terbaik).",
             "category": "panduan_akademik"
         },
         {
             "id": 6,
             "question": "Berapa SKS maksimal yang bisa diambil dalam satu semester?",
-            "ground_truth": "Jumlah SKS maksimal yang bisa diambil per semester ditentukan berdasarkan Indeks Prestasi Semester (IPS) pada semester sebelumnya. Mahasiswa dengan IPS tinggi dapat mengambil lebih banyak SKS.",
+            "ground_truth": "Jumlah SKS maksimal yang bisa diambil per semester ditentukan berdasarkan Indeks Prestasi Semester (IPS) pada semester sebelumnya, dengan ketentuan: IPS 3,00-4,00 maksimal 24 SKS; IPS 2,50-2,99 maksimal 22 SKS; IPS 2,00-2,49 maksimal 20 SKS; IPS di bawah 1,99 maksimal 18 SKS.",
             "category": "panduan_akademik"
         },
         {
             "id": 7,
             "question": "Apa itu Indeks Prestasi Semester (IPS)?",
-            "ground_truth": "Indeks Prestasi Semester (IPS) adalah rata-rata nilai yang diperoleh mahasiswa dalam satu semester, dihitung dari jumlah perkalian SKS dengan angka mutu dibagi total SKS yang diambil pada semester tersebut.",
+            "ground_truth": "Indeks Prestasi Semester (IPS) adalah rata-rata nilai yang diperoleh mahasiswa dalam satu semester tertentu, dihitung dari jumlah perkalian SKS dengan angka mutu dibagi total SKS yang diambil pada semester tersebut.",
             "category": "panduan_akademik"
         },
         {
@@ -64,7 +64,7 @@
         {
             "id": 9,
             "question": "Bagaimana sistem penilaian dan angka mutu di FATEK UNTAD?",
-            "ground_truth": "Sistem penilaian menggunakan huruf mutu A, A-, B+, B, B-, C+, C, D, dan E, dengan angka mutu berturut-turut 4.00, 3.75, 3.50, 3.00, 2.75, 2.50, 2.00, 1.00, dan 0. Nilai akhir dihitung berdasarkan rentang nilai tertentu.",
+            "ground_truth": "Sistem penilaian menggunakan huruf mutu A, A-, B+, B, B-, C+, C, D, dan E, dengan angka mutu berturut-turut 4.00, 3.75, 3.50, 3.00, 2.75, 2.50, 2.00, 1.00, dan 0. Nilai akhir dihitung berdasarkan rentang nilai tertentu. Khusus untuk penilaian seminar dan ujian tugas akhir, skala yang digunakan adalah A (85,01-100), A- (80,01-85), B+ (75,01-80), B (70,01-75), dengan nilai di bawah 70,01 dinyatakan tidak lulus.",
             "category": "panduan_akademik"
         },
         {
@@ -76,31 +76,31 @@
         {
             "id": 11,
             "question": "Kapan mahasiswa dinyatakan tidak aktif dan apa konsekuensinya?",
-            "ground_truth": "Mahasiswa dinyatakan tidak aktif jika tidak melakukan registrasi pada semester berjalan, tidak membayar UKT sampai batas waktu, atau dikenai skorsing. Status tidak aktif tetap terhitung dalam masa studi. Mahasiswa dapat aktif kembali setelah membayar UKT semester berjalan ditambah UKT terutang. Jika tidak melakukan registrasi dua semester berturut-turut, mahasiswa dinyatakan mengundurkan diri melalui SK Rektor dan otomatis hilang dari SIAKAD.",
+            "ground_truth": "Mahasiswa dinyatakan tidak aktif jika tidak melakukan registrasi pada semester berjalan, tidak membayar UKT sampai batas waktu yang telah ditentukan, atau dikenai skorsing. Status tidak aktif tetap terhitung dalam masa studi. Mahasiswa dapat aktif kembali setelah membayar UKT semester berjalan ditambah UKT terutang. Jika tidak melakukan registrasi dua semester berturut-turut, mahasiswa dinyatakan mengundurkan diri melalui SK Rektor dan otomatis hilang dari SIAKAD.",
             "category": "panduan_akademik"
         },
         {
             "id": 12,
             "question": "Bagaimana cara mengisi Kartu Rencana Studi (KRS)?",
-            "ground_truth": "Mahasiswa mengisi KRS dengan memilih mata kuliah yang akan diambil pada semester berjalan, dengan bimbingan dari Penasehat Akademik (PA). Jumlah SKS yang dapat diambil disesuaikan dengan IPS semester sebelumnya.",
+            "ground_truth": "Mahasiswa mengisi KRS melalui Sistem Informasi Akademik (SIAKAD) dengan memilih mata kuliah yang akan diambil pada semester berjalan, berdasarkan mata kuliah yang ditawarkan dan atas persetujuan Penasehat Akademik (PA). Jumlah SKS yang dapat diambil disesuaikan dengan IPS semester sebelumnya.",
             "category": "panduan_akademik"
         },
         {
             "id": 13,
             "question": "Apa yang terjadi jika mahasiswa tidak registrasi selama beberapa semester?",
-            "ground_truth": "Mahasiswa yang tidak melakukan registrasi atau herregistrasi dalam periode tertentu tanpa mengajukan cuti akademik dapat dikenai sanksi administratif dan dinyatakan mengundurkan diri atau putus studi.",
+            "ground_truth": "Mahasiswa yang tidak melakukan registrasi dua semester berturut-turut dinyatakan mengundurkan diri melalui surat keputusan Rektor usulan dari Dekan, dan secara otomatis hilang dari SIAKAD. Mahasiswa yang tidak mengajukan permohonan cuti akademik dan tidak membayar UKT selama 2 semester berturut-turut juga dinyatakan mengundurkan diri.",
             "category": "panduan_akademik"
         },
         {
             "id": 14,
             "question": "Apa itu Satuan Kredit Semester (SKS)?",
-            "ground_truth": "Satuan Kredit Semester (SKS) adalah takaran penghargaan terhadap pengalaman belajar yang diperoleh selama satu semester. SAtu SKS setara dengan kegiatan belajar tatap muka, kegiatan terstruktur, dan kegiatan mandiri per minggu selama satu semester.",
+            "ground_truth": "Satuan Kredit Semester (SKS) adalah takaran waktu kegiatan belajar yang dibebankan pada mahasiswa per semester. Satu SKS setara dengan 45 (empat puluh lima) jam per semester, yang dapat dipenuhi dalam berbagai bentuk pembelajaran termasuk kuliah, responsi, tutorial, seminar, praktikum, praktik, studio, penelitian, perancangan, pengembangan, tugas akhir, dan bentuk pembelajaran lain.",
             "category": "panduan_akademik"
         },
         {
             "id": 15,
             "question": "Berapa beban SKS minimal untuk lulus program S1?",
-            "ground_truth": "Beban SKS minimal untuk lulus program S1 adalah sekitar 144 SKS, termasuk mata kuliah wajib, pilihan, dan tugas akhir/skripsi, sesuai dengan kurikulum masing-masing program studi.",
+            "ground_truth": "Beban SKS minimal untuk lulus program S1 adalah paling sedikit 144 SKS, terdiri dari minimal 124 SKS mata kuliah wajib dan minimal 10 SKS mata kuliah pilihan, sesuai dengan kurikulum masing-masing program studi.",
             "category": "panduan_akademik"
         },
         {
@@ -112,7 +112,7 @@
         {
             "id": 17,
             "question": "Berapa total poin minimal untuk mendapat nilai mutu A?",
-            "ground_truth": "Untuk mendapat nilai mutu A, mahasiswa harus mengumpulkan total bobot poin lebih dari 3000. Nilai mutu A- diperoleh dengan poin 2501-3000, B+ dengan poin 2001-2500, dan B dengan poin 1500-2000.",
+            "ground_truth": "Untuk mendapat nilai mutu A, mahasiswa harus mengumpulkan total bobot poin lebih dari 3000.",
             "category": "poin_ekstrakurikuler"
         },
         {
@@ -130,7 +130,7 @@
         {
             "id": 20,
             "question": "Apa itu PKKMB dan apakah wajib diikuti?",
-            "ground_truth": "PKKMB (Pengenalan Kehidupan Kampus bagi Mahasiswa Baru) adalah kegiatan wajib yang harus diikuti setiap mahasiswa baru. Keikutsertaan PKKMB dibuktikan dengan sertifikat dan merupakan syarat untuk mengikuti kegiatan ekstrakurikuler lainnya. PKKMB bernilai 150 poin.",
+            "ground_truth": "PKKMB (Pengenalan Kehidupan Kampus bagi Mahasiswa Baru) adalah kegiatan wajib yang harus diikuti setiap mahasiswa baru. Keikutsertaan PKKMB dibuktikan dengan sertifikat dan merupakan syarat untuk mengikuti kegiatan ekstrakurikuler lainnya.",
             "category": "poin_ekstrakurikuler"
         },
         {
@@ -148,7 +148,7 @@
         {
             "id": 23,
             "question": "Apakah mahasiswa wajib mengikuti bakti lingkungan?",
-            "ground_truth": "Ya, setiap mahasiswa baru wajib mengikuti kegiatan bakti lingkungan dan penghijauan kampus selama 2 semester. Kegiatan ini merupakan syarat wajib mata kuliah Kajian Lingkungan Hidup (KLH) dan juga menjadi syarat untuk pengajuan TEM.",
+            "ground_truth": "Ya, setiap mahasiswa baru wajib mengikuti kegiatan bakti lingkungan dan penghijauan kampus selama 2 semester. Kegiatan ini merupakan syarat wajib mata kuliah Kajian Lingkungan Hidup (KLH).",
             "category": "poin_ekstrakurikuler"
         },
         {
@@ -160,19 +160,19 @@
         {
             "id": 25,
             "question": "Bagaimana cara mengumpulkan bukti kegiatan ekstrakurikuler?",
-            "ground_truth": "Setiap kegiatan harus dibuktikan dengan sertifikat, piagam, plakat, surat keputusan, atau bukti lainnya yang dianggap sah. Setiap akhir semester, mahasiswa menukar bukti asli ekstrakurikuler ke Bagian Kemahasiswaan dengan membawa formulir KRE (Kartu Rencana Ekstrakurikuler).",
+            "ground_truth": "Bukti kegiatan ekstrakurikuler berupa sertifikat, piagam, plakat, surat keputusan, atau bukti lainnya yang dianggap sah. Melalui SINEMA, mahasiswa dapat mengajukan klaim dengan memilih menu Pengajuan Klaim, memilih jenis kegiatan, mengunggah bukti pendukung, lalu klik Submit. Secara administratif, setiap akhir semester mahasiswa juga menukar bukti asli ekstrakurikuler ke Bagian Kemahasiswaan dengan membawa formulir KRE (Kartu Rencana Ekstrakurikuler).",
             "category": "poin_ekstrakurikuler"
         },
         {
             "id": 26,
             "question": "Apa syarat untuk mengikuti tugas akhir?",
-            "ground_truth": "Syarat mengikuti tugas akhir meliputi terdaftar sebagai mahasiswa aktif, telah menyelesaikan minimal sejumlah SKS tertentu sesuai kurikulum prodi, memiliki IPK yang memenuhi syarat, dan telah memperoleh Transkrip Ekstrakurikuler Mahasiswa (TEM).",
+            "ground_truth": "Syarat mengikuti tugas akhir meliputi terdaftar sebagai mahasiswa aktif, telah menyelesaikan minimal 120 SKS, memiliki IPK minimal 2,00, telah memperoleh Transkrip Ekstrakurikuler Mahasiswa (TEM), dan telah menghadiri seminar (proposal dan/atau hasil penelitian) minimal 5 kali.",
             "category": "ta_skripsi"
         },
         {
             "id": 27,
             "question": "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
-            "ground_truth": "Tugas akhir skripsi adalah karya ilmiah berbasis penelitian yang mengharuskan mahasiswa melakukan riset original, sedangkan tugas akhir non-skripsi bisa berupa proyek perancangan, studi kasus, atau bentuk karya lain yang sesuai dengan program studi.",
+            "ground_truth": "Tugas akhir skripsi adalah karya ilmiah berbasis penelitian yang mengharuskan mahasiswa melakukan riset, sedangkan tugas akhir non-skripsi bisa berupa Proyek, Prototype, Jurnal Ilmiah, Penerapan Teknologi Tepat Guna (TTG), Karya Prestasi, atau Prosiding Internasional Terindeks.",
             "category": "ta_skripsi"
         },
         {
@@ -184,19 +184,19 @@
         {
             "id": 29,
             "question": "Berapa jumlah dosen pembimbing tugas akhir?",
-            "ground_truth": "Tugas akhir dibimbing oleh dosen pembimbing yang ditunjuk oleh program studi. Biasanya terdiri dari pembimbing utama dan pembimbing pendamping.",
+            "ground_truth": "Tugas akhir dibimbing oleh dosen pembimbing yang ditunjuk oleh program studi. Mahasiswa dibimbing oleh 1 orang pembimbing dan/atau maksimal 2 orang pembimbing. Penambahan pembimbing pendamping dilakukan jika dianggap perlu oleh pembimbing pertama dan sesuai keputusan jurusan.",
             "category": "ta_skripsi"
         },
         {
             "id": 30,
             "question": "Apa saja komponen penilaian tugas akhir?",
-            "ground_truth": "Komponen penilaian tugas akhir umumnya meliputi kualitas proposal, pelaksanaan penelitian/proyek, penulisan laporan, presentasi dan pertahanan (sidang), serta penilaian dari dosen pembimbing dan penguji.",
+            "ground_truth": "Komponen penilaian tugas akhir berbeda tergantung jenisnya. Untuk TA skripsi, penilaian dilakukan melalui seminar proposal, seminar hasil, dan ujian sarjana komprehensif dengan pembobotan nilai angka 0-100. Untuk TA non-skripsi (Proyek/Prototype/TTG), bobot penilaian terdiri dari Laporan (20%), Luaran proyek/prototype/TTG (60%), dan Penguasaan materi/presentasi (20%). Untuk jalur publikasi artikel ilmiah, bobot penilaian terdiri dari Kualitas Artikel Ilmiah (80%) dan Penyajian Seminar Artikel Ilmiah (20%).",
             "category": "ta_skripsi"
         },
         {
             "id": 31,
             "question": "Apa syarat untuk mengikuti sidang tugas akhir?",
-            "ground_truth": "Syarat untuk mengikuti sidang tugas akhir meliputi penyelesaian seluruh bab laporan yang disetujui pembimbing, kelengkapan administrasi, bebas tunggakan, dan persyaratan akademik lainnya yang ditetapkan program studi.",
+            "ground_truth": "Syarat untuk mengikuti sidang tugas akhir (ujian sarjana/komprehensif) meliputi: telah lulus seminar hasil penelitian minimal B, similarity index skripsi tidak lebih dari 30% yang dibuktikan dengan hasil pemeriksaan Turnitin, telah lulus seluruh mata kuliah wajib, memiliki naskah skripsi yang disetujui pembimbing, serta kelengkapan administrasi termasuk lembar clearing.",
             "category": "ta_skripsi"
         },
         {
@@ -214,13 +214,13 @@
         {
             "id": 34,
             "question": "Berapa lama waktu maksimal untuk menyelesaikan tugas akhir?",
-            "ground_truth": "Waktu penyelesaian tugas akhir dibatasi sesuai dengan sisa masa studi mahasiswa. Jika masa studi habis sebelum tugas akhir selesai, mahasiswa harus mengajukan perpanjangan masa studi.",
+            "ground_truth": "Bobot Tugas Akhir Non-Skripsi adalah 6 SKS dengan target penyelesaian 1 (satu) semester atau 6 bulan, dan dapat diperpanjang sesuai ketentuan akademik. Waktu penyelesaian juga dibatasi oleh sisa masa studi mahasiswa.",
             "category": "ta_skripsi"
         },
         {
             "id": 35,
             "question": "Apa saja syarat untuk mengikuti ujian sarjana (ujian tutup)?",
-            "ground_truth": "Syarat ujian sarjana (ujian tutup) antara lain: telah lulus seminar hasil minimal B, jumlah SKS mata kuliah wajib dengan nilai D tidak lebih dari 15 SKS, telah lulus seluruh mata kuliah wajib dengan minimal 144 SKS dan IPK minimal 2,00, nilai skripsi sudah ditetapkan pembimbing, telah menyelesaikan lembar kliring, memperlihatkan transkrip sementara yang disahkan jurusan, membuktikan hasil tes TOEFL minimal Prediction, serta minimal telah membuat draf artikel ilmiah.",
+            "ground_truth": "Syarat ujian sarjana (ujian tutup) antara lain: telah lulus seminar hasil minimal B, telah lulus seluruh mata kuliah wajib dengan IPK minimal 2,00, nilai skripsi sudah ditetapkan pembimbing, telah menyelesaikan lembar kliring, memperlihatkan transkrip sementara yang disahkan jurusan, membuktikan hasil tes TOEFL minimal Prediction, telah menyelesaikan naskah skripsi dengan lembar persetujuan perbaikan, serta minimal telah membuat draf artikel ilmiah.",
             "category": "ta_skripsi"
         },
         {
@@ -232,7 +232,7 @@
         {
             "id": 37,
             "question": "Apa sanksi untuk plagiarisme?",
-            "ground_truth": "Sanksi plagiarisme dapat berupa pembatalan sertifikat, pemberian nilai nol pada tugas/ujian yang bersangkutan, skorsing, hingga tuntutan hak cipta tergantung tingkat keparahan pelanggaran.",
+            "ground_truth": "Sanksi plagiarisme ditindak sesuai kode etik Perguruan Tinggi. Dalam konteks self-plagiarism pada publikasi ilmiah, konsekuensinya meliputi penolakan naskah oleh jurnal/konferensi, permasalahan hak cipta, dan penurunan kredibilitas akademis. Pelanggaran akademik/kode etik yang berat dapat berujung pada Drop Out (DO) berdasarkan Keputusan Rektor.",
             "category": "integritas_akademik"
         },
         {
@@ -262,7 +262,7 @@
         {
             "id": 42,
             "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
-            "ground_truth": "Predikat kelulusan program sarjana terdiri dari tiga tingkatan: (1) Pujian, untuk IPK di atas 3,50 dengan ketentuan masa studi maksimal 8 semester, tidak pernah mengulang mata kuliah, serta nilai ujian skripsi A; (2) Sangat Memuaskan, untuk IPK di atas 3,00 sampai dengan 3,50 dengan ketentuan nilai ujian akhir sekurang-kurangnya B; dan (3) Memuaskan, untuk IPK 3,00 atau di bawahnya.",
+            "ground_truth": "Predikat kelulusan program sarjana terdiri dari tiga tingkatan: (1) Pujian, untuk IPK di atas 3,50 dengan ketentuan masa studi maksimal 8 semester, tidak pernah mengulang mata kuliah, serta nilai ujian skripsi A; (2) Sangat Memuaskan, untuk IPK di atas 3,00 sampai dengan 3,50 dengan ketentuan nilai ujian akhir sekurang-kurangnya B; dan (3) Memuaskan, untuk IPK di bawah atau sama dengan 3,00.",
             "category": "panduan_akademik"
         },
         {
@@ -273,8 +273,8 @@
         },
         {
             "id": 44,
-            "question": "Apa itu SINEMA?",
-            "ground_truth": "SINEMA (Sistem Informasi Ekstrakurikuler Mahasiswa) adalah platform digital Universitas Tadulako, khususnya Fakultas Teknik, untuk pencatatan dan pengelolaan kegiatan ekstrakurikuler mahasiswa. Melalui SINEMA, mahasiswa dapat mengajukan klaim poin kegiatan, melihat riwayat, dan mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM).",
+            "question": "Bagaimana cara mengetahui total poin ekstrakurikuler yang sudah terverifikasi di SINEMA?",
+            "ground_truth": "Setelah login ke SINEMA, mahasiswa dapat melihat total poin terverifikasi di dashboard. Dashboard menampilkan Total Poin Terverifikasi (jumlah poin yang sudah divalidasi oleh verifikator), Nilai Mutu Saat Ini (grade berdasarkan total poin), dan Pengajuan Diproses (jumlah pengajuan yang masih menunggu validasi).",
             "category": "website_sinema"
         },
         {

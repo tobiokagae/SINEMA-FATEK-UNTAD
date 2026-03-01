@@ -4,29 +4,9 @@
 
 ---
 
-## Pedoman
-## Kegiatan Ekstrakurikuler Mahasiswa
-## Universitas Tadulako
-2024
-## Bab I Pendahuluan
-1.1. Latar Belakang 1
-1.2. Dasar Hukum 2
-1.3. Tujuan 2
-## Bab Ii Bidang Jenis Dan Bobot Nilai Aktifitas
-## Kegiatan Ekstrakurikuler Mahasiswa
-2.1. Ketentuan Umum 3
-2.2. Ketentuan Khusus 4
-2.3. Bidang, Jenis dan Bobot Nilai Aktifitas 4
-2.4. Peniliaian 15
-## Bab Iii Administrasi Sistem Pembobotan
-## Ekstrakurikuler
-3.1. Ketentuan Umum 18
-3.2. Instruksi Kerja Perhitungan Spe Mahasiswa Universitas 20
-Tadulako
-## Lampiran
 ## Bab I
 ## Pendahuluan
-1.1. Latar Belakang
+## 1.1. Latar Belakang
 Sesuai amanat Undang-Undang Nomor 20 tahun 2003 tentang Sistem Pendidikan
 Nasional bahwa Pendidikan Nasional berfungsi mengembangkan kemampuan dan membentuk
 watak serta peradaban bangsa yang bermartabat dalam rangka mencerdaskan kehidupan bangsa,
@@ -63,7 +43,7 @@ ekstrakurikuler mahasiswa. Panduan ini disusun secara sistematis dan terprogram 
 dasar pelaksanaan penilaian aktifitas kegiatan kemahasiswaan di Universitas Tadulako selama
 mengikuti perkuliahan. Panduan ini juga berisikan rangakaian kegiatan ekstrakurikuler yang
 meliputi 8 (delapan) bidang dan diberi bobot poin untuk setiap aktifitas.
-1.2. Dasar Hukum
+## 1.2. Dasar Hukum
 1. Undang-Undang Nomor 20 Tahun 2003 tentang Sistem Pendidikan Nasional;
 2. Undang-Undang Nomor 14 Tahun 2005 tentang Guru dan Dosen;
 3. Undang-Undang Nomor 12 Tahun 2012 tentang Pendidikan Tinggi;
@@ -85,15 +65,14 @@ Akademik Tahun Universitas Tadulako 2024-2025;
 Informasi Manajemen Pemeringkatan Kemahasiswaan (SIMKATMAWA) -
 Direktorat Jenderal Pendidikan Tinggi, Riset, dan Teknologi Kementerian
 Pendidikan, Kebudayaan, Riset, dan Teknologi.
-1.3. Tujuan
+## 1.3. Tujuan
 1. Sebagai Panduan bagi semua pihak dalam penyelenggarakan kegiatan ekstrakurikuler di
 lingkungan Universitas Tadulako.
 2. Memberikan informasi tentang bidang kegiatan, jenis dan bobot poin untuk masing-
 masing kegiatan ekstrakurikuler mahasiswa, di lingkup Universitas Tadulako.
 ## Bab Ii
-## Bidang, Jenis, Dan Bobot Nilai Aktivitas
-## Kegiatan Ekstrakurikuler Mahasiswa.
-2.1. Ketentuan Umum
+## Bidang, Jenis, Dan Bobot Nilai Aktivitas Kegiatan Ekstrakurikuler Mahasiswa.
+## 2.1. Ketentuan Umum
 Ketentuan Umum yang merupakan syarat yang harus dipenuhi mahasiswa dalam
 pelaksanaan kegiatan ekstrakurikuler meliputi:
 1. Setiap mahasiswa wajib mengikuti kegiatan ekstrakurikuler, secara mandiri atau
@@ -117,7 +96,7 @@ sebagaimana tertuang dalam pedoman pelaksanaan ekstrakurikuler ini.
 dalam proses belajar setiap mahasiswa yang sifatnya wajib diikuti yang termuat dalam
 kurikulum setiap Program Studi minimal 1 sks dan maksimal 2 sks dan disajikan di
 semester akhir (semester 8)
-2.2. Ketentuan Khusus
+## 2.2. Ketentuan Khusus
 Beberapa ketentuan khusus yang harus diperhatikan oleh mahasiswa dalam mengikuti
 setiap kegiatan ekstrakurikuler yaitu:
 1. Mahasiswa wajib mengumpulkan nilai kegiatan ekstrakurikuler menurut bidang kegiatan
@@ -139,533 +118,432 @@ diminati.
 Kemahasiswaan setiap semester berjalan sebagai kontrol evaluasi, ketentuan pencapain
 bobot maksimal ekstrakurikuler mahasiswa dievaluasi serta menjadi persyaratan
 pengajuan proposal penelitian tugas akhir yang sudah terprogram dalam KRS.
-2.3. Bidang Jenis dan Bobot Nilai Aktifitas
+## 2.3. Bidang Jenis Dan Bobot Nilai Aktifitas
 Sebagai acuan dalam pemberian nilai untuk setiap aktivitas kegiatan ekstrakurikuler
 mahasiswa, maka diuraikan setiap aktivitas ekstrakurikuler mahasiswa menurut bidang kegiatan,
 jenis dan bobot nilai untuk masing-masing kegiatan, sesuai Tabel 1, Tabel 2, Tabel 3, Tabel 4,
 Tabel 5, Tabel 6, Tabel 7, dan Tabel 8 berikut ini:
-Tabel 1. Bidang Pengembangan Penalaran dan Kreativitas
-Peringkat/ Bobot
-No Kegiatan Tingkat
-Jabatan Nilai
-1 Memperoleh Prestasi dalam Lomba Karya Internasional Juara I 700
-Tulis Ilmiah/ Naskah/Populer/ Cerpen/Puisi/ Juara II 600
-Opini/ Sinopsis/ Bussines Plan (kegiatan
-mandiri dan tidak direkognisi ke SKS MK) Juara III 500
-Favorit 400
-Peserta 300
-Nasional Juara I 500
-Juara II 400
-Juara III 300
-Favorit 200
-Peserta 100
-Regional Juara I 300
-Juara II 200
-Juara III 150
-Favorit 100
-Peserta 75
-Universitas Juara I 200
-Juara II 150
-Juara III 100
-Favorit 75
-Peserta 50
-Fakultas Juara I 150
-Juara II 100
-Juara III 75
-Favorit 50
-Peserta 25
-Jurusan Juara I 75
-Juara II 50
-Juara III 25
-Favorit 20
-Peserta 15
-Program Studi Juara I 75
-Juara II 50
-Juara III 25
-Favorit 20
-Peserta 15
-2 Mengikuti Kegiatan/Forum Ilmiah (Seminar,
-Internasional 600
-Lokakarya, Workshop, Pameran/Poster)
-Nasional 500
-Regional 300
-Universitas 200
-Fakultas 100
-Jurusan 75
-Program Studi 50
-3 Menjadi Pembicara pada Suatu Kegiatan
-Internasional 700
-Ilmiah
-Nasional 500
-Regional 300
-Universitas 200
-Fakultas 100
-Jurusan 75
-Program Studi 50
-4 Menjadi Moderator pada Suatu Kegiatan
-Internasional 600
-Ilmiah
-Nasional 500
-Regional 300
-Universitas 200
-Fakultas 100
-Jurusan 75
-Program Studi 50
-5 Mengikuti Pelatihan/Bimbingan dalam
->56 jam 150
-Penyusunan Karya Tulis/Proposal
-32-56 jam 100
-<32 jam 50
-6 Mengikuti Seminar Proposal/Hasil Penelitian
-Dosen
-7 Membuat karya ilmiah jurnal (kegiatan Jurnal Internasional
-mandiri dan tidak direkognisi ke SKS MK) bereputasi
-Jurnal Internasional 600
-Jurnal Nasional Sinta
-1 dan 2
-Jurnal Nasional Sinta
-3 dan 4
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| 1 | Memperoleh Prestasi dalam Lomba Karya Tulis Ilmiah/ Naskah/Populer/ Cerpen/Puisi/ Opini/ Sinopsis/ Bussines Plan (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Internasional | Juara I | 700 |
+| | | | Juara II | 600 |
+| | | | Juara III | 500 |
+| | | | Favorit | 400 |
+| | | | Peserta | 300 |
+| | | Nasional | Juara I | 500 |
+| | | | Juara II | 400 |
+| | | | Juara III | 300 |
+| | | | Favorit | 200 |
+| | | | Peserta | 100 |
+| | | Regional | Juara I | 300 |
+| | | | Juara II | 200 |
+| | | | Juara III | 150 |
+| | | | Favorit | 100 |
+| | | | Peserta | 75 |
+| | | Universitas | Juara I | 200 |
+| | | | Juara II | 150 |
+| | | | Juara III | 100 |
+| | | | Favorit | 75 |
+| | | | Peserta | 50 |
+| | | Fakultas | Juara I | 150 |
+| | | | Juara II | 100 |
+| | | | Juara III | 75 |
+| | | | Favorit | 50 |
+| | | | Peserta | 25 |
+| | | Jurusan | Juara I | 75 |
+| | | | Juara II | 50 |
+| | | | Juara III | 25 |
+| | | | Favorit | 20 |
+| | | | Peserta | 15 |
+| | | Program Studi | Juara I | 75 |
+| | | | Juara II | 50 |
+| | | | Juara III | 25 |
+| | | | Favorit | 20 |
+| | | | Peserta | 15 |
+
+| 2 | Mengikuti Kegiatan/Forum Ilmiah (Seminar, Lokakarya, Workshop, Pameran/Poster) | Internasional | | 600 |
+|---|---|---|---|---|
+| | | Nasional | | 500 |
+| | | Regional | | 300 |
+| | | Universitas | | 200 |
+| | | Fakultas | | 100 |
+| | | Jurusan | | 75 |
+| | | Program Studi | | 50 |
+| 3 | Menjadi Pembicara pada Suatu Kegiatan Ilmiah | Internasional | | 700 |
+| | | Nasional | | 500 |
+| | | Regional | | 300 |
+| | | Universitas | | 200 |
+| | | Fakultas | | 100 |
+| | | Jurusan | | 75 |
+| | | Program Studi | | 50 |
+| 4 | Menjadi Moderator pada Suatu Kegiatan Ilmiah | Internasional | | 600 |
+| | | Nasional | | 500 |
+| | | Regional | | 300 |
+| | | Universitas | | 200 |
+| | | Fakultas | | 100 |
+| | | Jurusan | | 75 |
+| | | Program Studi | | 50 |
+| 5 | Mengikuti Pelatihan/Bimbingan dalam Penyusunan Karya Tulis/Proposal | >56 jam | | 150 |
+| | | 32-56 jam | | 100 |
+| | | <32 jam | | 50 |
+| 6 | Mengikuti Seminar Proposal/Hasil Penelitian Dosen | | | 50 |
+| 7 | Membuat karya ilmiah jurnal (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Jurnal Internasional bereputasi | | 700 |
+| | | Jurnal Internasional | | 600 |
+| | | Jurnal Nasional Sinta 1 dan 2 | | 600 |
+| | | Jurnal Nasional Sinta 3 dan 4 | | 500 |
+| | | Jurnal Nasional Sinta 5 dan 6 | | 300 |
+| | | Jurnal Nasional tidak terakreditasi | | 200 |
+| 8 | Menjadi Asisten Matakuliah/Praktikum/ Mentor Per Semester* (berlaku untuk fakultas tertentu) | Laboratorium/ Lapang | | 250 |
+| 9 | Menjadi Juri Perlombaan Olahraga, Seni dll | Internasional | | 700 |
+| | | Nasional | | 500 |
+| | | Regional | | 400 |
+| | | Universitas | | 300 |
+| | | Fakultas | | 200 |
+| 10 | Duduk Sebagai Personalia Redaksi Majalah/Buletin/Surat Kabar Per Semester | Nasional | | 500 |
+| | | Regional | | 400 |
+| | | Universitas | | 300 |
+| | | Fakultas | | 200 |
+| | | Jurusan | | 100 |
+| | | Program Studi | | 100 |
+| 11 | Mengikuti Kuliah Tamu | | | 50 |
+| 12 | Mengikuti seminar proposal/hasil TA (5 kali) | | | 50 |
+| | | Internasional | Juara I | 700 |
+| | | | Juara II | 600 |
+| | | | Juara III | 500 |
+| | | | Favorit | 400 |
+| | | | Peserta | 300 |
+| | | Nasional | Juara I | 500 |
+| | | | Juara II | 400 |
+| | | | Juara III | 300 |
+| | | | Favorit | 200 |
+| | | | Peserta | 100 |
+| | | Regional | Juara I | 300 |
+| | | | Juara II | 200 |
+| | | | Juara III | 100 |
+| | | | Favorit | 75 |
+| | | | Peserta | 50 |
+| | | | Juara I Juara II | 150 |
+| | | | | 100 |
+| | | | Juara III | 75 |
+
 Jurnal Nasional Sinta
 5 dan 6
-Jurnal Nasional tidak
-terakreditasi
-8 Menjadi Asisten Matakuliah/Praktikum/
-Laboratorium/
-Mentor Per Semester* (berlaku untuk 250
-Lapang
-fakultas tertentu)
-9 Menjadi Juri Perlombaan Olahraga, Seni dll Internasional 700
-Nasional 500
-Regional 400
-Universitas 300
-Fakultas 200
-10 Duduk Sebagai Personalia Redaksi
-Nasional
-Majalah/Buletin/Surat Kabar Per Semester 500
-Regional 400
-Universitas 300
-Fakultas 200
-Jurusan 100
-Program Studi 100
-11 Mengikuti Kuliah Tamu 50
-12 Mengikuti seminar proposal/hasil TA (5 kali) 50
-13 Sebagai Duta Mahasiswa
-Teladan/Berprestasi ((kegiatan mandiri dan Internasional Juara I 700
-tidak direkognisi ke SKS MK)
-Juara II 600
-Juara III 500
-Favorit 400
-Peserta 300
-Nasional Juara I 500
-Juara II 400
-Juara III 300
-Favorit 200
-Peserta 100
-Regional Juara I 300
-Juara II 200
-Juara III 100
-Favorit 75
-Peserta 50
-Universitas Juara I 150
-Juara II 100
-Juara III 75
-Favorit 50
-Peserta 50
-Fakultas Juara I 100
-Juara II 75
-Juara III 50
-Favorit 25
-Peserta 25
-14 Mengikuti Lomba (Debat, Sains, Pidato, dll)
-(kegiatan mandiri dan tidak direkognisi ke Internasional Juara I 700
-## Sks Mk)
-Juara II 600
-Juara III 500
-Favorit 400
-Peserta 300
-Nasional Juara I 500
-Juara II 400
-Juara III 300
-Favorit 200
-Peserta 100
-Regional Juara I 300
-Juara II 200
-Juara III 100
-Favorit 75
-Peserta 50
-Universitas Juara I 150
-Juara II 100
-Juara III 75
-Favorit 50
-Peserta 50
-Fakultas Juara I 100
-Juara II 75
-Juara III 50
-Favorit 25
-Peserta 25
+| | | | Favorit | 50 |
+|---|---|---|---|---|
+| | | | Peserta | 50 |
+| | | Fakultas | Juara I | 100 |
+| | | | Juara II | 75 |
+| | | | Juara III | 50 |
+| | | | Favorit | 25 |
+| | | | Peserta | 25 |
+| 14 | Mengikuti Lomba (Debat, Sains, Pidato, dll) (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Internasional | Juara I | 700 |
+| | | | Juara II | 600 |
+| | | | Juara III | 500 |
+| | | | Favorit | 400 |
+| | | | Peserta | 300 |
+| | | Nasional | Juara I | 500 |
+| | | | Juara II | 400 |
+| | | | Juara III | 300 |
+| | | | Favorit | 200 |
+| | | | Peserta | 100 |
+| | | Regional | Juara I | 300 |
+| | | | Juara II | 200 |
+| | | | Juara III | 100 |
+| | | | Favorit | 75 |
+| | | | Peserta | 50 |
+| | | Universitas | Juara I | 150 |
+| | | | Juara II | 100 |
+| | | | Juara III | 75 |
+| | | | Favorit | 50 |
+| | | | Peserta | 50 |
+| | | Fakultas | Juara I | 100 |
+| | | | Juara II | 75 |
+| | | | Juara III | 50 |
+| | | | Favorit | 25 |
+| | | | Peserta | 25 |
+
 Tabel 2. Bidang Kesejahteraan dan Kewirausahaan
-Peringkat/ Bobot
-No Kegiatan Tingkat
-Jabatan Nilai
-1 Mengelola Usaha/Koperasi Universitas Ketua 350
+
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| 1 | Mengelola Usaha/Koperasi | Universitas | Ketua | 350 |
+| | | | Sekretaris | 250 |
+|---|---|---|---|---|
+| | | | Wakil Sekretaris | 200 |
+| | | | Pengurus Bidang | 150 |
+| | | | Anggota Penggurus | 100 |
+| 2 | Mengikuti Ekspo Kewirausahaan (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Nasional | | 250 |
+| | | Regional | | 200 |
+| | | Universitas | | 150 |
+| | | Fakultas | | 100 |
+| 3 | Berpartisipasi dalam Penanganan Bencana | Internasional | | 300 |
+| | | Nasional | | 250 |
+| | | Regional | | 200 |
+| | | Universitas | | 150 |
+| | | Fakultas | | 100 |
+
 Wakil
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| | | Internasional | Ketua | 700 |
+| | | | Wakil Ketua | 600 |
+| | | | Sekretaris | 500 |
+| | | | Wakil Sekretaris | 400 |
+| | | | Pengurus Bidang | 300 |
+| | | | Anggota Pengurus | 200 |
+| | | | Ketua | 500 |
+| | | | Wakil Ketua | 400 |
+| | | | Sekretaris | 300 |
+| | | | Wakil Sekretaris | 200 |
+| | | | Pengurus Bidang | 100 |
+
 Ketua
-Sekretaris 250
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Penggurus
-2 Mengikuti Ekspo Kewirausahaan (kegiatan Nasional 250
-mandiri dan tidak direkognisi ke SKS MK)
-Regional 200
-Universitas 150
-Fakultas 100
-3 Berpartisipasi dalam Penanganan Bencana Internasional 300
-Nasional 250
-Regional 200
-Universitas 150
-Fakultas 100
 Tabel 3. Bidang Minat, Bakat dan Organisasi Kemahasiswaan
-Peringkat/ Bobot
-No Kegiatan Tingkat
-Jabatan Nilai
-1 Pengurus Organisasi Keilmuan Internasional Ketua 700
-Wakil
-Ketua
-Sekretaris 500
-Wakil
-Sekretaris
-Pengurus
-Bidang
+| | | Regional | Ketua | 400 |
+|---|---|---|---|---|
+| | | | Wakil Ketua | 300 |
+| | | | Sekretaris | 200 |
+| | | | Wakil Sekretaris | 100 |
+| | | | Pengurus Bidang | 75 |
+| | | | Anggota Pengurus | 50 |
+| | | Universitas | Ketua | 300 |
+| | | | Wakil Ketua | 200 |
+| | | | Sekretaris | 100 |
+| | | | Wakil Sekretaris | 75 |
+| | | | Pengurus Bidang | 50 |
+| | | | Anggota Pengurus | 25 |
+| | | Fakultas | Ketua | 200 |
+| | | | Wakil Ketua | 100 |
+| | | | Sekretaris | 75 |
+| | | | Wakil Sekretaris Pengurus Bidang | 50 25 |
+| | | | Anggota Pengurus | 20 |
+| | | | Ketua | 100 |
+| | | | Wakil Ketua | 75 |
+| | | | Sekretaris | 50 |
+| | | | Wakil Sekretaris | 25 |
+| | | | Pengurus Bidang | 20 |
+
 Anggota
 Pengurus
-Nasional Ketua 500
-Wakil
-Ketua
-Sekretaris 300
-Wakil
-Sekretaris
-Pengurus
-Bidang
+| Internasional | Ketua | 500 |
+|---|---|---|
+| | Wakil Ketua | 400 |
+| | Sekretaris | 300 |
+| | Wakil Sekretaris | 200 |
+| | Pengurus Bidang | 100 |
+| | Anggota Pengurus | 75 |
+| Nasional | Ketua | 400 |
+| | Wakil Ketua | 300 |
+| | Sekretaris | 200 |
+| | Wakil Sekretaris | 100 |
+| | Pengurus Bidang | 75 |
+| | Anggota Pengurus | 50 |
+| Regional | Ketua | 300 |
+| | Wakil Ketua | 200 |
+| | Sekretaris | 100 |
+| | Wakil Sekretaris | 75 |
+| | Pengurus Bidang | 50 |
+| | Anggota Penggurus | 25 |
+| Universitas | Ketua | 200 |
+| | Wakil Ketua | 100 |
+| | Sekretaris | 75 |
+| | Wakil Sekretaris | 50 |
+| | Pengurus Bidang | 25 |
+| | Anggota Penggurus | 15 |
+| | Ketua | 100 |
+
 Anggota
 Pengurus
-Regional Ketua 400
+2 Pengurus Organisasi Non Keilmuan
+| | Sekretaris | 50 |
+|---|---|---|
+| | Wakil Sekretaris | 25 |
+| | Pengurus Bidang | 15 |
+| | Anggota Penggurus | 10 |
+| Jurusan/Prodi | Ketua | 75 |
+| | Wakil Ketua | 50 |
+| | Sekretaris | 25 |
+| | Wakil Sekretaris | 15 |
+| | Pengurus Bidang | 10 |
+| | Anggota Penggurus | 5 |
+| Universitas | Ketua | 500 |
+| | Wakil Ketua | 400 |
+| | Sekretaris | 300 |
+| | Wakil Sekretaris | 200 |
+| | Bendahara | 300 |
+| | Wakil Bendahara | 200 |
+| | Ketua Pengurus Bidang | 100 |
+| | Anggota Pengurus | 75 |
+| | Ketua | 400 |
+| | Wakil Ketua | 300 |
+| | Sekretaris | 200 |
+| | Wakil Sekretaris | 100 |
+| | Bendahara | 200 |
+
 Wakil
 Ketua
-Sekretaris 200
+3 Pengurus Organisasi Kemahasiswaan
+MM/BEM/UKM/UKF/HMJ/HMP
 Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Pengurus
-Universitas Ketua 300
-Wakil
-Ketua
-Sekretaris 100
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Pengurus
-Fakultas Ketua 200
-Wakil
-Ketua
-Sekretaris 75
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Pengurus
-Jurusan/ Program
-Ketua 100
-Studi/Bidang
-Wakil
-Ketua
-Sekretaris 50
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Pengurus
-Internasional Ketua 500
-2 Pengurus Organisasi Non Keilmuan Wakil
-Ketua
-Sekretaris 300
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Pengurus
-Nasional Ketua 400
-Wakil
-Ketua
-Sekretaris 200
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Pengurus
-Regional Ketua 300
-Wakil
-Ketua
-Sekretaris 100
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Penggurus
-Universitas Ketua 200
-Wakil
-Ketua
-Sekretaris 75
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Penggurus
-Fakultas Ketua 100
-Wakil
-Ketua
-Sekretaris 50
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Penggurus
-Jurusan/Prodi Ketua 75
-Wakil
-Ketua
-Sekretaris 25
-Wakil
-Sekretaris
-Pengurus
-Bidang
-Anggota
-Penggurus
-3 Pengurus Organisasi Kemahasiswaan Universitas
-Ketua 500
-## Mm/Bem/Ukm/Ukf/Hmj/Hmp
-Wakil
-Ketua
-Sekretaris 300
-Wakil
-Sekretaris
-Bendahara 300
-Wakil
+
+| | Ketua Pengurus Bidang | 75 |
+|---|---|---|
+| | Anggota Penggurus | 50 |
+| Jurusan/Prodi/Bagian | Ketua | 300 |
+| | Wakil Ketua | 200 |
+| | Sekretaris | 100 |
+| | Wakil Sekretaris | 75 |
+| | Bendahara | 100 |
+| | Wakil Bendahara | 75 |
+| | Ketua Pengurus Bidang | 50 |
+| | Anggota Penggurus | 25 |
+| Internasional | Juara I | 700 |
+| | Juara II | 600 |
+| | Juara III | 500 |
+| | Favorit | 400 |
+| | Peserta | 300 |
+| Nasional | Juara I | 500 |
+| | Juara II | 400 |
+| | Juara III | 300 |
+| | Favorit | 200 |
+| | Peserta | 100 |
+| | Juara I | 300 |
+| | Juara II | 200 |
+| | Juara III | 100 |
+| | Favorit | 75 |
+| | Peserta | 50 |
+| | Juara I | 200 |
+| | Juara II | 150 |
 Bendahara
-Ketua
-Pengurus 100
-Bidang
-Anggota
-Pengurus
-Fakultas Ketua 400
-Wakil
-Ketua
-Sekretaris 200
-Wakil
-Sekretaris
-Bendahara
-Wakil
-Bendahara
-Ketua
-Pengurus 75
-Bidang
-Anggota
-Penggurus
-Jurusan/Prodi/Bagian Ketua 300
-Wakil
-Ketua
-Sekretaris 100
-Wakil
-Sekretaris
-Bendahara
-Wakil
-Bendahara
-Ketua
-Pengurus 50
-Bidang
-Anggota
-Penggurus
 4 Memperoleh Prestasi dalam Kegiatan Minat
-Internasional Juara I 700
 dan Bakat (Olaharaga, Seni, Tari, Drama dll)
 (kegiatan mandiri dan tidak direkognisi ke
-Juara II 600
-## Sks Mk)
-Juara III 500
-Favorit 400
-Peserta 300
-Nasional Juara I 500
-Juara II 400
-Juara III 300
-Favorit 200
-Peserta 100
-Regional Juara I 300
-Juara II 200
-Juara III 100
-Favorit 75
-Peserta 50
-Universitas Juara I 200
-Juara II 150
-Juara III 100
-Favorit 75
-Peserta 50
-Fakultas Juara I 150
-Juara II 100
-Juara III 75
-Favorit 50
-Peserta 25
+SKS MK)
+| | Juara III | 100 |
+|---|---|---|
+| | Favorit | 75 |
+| | Peserta | 50 |
+| Fakultas | Juara I | 150 |
+| | Juara II | 100 |
+| | Juara III | 75 |
+| | Favorit | 50 |
+| | Peserta | 25 |
+| Nasional | Ketua | 100 |
+| | Wakil Ketua | 75 |
+| | Sekretaris | 75 |
+| | Wakil Sekretaris | 50 |
+| | Bendahara | 75 |
+| | Wakil Bendahara | 50 |
+| | Anggota | 50 |
+| Universitas | Ketua | 75 |
+| | Wakil Ketua | 50 |
+| | Sekretaris | 50 |
+| | Wakil Sekretaris | 25 |
+| | Bendahara | 50 |
+| | Wakil Bendahara | 25 |
+| | Anggota | 15 |
+| Fakultas | Ketua | 50 |
+| | Wakil Ketua | 25 |
+| | Sekretaris | 25 |
+| | Wakil Sekretaris | 15 |
+| | Bendahara | 25 |
+| | Wakil Bendahara | 15 |
+| | Anggota | 10 |
+| | Ketua | 25 |
+| | Wakil Ketua | 15 |
+
 5 Panitia dalam Suatu Kegiatan keilmuan/Non
-Keilmuan Ketua
-Wakil
-Ketua
-Nasional
-Sekretaris 75
-Wakil
-Sekretaris
-Bendahara 75
-Wakil
-Bendahara
-Anggota 50
-Universitas Ketua 75
-Wakil
-Ketua
-Sekretaris 50
-Wakil
-Sekretaris
-Bendahara 50
-Wakil
-Bendahara
-Anggota 15
-Fakultas Ketua 50
-Wakil
-Ketua
-Sekretaris 25
-Wakil
-Sekretaris
-Bendahara 25
-Wakil
-Bendahara
-Anggota 10
-Jurusan/Prodi Ketua 25
-Wakil
-Ketua
+Keilmuan
+| | | | Wakil Sekretaris | 10 |
+|---|---|---|---|---|
+| | | | Bendahara | 15 |
+| | | | Wakil Bendahara | 10 |
+| | | | Anggota | 5 |
+| 6 | Mengikuti Kegiatan yang di Surat Tugaskan oleh Rektor atau Dekan (sifat insidentil) | Nasional | | 200 |
+| | | Regional | | 150 |
+| | | Universitas | | 100 |
+| | | Fakultas | | 50 |
+| 7 | Mengikuti Kegiatan berdasarkan penugasan oleh Instansi Daerah | | | 100 |
+| 8 | Mengikuti Kegiatan/Latihan yang Diatur oleh Masing-Masing UKM/UKF (Setiap kegiatan) | Universitas | | 5 |
+| | | Fakultas | | 3 |
+
 Sekretaris 15
-Wakil
-Sekretaris
-Bendahara 15
-Wakil
-Bendahara
-Anggota 5
-6 Mengikuti Kegiatan yang di Surat Tugaskan
-Nasional 200
-oleh Rektor atau Dekan (sifat insidentil)
-Regional 150
-Universitas 100
-Fakultas 50
-7 Mengikuti Kegiatan berdasarkan penugasan
-oleh Instansi Daerah
-8 Mengikuti Kegiatan/Latihan yang Diatur
-oleh Masing-Masing UKM/UKF (Setiap Universitas 5
-kegiatan)
-Fakultas 3
+
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| 1 | Mengikuti Pelatihan/Kursus Peningkatan Sumber Daya Manusia (SAR/Pramuka/Menwa dll) | Internasional | | 700 |
+| | | Nasional | | 500 |
+| | | Regional | | 400 |
+| | | Universitas | | 300 |
+| 2 | Mengikuti Pelatihan Kepemimpinan LKMM | Lanjut | | 400 |
+| | | Menengah | | 300 |
+| | | Dasar | | 200 |
+| 3 | Mengikuti kegiatan kepemimpinan lainnya | | | 100 |
+| 4 | Mengikuti Seminar/Workshop/Lokakarya/Diskusi | Internasional | | 700 |
+| | | Nasional | | 500 |
+| | | Regional | | 400 |
+| | | Universitas | | 300 |
+| | | Fakultas | | 200 |
+| | | Jurusan | | 150 |
+| | | Program Studi | | 100 |
+| 5 | Mengikuti kegiatan PKKMB | | | 150 |
+| 6 | Duta Kampus | Internasional | | 700 |
+| | | Nasional | | 500 |
+| | | Regional | | 400 |
+
 Tabel 4. Bidang Penyelarasan dan Pengembangan Karier
-Peringkat/ Bobot
-No Kegiatan Tingkat
-Jabatan Nilai
-1 Mengikuti Pelatihan/Kursus Peningkatan Internasional 700
-Sumber Daya Manusia
-Nasional 500
-(SAR/Pramuka/Menwa dll)
-Regional 400
-Universitas 300
-2 Mengikuti Pelatihan Kepemimpinan LKMM Lanjut 400
-Menengah 300
-Dasar 200
-3 Mengikuti kegiatan kepemimpinan lainnya 100
-4 Mengikuti Internasional 700
-Seminar/Workshop/Lokakarya/Diskusi
-Nasional 500
-Regional 400
-Universitas 300
-Fakultas 200
-Jurusan 150
-Program Studi 100
-5 Mengikuti kegiatan PKKMB 150
-6 Duta Kampus Internasional 700
-Nasional 500
-Regional 400
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| 1 | Mengikuti Kegiatan Keagamaan, Kebangsaaan, dan Sosial Budaya | Internasional | | 400 |
+| | | Nasional | | 300 |
+| | | Regional | | 200 |
+| | | Universitas | | 100 |
+| | | Fakultas | | 75 |
+| 2 | Mengikuti Upacara Bendera dan Upacara Hari-hari Besar Nasional minimal 3 (Tiga) Kali | | | 75 |
+| 3 | Mengikuti kegiatan Keagamaan dan Kebangsaan Secara Rutin minimal 10 Kali | | | 50 |
+
 Universitas 300
 Tabel 5. Bidang Pengembangan Mental Spritualitas Kebangsaaan
-Peringkat/ Bobot
-No Kegiatan Tingkat
-Jabatan Nilai
-1 Mengikuti Kegiatan Keagamaan,
-Internasional 400
-Kebangsaaan, dan Sosial Budaya
-Nasional 300
-Regional 200
-Universitas 100
-Fakultas 75
-2 Mengikuti Upacara Bendera dan Upacara
-Hari-hari Besar Nasional minimal 3 (Tiga) 75
-Kali
-3 50
-Mengikuti kegiatan Keagamaan dan
-Kebangsaan Secara Rutin minimal 10 Kali
+
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| 1 | Mengikuti Pertukaran Mahasiswa Internasional dan kegiatan internasional lainnya (kegiatan mandiri dan tidak direkognisi ke SKS MK) | | | 700 |
+
 Tabel 6. Bidang Internasionalisasi
-Peringkat/ Bobot
-No Kegiatan Tingkat
-Jabatan Nilai
-Mengikuti Pertukaran Mahasiswa
-Internasional dan kegiatan internasional
-1 700
-lainnya (kegiatan mandiri dan tidak
-direkognisi ke SKS MK)
+
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| 1 | Berpartisipasi dalam Duta Lingkungan | Internasional | | 400 |
+| | | Nasional | | 300 |
+| | | Regional | | 200 |
+| | | Universitas | | 100 |
+| 2 | Mengikuti Kegiatan Bakti Kampus | | | 25 |
+| 3 | Mengikuti Kegiatan Bakti Sosial | | | 50 |
+| 4 | Mengikuti Kegiatan Bakti Lingkungan | | | 50 |
+| 5 | Melakukan Pengabdian/Penyuluhan Pada Masyarakat (kegiatan mandiri dan tidak direkognisi ke SKS MK) | | | 100 |
+
 Tabel 7. Bidang Pengabdian pada Masyarakat dan Lingkungan Hidup
-Peringkat/ Bobot
-No Kegiatan Tingkat
-Jabatan Nilai
-1 Berpartisipasi dalam Duta Lingkungan Internasional 400
-Nasional 300
-Regional 200
-Universitas 100
-2 Mengikuti Kegiatan Bakti Kampus 25
-3 Mengikuti Kegiatan Bakti Sosial 50
-4 Mengikuti Kegiatan Bakti Lingkungan 50
-Melakukan Pengabdian/Penyuluhan Pada
-5 Masyarakat (kegiatan mandiri dan tidak 100
-direkognisi ke SKS MK)
 Tabel 8. Bidang Khusus Fakultas
-Peringkat/
-No Kegiatan Tingkat Bobot Nilai
-Jabatan
-1 Semua Kegiatan khusus Fakultas
-Disesuaikan Dsesuaikan Disesuaikan
-yang tidak tercakup pada 7 bidang
-2.4. Penilaian
+
+| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
+|---|---|---|---|---|
+| 1 | Semua Kegiatan khusus Fakultas yang tidak tercakup pada 7 bidang | Disesuaikan | Dsesuaikan | Disesuaikan |
+
+## 2.4. Penilaian
 Pengawasan dan sistem penilaian ekstrakurikuler (SPE) dilakukan oleh Bagian
 Kemahasiswaan dan Alumni Fakultas. Setiap mahasiswa yang telah mengikuti kegiatan
 ekstrakurikuler diberikan nilai bobot sesuai dengan total jumlah bobot nilai yang
+
+| Nilai Mutu | Total Bobot Poin |
+|---|---|
+| A | >3000 |
+| A- | 2501-3000 |
+| B+ | 2001-2500 |
+| B | 1500- 2000 |
+
 dikumpulkan selama menjadi mahasiswa. Ketentuan penilaian kegiatan ekstrakurikuler
 sesuai dengan jumlah total bobot nilai seperti Tabel 9 berikut ini:
 Tabel 9. Nilai Mutu dan Kisaran Bobot Poin
-Nilai Mutu Total Bobot Poin
-## A >3000
-## A- 2501-3000
-## B+ 2001-2500
-## B 1500- 2000
 Penilaian bobot kegiatan ekstrakurikuler seperti pada Tabel 9 diberlakukan mulai
 mahasiswa Angkatan 2024 dan program studi yang sudah memiliki mata kuliah
 ekstrakurikuler di kurikulum.
@@ -714,15 +592,15 @@ monitoring dan evaluasi pelaksanaan SPE.
 3. Langkah-langkah teknis pelaksanaan SPE dituangkan dalam bentuk instruksi kerja bagi
 mahasiswa, Bagian Kemahasiswaan dan alumni di Fakultas sebagai acuan teknis.
 4. Struktur standar operasional Prosedur Sistem Penilaian Ekstrakuriler (SOP- SPE):
-## Sop - Spe
-## Ik - Mahasiswa
-## Formulir – 01 (Kre)
-## Ik – Bagian
+SOP - SPE
+IK - MAHASISWA
+FORMULIR – 01 (KRE)
+IK – BAGIAN
 ## Kemahasiswaan
-## Formulir – 02 (Khe)
-## Ik – Wakil Dekan Bagian
+FORMULIR – 02 (KHE)
+IK – WAKIL DEKAN BAGIAN
 ## Kemahasiswaan Dan Alumni
-## Formulir – 03 (Tem)
+FORMULIR – 03 (TEM)
 Keterangan :
 SOP : Standar Operasional Prosedur
 SPE : Sistem Penilaian Ekstrakurikuler
@@ -739,7 +617,7 @@ Alumni.
 5. Penerbitan Transkip Ekstrakurikuler Mahasiswa (TEM) pada saat akan proposal tugas
 akhir menggunakan formulir 03.
 6. Buku pedoman ini berlaku untuk mahasiswa Universitas Tadulako
-## 8. Lampiran:
+8. LAMPIRAN:
 1. Formulir Kartu Rencana Esktrakurikuler (KRE).
 2. Formulir Kartu Hasil Esktrakurikuler (KHE).
 3. Format Transkrip Esktrakurikuler Mahasiswa (TEM).
@@ -756,552 +634,3 @@ Transkrip Esktrakurikuler Mahasiswa (formular 03) di bagian kemahasiswaan Fakuta
 5. Mahasiswa menerima Transkrip Esktrakurikuler Mahasiswa (TEM) dan diserahkan ke
 Program Studi untuk dikonversi nilai Mata Kuliah Ekstrakurikuler.
 6. Selesai.
-Formulir Kartu Rencana Esktrakurikuler (KRE) (Formulir 01)
-## Kartu Rencana Ekstrakurikuler (Kre)
-## Nama Mahasiswa :
-## Stambuk :
-## Program Studi :
-## Semester :
-No Nama Kegiatan No. Waktu Penyelenggara
-Sertifikat/No. Kegiatan
-Surat Tugas/
-No. SK
-1. Bidang Pengembangan
-Penalaran dan Kreativitas
-2. Bidang Kesejahteraan dan
-Kewirausahaan
-3. Bidang Minat, Bakat dan
-Organisasi Kemahasiswaan
-4. Bidang Penyelarasan dan
-Pengembangan Karier
-5. Bidang Pengembangan
-Mental Spritualitas
-Kebangsaaan
-6. Bidang Internasionalisasi
-7. Bidang Pengabdian pada
-Masyarakat dan Lingkungan
-Hidup
-8. Bidang Khusus sesuai
-Fakultas
-Palu, Menyetujui,
-a.n. Dekan
-Wakil Dekan Bidang Kemahasiswaan dan
-Alumni
--------------------------------------------- (………………………………………)
-Stambuk. NIP.
-Formulir Konsep Kartu Hasil Ekrakurikuler (KHE) (Formulir 02)
-## Kartu Hasil Ekstrakurikuler (Khe)
-## Fakultas ……………………
-## Nama Mahasiswa :
-## Stambuk :
-## Program Studi :
-## Semester :
-No. Kriteria Kegiatan Ekstrakurikuler Mahasiswa Nilai Paraf
-Verifikator
-1. Bidang Pengembangan Penalaran dan Kreativitas
-2. Bidang Kesejahteraan dan Kewirausahaan
-3. Bidang Minat, Bakat dan Organisasi Kemahasiswaan
-4. Bidang Penyelarasan dan Pengembangan Karier
-Bidang Pengembangan Mental Spritualitas
-5.
-Kebangsaaan
-6. Bidang Internasionalisasi
-Bidang Pengabdian pada Masyarakat dan Lingkungan
-7.
-Hidup
-8. Bidang Khusus sesuai Fakultas
-Jumlah Perolehan Nilai
-Mengetahui, Menyetujui,
-a.n. Dekan
-Wakil Dekan Bidang Kemahasiswaan Verifikator,
-dan Alumni
-(…………………………………………) (…………………..………….)
-## Nip.
-Formulir Konsep Transkrip Ekstrakurikuler Mahasiswa (TEM) (Formulir 03)
-## Transkrip Ekstrakurikuler Mahasiswa (Tem)
-## Fakultas ………………..
-## Nama Mahasiswa :
-## Stambuk :
-## Program Studi :
-No. Kriteria Kegiatan Ekstrakurikuler Mahasiswa Nilai
-1. Bidang Pengembangan Penalaran dan Kreativitas
-2. Bidang Kesejahteraan dan Kewirausahaan
-3. Bidang Minat, Bakat dan Organisasi Kemahasiswaan
-4. Bidang Penyelarasan dan Pengembangan Karier
-5. Bidang Pengembangan Mental Spritualitas Kebangsaaan
-6. Bidang Internasionalisasi
-7 Bidang Pengabdian pada Masyarakat dan Lingkungan Hidup
-8 Bidang Khusus sesuai Fakultas
-Jumlah Perolehan Nilai
-Menyetujui,
-a.n. Dekan
-Wakil Dekan Bidang Kemahasiswaan dan Alumni
-(……………………………………..)
-## Nip. ……………………..
-## Tabel yang Diekstrak
-
-### Tabel (Halaman 10, #1)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| 1 | Memperoleh Prestasi dalam Lomba Karya Tulis Ilmiah/ Naskah/Populer/ Cerpen/Puisi/ Opini/ Sinopsis/ Bussines Plan (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Internasional | Juara I | 700 |
-| | | | Juara II | 600 |
-| | | | Juara III | 500 |
-| | | | Favorit | 400 |
-| | | | Peserta | 300 |
-| | | Nasional | Juara I | 500 |
-| | | | Juara II | 400 |
-| | | | Juara III | 300 |
-| | | | Favorit | 200 |
-| | | | Peserta | 100 |
-| | | Regional | Juara I | 300 |
-| | | | Juara II | 200 |
-| | | | Juara III | 150 |
-| | | | Favorit | 100 |
-| | | | Peserta | 75 |
-| | | Universitas | Juara I | 200 |
-| | | | Juara II | 150 |
-| | | | Juara III | 100 |
-| | | | Favorit | 75 |
-| | | | Peserta | 50 |
-| | | Fakultas | Juara I | 150 |
-| | | | Juara II | 100 |
-| | | | Juara III | 75 |
-| | | | Favorit | 50 |
-| | | | Peserta | 25 |
-| | | Jurusan | Juara I | 75 |
-| | | | Juara II | 50 |
-| | | | Juara III | 25 |
-| | | | Favorit | 20 |
-| | | | Peserta | 15 |
-| | | Program Studi | Juara I | 75 |
-| | | | Juara II | 50 |
-| | | | Juara III | 25 |
-| | | | Favorit | 20 |
-| | | | Peserta | 15 |
-
-### Tabel (Halaman 11, #1)
-
-| | | Nasional | | 500 |
-|---|---|---|---|---|
-| | | Regional | | 300 |
-| | | Universitas | | 200 |
-| | | Fakultas | | 100 |
-| | | Jurusan | | 75 |
-| | | Program Studi | | 50 |
-| 3 | Menjadi Pembicara pada Suatu Kegiatan Ilmiah | Internasional | | 700 |
-| | | Nasional | | 500 |
-| | | Regional | | 300 |
-| | | Universitas | | 200 |
-| | | Fakultas | | 100 |
-| | | Jurusan | | 75 |
-| | | Program Studi | | 50 |
-| 4 | Menjadi Moderator pada Suatu Kegiatan Ilmiah | Internasional | | 600 |
-| | | Nasional | | 500 |
-| | | Regional | | 300 |
-| | | Universitas | | 200 |
-| | | Fakultas | | 100 |
-| | | Jurusan | | 75 |
-| | | Program Studi | | 50 |
-| 5 | Mengikuti Pelatihan/Bimbingan dalam Penyusunan Karya Tulis/Proposal | >56 jam | | 150 |
-| | | 32-56 jam | | 100 |
-| | | <32 jam | | 50 |
-| 6 | Mengikuti Seminar Proposal/Hasil Penelitian Dosen | | | 50 |
-| 7 | Membuat karya ilmiah jurnal (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Jurnal Internasional bereputasi | | 700 |
-| | | Jurnal Internasional | | 600 |
-| | | Jurnal Nasional Sinta 1 dan 2 | | 600 |
-| | | Jurnal Nasional Sinta 3 dan 4 | | 500 |
-
-### Tabel (Halaman 12, #1)
-
-| | | Jurnal Nasional tidak terakreditasi | | 200 |
-|---|---|---|---|---|
-| 8 | Menjadi Asisten Matakuliah/Praktikum/ Mentor Per Semester* (berlaku untuk fakultas tertentu) | Laboratorium/ Lapang | | 250 |
-| 9 | Menjadi Juri Perlombaan Olahraga, Seni dll | Internasional | | 700 |
-| | | Nasional | | 500 |
-| | | Regional | | 400 |
-| | | Universitas | | 300 |
-| | | Fakultas | | 200 |
-| 10 | Duduk Sebagai Personalia Redaksi Majalah/Buletin/Surat Kabar Per Semester | Nasional | | 500 |
-| | | Regional | | 400 |
-| | | Universitas | | 300 |
-| | | Fakultas | | 200 |
-| | | Jurusan | | 100 |
-| | | Program Studi | | 100 |
-| 11 | Mengikuti Kuliah Tamu | | | 50 |
-| 12 | Mengikuti seminar proposal/hasil TA (5 kali) | | | 50 |
-| | | Internasional | Juara I | 700 |
-| | | | Juara II | 600 |
-| | | | Juara III | 500 |
-| | | | Favorit | 400 |
-| | | | Peserta | 300 |
-| | | Nasional | Juara I | 500 |
-| | | | Juara II | 400 |
-| | | | Juara III | 300 |
-| | | | Favorit | 200 |
-| | | | Peserta | 100 |
-| | | Regional | Juara I | 300 |
-| | | | Juara II | 200 |
-| | | | Juara III | 100 |
-| | | | Favorit | 75 |
-| | | | Peserta | 50 |
-| | | | Juara I Juara II | 150 |
-| | | | | 100 |
-| | | | Juara III | 75 |
-
-### Tabel (Halaman 13, #1)
-
-| | | | Favorit | 50 |
-|---|---|---|---|---|
-| | | | Peserta | 50 |
-| | | Fakultas | Juara I | 100 |
-| | | | Juara II | 75 |
-| | | | Juara III | 50 |
-| | | | Favorit | 25 |
-| | | | Peserta | 25 |
-| 14 | Mengikuti Lomba (Debat, Sains, Pidato, dll) (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Internasional | Juara I | 700 |
-| | | | Juara II | 600 |
-| | | | Juara III | 500 |
-| | | | Favorit | 400 |
-| | | | Peserta | 300 |
-| | | Nasional | Juara I | 500 |
-| | | | Juara II | 400 |
-| | | | Juara III | 300 |
-| | | | Favorit | 200 |
-| | | | Peserta | 100 |
-| | | Regional | Juara I | 300 |
-| | | | Juara II | 200 |
-| | | | Juara III | 100 |
-| | | | Favorit | 75 |
-| | | | Peserta | 50 |
-| | | Universitas | Juara I | 150 |
-| | | | Juara II | 100 |
-| | | | Juara III | 75 |
-| | | | Favorit | 50 |
-| | | | Peserta | 50 |
-| | | Fakultas | Juara I | 100 |
-| | | | Juara II | 75 |
-| | | | Juara III | 50 |
-| | | | Favorit | 25 |
-| | | | Peserta | 25 |
-
-### Tabel (Halaman 13, #2)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| 1 | Mengelola Usaha/Koperasi | Universitas | Ketua | 350 |
-
-### Tabel (Halaman 14, #1)
-
-| | | | Sekretaris | 250 |
-|---|---|---|---|---|
-| | | | Wakil Sekretaris | 200 |
-| | | | Pengurus Bidang | 150 |
-| | | | Anggota Penggurus | 100 |
-| 2 | Mengikuti Ekspo Kewirausahaan (kegiatan mandiri dan tidak direkognisi ke SKS MK) | Nasional | | 250 |
-| | | Regional | | 200 |
-| | | Universitas | | 150 |
-| | | Fakultas | | 100 |
-| 3 | Berpartisipasi dalam Penanganan Bencana | Internasional | | 300 |
-| | | Nasional | | 250 |
-| | | Regional | | 200 |
-| | | Universitas | | 150 |
-| | | Fakultas | | 100 |
-
-### Tabel (Halaman 14, #2)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| | | Internasional | Ketua | 700 |
-| | | | Wakil Ketua | 600 |
-| | | | Sekretaris | 500 |
-| | | | Wakil Sekretaris | 400 |
-| | | | Pengurus Bidang | 300 |
-| | | | Anggota Pengurus | 200 |
-| | | | Ketua | 500 |
-| | | | Wakil Ketua | 400 |
-| | | | Sekretaris | 300 |
-| | | | Wakil Sekretaris | 200 |
-| | | | Pengurus Bidang | 100 |
-
-### Tabel (Halaman 15, #1)
-
-| | | Regional | Ketua | 400 |
-|---|---|---|---|---|
-| | | | Wakil Ketua | 300 |
-| | | | Sekretaris | 200 |
-| | | | Wakil Sekretaris | 100 |
-| | | | Pengurus Bidang | 75 |
-| | | | Anggota Pengurus | 50 |
-| | | Universitas | Ketua | 300 |
-| | | | Wakil Ketua | 200 |
-| | | | Sekretaris | 100 |
-| | | | Wakil Sekretaris | 75 |
-| | | | Pengurus Bidang | 50 |
-| | | | Anggota Pengurus | 25 |
-| | | Fakultas | Ketua | 200 |
-| | | | Wakil Ketua | 100 |
-| | | | Sekretaris | 75 |
-| | | | Wakil Sekretaris Pengurus Bidang | 50 25 |
-| | | | Anggota Pengurus | 20 |
-| | | | Ketua | 100 |
-| | | | Wakil Ketua | 75 |
-| | | | Sekretaris | 50 |
-| | | | Wakil Sekretaris | 25 |
-| | | | Pengurus Bidang | 20 |
-
-### Tabel (Halaman 16, #1)
-
-| Internasional | Ketua | 500 |
-|---|---|---|
-| | Wakil Ketua | 400 |
-| | Sekretaris | 300 |
-| | Wakil Sekretaris | 200 |
-| | Pengurus Bidang | 100 |
-| | Anggota Pengurus | 75 |
-| Nasional | Ketua | 400 |
-| | Wakil Ketua | 300 |
-| | Sekretaris | 200 |
-| | Wakil Sekretaris | 100 |
-| | Pengurus Bidang | 75 |
-| | Anggota Pengurus | 50 |
-| Regional | Ketua | 300 |
-| | Wakil Ketua | 200 |
-| | Sekretaris | 100 |
-| | Wakil Sekretaris | 75 |
-| | Pengurus Bidang | 50 |
-| | Anggota Penggurus | 25 |
-| Universitas | Ketua | 200 |
-| | Wakil Ketua | 100 |
-| | Sekretaris | 75 |
-| | Wakil Sekretaris | 50 |
-| | Pengurus Bidang | 25 |
-| | Anggota Penggurus | 15 |
-| | Ketua | 100 |
-
-### Tabel (Halaman 17, #1)
-
-| | Sekretaris | 50 |
-|---|---|---|
-| | Wakil Sekretaris | 25 |
-| | Pengurus Bidang | 15 |
-| | Anggota Penggurus | 10 |
-| Jurusan/Prodi | Ketua | 75 |
-| | Wakil Ketua | 50 |
-| | Sekretaris | 25 |
-| | Wakil Sekretaris | 15 |
-| | Pengurus Bidang | 10 |
-| | Anggota Penggurus | 5 |
-| Universitas | Ketua | 500 |
-| | Wakil Ketua | 400 |
-| | Sekretaris | 300 |
-| | Wakil Sekretaris | 200 |
-| | Bendahara | 300 |
-| | Wakil Bendahara | 200 |
-| | Ketua Pengurus Bidang | 100 |
-| | Anggota Pengurus | 75 |
-| | Ketua | 400 |
-| | Wakil Ketua | 300 |
-| | Sekretaris | 200 |
-| | Wakil Sekretaris | 100 |
-| | Bendahara | 200 |
-
-### Tabel (Halaman 18, #1)
-
-| | Ketua Pengurus Bidang | 75 |
-|---|---|---|
-| | Anggota Penggurus | 50 |
-| Jurusan/Prodi/Bagian | Ketua | 300 |
-| | Wakil Ketua | 200 |
-| | Sekretaris | 100 |
-| | Wakil Sekretaris | 75 |
-| | Bendahara | 100 |
-| | Wakil Bendahara | 75 |
-| | Ketua Pengurus Bidang | 50 |
-| | Anggota Penggurus | 25 |
-| Internasional | Juara I | 700 |
-| | Juara II | 600 |
-| | Juara III | 500 |
-| | Favorit | 400 |
-| | Peserta | 300 |
-| Nasional | Juara I | 500 |
-| | Juara II | 400 |
-| | Juara III | 300 |
-| | Favorit | 200 |
-| | Peserta | 100 |
-| | Juara I | 300 |
-| | Juara II | 200 |
-| | Juara III | 100 |
-| | Favorit | 75 |
-| | Peserta | 50 |
-| | Juara I | 200 |
-| | Juara II | 150 |
-
-### Tabel (Halaman 19, #1)
-
-| | Juara III | 100 |
-|---|---|---|
-| | Favorit | 75 |
-| | Peserta | 50 |
-| Fakultas | Juara I | 150 |
-| | Juara II | 100 |
-| | Juara III | 75 |
-| | Favorit | 50 |
-| | Peserta | 25 |
-| Nasional | Ketua | 100 |
-| | Wakil Ketua | 75 |
-| | Sekretaris | 75 |
-| | Wakil Sekretaris | 50 |
-| | Bendahara | 75 |
-| | Wakil Bendahara | 50 |
-| | Anggota | 50 |
-| Universitas | Ketua | 75 |
-| | Wakil Ketua | 50 |
-| | Sekretaris | 50 |
-| | Wakil Sekretaris | 25 |
-| | Bendahara | 50 |
-| | Wakil Bendahara | 25 |
-| | Anggota | 15 |
-| Fakultas | Ketua | 50 |
-| | Wakil Ketua | 25 |
-| | Sekretaris | 25 |
-| | Wakil Sekretaris | 15 |
-| | Bendahara | 25 |
-| | Wakil Bendahara | 15 |
-| | Anggota | 10 |
-| | Ketua | 25 |
-| | Wakil Ketua | 15 |
-
-### Tabel (Halaman 20, #1)
-
-| | | | Wakil Sekretaris | 10 |
-|---|---|---|---|---|
-| | | | Bendahara | 15 |
-| | | | Wakil Bendahara | 10 |
-| | | | Anggota | 5 |
-| 6 | Mengikuti Kegiatan yang di Surat Tugaskan oleh Rektor atau Dekan (sifat insidentil) | Nasional | | 200 |
-| | | Regional | | 150 |
-| | | Universitas | | 100 |
-| | | Fakultas | | 50 |
-| 7 | Mengikuti Kegiatan berdasarkan penugasan oleh Instansi Daerah | | | 100 |
-| 8 | Mengikuti Kegiatan/Latihan yang Diatur oleh Masing-Masing UKM/UKF (Setiap kegiatan) | Universitas | | 5 |
-| | | Fakultas | | 3 |
-
-### Tabel (Halaman 20, #2)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| 1 | Mengikuti Pelatihan/Kursus Peningkatan Sumber Daya Manusia (SAR/Pramuka/Menwa dll) | Internasional | | 700 |
-| | | Nasional | | 500 |
-| | | Regional | | 400 |
-| | | Universitas | | 300 |
-| 2 | Mengikuti Pelatihan Kepemimpinan LKMM | Lanjut | | 400 |
-| | | Menengah | | 300 |
-| | | Dasar | | 200 |
-| 3 | Mengikuti kegiatan kepemimpinan lainnya | | | 100 |
-| 4 | Mengikuti Seminar/Workshop/Lokakarya/Diskusi | Internasional | | 700 |
-| | | Nasional | | 500 |
-| | | Regional | | 400 |
-| | | Universitas | | 300 |
-| | | Fakultas | | 200 |
-| | | Jurusan | | 150 |
-| | | Program Studi | | 100 |
-| 5 | Mengikuti kegiatan PKKMB | | | 150 |
-| 6 | Duta Kampus | Internasional | | 700 |
-| | | Nasional | | 500 |
-| | | Regional | | 400 |
-
-### Tabel (Halaman 21, #2)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| 1 | Mengikuti Kegiatan Keagamaan, Kebangsaaan, dan Sosial Budaya | Internasional | | 400 |
-| | | Nasional | | 300 |
-| | | Regional | | 200 |
-| | | Universitas | | 100 |
-| | | Fakultas | | 75 |
-| 2 | Mengikuti Upacara Bendera dan Upacara Hari-hari Besar Nasional minimal 3 (Tiga) Kali | | | 75 |
-| 3 | Mengikuti kegiatan Keagamaan dan Kebangsaan Secara Rutin minimal 10 Kali | | | 50 |
-
-### Tabel (Halaman 21, #3)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| 1 | Mengikuti Pertukaran Mahasiswa Internasional dan kegiatan internasional lainnya (kegiatan mandiri dan tidak direkognisi ke SKS MK) | | | 700 |
-
-### Tabel (Halaman 21, #4)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| 1 | Berpartisipasi dalam Duta Lingkungan | Internasional | | 400 |
-| | | Nasional | | 300 |
-| | | Regional | | 200 |
-| | | Universitas | | 100 |
-| 2 | Mengikuti Kegiatan Bakti Kampus | | | 25 |
-| 3 | Mengikuti Kegiatan Bakti Sosial | | | 50 |
-| 4 | Mengikuti Kegiatan Bakti Lingkungan | | | 50 |
-| 5 | Melakukan Pengabdian/Penyuluhan Pada Masyarakat (kegiatan mandiri dan tidak direkognisi ke SKS MK) | | | 100 |
-
-### Tabel (Halaman 22, #1)
-
-| No | Kegiatan | Tingkat | Peringkat/ Jabatan | Bobot Nilai |
-|---|---|---|---|---|
-| 1 | Semua Kegiatan khusus Fakultas yang tidak tercakup pada 7 bidang | Disesuaikan | Dsesuaikan | Disesuaikan |
-
-### Tabel (Halaman 22, #2)
-
-| Nilai Mutu | Total Bobot Poin |
-|---|---|
-## | A | >3000 |
-## | A- | 2501-3000 |
-## | B+ | 2001-2500 |
-## | B | 1500- 2000 |
-
-### Tabel (Halaman 27, #1)
-
-| No | Nama Kegiatan | No. Sertifikat/No. Surat Tugas/ No. SK | Waktu Kegiatan | Penyelenggara |
-|---|---|---|---|---|
-| 1. | Bidang Pengembangan Penalaran dan Kreativitas | | | |
-| 2. | Bidang Kesejahteraan dan Kewirausahaan | | | |
-
-### Tabel (Halaman 28, #1)
-
-| 3. | Bidang Minat, Bakat dan Organisasi Kemahasiswaan | | | |
-|---|---|---|---|---|
-| 4. | Bidang Penyelarasan dan Pengembangan Karier | | | |
-| 5. | Bidang Pengembangan Mental Spritualitas Kebangsaaan | | | |
-
-### Tabel (Halaman 29, #1)
-
-| 6. | Bidang Internasionalisasi | | | |
-|---|---|---|---|---|
-| 7. | Bidang Pengabdian pada Masyarakat dan Lingkungan Hidup | | | |
-| 8. | Bidang Khusus sesuai Fakultas | | | |
-
-### Tabel (Halaman 30, #1)
-
-| No. | Kriteria Kegiatan Ekstrakurikuler Mahasiswa | Nilai | Paraf Verifikator |
-|---|---|---|---|
-| 1. | Bidang Pengembangan Penalaran dan Kreativitas | | |
-| 2. | Bidang Kesejahteraan dan Kewirausahaan | | |
-| 3. | Bidang Minat, Bakat dan Organisasi Kemahasiswaan | | |
-| 4. | Bidang Penyelarasan dan Pengembangan Karier | | |
-| 5. | Bidang Pengembangan Mental Spritualitas Kebangsaaan | | |
-| 6. | Bidang Internasionalisasi | | |
-| 7. | Bidang Pengabdian pada Masyarakat dan Lingkungan Hidup | | |
-| 8. | Bidang Khusus sesuai Fakultas | | |
-| Jumlah Perolehan Nilai | | | |
-
-### Tabel (Halaman 31, #1)
-
-| No. | Kriteria Kegiatan Ekstrakurikuler Mahasiswa | Nilai |
-|---|---|---|
-| 1. | Bidang Pengembangan Penalaran dan Kreativitas | |
-| 2. | Bidang Kesejahteraan dan Kewirausahaan | |
-| 3. | Bidang Minat, Bakat dan Organisasi Kemahasiswaan | |
-| 4. | Bidang Penyelarasan dan Pengembangan Karier | |
-| 5. | Bidang Pengembangan Mental Spritualitas Kebangsaaan | |
-| 6. | Bidang Internasionalisasi | |
-| 7 | Bidang Pengabdian pada Masyarakat dan Lingkungan Hidup | |
-| 8 | Bidang Khusus sesuai Fakultas | |
-| Jumlah Perolehan Nilai | | |

@@ -31,15 +31,16 @@ from app.rag.retriever import RAGRetriever
 from app.llm.api_generator import APIGenerator
 from app.config import (
     DOCUMENTS_DIR, VECTOR_DB_DIR, EMBEDDING_MODEL,
-    CHUNK_SIZE, CHUNK_OVERLAP, TOP_K, SYSTEM_PROMPT
+    CHUNK_SIZE, CHUNK_OVERLAP, TOP_K, SYSTEM_PROMPT,
+    RELEVANCE_THRESHOLD
 )
 
 # ============================================================
 # Configuration
 # ============================================================
 BENCHMARK_FILE = PROJECT_ROOT / "evaluation" / "benchmark_dataset.json"
-OUTPUT_FILE = PROJECT_ROOT / "evaluation" / "ragas_results.json"
-CACHE_FILE = PROJECT_ROOT / "evaluation" / "collected_cache.json"
+OUTPUT_FILE = PROJECT_ROOT / "evaluation" / "ragas_results_v2.json"
+CACHE_FILE = PROJECT_ROOT / "evaluation" / "collected_cache_v2.json"
 
 # Markers that indicate an error/rate-limited response (not a real answer)
 ERROR_MARKERS = [
@@ -202,6 +203,8 @@ def collect_rag_responses(retriever, generator, questions, cached_results=None):
         _save_cache(results)
 
     print(f"\n   📊 Ringkasan: {skipped} dari cache, {collected} baru, {errors} error")
+    # Final save to include any trailing CACHED items not yet persisted
+    _save_cache(results)
     return results
 
 
@@ -290,7 +293,7 @@ def _setup_ragas_llm():
         return None, None
 
 
-PROGRESS_FILE = PROJECT_ROOT / "evaluation" / "ragas_progress.csv"
+PROGRESS_FILE = PROJECT_ROOT / "evaluation" / "ragas_progress_v2.csv"
 DELAY_BETWEEN_QUESTIONS = 120  # detik antar soal
 
 
@@ -544,6 +547,7 @@ def run_evaluation():
     print("\n🔄 Memuat komponen RAG...")
     print(f"   Embedding: {EMBEDDING_MODEL}")
     print(f"   Chunk Size: {CHUNK_SIZE} | Overlap: {CHUNK_OVERLAP} | Top-K: {TOP_K}")
+    print(f"   Relevance Threshold: {RELEVANCE_THRESHOLD}")
 
     retriever = RAGRetriever(
         documents_dir=DOCUMENTS_DIR,
@@ -551,7 +555,8 @@ def run_evaluation():
         embedding_model_name=EMBEDDING_MODEL,
         chunk_size=CHUNK_SIZE,
         chunk_overlap=CHUNK_OVERLAP,
-        top_k=TOP_K
+        top_k=TOP_K,
+        relevance_threshold=RELEVANCE_THRESHOLD
     )
     retriever.initialize()
     generator = APIGenerator()
@@ -581,6 +586,10 @@ def run_evaluation():
         print(f"   Jalankan ulang script ini nanti setelah API limit reset.")
         print(f"   Progress tersimpan di cache, tidak perlu ulang dari awal.")
 
+    # TODO: TEMPORARY - Skip RAGAS, hanya collect responses
+    print(f"\n✅ Collection selesai! {valid_count}/{len(collected_results)} valid.")
+    print(f"   Cache tersimpan di: {CACHE_FILE.name}")
+    return collected_results
 
     # 4. Run RAGAS evaluation
     ragas_result = run_ragas_evaluation(collected_results)
