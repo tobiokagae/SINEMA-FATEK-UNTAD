@@ -397,7 +397,7 @@ def _github_commit(data):
         payload = {
             "message": f"Auto-update expert evaluations ({len(data['evaluations'])} total)",
             "content": content_b64,
-            "branch": "main"
+            "branch": "sinema-chatbot"
         }
         if sha:
             payload["sha"] = sha
