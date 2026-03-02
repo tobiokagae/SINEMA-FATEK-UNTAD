@@ -2,25 +2,908 @@
   "evaluations": [
     {
       "id": 1,
-      "expert_name": "Alisha Cantik",
-      "expert_jabatan": "",
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
       "category": "",
       "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
-      "answer": "Siap! Berikut predikat kelulusan untuk program Sarjana beserta syarat IPK‑nya:\n\n1. **Pujian** – IPK > 3,50, dengan ketentuan masa studi maksimal (8) delapan semester, tidak pernah mengulang mata kuliah, serta nilai ujian skripsi A.  \n2. **Sangat Memuaskan** – IPK > 3,00 dan ≤ 3,50, dengan ketentuan nilai ujian akhir sekurang‑kurangnya B.  \n3. **Memuaskan** – IPK ≤ 3,00.\n\nJika IPK kamu sudah berada di salah satu rentang di atas, kamu tinggal pastikan persyaratan tambahan (masa studi, nilai ujian, dll.) terpenuhi supaya predikatnya sesuai.\n\nBoleh tahu, IPK kamu saat ini berapa? Saya bisa bantu cek apakah sudah memenuhi salah satu predikat tersebut.",
+      "answer": "",
       "sources": [],
       "latency": 0,
       "scores": {
         "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 2,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur pengajuan cuti akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 4,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 3,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 4,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan klaim kegiatan di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 5,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Berapa total poin minimal untuk mendapat nilai mutu A?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 6,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 7,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 8,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur seminar proposal tugas akhir?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 9,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM) di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 10,
+      "expert_name": "Andi Arham Adam",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara menghindari plagiarisme dalam penulisan karya ilmiah?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T21:39:00"
+    },
+    {
+      "id": 11,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan klaim kegiatan di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 12,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Berapa total poin minimal untuk mendapat nilai mutu A?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 13,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 14,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM) di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 15,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 4,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 16,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur pengajuan cuti akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 17,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 18,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 19,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur seminar proposal tugas akhir?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 20,
+      "expert_name": "Bakri",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara menghindari plagiarisme dalam penulisan karya ilmiah?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T22:32:00"
+    },
+    {
+      "id": 21,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 3,
+        "relevansi": 4,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 22,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur pengajuan cuti akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 4,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 23,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 4,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 24,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan klaim kegiatan di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 25,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Berapa total poin minimal untuk mendapat nilai mutu A?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 4,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 26,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 3,
+        "relevansi": 4,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 27,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 3,
         "relevansi": 3,
-        "kelengkapan": 3,
         "kejelasan": 3
       },
       "comment": "",
-      "timestamp": "2026-02-27T00:01:16.676487"
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 28,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur seminar proposal tugas akhir?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 3,
+        "relevansi": 3,
+        "kejelasan": 3
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 29,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM) di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 3,
+        "relevansi": 3,
+        "kejelasan": 3
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 30,
+      "expert_name": "Yusuf Anshori",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara menghindari plagiarisme dalam penulisan karya ilmiah?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 3,
+        "relevansi": 3,
+        "kejelasan": 3
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:07:00"
+    },
+    {
+      "id": 31,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 32,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Bagaimana prosedur pengajuan cuti akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 33,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 34,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Bagaimana cara mengajukan klaim kegiatan di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 35,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Berapa total poin minimal untuk mendapat nilai mutu A?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 36,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 37,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 38,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Bagaimana prosedur seminar proposal tugas akhir?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 39,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Bagaimana cara mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM) di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 40,
+      "expert_name": "Anita Ahmad Kasim",
+      "expert_jabatan": "Staff Kemahasiswaan",
+      "category": "",
+      "question": "Bagaimana cara menghindari plagiarisme dalam penulisan karya ilmiah?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-26T23:59:00"
+    },
+    {
+      "id": 41,
+      "expert_name": "Nouval Trezandy Lapatta",
+      "expert_jabatan": "Mahasiswa",
+      "category": "",
+      "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:29:00"
+    },
+    {
+      "id": 42,
+      "expert_name": "Nouval Trezandy Lapatta",
+      "expert_jabatan": "Mahasiswa",
+      "category": "",
+      "question": "Bagaimana prosedur pengajuan cuti akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:29:00"
+    },
+    {
+      "id": 43,
+      "expert_name": "Nouval Trezandy Lapatta",
+      "expert_jabatan": "Mahasiswa",
+      "category": "",
+      "question": "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 5,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:29:00"
+    },
+    {
+      "id": 44,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja predikat kelulusan program sarjana dan syarat IPK-nya?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 45,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur pengajuan cuti akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 46,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bentuk-bentuk pelanggaran integritas akademik?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 5,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 47,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan klaim kegiatan di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 48,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Berapa total poin minimal untuk mendapat nilai mutu A?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 49,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa saja bidang kegiatan ekstrakurikuler yang diakui?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 50,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Apa perbedaan tugas akhir skripsi dan non-skripsi?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 5,
+        "kejelasan": 4
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 51,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana prosedur seminar proposal tugas akhir?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 52,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara mengajukan Transkrip Ekstrakurikuler Mahasiswa (TEM) di SINEMA?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 4,
+        "relevansi": 5,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
+    },
+    {
+      "id": 53,
+      "expert_name": "Muh Dadang Anshari",
+      "expert_jabatan": "Dosen Fakultas Teknik",
+      "category": "",
+      "question": "Bagaimana cara menghindari plagiarisme dalam penulisan karya ilmiah?",
+      "answer": "",
+      "sources": [],
+      "latency": 0,
+      "scores": {
+        "akurasi": 5,
+        "relevansi": 4,
+        "kejelasan": 5
+      },
+      "comment": "",
+      "timestamp": "2026-02-27T01:33:00"
     }
   ],
   "metadata": {
-    "last_updated": "2026-02-27T00:01:16.677488",
-    "total_evaluations": 1
+    "last_updated": "2026-03-02T07:56:10.299922",
+    "total_evaluations": 53
   }
 }

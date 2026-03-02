@@ -28,56 +28,19 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask
-
-# Import app modules directly to avoid app/__init__.py (which triggers RAG/LLM imports)
-import importlib.util
-
-def _import_module_direct(name, filepath):
-    spec = importlib.util.spec_from_file_location(name, str(filepath))
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-_config_mod = _import_module_direct("app_config", PROJECT_ROOT / "app" / "config.py")
-DATABASE_URL = _config_mod.DATABASE_URL
-
-_models_mod = _import_module_direct("app_models", PROJECT_ROOT / "app" / "models.py")
-db = _models_mod.db
-ExpertEvaluation = _models_mod.ExpertEvaluation
-
-# =========================
-# Database Setup
-# =========================
-@st.cache_resource
-def get_flask_app():
-    """Create minimal Flask app for database operations"""
-    app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-        'pool_recycle': 280,
-        'pool_pre_ping': True
-    }
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
-        # Auto-seed if table is empty (first deploy)
-        if ExpertEvaluation.query.count() == 0:
-            try:
-                from evaluation.seed_expert_data import seed as run_seed
-                print("🌱 Auto-seeding expert evaluation data...")
-                run_seed()
-            except Exception as e:
-                print(f"⚠️ Auto-seed failed: {e}")
-    return app
-
-_flask_app = get_flask_app()
+import requests
+import base64
 
 # =========================
 # Configuration
 # =========================
 EVAL_DIR = PROJECT_ROOT / "evaluation"
+EVAL_FILE = EVAL_DIR / "expert_evaluations.json"
+
+# GitHub API config for persistent storage
+GITHUB_REPO = "tobiokagae/SINEMA-FATEK-UNTAD"
+GITHUB_FILE_PATH = "evaluation/expert_evaluations.json"
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "")
 
 ASPECTS = [
     {
@@ -392,51 +355,59 @@ def ask_chatbot(question: str):
 # Data Management
 # =========================
 def load_evaluations():
-    """Load evaluations from MySQL database"""
-    with _flask_app.app_context():
-        evals = ExpertEvaluation.query.order_by(ExpertEvaluation.id).all()
-        evaluations = [ev.to_dict() for ev in evals]
-    return {
-        "evaluations": evaluations,
-        "metadata": {
-            "last_updated": datetime.now().isoformat(),
-            "total_evaluations": len(evaluations)
+    """Load evaluations from JSON file"""
+    if EVAL_FILE.exists():
+        try:
+            with open(EVAL_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, Exception):
+            return {"evaluations": [], "metadata": {}}
+    return {"evaluations": [], "metadata": {}}
+
+
+def save_evaluations(data):
+    """Save evaluations to JSON file and auto-commit to GitHub"""
+    EVAL_DIR.mkdir(exist_ok=True)
+    data["metadata"]["last_updated"] = datetime.now().isoformat()
+    data["metadata"]["total_evaluations"] = len(data["evaluations"])
+    with open(EVAL_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    # Auto-commit to GitHub for persistence
+    _github_commit(data)
+
+
+def _github_commit(data):
+    """Commit updated JSON to GitHub repo via API"""
+    if not GITHUB_TOKEN:
+        print("⚠️ GITHUB_TOKEN not set, skipping auto-commit")
+        return
+    try:
+        api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+        headers = {
+            "Authorization": f"token {GITHUB_TOKEN}",
+            "Accept": "application/vnd.github.v3+json"
         }
-    }
-
-
-def save_evaluation(expert_name, expert_jabatan, question, answer, scores, comment):
-    """Save a single evaluation to MySQL database"""
-    with _flask_app.app_context():
-        ev = ExpertEvaluation(
-            expert_name=expert_name,
-            expert_jabatan=expert_jabatan,
-            question=question,
-            answer=answer,
-            score_akurasi=scores['akurasi'],
-            score_relevansi=scores['relevansi'],
-            score_kejelasan=scores['kejelasan'],
-            comment=comment,
-        )
-        db.session.add(ev)
-        db.session.commit()
-        return ev.to_dict()
-
-
-def delete_evaluation(eval_id):
-    """Delete a single evaluation from MySQL database"""
-    with _flask_app.app_context():
-        ev = ExpertEvaluation.query.get(eval_id)
-        if ev:
-            db.session.delete(ev)
-            db.session.commit()
-
-
-def delete_all_evaluations():
-    """Delete all evaluations from MySQL database"""
-    with _flask_app.app_context():
-        ExpertEvaluation.query.delete()
-        db.session.commit()
+        # Get current file SHA
+        resp = requests.get(api_url, headers=headers, timeout=10)
+        sha = resp.json().get("sha", "") if resp.status_code == 200 else ""
+        # Encode content
+        content_bytes = json.dumps(data, ensure_ascii=False, indent=2).encode('utf-8')
+        content_b64 = base64.b64encode(content_bytes).decode('utf-8')
+        # Commit
+        payload = {
+            "message": f"Auto-update expert evaluations ({len(data['evaluations'])} total)",
+            "content": content_b64,
+            "branch": "main"
+        }
+        if sha:
+            payload["sha"] = sha
+        resp = requests.put(api_url, headers=headers, json=payload, timeout=15)
+        if resp.status_code in (200, 201):
+            print(f"✅ Auto-committed to GitHub ({len(data['evaluations'])} evaluations)")
+        else:
+            print(f"⚠️ GitHub commit failed: {resp.status_code} {resp.text[:200]}")
+    except Exception as e:
+        print(f"⚠️ GitHub commit error: {e}")
 
 
 def export_csv(data):
@@ -793,17 +764,22 @@ if page == "🤖 Uji Chatbot":
                         if not st.session_state.get("expert_name", "").strip() or not st.session_state.get("expert_jabatan", "").strip():
                             st.error("❌ Silakan isi nama expert dan jabatan terlebih dahulu!")
                             st.stop()
-                        saved_ev = save_evaluation(
-                            expert_name=st.session_state.expert_name.strip(),
-                            expert_jabatan=st.session_state.get("expert_jabatan", "").strip(),
-                            question=q,
-                            answer=answer,
-                            scores=scores,
-                            comment=comment.strip()
-                        )
-                        # Reload from database
-                        st.session_state.eval_data = load_evaluations()
-                        data = st.session_state.eval_data
+                        ev = {
+                            "id": len(data["evaluations"]) + 1,
+                            "expert_name": st.session_state.expert_name.strip(),
+                            "expert_jabatan": st.session_state.get("expert_jabatan", "").strip(),
+                            "category": "",
+                            "question": q,
+                            "answer": answer,
+                            "sources": [],
+                            "latency": 0,
+                            "scores": scores,
+                            "comment": comment.strip(),
+                            "timestamp": datetime.now().isoformat()
+                        }
+                        data["evaluations"].append(ev)
+                        save_evaluations(data)
+                        st.session_state.eval_data = data
                         avg = sum(scores.values()) / len(scores)
                         if avg >= TARGET_SCORE:
                             st.balloons()
@@ -1042,10 +1018,9 @@ elif page == "📋 Detail Data":
                     col_yes, col_no = st.columns(2)
                     with col_yes:
                         if st.button(f"✅ Ya, Hapus", key=f"confirm_yes_{idx}", use_container_width=True):
-                            eval_id = ev.get('id')
-                            if eval_id:
-                                delete_evaluation(eval_id)
-                            st.session_state.eval_data = load_evaluations()
+                            data["evaluations"].pop(idx)
+                            save_evaluations(data)
+                            st.session_state.eval_data = data
                             st.session_state.pop(f"confirm_del_{idx}", None)
                             st.rerun()
                     with col_no:
@@ -1056,7 +1031,8 @@ elif page == "📋 Detail Data":
             st.markdown("---")
             st.markdown("##### 💣 Hapus Semua Data")
             if st.button("🗑️ Hapus Semua Data Evaluasi", type="secondary"):
-                delete_all_evaluations()
-                st.session_state.eval_data = load_evaluations()
+                data["evaluations"] = []
+                save_evaluations(data)
+                st.session_state.eval_data = data
                 st.rerun()
 
